@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EntityFramework.Web.UI</name>
+    </assembly>
+    <members>
+        <member name="T:System.Web.UI.WebControls.DbDataSource`2">
+            <summary>
+            A DataSource base class for custom data sources specific to a entity type.
+            </summary>
+            <typeparam name="TContext">The DbContext type</typeparam>
+            <typeparam name="TElement">The entity type.</typeparam>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericDataSource.Insert(System.Web.UI.WebControls.GenericDataArgs)">
+            <summary>
+            Triggers the data source Insert operation.
+            </summary>
+            <param name="args">The GenericInsertArgs arguments.</param>
+            <returns>The number of affected rows.</returns>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericDataSource.Update(System.Web.UI.WebControls.GenericUpdateArgs)">
+            <summary>
+            Triggers the data source Update operation.
+            It ofers support for Optimistic concurrency, by storing the original and updated parameter values.
+            </summary>
+            <param name="args">The GenericUpdateArgs arguments.</param>
+            <returns>The number of affected rows.</returns>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericDataSource.Delete(System.Web.UI.WebControls.GenericKeyDataArgs)">
+            <summary>
+            Triggers the data source Update operation.
+            It ofers support for Optimistic concurrency, by storing the original and updated parameter values.
+            </summary>
+            <param name="args">The GenericDeleteArgs arguments.</param>
+            <returns>The number of affected rows.</returns>
+        </member>
+        <member name="E:System.Web.UI.WebControls.GenericDataSource.ExecuteSelect">
+            <summary>
+            Occurs when the GenericDataSource control performs Select operation. This event must be handled to support the data Retrieval (Select) operation.
+            </summary>
+        </member>
+        <member name="E:System.Web.UI.WebControls.GenericDataSource.ExecuteInsert">
+            <summary>
+            Occurs when the GenericDataSource control performs Insert operation. This event must be handled to support the data Insert operation.
+            </summary>
+        </member>
+        <member name="E:System.Web.UI.WebControls.GenericDataSource.ExecuteUpdate">
+            <summary>
+            Occurs when the GenericDataSource control performs Update operation. This event must be handled to support the data Update operation.
+            </summary>
+        </member>
+        <member name="E:System.Web.UI.WebControls.GenericDataSource.ExecuteDelete">
+            <summary>
+            Occurs when the GenericDataSource control performs Delete operation. This event must be handled to support the data Delete operation.
+            </summary>
+        </member>
+        <member name="P:System.Web.UI.WebControls.GenericDataSource.DataSource">
+            <summary>
+            The DataSource resulted from the Select operation, automatically sorted and paged, if the case.
+            </summary>
+        </member>
+        <member name="P:System.Web.UI.WebControls.GenericDataSource.DisableSelect">
+            <summary>
+            Set this to FALSE, for data insert scenarios.
+            Once used by a data bound control, the GenericDataSource control will trigger the ExecuteSelect event to handle data Retrieval.
+            </summary>
+        </member>
+        <member name="P:System.Web.UI.WebControls.GenericDataSource.AutoPage">
+            <summary>
+            When AutoPage is <value>True</value>, the data source set using <see cref="!:GenericSelectArgs.SetData()"/> handler will be automatically paged.
+            </summary>
+        </member>
+        <member name="P:System.Web.UI.WebControls.GenericDataSource.AutoSort">
+            <summary>
+            When AutoSort is <value>True</value>, the data source set using <see cref="!:GenericSelectArgs.SetData()"/> handler will be automatically sorted, if possible.
+            </summary>
+        </member>
+        <member name="P:System.Web.UI.WebControls.GenericDataSource.DefaultView">
+            <summary>
+            Gets the default (Generic)DataSourceView that handles the Select, Insert, Update and Delete operations.
+            </summary>
+        </member>
+        <member name="P:System.Web.UI.WebControls.DbDataSource`2.Where">
+            <summary>
+            You set this property to specify a where expression:
+            &lt;% mydatasourceID.Where = set => set.Where(e => My where expression); %&gt;
+            </summary>
+        </member>
+        <member name="P:System.Web.UI.WebControls.DbDataSource`2.Select">
+            <summary>
+            You set this property to specify a select expression:<br/>
+            &lt;% mydatasourceID.Select = set => set.Select(e => My select expression); %&gt;<br/>
+            Note that when you use a select expression, you cannot insert, update and delete on the datasource anymore.
+            </summary>
+        </member>
+        <member name="P:System.Web.UI.WebControls.DbDataSource`2.Database">
+            <summary>
+            The name of the ConnectionString.
+            </summary>
+        </member>
+        <member name="T:System.Web.UI.WebControls.DbDataSource">
+            <summary>
+            A DataSource for EntityFramework.<br/>
+            You use the DbDataSource like so:<br/>
+            <br/>
+            &lt;asp:DbDataSource ID="source" runat="server" Source="Namespace.MyDbContext.MyDbSetProperty" /&gt;<br/>
+            <br/>
+            You can additionally set Where and Select LINQ expressions like so:<br/>
+            <br/>
+            &lt;%<br/>
+              source.Where = set => set.OfType&lt;MyEntityType&gt;().Where(p => My where expression...);<br/>
+              source.Select = set => set.OfType&lt;MyEntityType&gt;().Select(p => My select expression...);<br/>
+            %&gt;
+            </summary>
+        </member>
+        <member name="P:System.Web.UI.WebControls.DbDataSource.Where">
+            <summary>
+            You set this property to specify a where expression:<br/>
+            &lt;% mydatasourceID.Where = set => set.OfType&lt;MyEntityType&gt;().Where(e => My where expression); %&gt;
+            </summary>
+        </member>
+        <member name="P:System.Web.UI.WebControls.DbDataSource.Select">
+            <summary>
+            You set this property to specify a select expression:<br/>
+            &lt;% mydatasourceID.Select = set => set.OfType&lt;MyEntityType&gt;().Select(e => My select expression); %&gt;<br/>
+            Note that when you use a select expression, you cannot insert, update and delete on the datasource anymore.
+            </summary>
+        </member>
+        <member name="P:System.Web.UI.WebControls.DbDataSource.Database">
+            <summary>
+            The name of the ConnectionString.
+            </summary>
+        </member>
+        <member name="P:System.Web.UI.WebControls.DbDataSource.Source">
+            <summary>
+            The Source of the data in the format "Namespace.MyDbContext.MyDbSetProperty"
+            </summary>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericArgsDataItem.Value``1">
+            <summary>
+            Gets the DataItem, after filling it with the available values.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericArgsDataItem.Fill``1(``0)">
+            <summary>
+            Fills the DataItem with the modified values.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericDataArgs.#ctor(System.Collections.IDictionary)">
+            <summary>
+            The DataItem to be used for the data source operation.
+            </summary>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericDataArgs.GetDataItem``1">
+            <summary>
+            Returns a new DataItem <typeparamref name="T"/> filled with the modified input values.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns>A new DataItem <typeparamref name="T"/>.</returns>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericDataArgs.FillDataItem``1(``0)">
+            <summary>
+            Refreshes the DataItem <typeparamref name="T"/> with the modified input values.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataItem"></param>
+            <returns>The DataItem <typeparamref name="T"/>.</returns>
+        </member>
+        <member name="P:System.Web.UI.WebControls.GenericDataArgs.DataItem">
+            <summary>
+            Reference to the DataItem object, used for one of the Create/Update/Delete actions.
+            This is automatically setup when using <seealso cref="M:System.Web.UI.WebControls.GenericDataArgs.GetDataItem``1"/> or <seealso cref="!:FillDataItem(object)"/>.
+            </summary>
+        </member>
+        <member name="T:System.Web.UI.WebControls.GenericDataSourceView">
+            <summary>
+            The DataSourceView for the GenericDataSourceControl. This DataSourceView handles the "Select", "Insert", "Update" and "Delete" events of the DataSource.
+            </summary>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericKeyDataArgs.FillDataItem``1(``0)">
+            <summary>
+            Refreshes the DataItem <typeparamref name="T"/> with the modified input values and keys.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataItem"></param>
+            <returns>The DataItem <typeparamref name="T"/>.</returns>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericSelectArgs.SetData(System.Linq.IQueryable)">
+            <summary>
+            Sets the IQueryable data source. The data source will sorted and paged according to the <see cref="P:System.Web.UI.WebControls.GenericSelectArgs.AutoSort"/> and <see cref="P:System.Web.UI.WebControls.GenericSelectArgs.AutoPage"/>.
+            </summary>
+            <param name="data">IQueryable data source</param>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericSelectArgs.SetData(System.Linq.IQueryable,System.Func{System.Collections.Generic.IEnumerable{System.Object},System.Linq.IQueryable})">
+            <summary>
+            Sets the IQueryable data source. The data source will sorted and paged according to the <see cref="P:System.Web.UI.WebControls.GenericSelectArgs.AutoSort"/> and <see cref="P:System.Web.UI.WebControls.GenericSelectArgs.AutoPage"/>.
+            </summary>
+            <param name="data">IQueryable data source</param>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericSelectArgs.SetData(System.Collections.IEnumerable)">
+            <summary>
+            Sets the IEnumerable datasource. The data source will sorted and paged according to the <see cref="P:System.Web.UI.WebControls.GenericSelectArgs.AutoSort"/> and <see cref="P:System.Web.UI.WebControls.GenericSelectArgs.AutoPage"/>.
+            </summary>
+            <param name="data">IEnumerable data source</param>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericSelectArgs.SetPagedData(System.Collections.IEnumerable,System.Int32)">
+            <summary>
+            Sets the IEnumerable data source, already sorted and paged.
+            </summary>
+            <param name="data">The custom sorted and paged IEnumerable data source.</param>
+            <param name="totalRowCount">The total number of data items, to be used for UI data paging. The TotalRowCount is used to determine the total number of data pages.</param>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericSelectArgs.SetData(System.Linq.IQueryable,System.Boolean,System.Boolean)">
+            <summary>
+            Sets the IQueryable data source. The data source will sorted and paged according to the <param name="autoSort"/> and <param name="autoPage"/>.
+            </summary>
+            <param name="data">IQueryable data source</param>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericSelectArgs.SetData(System.Linq.IQueryable,System.Func{System.Collections.Generic.IEnumerable{System.Object},System.Linq.IQueryable},System.Boolean,System.Boolean)">
+            <summary>
+            Sets the IQueryable data source. The data source will sorted and paged according to the <param name="autoSort"/> and <param name="autoPage"/>.
+            </summary>
+            <param name="data">IQueryable data source</param>
+        </member>
+        <member name="P:System.Web.UI.WebControls.GenericSelectArgs.AutoSort">
+            <summary>
+            The Data Source will be sorted automatically.
+            </summary>
+        </member>
+        <member name="P:System.Web.UI.WebControls.GenericSelectArgs.AutoPage">
+            <summary>
+            The Data Source will be paged automatically.
+            </summary>
+        </member>
+        <member name="P:System.Web.UI.WebControls.GenericSelectArgs.DataSource">
+            <summary>
+            Gets the DataSource Items to be displayed by the UI Control.
+            To set the raw DataSource Items, use the <see cref="!:SelectDataEventArgs.SetDataSource"/>, or <seealso cref="!:SelectDataEventArgs.SetPagedDataSource"/>.
+            </summary>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericUpdateArgs.GetOldDataItem``1">
+            <summary>
+            For optimistic concurrency: returns a new DataItem <typeparamref name="T"/> filled with the original input values and keys.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns>A new DataItem <typeparamref name="T"/>.</returns>
+        </member>
+        <member name="M:System.Web.UI.WebControls.GenericUpdateArgs.FillOldDataItem``1(``0)">
+            <summary>
+            For optimistic concurrency: refreshes the DataItem <typeparamref name="T"/> with the original input values and keys.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataItem"></param>
+            <returns>The DataItem <typeparamref name="T"/>.</returns>
+        </member>
+    </members>
+</doc>

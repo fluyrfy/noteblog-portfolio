@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="noteblogModelStoreContainer" CdmEntityContainer="noteblogEntities">
+    <EntitySetMapping Name="notes">
+      <EntityTypeMapping TypeName="noteblogModel.notes">
+        <MappingFragment StoreEntitySet="notes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="note_category_id" ColumnName="note_category_id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="published_at" ColumnName="published_at" />
+          <ScalarProperty Name="pic" ColumnName="pic" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="order" ColumnName="order" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="noteblogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="notes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Precision="20" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="note_category_id" Type="Decimal" Precision="20" Scale="0" />
+    <Property Name="title" Type="String" MaxLength="191" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="published_at" Type="DateTime" Nullable="false" />
+    <Property Name="pic" Type="String" MaxLength="191" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="order" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" />
+    <Property Name="updated_at" Type="DateTime" />
+  </EntityType>
+  <EntityContainer Name="noteblogEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="notes" EntityType="Self.notes" />
+  </EntityContainer>
+</Schema>
