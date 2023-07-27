@@ -1,0 +1,22 @@
+﻿body {
+}
+
+.rep-item {
+    cursor: pointer;
+}
+
+.cover-photo {
+    width: 100%;
+    max-height: 274.66px;
+    object-fit: contain;
+    object-position: center;
+    aspect-ratio: 6/4;
+    background: white;
+}
+
+.content {
+    min-height: 68px;
+    max-height: 158px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="F.L." Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="noteblog._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <link href="Shared/Default.css" rel="stylesheet" />
 
     <main>
         <!-- Sidebar/menu -->
@@ -13,8 +14,6 @@
                 <img src="/w3images/avatar_g2.jpg" style="width: 45%;" class="w3-round"><br>
                 <br>
                 <h4>
-                    <asp:GridView ID="GridView1" runat="server">
-                    </asp:GridView>
                     <b>Frank Liao</b></h4>
                 <p class="w3-text-grey">Code, Recode, Record</p>
             </div>
@@ -36,85 +35,58 @@
         <!-- !PAGE CONTENT! -->
         <div class="w3-main" style="margin-left: 300px">
 
-            <!-- Header -->
-            <header id="portfolio">
-                <a href="#">
-                    <img src="/w3images/avatar_g2.jpg" style="width: 65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
-                <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
-                <div class="w3-container">
-                    <h1><b>My Portfolio</b></h1>
-                    <div class="w3-section w3-bottombar w3-padding-16">
-                        <span class="w3-margin-right">Filter:</span>
-                        <button class="w3-button w3-black">ALL</button>
-                        <button class="w3-button w3-white" onserverclick="btnFront_Click" runat="server"><i class="fa fa-code w3-margin-right"></i>Front-End</button>
-                        <button class="w3-button w3-white w3-hide-small" onserverclick="btnBack_Click"><i class="fa fa-database w3-margin-right"></i>Back-End</button>
-                        <!-- <button class="w3-button w3-white w3-hide-small"><i class="fa fa-map-pin w3-margin-right"></i>Art</button> -->
-                    </div>
-                </div>
-            </header>
+            <asp:UpdatePanel ID="updatePanel1" runat="server">
+                <ContentTemplate>
+                    <!-- Header -->
+                    <header id="portfolio">
+                        <a href="#">
+                            <img src="/w3images/avatar_g2.jpg" style="width: 65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+                        <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+                        <div class="w3-container">
+                            <h1><b>My Portfolio</b></h1>
+                            <div class="w3-section w3-bottombar w3-padding-16">
+                                <span class="w3-margin-right">Filter:</span>
+                                <button class="w3-button w3-black" runat="server" onserverclick="btnAll_Click" type="button">ALL</button>
+                                <button class="w3-button w3-white" onserverclick="btnFront_Click" runat="server"><i class="fa fa-code w3-margin-right" type="button"></i>Front-End</button>
+                                <button class="w3-button w3-white w3-hide-small" onserverclick="btnBack_Click" runat="server"><i class="fa fa-database w3-margin-right" type="button"></i>Back-End</button>
+                            </div>
+                        </div>
+                    </header>
 
-            <!-- First Photo Grid-->
-            <div class="w3-row-padding">
-                <div class="w3-third w3-container w3-margin-bottom">
-                    <img src="/w3images/mountains.jpg" alt="Norway" style="width: 100%" class="w3-hover-opacity">
-                    <div class="w3-container w3-white">
-                        <p><b>Lorem Ipsum</b></p>
-                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-                    </div>
-                </div>
-                <div class="w3-third w3-container w3-margin-bottom">
-                    <img src="/w3images/lights.jpg" alt="Norway" style="width: 100%" class="w3-hover-opacity">
-                    <div class="w3-container w3-white">
-                        <p><b>Lorem Ipsum</b></p>
-                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-                    </div>
-                </div>
-                <div class="w3-third w3-container">
-                    <img src="/w3images/nature.jpg" alt="Norway" style="width: 100%" class="w3-hover-opacity">
-                    <div class="w3-container w3-white">
-                        <p><b>Lorem Ipsum</b></p>
-                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Second Photo Grid-->
-            <div class="w3-row-padding">
-                <div class="w3-third w3-container w3-margin-bottom">
-                    <img src="/w3images/p1.jpg" alt="Norway" style="width: 100%" class="w3-hover-opacity">
-                    <div class="w3-container w3-white">
-                        <p><b>Lorem Ipsum</b></p>
-                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+                    <div class="w3-row-padding">
+                        <asp:Repeater ID="repNote" runat="server" Visible="true">
+                            <ItemTemplate>
+                                <div class="w3-third w3-container w3-margin-bottom rep-item" onclick="redirectPage(<%# Eval("id") %>)">
+                                    <asp:LinkButton runat="server" ID="lnkNote" CommandName="ReadNote" CommandArgument='<%# Eval("id") %>' />
+                                    <img src="data:image/png;base64,<%# System.Convert.ToBase64String((byte[])Eval("pic"))%>" alt="Norway" class="w3-hover-opacity cover-photo">
+                                    <div class="w3-container w3-white">
+                                        <p>
+                                            <b>
+                                                <asp:Literal Text='<%# Eval("title").ToString() %>' runat="server" />
+                                            </b>
+                                        </p>
+                                        <p class="content">
+                                            <asp:Literal ID="litContent" Text='<%# Eval("content").ToString() %>' runat="server" />
+                                        </p>
+                                    </div>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </div>
-                </div>
-                <div class="w3-third w3-container w3-margin-bottom">
-                    <img src="/w3images/p2.jpg" alt="Norway" style="width: 100%" class="w3-hover-opacity">
-                    <div class="w3-container w3-white">
-                        <p><b>Lorem Ipsum</b></p>
-                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+                    <!-- Pagination -->
+                    <div class="w3-center w3-padding-32">
+                        <div class="w3-bar">
+                            <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
+                            <a href="#" class="w3-bar-item w3-black w3-button">1</a>
+                            <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
+                            <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
+                            <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
+                            <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+                        </div>
                     </div>
-                </div>
-                <div class="w3-third w3-container">
-                    <img src="/w3images/p3.jpg" alt="Norway" style="width: 100%" class="w3-hover-opacity">
-                    <div class="w3-container w3-white">
-                        <p><b>Lorem Ipsum</b></p>
-                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pagination -->
-            <div class="w3-center w3-padding-32">
-                <div class="w3-bar">
-                    <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-                    <a href="#" class="w3-bar-item w3-black w3-button">1</a>
-                    <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-                    <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-                    <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-                    <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
-                </div>
-            </div>
-
+                </ContentTemplate>
+            </asp:UpdatePanel>
             <!-- Images of Me -->
             <div class="w3-row-padding w3-padding-16" id="about">
                 <div class="w3-col m6">
@@ -145,7 +117,7 @@
                     <div class="w3-container w3-dark-grey w3-padding w3-center" style="width: 80%">80%</div>
                 </div>
                 <p>
-                    <button class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom">
+                    <button class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom" runat="server" onserverclick="btnDownload_Click" type="button">
                         <i class="fa fa-download w3-margin-right"></i>Download Resume
                     </button>
                 </p>
@@ -240,7 +212,6 @@
                     </div>
                     <button type="submit" class="w3-button w3-black w3-margin-bottom"><i class="fa fa-paper-plane w3-margin-right"></i>Send Message</button>
                 <%--</form>--%>
-            --%>
             </div>
             <!-- <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
             <!-- End page content -->
@@ -256,6 +227,12 @@
             function w3_close() {
                 document.getElementById("mySidebar").style.display = "none";
                 document.getElementById("myOverlay").style.display = "none";
+            }
+
+            // 使用事件委托，在整个 Repeater 区域监听点击事件
+            function redirectPage(noteId) {
+                console.log(noteId)
+                window.location.href = 'Note.aspx?id=' + encodeURIComponent(noteId);
             }
         </script>
     </main>
