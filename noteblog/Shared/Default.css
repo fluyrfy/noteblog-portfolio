@@ -1,4 +1,7 @@
-﻿body {
+﻿@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+body {
 }
 
 .rep-item {
@@ -14,9 +17,18 @@
     background: white;
 }
 
+
+
 .content {
-    min-height: 68px;
+    font-family: 'Fira Code', 'Noto Sans TC', monospace, sans-serif !important;
     max-height: 158px;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.clickable {
+    cursor: pointer;
 }

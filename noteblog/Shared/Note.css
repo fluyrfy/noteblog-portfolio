@@ -1,10 +1,30 @@
-﻿body {
+﻿@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+
+
+body {
+}
+
+.title {
+    text-align: center
 }
 
 .main-text {
-    /*    margin-inline: auto !important;*/
-    width: 75%;
-    padding: 80px 30px;
+    min-height: 100vh;
+    margin-left: 300px;
+    font-family: 'Fira Code', 'Noto Sans TC', monospace, sans-serif !important;
+    border-left: 1px dashed #dedede;
+    padding: 60px 30px;
     background: #ffffff;
     box-shadow: -2px -1px 88px 0px rgba(0,0,0,0.17);
+    line-height: 30px;
+}
+
+code {
+    border-radius: 4px;
+    white-space: pre-wrap;
+    background-color: hsl(210,8%,90%);
+    padding: 2px 4px;
+    font-family: 'Fira Code', monospace;
 }

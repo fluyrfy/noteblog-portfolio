@@ -50,6 +50,7 @@ namespace noteblog
                                     if (reader.HasRows)
                                     {
                                         reader.Read();
+                                        litTitle.Text = reader["title"].ToString();
                                         litContent.Text = Server.HtmlDecode(reader["content"].ToString());
                                     }
                                     else
