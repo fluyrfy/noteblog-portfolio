@@ -1,18 +1,13 @@
-﻿<%@ Page Title="New Post" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Take.aspx.cs" Inherits="noteblog.Take" ValidateRequest="false" %>
+﻿<%@ Page Title="Modify Post" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Modify.aspx.cs" Inherits="noteblog.Modify" ValidateRequest="false" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <main>
+    <main class="">
         <!-- Overlay effect when opening sidebar on small screens -->
         <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor: pointer" title="close side menu" id="myOverlay"></div>
 
         <div class="w3-main" style="margin-left: 300px">
-            <header id="portfolio">
-                <a href="#">
-                    <img src="/w3images/avatar_g2.jpg" style="width: 65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
-                <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
-            </header>
             <div class="w3-container w3-padding-large w3-grey">
-                <h4 id="contact"><b>New Post</b></h4>
+                <h4 id="contact"><b>Modify Post</b></h4>
                 <hr class="w3-opacity">
                 <div class="w3-section" aria-orientation="horizontal">
                     <label>Development</label>

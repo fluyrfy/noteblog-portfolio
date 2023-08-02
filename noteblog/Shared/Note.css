@@ -14,7 +14,6 @@ body {
     min-height: 100vh;
     margin-left: 300px;
     font-family: 'Fira Code', 'Noto Sans TC', monospace, sans-serif !important;
-    border-left: 1px dashed #dedede;
     padding: 60px 30px;
     background: #ffffff;
     box-shadow: -2px -1px 88px 0px rgba(0,0,0,0.17);

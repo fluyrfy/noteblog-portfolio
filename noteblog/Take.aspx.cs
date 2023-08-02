@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.IO;
+using System.Collections;
+using System.Web.Caching;
+using noteblog.Utils;
 
 namespace noteblog
 {
@@ -43,12 +46,13 @@ namespace noteblog
                     }
                     con.Open();
                     cmd.ExecuteNonQuery();
+                    CacheHelper.ClearAllCache();
                     Response.Redirect("Default.aspx");
                 }
 
                 catch (Exception ex)
                 {
-                    throw ex;
+                    throw;
                 }
             }
 

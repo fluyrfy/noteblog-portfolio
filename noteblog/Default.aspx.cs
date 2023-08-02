@@ -20,10 +20,24 @@ namespace noteblog
         {
             if (!IsPostBack)
             {
-                queryNotesData();
+                Cache["NotesAll"] = queryNotesData();
+                bindNotesData(Cache["NotesAll"]);
             }
         }
-        protected void queryNotesData(string dev = "")
+        protected void bindNotesData(object cacheNotes)
+        {
+            try
+            {
+                repNote.DataSource = cacheNotes;
+                repNote.DataBind();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+        protected DataTable queryNotesData(string dev = "")
         {
             //SqlConnection conn = new SqlConnection("data source=localhost; database=noteblog; integrated security=SSPI");
             using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Noteblog"].ConnectionString))
@@ -49,24 +63,36 @@ namespace noteblog
                     string strippedContent = StripHtmlTags(content);
                     row["content"] = strippedContent;
                 }
-                repNote.DataSource = dt;
-                repNote.DataBind();
+                return dt;
             }
+
         }
 
         protected void btnAll_Click(object sender, EventArgs e)
         {
-            queryNotesData();
+            if (Cache["NotesAll"] == null)
+            {
+                Cache["NotesAll"] = queryNotesData();
+            }
+            bindNotesData(Cache["NotesAll"]);
         }
 
         protected void btnFront_Click(object sender, EventArgs e)
         {
-            queryNotesData("F");
+            if (Cache["NotesFront"] == null)
+            {
+                Cache["NotesFront"] = queryNotesData("F");
+            }
+            bindNotesData(Cache["NotesFront"]);
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            queryNotesData("B");
+            if (Cache["NotesBack"] == null)
+            {
+                Cache["NotesBack"] = queryNotesData("B");
+            }
+            bindNotesData(Cache["NotesBack"]);
         }
         private string StripHtmlTags(string input)
         {

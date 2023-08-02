@@ -434,7 +434,9 @@
     <Content Include="bin\zh-Hant\Microsoft.AspNet.FriendlyUrls.resources.dll" />
     <Content Include="bin\zh-Hant\System.Web.Optimization.resources.dll" />
     <Content Include="Note.aspx" />
+    <Content Include="Shared\Common.css" />
     <Content Include="Shared\Note.css" />
+    <Content Include="Modify.aspx" />
     <Content Include="Take.aspx" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
@@ -551,6 +553,13 @@
     </Compile>
     <Compile Include="Site.Mobile - 複製.Master.designer.cs">
       <DependentUpon>Site.Mobile - 複製.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
     </Compile>
     <Compile Include="Take.aspx.cs">
       <DependentUpon>Take.aspx</DependentUpon>
@@ -794,6 +803,7 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="Utils\CacheHelper.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
