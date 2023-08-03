@@ -21,10 +21,12 @@ namespace noteblog
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            Logger log = new Logger(typeof(Take).Name);
             using (MySqlConnection con = new MySqlConnection(ConfigurationManager.ConnectionStrings["Noteblog"].ConnectionString))
             {
                 try
                 {
+                    log.Info("Starting to create new note");
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = con;
                     cmd.CommandText = "INSERT INTO notes(development,title, content, keyword, published_at, pic) VALUES (@development, @title, @content, @keyword, @publishedAt, @pic)";
@@ -44,15 +46,26 @@ namespace noteblog
                             }
                         }
                     }
+                    log.Debug($"New note info: {txtTitle.Text} - {txtContent.Text}");
                     con.Open();
                     cmd.ExecuteNonQuery();
+                    MySqlCommand cmd2 = new MySqlCommand();
+                    cmd2.Connection = con;
+                    cmd2.CommandText = "SELECT LAST_INSERT_ID()";
+                    string newId = cmd2.ExecuteScalar().ToString();
+                    log.Info("Note created successfully, note ID: " + newId);
                     CacheHelper.ClearAllCache();
-                    Response.Redirect("Default.aspx");
                 }
 
                 catch (Exception ex)
                 {
+                    log.Error("Failed to create new note", ex);
                     throw;
+                }
+                finally { 
+                    log.Info("End of note creation method");
+                    log.Shutdown();
+                    Response.Redirect("Default.aspx");
                 }
             }
 

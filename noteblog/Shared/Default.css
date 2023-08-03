@@ -21,6 +21,7 @@ body {
 
 .content {
     font-family: 'Fira Code', 'Noto Sans TC', monospace, sans-serif !important;
+    min-height: 45px;
     max-height: 158px;
     overflow: hidden;
     text-overflow: ellipsis;

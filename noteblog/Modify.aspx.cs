@@ -23,8 +23,7 @@ namespace noteblog
                 string noteIdString = Request.QueryString["id"];
                 if (string.IsNullOrEmpty(noteIdString))
                 {
-                    // 如果文章ID为空，则执行重定向到首页
-                    Response.Redirect("~/Default.aspx"); // 请替换为你的首页URL
+                    Response.Redirect("~/Default.aspx");
                 }
                 else
                 {
@@ -63,10 +62,12 @@ namespace noteblog
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            Logger log = new Logger(typeof(Modify).Name);
             using (MySqlConnection con = new MySqlConnection(ConfigurationManager.ConnectionStrings["Noteblog"].ConnectionString))
             {
                 try
                 {
+                    log.Info("Starting to modify note");
                     MySqlDataAdapter da = new MySqlDataAdapter();
                     da.SelectCommand = new MySqlCommand();
                     da.SelectCommand.CommandText = ViewState["SQL_QUERY"].ToString();
@@ -81,6 +82,7 @@ namespace noteblog
                         dr["title"] = txtTitle.Text;
                         dr["content"] = txtContent.Text;
                         dr["keyword"] = txtKeyword.Text;
+                        log.Debug($"New note info: {txtTitle.Text} - {txtContent.Text}");
                         if (fuCoverPhoto.HasFile)
                         {
                             using (Stream fs = fuCoverPhoto.PostedFile.InputStream)
@@ -92,15 +94,27 @@ namespace noteblog
                                 }
                             }
                         }
+                        int rowsUpdated = da.Update(dt);
+
+                        if (rowsUpdated > 0)
+                        {
+                            log.Info($"Note modified successfully, note ID: {dr["id"].ToString()}");
+                        }
                     }
-                    da.Update(dt);
                     CacheHelper.ClearAllCache();
-                    Response.Redirect("Default.aspx");
                 }
 
                 catch (Exception ex)
                 {
+                    log.Error("Failed to modify new note", ex);
                     throw;
+                }
+                finally
+                {
+
+                    log.Info("End of note modification method");
+                    log.Shutdown();
+                    Response.Redirect("Default.aspx");
                 }
             }
 

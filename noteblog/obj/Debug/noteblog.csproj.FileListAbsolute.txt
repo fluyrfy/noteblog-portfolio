@@ -42,3 +42,8 @@ D:\C#\noteblog\noteblog\bin\MarkdownSharp.xml
 D:\C#\noteblog\noteblog\bin\CommonMark.dll
 D:\C#\noteblog\noteblog\bin\CommonMark.pdb
 D:\C#\noteblog\noteblog\bin\CommonMark.xml
+D:\C#\noteblog\noteblog\bin\log4net.dll
+D:\C#\noteblog\noteblog\bin\log4net.xml
+D:\C#\noteblog\noteblog\bin\Web.config
+D:\C#\noteblog\noteblog\bin\Web.Debug.config
+D:\C#\noteblog\noteblog\bin\Web.Release.config
