@@ -24,6 +24,33 @@ namespace noteblog
         protected global::System.Web.UI.UpdatePanel updatePanel1;
 
         /// <summary>
+        /// btnAll 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnAll;
+
+        /// <summary>
+        /// btnFrontEnd 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnFrontEnd;
+
+        /// <summary>
+        /// btnBackEnd 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnBackEnd;
+
+        /// <summary>
         /// repNote 控制項。
         /// </summary>
         /// <remarks>
@@ -33,6 +60,24 @@ namespace noteblog
         protected global::System.Web.UI.WebControls.Repeater repNote;
 
         /// <summary>
+        /// pnlPagination 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPagination;
+
+        /// <summary>
+        /// btnPrevious 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPrevious;
+
+        /// <summary>
         /// repPagination 控制項。
         /// </summary>
         /// <remarks>
@@ -40,5 +85,14 @@ namespace noteblog
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater repPagination;
+
+        /// <summary>
+        /// btnNext 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNext;
     }
 }

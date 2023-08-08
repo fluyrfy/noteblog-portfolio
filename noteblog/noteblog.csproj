@@ -437,9 +437,16 @@
     <Content Include="bin\zh-Hant\Microsoft.AspNet.FriendlyUrls.resources.dll" />
     <Content Include="bin\zh-Hant\System.Web.Optimization.resources.dll" />
     <Content Include="Note.aspx" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ckeditor\ckeditor.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Shared\bootstrap.min.css" />
     <Content Include="Shared\Common.css" />
+    <Content Include="Shared\custom.css" />
     <Content Include="Shared\Note.css" />
     <Content Include="Modify.aspx" />
+    <Content Include="Dashboard.aspx" />
+    <Content Include="Shared\Take.css" />
     <Content Include="Take.aspx" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
@@ -481,9 +488,7 @@
       <DependentUpon>NoteModel.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\ckeditor.js" />
     <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\ckeditor.js.map" />
     <Content Include="bin\noteblog.dll.config" />
     <Content Include="bin\roslyn\csc.exe.config" />
     <Content Include="bin\roslyn\csc.rsp" />
@@ -499,6 +504,7 @@
     <Content Include="obj\Release\noteblog.csproj.AssemblyReference.cache" />
     <Content Include="Logs\20230802.log" />
     <Content Include="Logs\20230803.log" />
+    <Content Include="Scripts\ckeditor\ckeditor.js.map" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Models\NoteModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -554,12 +560,19 @@
     <Compile Include="Note.aspx.designer.cs">
       <DependentUpon>Note.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Site.Mobile - 複製.Master.cs">
-      <DependentUpon>Site.Mobile - 複製.Master</DependentUpon>
+    <Compile Include="Admin.Master.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Site.Mobile - 複製.Master.designer.cs">
-      <DependentUpon>Site.Mobile - 複製.Master</DependentUpon>
+    <Compile Include="Admin.Master.designer.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Mobile - copy.Master.cs">
+      <DependentUpon>Site.Mobile - copy.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Mobile - copy.Master.designer.cs">
+      <DependentUpon>Site.Mobile - copy.Master</DependentUpon>
     </Compile>
     <Compile Include="Modify.aspx.cs">
       <DependentUpon>Modify.aspx</DependentUpon>
@@ -567,6 +580,13 @@
     </Compile>
     <Compile Include="Modify.aspx.designer.cs">
       <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Take.aspx.cs">
       <DependentUpon>Take.aspx</DependentUpon>
@@ -811,6 +831,7 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="Utils\CacheHelper.cs" />
+    <Compile Include="Utils\DatabaseHelper.cs" />
     <Compile Include="Utils\Logger.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
@@ -829,7 +850,8 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.0.min.map" />
-    <Content Include="Site.Mobile - 複製.Master" />
+    <Content Include="Site.Mobile - copy.Master" />
+    <Content Include="Admin.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -11,61 +11,88 @@ namespace noteblog
 {
 
 
-    public partial class Modify
+    public partial class Dashboard
     {
 
         /// <summary>
-        /// rdlDevelopment 控制項。
+        /// MultiDelete 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdlDevelopment;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor MultiDelete;
 
         /// <summary>
-        /// fuCoverPhoto 控制項。
+        /// cbSelectAll 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fuCoverPhoto;
+        protected global::System.Web.UI.WebControls.CheckBox cbSelectAll;
 
         /// <summary>
-        /// imgCover 控制項。
+        /// repNotes 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgCover;
+        protected global::System.Web.UI.WebControls.Repeater repNotes;
 
         /// <summary>
-        /// txtTitle 控制項。
+        /// litPageSize 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTitle;
+        protected global::System.Web.UI.WebControls.Literal litPageSize;
 
         /// <summary>
-        /// txtKeyword 控制項。
+        /// litDataCount 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtKeyword;
+        protected global::System.Web.UI.WebControls.Literal litDataCount;
 
         /// <summary>
-        /// txtContent 控制項。
+        /// btnPrevious 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtContent;
+        protected global::System.Web.UI.WebControls.LinkButton btnPrevious;
+
+        /// <summary>
+        /// repPage 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater repPage;
+
+        /// <summary>
+        /// btnNext 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnNext;
+
+        /// <summary>
+        /// btnNoteDelete 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNoteDelete;
     }
 }

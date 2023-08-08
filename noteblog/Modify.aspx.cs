@@ -16,8 +16,10 @@ namespace noteblog
 {
     public partial class Modify : Page
     {
+        private Logger log;
         protected void Page_Load(object sender, EventArgs e)
         {
+            log = new Logger(typeof(Modify).Name);
             if (!IsPostBack)
             {
                 string noteIdString = Request.QueryString["id"];
@@ -48,6 +50,7 @@ namespace noteblog
                                     rdlDevelopment.SelectedValue = dr["development"].ToString();
                                     txtTitle.Text = dr["title"].ToString();
                                     txtKeyword.Text = dr["keyword"].ToString();
+                                    imgCover.ImageUrl = $"data:image/png;base64,{Convert.ToBase64String((byte[])dr["pic"])}";
                                     txtContent.Text = HttpUtility.HtmlDecode(dr["content"].ToString());
                                 }
                                 ViewState["SQL_QUERY"] = ct;
@@ -62,7 +65,7 @@ namespace noteblog
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            Logger log = new Logger(typeof(Modify).Name);
+
             using (MySqlConnection con = new MySqlConnection(ConfigurationManager.ConnectionStrings["Noteblog"].ConnectionString))
             {
                 try
@@ -111,10 +114,9 @@ namespace noteblog
                 }
                 finally
                 {
-
                     log.Info("End of note modification method");
                     log.Shutdown();
-                    Response.Redirect("Default.aspx");
+                    Response.Redirect("Dashboard.aspx");
                 }
             }
 

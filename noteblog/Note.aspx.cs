@@ -33,8 +33,7 @@ namespace noteblog
                     if (int.TryParse(noteIdString, out int noteId))
                     {
                         try
-                        {
-                            // 转换成功，result包含转换后的整数值
+                        {                            
                             using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Noteblog"].ConnectionString))
                             {
                                 MySqlCommand cmd = new MySqlCommand();
@@ -69,7 +68,7 @@ namespace noteblog
                     }
                     else
                     {
-                        // 转换失败，处理错误情况
+
                     }
                 }
             }

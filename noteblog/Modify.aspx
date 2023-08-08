@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="Modify Post" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Modify.aspx.cs" Inherits="noteblog.Modify" ValidateRequest="false" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <main class="">
+    <link href="Shared/Take.css" rel="stylesheet" />
+
+    <main>
         <!-- Overlay effect when opening sidebar on small screens -->
         <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor: pointer" title="close side menu" id="myOverlay"></div>
 
@@ -18,7 +20,8 @@
                 </div>
                 <div class="w3-section">
                     <label>Cover Photo</label>
-                    <asp:FileUpload ID="fuCoverPhoto" runat="server" accept=".png,.jpg,.jpeg,.gif" />
+                    <asp:FileUpload ID="fuCoverPhoto" runat="server" accept=".png,.jpg,.jpeg" /><br />
+                    <asp:Image ID="imgCover" runat="server" CssClass="cover-photo" />
                 </div>
                 <div class="w3-section">
                     <label>Title</label>
@@ -88,7 +91,21 @@
             console.error(error);
         }
 
-
+        $(document).ready(function () {
+            // 監聽 file input 的變化事件
+            $("#MainContent_fuCoverPhoto").on("change", function () {
+                var fileInput = $(this)[0];
+                if (fileInput.files && fileInput.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        // 將讀取的圖片數據設置為 <img> 的 src
+                        $("#MainContent_imgCover").attr("src", e.target.result);
+                    };
+                    // 讀取選擇的文件
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+            });
+        });
     </script>
 </asp:Content>
 

@@ -22,16 +22,16 @@ namespace noteblog
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<NoteDBContext>());
 
-            // 1. Map路径
+            // map path
             string logPath = Server.MapPath("~/Logs");
 
-            // 2. 检查是否存在
+            // check exist
             if (!Directory.Exists(logPath))
             {
                 Directory.CreateDirectory(logPath);
             }
 
-            // 3. 设置权限 
+            // folder permissions
             var writeAllow = new FileSystemAccessRule("Users",
                                                        FileSystemRights.Write,
                                                        AccessControlType.Allow);

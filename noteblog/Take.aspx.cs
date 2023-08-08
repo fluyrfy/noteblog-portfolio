@@ -15,13 +15,13 @@ namespace noteblog
 {
     public partial class Take : Page
     {
+        private Logger log;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            log = new Logger(typeof(Take).Name);
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            Logger log = new Logger(typeof(Take).Name);
             using (MySqlConnection con = new MySqlConnection(ConfigurationManager.ConnectionStrings["Noteblog"].ConnectionString))
             {
                 try
@@ -62,10 +62,11 @@ namespace noteblog
                     log.Error("Failed to create new note", ex);
                     throw;
                 }
-                finally { 
+                finally
+                {
                     log.Info("End of note creation method");
                     log.Shutdown();
-                    Response.Redirect("Default.aspx");
+                    Response.Redirect("Dashboard.aspx");
                 }
             }
 

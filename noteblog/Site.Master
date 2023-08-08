@@ -47,15 +47,18 @@
         </asp:ScriptManager>
         <div>
             <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index: 3; width: 300px;" id="mySidebar">
-                <br>
+                <br />
                 <div class="w3-container">
-                    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+                    <a onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
                         <i class="fa fa-remove"></i>
                     </a>
-                    <img src="/w3images/avatar_g2.jpg" style="width: 45%;" class="w3-round"><br>
-                    <br>
+
+                    <asp:Image runat="server" ID="imgAvatar" Style="width: 45%;" class="w3-round" ImageUrl="~/Images/avatar.jpg" />
+                    <br />
+                    <br />
+                    <asp:HyperLink NavigateUrl="Dashboard" runat="server">
                     <h4>
-                        <b>Frank Liao</b></h4>
+                        <b>Frank Liao</b></h4></asp:HyperLink>
                     <p class="w3-text-grey">Code, Recode, Record</p>
                 </div>
                 <div class="w3-bar-block">
@@ -70,6 +73,11 @@
                     <i class="fa fa-github w3-hover-opacity"></i>
                 </div>--%>
             </nav>
+            <header id="portfolio">
+                <a href="#">
+                    <img src="/w3images/avatar_g2.jpg" style="width: 65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+                <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+            </header>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <!-- Footer -->

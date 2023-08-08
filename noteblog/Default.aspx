@@ -9,32 +9,23 @@
 
         <!-- !PAGE CONTENT! -->
         <div class="w3-main" style="margin-left: 300px">
-
             <asp:UpdatePanel ID="updatePanel1" runat="server">
                 <ContentTemplate>
-                    <!-- Header -->
-                    <header id="portfolio">
-                        <a href="#">
-                            <img src="/w3images/avatar_g2.jpg" style="width: 65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
-                        <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
-                        <div class="w3-container">
-                            <h1><b>My Portfolio</b></h1>
-                            <div class="w3-section w3-bottombar w3-padding-16">
-                                <span class="w3-margin-right">Filter:</span>
-                                <button class="w3-button w3-black" runat="server" onserverclick="btnAll_Click" type="button">ALL</button>
-                                <button class="w3-button w3-white" onserverclick="btnFront_Click" runat="server"><i class="fa fa-code w3-margin-right" type="button"></i>Front-End</button>
-                                <button class="w3-button w3-white w3-hide-small" onserverclick="btnBack_Click" runat="server"><i class="fa fa-database w3-margin-right" type="button"></i>Back-End</button>
-                            </div>
+                    <div class="w3-container">
+                        <h1><b>My Portfolio</b></h1>
+                        <div class="w3-section w3-bottombar w3-padding-16" id="filter">
+                            <span class="w3-margin-right">Filter:</span>
+                            <asp:LinkButton ID="btnAll" runat="server" OnCommand="btnFilter_Command" CommandArgument="NotesAll" type="button" Text="ALL"></asp:LinkButton>
+                            <asp:LinkButton ID="btnFrontEnd" OnCommand="btnFilter_Command" runat="server" CommandArgument="NotesFront"><i class="fa fa-code w3-margin-right" type="button"></i>Front-End</asp:LinkButton>
+                            <asp:LinkButton ID="btnBackEnd" OnCommand="btnFilter_Command" CommandArgument="NotesBack" runat="server"><i class="fa fa-code w3-margin-right" type="button"></i>Back-End</asp:LinkButton>
                         </div>
-                    </header>
-
-
+                    </div>
                     <div class="w3-row-padding">
                         <asp:Repeater ID="repNote" runat="server" Visible="true">
                             <ItemTemplate>
                                 <div class="w3-third w3-container w3-margin-bottom rep-item" onclick="redirectPage(<%# Eval("id") %>)">
                                     <asp:LinkButton runat="server" ID="lnkNote" CommandName="ReadNote" CommandArgument='<%# Eval("id") %>' />
-                                    <img src="data:image/png;base64,<%# System.Convert.ToBase64String((byte[])Eval("pic"))%>" alt="Norway" class="w3-hover-opacity cover-photo">
+                                    <img src="data:image/png;base64,<%# System.Convert.ToBase64String((byte[])Eval("pic"))%>" class="w3-hover-opacity cover-photo">
                                     <div class="w3-container w3-white">
                                         <p>
                                             <b>
@@ -50,17 +41,19 @@
                         </asp:Repeater>
                     </div>
                     <!-- Pagination -->
-                    <div class="w3-center w3-padding-32">
-                        <div class="w3-bar">
-                            <asp:Button runat="server" CssClass="w3-bar-item w3-button w3-hover-black" Text="«" OnCommand="btnNavigation_Command" CommandArgument="Previous" />
-                            <asp:Repeater runat="server" ID="repPagination" OnItemDataBound="repPagination_ItemDataBound">
-                                <ItemTemplate>
-                                    <asp:Button runat="server" ID="btnPage" ClientIDMode="AutoID" CssClass="w3-bar-item w3-button w3-hover-black" Text='<%# Container.DataItem %>' OnClick="btnPage_Click" CommandArgument='<%# Container.DataItem %>' />
-                                </ItemTemplate>
-                            </asp:Repeater>
-                            <asp:Button runat="server" class="w3-bar-item w3-button w3-hover-black" Text="»" OnCommand="btnNavigation_Command" CommandArgument="Next" />
+                    <asp:Panel runat="server" ID="pnlPagination">
+                        <div class="w3-center w3-padding-32">
+                            <div class="w3-bar">
+                                <asp:Button runat="server" CssClass="w3-bar-item w3-button w3-hover-black" Text="«" OnCommand="btnNavigation_Command" CommandArgument="Previous" ID="btnPrevious" />
+                                <asp:Repeater runat="server" ID="repPagination" OnItemDataBound="repPagination_ItemDataBound">
+                                    <ItemTemplate>
+                                        <asp:Button runat="server" ID="btnPage" ClientIDMode="AutoID" CssClass="w3-bar-item w3-button w3-hover-black" Text='<%# Container.DataItem %>' OnClick="btnPage_Click" CommandArgument='<%# Container.DataItem %>' />
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <asp:Button runat="server" class="w3-bar-item w3-button w3-hover-black" Text="»" OnCommand="btnNavigation_Command" CommandArgument="Next" ID="btnNext" />
+                            </div>
                         </div>
-                    </div>
+                    </asp:Panel>
                 </ContentTemplate>
             </asp:UpdatePanel>
             <!-- Images of Me -->

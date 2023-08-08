@@ -1,16 +1,13 @@
 ﻿<%@ Page Title="New Post" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Take.aspx.cs" Inherits="noteblog.Take" ValidateRequest="false" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <link href="Shared/Take.css" rel="stylesheet" />
+
     <main>
         <!-- Overlay effect when opening sidebar on small screens -->
         <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor: pointer" title="close side menu" id="myOverlay"></div>
 
         <div class="w3-main" style="margin-left: 300px">
-            <header id="portfolio">
-                <a href="#">
-                    <img src="/w3images/avatar_g2.jpg" style="width: 65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
-                <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
-            </header>
             <div class="w3-container w3-padding-large w3-grey">
                 <h4 id="contact"><b>New Post</b></h4>
                 <hr class="w3-opacity">
@@ -23,7 +20,9 @@
                 </div>
                 <div class="w3-section">
                     <label>Cover Photo</label>
-                    <asp:FileUpload ID="fuCoverPhoto" runat="server" accept=".png,.jpg,.jpeg,.gif" />
+                    <asp:FileUpload ID="fuCoverPhoto" runat="server" accept=".png,.jpg,.jpeg" />
+                    <br />
+                    <asp:Image ID="imgCover" runat="server" CssClass="cover-photo" />
                 </div>
                 <div class="w3-section">
                     <label>Title</label>
@@ -92,7 +91,26 @@
             console.warn('Build id: 31o3b59jzmiv-rq35etlei2s');
             console.error(error);
         }
-
+        $(document).ready(function () {
+            $("#MainContent_imgCover").hide();
+            //$("#MainContent_imgCover")
+            // 監聽 file input 的變化事件
+            $("#MainContent_fuCoverPhoto").on("change", function () {
+                var fileInput = $(this)[0];
+                if (fileInput.files && fileInput.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        // 將讀取的圖片數據設置為 <img> 的 src
+                        $("#MainContent_imgCover").attr("src", e.target.result);
+                        $("#MainContent_imgCover").show(); // 顯示圖片
+                    };
+                    // 讀取選擇的文件
+                    reader.readAsDataURL(fileInput.files[0]);
+                } else {
+                    $("#MainContent_imgCover").hide();
+                }
+            });
+        });
 
     </script>
 </asp:Content>

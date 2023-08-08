@@ -19,10 +19,11 @@ namespace noteblog
 {
     public partial class _Default : Page
     {
-        private Logger logger = new Logger(typeof(_Default).Name);
+        private Logger logger;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            logger = new Logger(typeof(_Default).Name);
             if (!IsPostBack)
             {
                 ViewState["CurrentPage"] = Session["CurrentPage"] == null ? 1 : Convert.ToInt32(Session["CurrentPage"]);
@@ -78,16 +79,25 @@ namespace noteblog
                             DataRow[] resultRows;
                             if (dev == "NotesFront")
                             {
-                                resultRows = dt.Select($"development = 'F'");
-                                filteredTable = resultRows.CopyToDataTable();
+                                resultRows = dt.Select("development = 'F'");
+                                filteredTable = dt.Clone();
+                                foreach (DataRow row in resultRows)
+                                {
+                                    filteredTable.ImportRow(row);
+                                }
                                 Cache["NotesFront"] = filteredTable;
                             }
                             else if (dev == "NotesBack")
                             {
-                                resultRows = dt.Select($"development = 'B'");
-                                filteredTable = resultRows.CopyToDataTable();
+                                resultRows = dt.Select("development = 'B'");
+                                filteredTable = dt.Clone();
+                                foreach (DataRow row in resultRows)
+                                {
+                                    filteredTable.ImportRow(row);
+                                }
                                 Cache["NotesBack"] = filteredTable;
                             }
+
                         }
                     }
                     logger.Info("Notes queried successfully");
@@ -116,14 +126,22 @@ namespace noteblog
             {
                 string cacheKey = ViewState["Development"].ToString();
                 Session["Development"] = cacheKey;
-                int pageNumber = Convert.ToInt32(ViewState["CurrentPage"]);
+                int pageNumber = Convert.ToInt32(ViewState["CurrentPage"]) > 0 ? Convert.ToInt32(ViewState["CurrentPage"]) : 1;
                 logger.Debug($"Current development: {cacheKey}");
                 int pageSize = 6;
                 if (Cache[cacheKey] is DataTable dt)
                 {
                     int totalRecords = dt.Rows.Count;
-                    int totalPages = (int)Math.Ceiling((double)totalRecords / 6);
+                    int totalPages;
+                    totalPages = (int)Math.Ceiling((double)totalRecords / 6);
                     pageNumber = Math.Min(pageNumber, totalPages);
+                    pnlPagination.Visible = totalRecords == 0 ? false : true;
+                    if (totalRecords == 0)
+                    {
+                        totalPages = 0;
+                        pageNumber = 0;
+                        pageSize = 0;
+                    }
                     logger.Debug($"Current page number: {pageNumber}");
                     ViewState["CurrentPage"] = pageNumber;
                     Session["CurrentPage"] = pageNumber;
@@ -135,20 +153,28 @@ namespace noteblog
                     repPagination.DataSource = pageNumbers;
                     repPagination.DataBind();
 
+                    // 樣式切換
                     paginationActiveStyle();
+                    toggleFilterCss();
 
                     ViewState["TotalPages"] = totalPages;
                     int startIndex = (pageNumber - 1) * pageSize;
                     int endIndex = Math.Min(startIndex + pageSize - 1, dt.Rows.Count - 1);
+                    startIndex = startIndex < 0 ? 0 : startIndex;
+                    endIndex = endIndex < 0 ? 0 : endIndex;
 
                     DataTable currentPageData = dt.Clone();
 
-                    for (int i = startIndex; i <= endIndex; i++)
+                    if (dt.Rows.Count > 0)
                     {
-                        currentPageData.ImportRow(dt.Rows[i]);
+                        for (int i = startIndex; i <= endIndex; i++)
+                        {
+                            currentPageData.ImportRow(dt.Rows[i]);
+                        }
                     }
                     bindNotesData(currentPageData);
                     logger.Info($"Notes queried successfully, Datatable: {currentPageData}");
+
                 }
             }
             catch (Exception ex)
@@ -158,26 +184,27 @@ namespace noteblog
             finally
             {
                 logger.Info("End of notes load method");
+                logger.Shutdown();
             }
         }
 
-        protected void btnAll_Click(object sender, EventArgs e)
-        {
-            ViewState["Development"] = "NotesAll";
-            queryNotesData();
-        }
+        //protected void btnAll_Click(object sender, EventArgs e)
+        //{
+        //    ViewState["Development"] = "NotesAll";
+        //    queryNotesData();
+        //}
 
-        protected void btnFront_Click(object sender, EventArgs e)
-        {
-            ViewState["Development"] = "NotesFront";
-            queryNotesData();
-        }
+        //protected void btnFront_Click(object sender, EventArgs e)
+        //{
+        //    ViewState["Development"] = "NotesFront";
+        //    queryNotesData();
+        //}
 
-        protected void btnBack_Click(object sender, EventArgs e)
-        {
-            ViewState["Development"] = "NotesBack";
-            queryNotesData();
-        }
+        //protected void btnBack_Click(object sender, EventArgs e)
+        //{
+        //    ViewState["Development"] = "NotesBack";
+        //    queryNotesData();
+        //}
         protected void btnPage_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -258,6 +285,32 @@ namespace noteblog
             }
             ViewState["CurrentPage"] = currentPage;
             queryNotesData();
+        }
+
+        protected void btnFilter_Command(object sender, CommandEventArgs e)
+        {
+            ViewState["Development"] = e.CommandArgument.ToString();
+            queryNotesData();
+        }
+        protected void toggleFilterCss()
+        {
+            string active = "w3-button w3-black";
+            string inactive = "w3-button w3-white";
+            btnAll.CssClass = inactive;
+            btnFrontEnd.CssClass = inactive;
+            btnBackEnd.CssClass = inactive;
+            switch (Session["Development"].ToString())
+            {
+                case "NotesAll":
+                    btnAll.CssClass = active;
+                    break;
+                case "NotesFront":
+                    btnFrontEnd.CssClass = active; break;
+                case "NotesBack":
+                    btnBackEnd.CssClass = active; break;
+                default:
+                    break;
+            }
         }
 
         //protected void lnkNote_Command(object sender, CommandEventArgs e)
