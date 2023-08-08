@@ -17,24 +17,28 @@
                         <asp:ListItem Value="F">Front-End</asp:ListItem>
                         <asp:ListItem Value="B">Back-End</asp:ListItem>
                     </asp:RadioButtonList>
+                    <asp:RequiredFieldValidator ID="rfvDevelopment" runat="server" ErrorMessage="Development is required" ControlToValidate="rdlDevelopment" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
                 <div class="w3-section">
-                    <label>Cover Photo</label>
+                    <label>Cover Image</label>
                     <asp:FileUpload ID="fuCoverPhoto" runat="server" accept=".png,.jpg,.jpeg" />
+                    <asp:RequiredFieldValidator ID="rfvCI" runat="server" ErrorMessage="Cover Image is required" ControlToValidate="fuCoverPhoto" ForeColor="Red"></asp:RequiredFieldValidator>
                     <br />
                     <asp:Image ID="imgCover" runat="server" CssClass="cover-photo" />
                 </div>
                 <div class="w3-section">
                     <label>Title</label>
                     <asp:TextBox ID="txtTitle" runat="server" class="w3-input w3-border" required="required"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvTitle" runat="server" ErrorMessage="Title is required" ControlToValidate="txtTitle" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
                 <div class="w3-section">
                     <label>Keyword</label>
-                    <asp:TextBox ID="txtKeyword" runat="server" class="w3-input w3-border" required="required"></asp:TextBox>
+                    <asp:TextBox ID="txtKeyword" runat="server" class="w3-input w3-border"></asp:TextBox>
                 </div>
                 <div class="w3-section">
                     <label>Content</label>
                     <asp:TextBox ID="txtContent" class="w3-input w3-border ck-editor" TextMode="MultiLine" runat="server" AutoPostBack="true"></asp:TextBox>
+                    <%-- <asp:RequiredFieldValidator ID="rfvContent" runat="server" ErrorMessage="Content is required" ControlToValidate="txtContent" ForeColor="Red"></asp:RequiredFieldValidator>--%>
                 </div>
                 <div style="width: 100%; text-align: center;">
                     <button class="w3-button w3-black w3-round" runat="server" onserverclick="btnSubmit_Click"><i class="fa fa-pencil w3-margin-right"></i>Submit</button>
@@ -58,7 +62,6 @@
                     // 在这里可以绑定其他事件或进行其他操作
                     editor.model.document.on('change:data', () => {
                         const data = editor.getData();
-                        console.log(data);
                     })
 
                     return editor;

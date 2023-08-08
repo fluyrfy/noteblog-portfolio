@@ -24,6 +24,15 @@ namespace noteblog
         protected global::System.Web.UI.WebControls.RadioButtonList rdlDevelopment;
 
         /// <summary>
+        /// rfvDevelopment 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDevelopment;
+
+        /// <summary>
         /// fuCoverPhoto 控制項。
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace noteblog
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fuCoverPhoto;
+
+        /// <summary>
+        /// rfvCI 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCI;
 
         /// <summary>
         /// imgCover 控制項。
@@ -49,6 +67,15 @@ namespace noteblog
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTitle;
+
+        /// <summary>
+        /// rfvTitle 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTitle;
 
         /// <summary>
         /// txtKeyword 控制項。

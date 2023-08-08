@@ -25,7 +25,7 @@ namespace noteblog
                 string noteIdString = Request.QueryString["id"];
                 if (string.IsNullOrEmpty(noteIdString))
                 {
-                    Response.Redirect("~/Default.aspx");
+                    Response.Redirect("Default.aspx");
                 }
                 else
                 {
@@ -51,7 +51,7 @@ namespace noteblog
                                     txtTitle.Text = dr["title"].ToString();
                                     txtKeyword.Text = dr["keyword"].ToString();
                                     imgCover.ImageUrl = $"data:image/png;base64,{Convert.ToBase64String((byte[])dr["pic"])}";
-                                    txtContent.Text = HttpUtility.HtmlDecode(dr["content"].ToString());
+                                    txtContent.Text = dr["content"].ToString();
                                 }
                                 ViewState["SQL_QUERY"] = ct;
                                 ViewState["NOTE"] = dt;

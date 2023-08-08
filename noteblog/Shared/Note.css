@@ -20,10 +20,50 @@ body {
     line-height: 30px;
 }
 
+pre {
+    /*    background-color: hsl(0,0%,96.5%);*/
+    border-radius: 6px;
+    overflow: auto;
+    /*    padding: 12px;*/
+}
+
+    pre code {
+        max-width: 100%;
+        overflow-wrap: break-word;
+        font-family: 'Fira Code', monospace, sans-serif !important;
+        font-size: 13px;
+        padding: 0;
+        width: fit-content;
+        margin: auto;
+    }
+
+
 code {
     border-radius: 4px;
     white-space: pre-wrap;
     background-color: hsl(210,8%,90%);
     padding: 2px 4px;
     font-family: 'Fira Code', monospace;
+}
+
+.marker-blue {
+    background-color: #72ccfd;
+}
+
+.marker-green {
+    background-color: #62f962;
+}
+
+.marker-pink {
+    background-color: #fc7899;
+}
+
+.pen-red {
+    background-color: transparent;
+    color: #e71313;
+}
+
+.pen-green {
+    background-color: transparent;
+    color: #128a00;
 }

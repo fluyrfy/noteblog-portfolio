@@ -25,7 +25,7 @@ namespace noteblog
                 if (string.IsNullOrEmpty(noteIdString))
                 {
                     // 如果文章ID为空，则执行重定向到首页
-                    Response.Redirect("~/Default.aspx"); // 请替换为你的首页URL
+                    Response.Redirect("Default.aspx"); // 请替换为你的首页URL
                 }
                 else
                 {
@@ -33,7 +33,7 @@ namespace noteblog
                     if (int.TryParse(noteIdString, out int noteId))
                     {
                         try
-                        {                            
+                        {
                             using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Noteblog"].ConnectionString))
                             {
                                 MySqlCommand cmd = new MySqlCommand();
@@ -50,7 +50,7 @@ namespace noteblog
                                     {
                                         reader.Read();
                                         litTitle.Text = reader["title"].ToString();
-                                        litContent.Text = Server.HtmlDecode(reader["content"].ToString());
+                                        litContent.Text = reader["content"].ToString();
                                     }
                                     else
                                     {

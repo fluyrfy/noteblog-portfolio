@@ -17,7 +17,7 @@
                             <span class="w3-margin-right">Filter:</span>
                             <asp:LinkButton ID="btnAll" runat="server" OnCommand="btnFilter_Command" CommandArgument="NotesAll" type="button" Text="ALL"></asp:LinkButton>
                             <asp:LinkButton ID="btnFrontEnd" OnCommand="btnFilter_Command" runat="server" CommandArgument="NotesFront"><i class="fa fa-code w3-margin-right" type="button"></i>Front-End</asp:LinkButton>
-                            <asp:LinkButton ID="btnBackEnd" OnCommand="btnFilter_Command" CommandArgument="NotesBack" runat="server"><i class="fa fa-code w3-margin-right" type="button"></i>Back-End</asp:LinkButton>
+                            <asp:LinkButton ID="btnBackEnd" OnCommand="btnFilter_Command" CommandArgument="NotesBack" runat="server"><i class="fa fa-database w3-margin-right" type="button"></i>Back-End</asp:LinkButton>
                         </div>
                     </div>
                     <div class="w3-row-padding">
@@ -73,15 +73,15 @@
 
                 <h4>Technical Skills</h4>
                 <!-- Progress bars / Skills -->
-                <p>Photography</p>
+                <p>Front-End</p>
                 <div class="w3-grey">
                     <div class="w3-container w3-dark-grey w3-padding w3-center" style="width: 95%">95%</div>
                 </div>
-                <p>Web Design</p>
+                <p>Back-End</p>
                 <div class="w3-grey">
-                    <div class="w3-container w3-dark-grey w3-padding w3-center" style="width: 85%">85%</div>
+                    <div class="w3-container w3-dark-grey w3-padding w3-center" style="width: 90%">90%</div>
                 </div>
-                <p>Photoshop</p>
+                <p>Other</p>
                 <div class="w3-grey">
                     <div class="w3-container w3-dark-grey w3-padding w3-center" style="width: 80%">80%</div>
                 </div>

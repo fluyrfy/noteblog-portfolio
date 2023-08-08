@@ -29,7 +29,7 @@
                 </div>
                 <div class="w3-section">
                     <label>Keyword</label>
-                    <asp:TextBox ID="txtKeyword" runat="server" class="w3-input w3-border" required="required"></asp:TextBox>
+                    <asp:TextBox ID="txtKeyword" runat="server" class="w3-input w3-border"></asp:TextBox>
                 </div>
                 <div class="w3-section">
                     <label>Content</label>
@@ -57,7 +57,6 @@
                     // 在这里可以绑定其他事件或进行其他操作
                     editor.model.document.on('change:data', () => {
                         const data = editor.getData();
-                        console.log(data);
                     })
 
                     return editor;

@@ -22,54 +22,58 @@ namespace noteblog
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            using (MySqlConnection con = new MySqlConnection(ConfigurationManager.ConnectionStrings["Noteblog"].ConnectionString))
+            if (Page.IsValid)
             {
-                try
+
+                using (MySqlConnection con = new MySqlConnection(ConfigurationManager.ConnectionStrings["Noteblog"].ConnectionString))
                 {
-                    log.Info("Starting to create new note");
-                    MySqlCommand cmd = new MySqlCommand();
-                    cmd.Connection = con;
-                    cmd.CommandText = "INSERT INTO notes(development,title, content, keyword, published_at, pic) VALUES (@development, @title, @content, @keyword, @publishedAt, @pic)";
-                    cmd.Parameters.AddWithValue("@development", rdlDevelopment.SelectedValue);
-                    cmd.Parameters.AddWithValue("@title", txtTitle.Text);
-                    cmd.Parameters.AddWithValue("@content", Server.HtmlEncode(txtContent.Text));
-                    cmd.Parameters.AddWithValue("@keyword", txtKeyword.Text);
-                    cmd.Parameters.AddWithValue("@publishedAt", DateTime.UtcNow);
-                    if (fuCoverPhoto.HasFile)
+                    try
                     {
-                        using (Stream fs = fuCoverPhoto.PostedFile.InputStream)
+                        log.Info("Starting to create new note");
+                        MySqlCommand cmd = new MySqlCommand();
+                        cmd.Connection = con;
+                        cmd.CommandText = "INSERT INTO notes(development,title, content, keyword, published_at, pic) VALUES (@development, @title, @content, @keyword, @publishedAt, @pic)";
+                        cmd.Parameters.AddWithValue("@development", rdlDevelopment.SelectedValue);
+                        cmd.Parameters.AddWithValue("@title", txtTitle.Text);
+                        cmd.Parameters.AddWithValue("@content", HttpUtility.HtmlEncode(txtContent.Text));
+                        cmd.Parameters.AddWithValue("@keyword", txtKeyword.Text);
+                        cmd.Parameters.AddWithValue("@publishedAt", DateTime.UtcNow);
+                        if (fuCoverPhoto.HasFile)
                         {
-                            using (BinaryReader br = new BinaryReader(fs))
+                            using (Stream fs = fuCoverPhoto.PostedFile.InputStream)
                             {
-                                byte[] imgData = br.ReadBytes((Int32)fs.Length);
-                                cmd.Parameters.AddWithValue("@pic", imgData);
+                                using (BinaryReader br = new BinaryReader(fs))
+                                {
+                                    byte[] imgData = br.ReadBytes((Int32)fs.Length);
+                                    cmd.Parameters.AddWithValue("@pic", imgData);
+                                }
                             }
                         }
+                        log.Debug($"New note info: {txtTitle.Text} - {txtContent.Text}");
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        MySqlCommand cmd2 = new MySqlCommand();
+                        cmd2.Connection = con;
+                        cmd2.CommandText = "SELECT LAST_INSERT_ID()";
+                        string newId = cmd2.ExecuteScalar().ToString();
+                        log.Info("Note created successfully, note ID: " + newId);
+                        CacheHelper.ClearAllCache();
                     }
-                    log.Debug($"New note info: {txtTitle.Text} - {txtContent.Text}");
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    MySqlCommand cmd2 = new MySqlCommand();
-                    cmd2.Connection = con;
-                    cmd2.CommandText = "SELECT LAST_INSERT_ID()";
-                    string newId = cmd2.ExecuteScalar().ToString();
-                    log.Info("Note created successfully, note ID: " + newId);
-                    CacheHelper.ClearAllCache();
+
+                    catch (Exception ex)
+                    {
+                        log.Error("Failed to create new note", ex);
+                        throw;
+                    }
+                    finally
+                    {
+                        log.Info("End of note creation method");
+                        log.Shutdown();
+                        Response.Redirect("Dashboard.aspx");
+                    }
                 }
 
-                catch (Exception ex)
-                {
-                    log.Error("Failed to create new note", ex);
-                    throw;
-                }
-                finally
-                {
-                    log.Info("End of note creation method");
-                    log.Shutdown();
-                    Response.Redirect("Dashboard.aspx");
-                }
             }
-
         }
     }
 }

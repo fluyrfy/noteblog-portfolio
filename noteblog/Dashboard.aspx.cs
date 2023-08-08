@@ -69,7 +69,7 @@ namespace noteblog
         protected void btnNoteDelete_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(Request.Form["noteId"]);
-            if (id != null && id != 0)
+            if (id != 0)
             {
                 log.Info("Starting to delete note");
                 log.Debug($"Delete note id: {id}");
@@ -116,31 +116,35 @@ namespace noteblog
                 }
                 if (selectedIds.Count > 0)
                 {
-                    try
+                    string ids = string.Join(",", selectedIds);
+                    log.Debug($"Delete notes id: {ids}");
+                    string deleteQuery = $"DELETE FROM notes WHERE id IN ({ids})";
+                    using (MySqlConnection con = DatabaseHelper.GetConnection())
                     {
-                        string ids = string.Join(",", selectedIds);
-                        log.Debug($"Delete notes id: {ids}");
-                        string deleteQuery = $"DELETE FROM notes WHERE id IN ({ids})";
-                        using (MySqlConnection con = DatabaseHelper.GetConnection())
+                        MySqlTransaction transaction = con.BeginTransaction();
+                        try
                         {
-                            MySqlCommand cmd = new MySqlCommand(deleteQuery, con);
+                            MySqlCommand cmd = new MySqlCommand(deleteQuery, con, transaction);
                             con.Open();
-                            if (cmd.ExecuteNonQuery() > 0)
+                            int affectedRows = cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                            if (affectedRows > 0)
                             {
                                 CacheHelper.ClearAllCache();
                                 log.Info("Notes deleted successfully");
                             }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        log.Error("Failed to delete notes", ex);
-                        throw;
-                    }
-                    finally
-                    {
-                        log.Info("End of notes deletion method");
-                        Response.Redirect("Dashboard.aspx");
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            log.Error("Failed to delete notes", ex);
+                            throw;
+                        }
+                        finally
+                        {
+                            log.Info("End of notes deletion method");
+                            Response.Redirect("Dashboard.aspx");
+                        }
                     }
                 }
             }
