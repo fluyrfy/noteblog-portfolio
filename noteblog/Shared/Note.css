@@ -21,21 +21,30 @@ body {
 }
 
 pre {
-    /*    background-color: hsl(0,0%,96.5%);*/
     border-radius: 6px;
     overflow: auto;
-    /*    padding: 12px;*/
+    width: fit-content;
+    margin-inline: auto;
+    position: relative;
+    /*    background-color: hsl(0,0%,96.5%);*/
 }
 
-    pre code {
+    pre > code.hljs {
+        padding-top: 15px !important;
+        padding: 1em;
         max-width: 100%;
         overflow-wrap: break-word;
         font-family: 'Fira Code', monospace, sans-serif !important;
         font-size: 13px;
-        padding: 0;
         width: fit-content;
         margin: auto;
+        display: block;
     }
+
+    pre:hover > button {
+        opacity: 1;
+    }
+
 
 
 code {
@@ -44,6 +53,21 @@ code {
     background-color: hsl(210,8%,90%);
     padding: 2px 4px;
     font-family: 'Fira Code', monospace;
+}
+
+.copy-btn {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: absolute;
+    right: 4px;
+    top: 3px;
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+    background-color: #eee;
+    background-image: linear-gradient(#fcfcfc, #eee);
+    cursor: pointer;
+    padding: 2px 6px;
+    margin: 0;
 }
 
 .marker-blue {

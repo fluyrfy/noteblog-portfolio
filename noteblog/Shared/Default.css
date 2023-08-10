@@ -18,6 +18,12 @@ body {
 }
 
 
+.title {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 
 .content {
     font-family: 'Fira Code', 'Noto Sans TC', monospace, sans-serif !important;
@@ -33,5 +39,3 @@ body {
 .clickable {
     cursor: pointer;
 }
-
-

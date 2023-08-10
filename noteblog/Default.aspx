@@ -28,7 +28,7 @@
                                     <img src="data:image/png;base64,<%# System.Convert.ToBase64String((byte[])Eval("pic"))%>" class="w3-hover-opacity cover-photo">
                                     <div class="w3-container w3-white">
                                         <p>
-                                            <b>
+                                            <b class="title">
                                                 <asp:Literal Text='<%# Eval("title").ToString() %>' runat="server" />
                                             </b>
                                         </p>
@@ -165,7 +165,7 @@
                         <p>+886 965605173</p>
                     </div>
                 </div>
-                <hr class="w3-opacity">
+                <%--<hr class="w3-opacity">--%>
                 <%--<form action="/action_page.php" target="_blank">
                     <div class="w3-section">
                         <label>Name</label>
@@ -182,7 +182,7 @@
                     <button type="submit" class="w3-button w3-black w3-margin-bottom"><i class="fa fa-paper-plane w3-margin-right"></i>Send Message</button>
                 <%--</form>--%>
             </div>
-            <!-- <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
+            <div class="w3-black w3-center w3-padding-16">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
             <!-- End page content -->
         </div>
 

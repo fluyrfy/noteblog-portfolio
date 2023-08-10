@@ -137,21 +137,16 @@
 
                         <div class="col-md-5 col-lg-3 order-3 order-md-2">
                             <div class="xp-searchbar">
-                                <%--<form>
-                                    <div class="input-group">
-                                        <input type="search" class="form-control"
-                                            placeholder="Search">
-                                        <div class="input-group-append">
-                                            <button class="btn" type="submit" id="button-addon2">
-                                                Go
-                                            </button>
-                                        </div>
+                                <div class="input-group">
+                                    <asp:TextBox runat="server" ID="txtSearch" CssClass="form-control" placeholder="Search" type="search" />
+                                    <asp:HiddenField ID="hdnSearch" runat="server" />
+                                    <div class="input-group-append">
+                                        <asp:Button runat="server" CssClass="btn" ID="btnSearch" Text="Go" OnClick="btnSearch_Click" OnClientClick="convertToBase64()" />
                                     </div>
-                                </form>--%>
+                                </div>
+
                             </div>
                         </div>
-
-
                         <div class="col-10 col-md-6 col-lg-8 order-1 order-md-3">
                             <div class="xp-profilebar text-right">
                                 <nav class="navbar p-0">
@@ -168,13 +163,11 @@
                                                 <li><a href="#">You Have 4 New Messages</a></li>
                                             </ul>
                                         </li>
-
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">
                                                 <span class="material-icons">question_answer</span>
                                             </a>
                                         </li>
-
                                         <li class="dropdown nav-item">
                                             <a class="nav-link" href="#" data-toggle="dropdown">
                                                 <img src="img/user.jpg" style="width: 40px; border-radius: 50%;" />
@@ -193,16 +186,12 @@
                                                     <span class="material-icons">logout</span>
                                                     Logout
                                                 </a></li>
-
                                             </ul>
                                         </li>
-
-
                                     </ul>
                                 </nav>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="xp-breadcrumbbar text-center">
@@ -217,7 +206,6 @@
                 </div>
             </div>
             <!------top-navbar-end----------->
-
 
             <!------main-content-start----------->
 
@@ -293,7 +281,6 @@
                                     </asp:Repeater>
                                 </tbody>
                             </table>
-
                             <div class="clearfix">
                                 <div class="hint-text">
                                     showing <b>
@@ -315,7 +302,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <!----add-modal start--------->
                     <%--<div class="modal fade" tabindex="-1" id="addEmployeeModal" role="dialog">
@@ -355,10 +341,6 @@
 
                     <!----edit-modal end--------->
 
-
-
-
-
                     <!----edit-modal start--------->
                     <%--<div class="modal fade" tabindex="-1" id="editEmployeeModal" role="dialog">
                         <div class="modal-dialog" role="document">
@@ -396,7 +378,6 @@
                     </div>--%>
 
                     <!----edit-modal end--------->
-
 
                     <!----delete-modal start--------->
                     <div class="modal fade" tabindex="-1" id="deleteNoteModal" role="dialog">
@@ -445,6 +426,18 @@
         function setNoteIds(noteIds = 0) {
             document.getElementById("noteId").value = noteIds == 0 ? 0 : noteIds;
         }
+
+        function convertToBase64() {
+            if ($("#MainContent_txtSearch").val() == "") {
+                return false
+            }
+            var userInput = $("#MainContent_txtSearch").val();
+            var encodedInput = btoa(userInput); // 將用戶輸入的內容進行 Base64 編碼
+            $("#MainContent_hdnSearch").val(encodedInput);
+            $("#MainContent_txtSearch").val("");
+            return true;
+        }
+
         $(document).ready(function () {
             $(".xp-menubar").on('click', function () {
                 $("#sidebar").toggleClass('active');

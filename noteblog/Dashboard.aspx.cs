@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Net;
 using System.Text;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
@@ -31,17 +33,40 @@ namespace noteblog
                 using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Noteblog"].ConnectionString))
                 {
                     MySqlDataAdapter da = new MySqlDataAdapter();
+                    da.SelectCommand = new MySqlCommand();
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine("SELECT * FROM notes WHERE 1 = 1");
+                    string keyQuery = @"
+AND (
+title LIKE @word
+OR content LIKE @word
+OR keyword LIKE @word
+)
+";
+                    if (!string.IsNullOrEmpty(ViewState["Word"]?.ToString()))
+                    {
+                        sb.AppendLine(keyQuery);
+                        da.SelectCommand.Parameters.AddWithValue("@word", $"%{ViewState["Word"]?.ToString()}%");
+                    }
                     sb.AppendLine("ORDER BY updated_at DESC");
                     sb.AppendLine("LIMIT 5 OFFSET @offset");
-                    da.SelectCommand = new MySqlCommand(sb.ToString(), conn);
+                    da.SelectCommand.CommandText = sb.ToString();
+                    da.SelectCommand.Connection = conn;
                     da.SelectCommand.Parameters.AddWithValue("@offset", (Convert.ToInt32(ViewState["CurrentPage"]) - 1) * 5);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
                     repNotes.DataSource = dt;
                     repNotes.DataBind();
-                    MySqlCommand mCmd = new MySqlCommand("SELECT COUNT(*) FROM notes", conn);
+                    MySqlCommand mCmd = new MySqlCommand();
+                    StringBuilder mSb = new StringBuilder();
+                    mSb.AppendLine("SELECT COUNT(*) FROM notes WHERE 1 = 1");
+                    if (!string.IsNullOrEmpty(ViewState["Word"]?.ToString()))
+                    {
+                        mSb.AppendLine(keyQuery);
+                        mCmd.Parameters.AddWithValue("@word", $"%{ViewState["Word"]?.ToString()}%");
+                    }
+                    mCmd.CommandText = mSb.ToString();
+                    mCmd.Connection = conn;
                     conn.Open();
                     int dataCount = Convert.ToInt32(mCmd.ExecuteScalar());
                     litDataCount.Text = dataCount.ToString();
@@ -57,14 +82,16 @@ namespace noteblog
                     repPage.DataBind();
                     if (totalPages == 1)
                     {
-                        //btnNext.CssClass += " disabled";
-                        //btnPrevious.CssClass += " disabled";
+                        btnNext.CssClass += " disabled";
+                        btnPrevious.CssClass += " disabled";
                     }
                     paginationActiveStyle();
                 }
             }
             catch { }
-            finally { }
+            finally
+            {
+            }
         }
         protected void btnNoteDelete_Click(object sender, EventArgs e)
         {
@@ -231,6 +258,22 @@ namespace noteblog
             }
             ViewState["CurrentPage"] = cPage;
             queryNotesData();
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            string encodedInput = hdnSearch.Value; // 獲取編碼後的值
+            string userInput = Encoding.UTF8.GetString(Convert.FromBase64String(encodedInput)); // 解碼處理
+            if (!string.IsNullOrEmpty(userInput))
+            {
+                ViewState["Word"] = HttpUtility.HtmlEncode(userInput);
+            }
+            else
+            {
+                ViewState["Word"] = null;
+            }
+            queryNotesData();
+            hdnSearch.Value = "";
         }
 
         protected void paginationActiveStyle()

@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="~/user.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="~/Images/ico/user.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="stylesheet" href="Shared/bootstrap.min.css">
     <!----css3---->
     <link rel="stylesheet" href="Shared/custom.css">

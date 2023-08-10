@@ -436,6 +436,7 @@
     <Content Include="bin\WebMatrix.WebData.xml" />
     <Content Include="bin\zh-Hant\Microsoft.AspNet.FriendlyUrls.resources.dll" />
     <Content Include="bin\zh-Hant\System.Web.Optimization.resources.dll" />
+    <Content Include="Images\cover\default.jpg" />
     <Content Include="Note.aspx" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -478,7 +479,7 @@
     <Content Include="DynamicData\PageTemplates\Insert.aspx" />
     <Content Include="DynamicData\PageTemplates\List.aspx" />
     <Content Include="DynamicData\PageTemplates\ListDetails.aspx" />
-    <Content Include="favicon.ico" />
+    <Content Include="Images\ico\favicon.ico" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="Models\NoteModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -844,7 +845,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
-    <Folder Include="Images\" />
+    <Folder Include="Shared\highlight\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

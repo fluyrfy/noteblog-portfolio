@@ -38,15 +38,12 @@ namespace noteblog
                         cmd.Parameters.AddWithValue("@content", HttpUtility.HtmlEncode(txtContent.Text));
                         cmd.Parameters.AddWithValue("@keyword", txtKeyword.Text);
                         cmd.Parameters.AddWithValue("@publishedAt", DateTime.UtcNow);
-                        if (fuCoverPhoto.HasFile)
+                        using (Stream fs = fuCoverPhoto.HasFile ? fuCoverPhoto.PostedFile.InputStream : new FileStream(Server.MapPath("~/Images/cover/default.jpg"), FileMode.Open, FileAccess.Read))
                         {
-                            using (Stream fs = fuCoverPhoto.PostedFile.InputStream)
+                            using (BinaryReader br = new BinaryReader(fs))
                             {
-                                using (BinaryReader br = new BinaryReader(fs))
-                                {
-                                    byte[] imgData = br.ReadBytes((Int32)fs.Length);
-                                    cmd.Parameters.AddWithValue("@pic", imgData);
-                                }
+                                byte[] imgData = br.ReadBytes((Int32)fs.Length);
+                                cmd.Parameters.AddWithValue("@pic", imgData);
                             }
                         }
                         log.Debug($"New note info: {txtTitle.Text} - {txtContent.Text}");
