@@ -299,17 +299,20 @@ namespace noteblog
             btnAll.CssClass = inactive;
             btnFrontEnd.CssClass = inactive;
             btnBackEnd.CssClass = inactive;
-            switch (Session["Development"].ToString())
+            if (Session["Development"] != null)
             {
-                case "NotesAll":
-                    btnAll.CssClass = active;
-                    break;
-                case "NotesFront":
-                    btnFrontEnd.CssClass = active; break;
-                case "NotesBack":
-                    btnBackEnd.CssClass = active; break;
-                default:
-                    break;
+                switch (Session["Development"].ToString())
+                {
+                    case "NotesAll":
+                        btnAll.CssClass = active;
+                        break;
+                    case "NotesFront":
+                        btnFrontEnd.CssClass = active; break;
+                    case "NotesBack":
+                        btnBackEnd.CssClass = active; break;
+                    default:
+                        break;
+                }
             }
         }
 

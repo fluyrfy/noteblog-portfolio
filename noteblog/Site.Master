@@ -7,31 +7,21 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
     <script src="Scripts/ckeditor/ckeditor.js"></script>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
     <link href="~/Images/ico/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="~/Shared/Common.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+    <%--font-awesome--%>
     <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">--%>
     <script src="https://kit.fontawesome.com/136fcdeb32.js" crossorigin="anonymous"></script>
-    <%--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">--%>
-    <%--    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/themes/prism.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/prism.js"></script>--%>
+    <%--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">--%>
 
-    <%--scirpt hightlight--%>
-    <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">--%>
-    <link rel="stylesheet" href="~/Shared/highlight/stackoverflow-light.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-    <!-- and it's easy to individually load additional languages -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/go.min.js"></script>
-
-    <%--clipboard js--%>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
     <style>
         body, h1, h2, h3, h4, h5, h6 {
             font-family: "Raleway", sans-serif
@@ -69,7 +59,7 @@
                     <asp:Image runat="server" ID="imgAvatar" Style="width: 45%;" class="w3-round" ImageUrl="~/Images/avatar.jpg" />
                     <br />
                     <br />
-                    <asp:HyperLink NavigateUrl="Dashboard" runat="server">
+                    <asp:HyperLink NavigateUrl="Dashboard.aspx" runat="server">
                     <h4>
                         <b>Frank Liao</b></h4></asp:HyperLink>
                     <p class="w3-text-grey">Code, Recode, Record</p>
@@ -87,8 +77,10 @@
                 </div>--%>
             </nav>
             <header id="portfolio">
-                <a href="#">
-                    <img src="/w3images/avatar_g2.jpg" style="width: 65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+                <%--<a href="#">--%>
+                <asp:Image runat="server" ID="Image1" Style="width: 38px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity" ImageUrl="~/Images/avatar.jpg" />
+                <%--<img src="/w3images/avatar_g2.jpg" style="width: 65px;">--%>
+                <%--</a>--%>
                 <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
             </header>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
@@ -138,9 +130,6 @@
     </asp:PlaceHolder>--%>
 </body>
 <script>
-    // Initialize Prism.js Highlight.js
-    //Prism.highlightAll();
-    hljs.highlightAll();
 
     // Script to open and close sidebar
     function w3_open() {

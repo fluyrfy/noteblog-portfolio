@@ -5,27 +5,78 @@ using System.Data;
 using System.Net;
 using System.Text;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using noteblog.Models;
 using noteblog.Utils;
+using static System.Web.Razor.Parser.SyntaxConstants;
 
 namespace noteblog
 {
     public partial class Dashboard : Page
     {
-        private Logger log = new Logger(typeof(Dashboard).Name);
-
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("~/Sign.aspx");
+                return;
+            }
+            else
+            {
+                // 檢查票證是否過期
+                if (FormsAuthenticationTicketExpired())
+                {
+                    // 票證過期，執行登出操作
+                    FormsAuthentication.SignOut();
+                    Response.Redirect("Login.aspx");
+                    return;
+                } else
+                {
+                    if (User.Identity is FormsIdentity formsIdentity)
+                    {                        
+                        FormsAuthenticationTicket ticket = formsIdentity.Ticket;
+                        // 解析使用者資訊
+                        string userData = ticket.UserData;
+                        string[] userDataArray = userData.Split('|');
+
+                        if (userDataArray.Length == 2)
+                        {
+                            string username = userDataArray[0];
+                            string email = userDataArray[1];
+
+                            lblUser.Text = username;
+                            hlkUser.Text = username;
+                        }
+                    }
+                }
+            }
+
             if (!IsPostBack)
             {
                 ViewState["CurrentPage"] = 1;
                 queryNotesData();
             }
         }
+        private Logger log = new Logger(typeof(Dashboard).Name);
+
+        private bool FormsAuthenticationTicketExpired()
+        {
+            // 從 FormsIdentity 取得目前使用者的票證
+            FormsIdentity identity = (FormsIdentity)User.Identity;
+            FormsAuthenticationTicket ticket = identity.Ticket;
+
+            // 檢查票證的到期時間是否已過期
+            if (ticket.Expired)
+            {
+                return true;
+            }
+            return false;
+        }
+
         protected void queryNotesData()
         {
             try

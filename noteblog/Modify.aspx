@@ -44,8 +44,7 @@
     </main>
 
     <script>
-        // 在页面加载完成后执行初始化
-
+        // init ckeditor
         const watchdog = new CKSource.EditorWatchdog();
 
         window.watchdog = watchdog;
@@ -74,12 +73,8 @@
 
         watchdog
             .create(document.querySelector('.ck-editor'), {
-
                 licenseKey: '',
-
-
-
-
+                removePlugins: ['MediaEmbedToolbar']
             })
             .catch(handleError);
 

@@ -1,17 +1,29 @@
 ﻿<%@ Page Title="Dashboard" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="noteblog.Dashboard" EnableEventValidation="false" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="wrapper">
+    <link rel="stylesheet" href="Shared/bootstrap.min.css">
+    <!----css3---->
+    <link rel="stylesheet" href="Shared/custom.css">
 
+
+    <!--google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!--google material icon-->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+
+    <div class="wrapper">
         <div class="body-overlay"></div>
 
         <!-------sidebar--design------------>
-
         <div id="sidebar">
             <div class="sidebar-header">
                 <asp:HyperLink NavigateUrl="/" runat="server">
-                <h3>
-                    <img src="img/logo.png" class="img-fluid" /><span>portfolio</span></h3></asp:HyperLink>
+                    <h3>
+                        <img src="img/logo.png" class="img-fluid" /><asp:Label ID="lblUser" runat="server" /></h3>
+                </asp:HyperLink>
             </div>
             <ul class="list-unstyled component m-0">
                 <li class="active">
@@ -197,7 +209,8 @@
                     <div class="xp-breadcrumbbar text-center">
                         <h4 class="page-title">Dashboard</h4>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="Default.aspx">Portfolio</a></li>
+                            <li class="breadcrumb-item">
+                                <asp:HyperLink runat="server" NavigateUrl="~/Default.aspx" ID="hlkUser"></asp:HyperLink></li>
                             <li class="breadcrumb-item active" aria-curent="page">Dashboard</li>
                         </ol>
                     </div>
