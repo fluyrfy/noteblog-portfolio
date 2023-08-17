@@ -350,7 +350,6 @@
     <Content Include="bin\AspNet.ScriptManager.jQuery.dll" />
     <Content Include="bin\BouncyCastle.Crypto.dll" />
     <Content Include="bin\Dapper.dll" />
-    <Content Include="bin\Dapper.xml" />
     <Content Include="bin\EntityFramework.dll" />
     <Content Include="bin\EntityFramework.SqlServer.dll" />
     <Content Include="bin\EntityFramework.SqlServer.xml" />
