@@ -414,7 +414,6 @@
 		<Content Include="bin\System.Diagnostics.DiagnosticSource.dll" />
 		<Content Include="bin\System.Interactive.Async.dll" />
 		<Content Include="bin\System.IO.Pipelines.dll" />
-		<Content Include="bin\System.Linq.dll" />
 		<Content Include="bin\System.Linq.Expressions.dll" />
 		<Content Include="bin\System.Memory.dll" />
 		<Content Include="bin\System.Numerics.Vectors.dll" />
