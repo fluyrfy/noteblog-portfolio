@@ -352,7 +352,6 @@
     <Content Include="bin\Dapper.dll" />
     <Content Include="bin\EntityFramework.dll" />
     <Content Include="bin\EntityFramework.SqlServer.dll" />
-    <Content Include="bin\EntityFramework.SqlServer.xml" />
     <Content Include="bin\EntityFramework.Web.UI.dll" />
     <Content Include="bin\EntityFramework.Web.UI.xml" />
     <Content Include="bin\EntityFramework.xml" />
