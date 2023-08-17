@@ -353,31 +353,20 @@
     <Content Include="bin\EntityFramework.dll" />
     <Content Include="bin\EntityFramework.SqlServer.dll" />
     <Content Include="bin\EntityFramework.Web.UI.dll" />
-    <Content Include="bin\EntityFramework.Web.UI.xml" />
-    <Content Include="bin\EntityFramework.xml" />
     <Content Include="bin\FontAwesome.dll" />
     <Content Include="bin\Google.Protobuf.dll" />
     <Content Include="bin\Google.Protobuf.pdb" />
-    <Content Include="bin\Google.Protobuf.xml" />
     <Content Include="bin\K4os.Compression.LZ4.dll" />
     <Content Include="bin\K4os.Compression.LZ4.Streams.dll" />
-    <Content Include="bin\K4os.Compression.LZ4.Streams.xml" />
-    <Content Include="bin\K4os.Compression.LZ4.xml" />
     <Content Include="bin\K4os.Hash.xxHash.dll" />
-    <Content Include="bin\K4os.Hash.xxHash.xml" />
     <Content Include="bin\Microsoft.AspNet.DynamicData.EFProvider.dll" />
     <Content Include="bin\Microsoft.AspNet.EntityDataSource.dll" />
     <Content Include="bin\Microsoft.AspNet.FriendlyUrls.dll" />
-    <Content Include="bin\Microsoft.AspNet.FriendlyUrls.xml" />
     <Content Include="bin\Microsoft.AspNet.Web.Optimization.WebForms.dll" />
     <Content Include="bin\Microsoft.Bcl.AsyncInterfaces.dll" />
-    <Content Include="bin\Microsoft.Bcl.AsyncInterfaces.xml" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
-    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="bin\Microsoft.Extensions.Caching.Abstractions.dll" />
-    <Content Include="bin\Microsoft.Extensions.Caching.Abstractions.xml" />
     <Content Include="bin\Microsoft.Extensions.Caching.Memory.dll" />
-    <Content Include="bin\Microsoft.Extensions.Caching.Memory.xml" />
     <Content Include="bin\Microsoft.Extensions.Configuration.Abstractions.dll" />
     <Content Include="bin\Microsoft.Extensions.Configuration.Abstractions.xml" />
     <Content Include="bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
@@ -941,6 +930,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <AllowedReferenceRelatedFileExtensions>
+      *.pdb;
+    </AllowedReferenceRelatedFileExtensions> 
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
