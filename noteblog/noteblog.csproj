@@ -347,7 +347,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
-    <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\AspNet.ScriptManager.jQuery.dll" />
     <Content Include="bin\BouncyCastle.Crypto.dll" />
     <Content Include="bin\BouncyCastle.Crypto.xml" />
