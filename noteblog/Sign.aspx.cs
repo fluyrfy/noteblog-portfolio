@@ -12,15 +12,18 @@ using System.IO;
 using Org.BouncyCastle.Asn1.Ocsp;
 using System.Text.Encodings.Web;
 using System.Text;
+using System.Web.UI.HtmlControls;
+using System.Security.Cryptography;
 
 namespace noteblog
 {
     public partial class Sign : Page
     {
-        private Logger log = new Logger(typeof(Sign).Name);
+        private Logger log;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            log = new Logger(typeof(Sign).Name);
             if (!IsPostBack)
             {
 
@@ -31,36 +34,52 @@ namespace noteblog
         {
             if (Page.IsValid)
             {
-
-                List<TextBox> upTextBoxs = new List<TextBox> { txtUpEmail, txtUpName, txtUpPwd };
-                if (isTextValid(upTextBoxs))
+                try
                 {
-                    string email = txtUpEmail.Text;
-                    string name = txtUpName.Text;
-                    string password = txtUpPwd.Text;
-
-                    // check email unique
-                    if (isEmailExists(email))
+                    List<TextBox> upTextBoxs = new List<TextBox> { txtUpEmail, txtUpName, txtUpPwd };
+                    if (isTextValid(upTextBoxs))
                     {
-                        lblInHint.Text = "Email already exists";
-                        lblInHint.ForeColor = System.Drawing.Color.Red;
-                        return;
+                        string email = txtUpEmail.Text;
+                        string name = txtUpName.Text;
+                        string password = txtUpPwd.Text;
+
+                        // check email unique
+                        if (isEmailExists(email))
+                        {
+                            lblUpHint.Text = "Email already exists";
+                            lblUpHint.ForeColor = System.Drawing.Color.Red;
+                            return;
+                        }
+
+                        //string hashedPassword = FormsAuthentication.HashPasswordForStoringInConfigFile(txtUpPwd.Text, "SHA1");
+                        // BCrypt.Net encrypt pwd
+                        string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+                        string verificationCode = generateVerificationCode();
+
+                        // create new user
+                        insertUserToDatabase(email, name, hashedPassword, verificationCode);
+
+                        lblUpHint.Text = "Sign up success";
+                        lblUpHint.ForeColor = System.Drawing.Color.Green;
+                        sendVerifyEmail(name, email, verificationCode);
+                        log.Debug($"New user info: {name} - {email}");
+                        log.Info("User registration is successful");
+                        modalBgPanel.Visible = true;
+                        modalContentPanel.Visible = true;
                     }
-
-                    //string hashedPassword = FormsAuthentication.HashPasswordForStoringInConfigFile(txtUpPwd.Text, "SHA1");
-                    // BCrypt.Net encrypt pwd
-                    string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
-                    string verificationCode = generateVerificationCode();
-
-                    // create new user
-                    insertUserToDatabase(email, name, hashedPassword, verificationCode);
-
-                    lblInHint.Text = "Sign up success";
-                    lblInHint.ForeColor = System.Drawing.Color.Green;
-                    sendVerifyEmail(name, email, verificationCode);
-                    Server.Transfer("Sign.aspx");
+                }
+                catch (Exception ex)
+                {
+                    log.Error("User registration error", ex);
                 }
             }
+        }
+
+        protected void btnClose_Click(object sender, EventArgs e)
+        {
+            modalBgPanel.Visible = false;
+            modalContentPanel.Visible = false;
+            Response.Redirect("~/Sign.aspx");
         }
 
         protected void btnLogIn_Click(object sender, EventArgs e)
@@ -94,20 +113,30 @@ namespace noteblog
 
         private string generateVerifyLink(string email, string code, out string domain)
         {
-            string token = HttpUtility.UrlEncode(Convert.ToBase64String(MachineKey.Protect(Encoding.UTF8.GetBytes($"{email}_{code}"), null)));
-            Uri currentUrl = HttpContext.Current.Request.Url;
-            domain = $"{currentUrl.Scheme}://{currentUrl.Host}:{currentUrl.Port}";
+            string token = BitConverter.ToString(MachineKey.Protect(Encoding.UTF8.GetBytes($"{email}_{code}"), null));
+            domain = Request.Url.GetLeftPart(UriPartial.Authority);
+            //domain = $"{currentUrl.Scheme}://{currentUrl.Host}:{currentUrl.Port}";
             return $"{domain}/Verify?token={token}";
         }
 
         private void sendVerifyEmail(string userName, string userEmail, string verificationCode)
         {
-            MailMessage mailMessage = new MailMessage("yufanliaocestlavie@gmail.com", userEmail);
+            string sender = "yufanliaocestlavie@gmail.com";
+            MailAddress from = new MailAddress(sender, "F.L.", Encoding.UTF8);
+            MailAddress to = new MailAddress(userEmail);
+            MailMessage mailMessage = new MailMessage(from, to);
             mailMessage.Subject = "Account Verification for F.L.";
             string htmlBody = File.ReadAllText(Server.MapPath("~/Templates/email.html"));
             string link = generateVerifyLink(userEmail, verificationCode, out string domain);
+            htmlBody = htmlBody.Replace("{logoUrl}", "https://i.imgur.com/HeSD3Um.png");
             htmlBody = htmlBody.Replace("{homeUrl}", domain);
             htmlBody = htmlBody.Replace("{verifyLink}", link);
+            //          AlternateView plainView = AlternateView.CreateAlternateViewFromString(
+            //"Please click the link in this email to verify your account", Encoding.UTF8, "text/plain");
+            //          AlternateView htmlView = AlternateView.CreateAlternateViewFromString(
+            //htmlBody, null, "text/html");
+            //          mailMessage.AlternateViews.Add(plainView);
+            //          mailMessage.AlternateViews.Add(htmlView);
             mailMessage.Body = htmlBody;
             mailMessage.IsBodyHtml = true;
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);

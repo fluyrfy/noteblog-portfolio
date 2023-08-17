@@ -13,6 +13,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Org.BouncyCastle.Utilities.Encoders;
 using System.Linq;
+using System.Windows.Interop;
 
 namespace noteblog
 {
@@ -24,57 +25,82 @@ namespace noteblog
         {
             if (!IsPostBack)
             {
-                string msg = "Token has been lost, please try again";
-                string encryptedCode = Request.QueryString["token"].Replace(" ", "+");
-                if (!string.IsNullOrEmpty(Request.QueryString["token"]))
+                try
                 {
-                    byte[] encryptedBytes = Convert.FromBase64String(encryptedCode);
-                    byte[] decryptedBytes = MachineKey.Unprotect(encryptedBytes, null);
-                    string decryptedString = Encoding.UTF8.GetString(decryptedBytes);
-                    string[] parts = decryptedString.Split('_'); // 使用分隔符拆分
-                    if (parts.Length == 2)
+                    string msg = "Token has been lost, please try again";
+                    string encryptedCode = Request.QueryString["token"];
+                    if (!string.IsNullOrEmpty(Request.QueryString["token"]))
                     {
-                        string email = parts[0];
-                        string code = parts[1];
-                        using (MySqlConnection con = DatabaseHelper.GetConnection())
+
+                        byte[] encryptedBytes = hexStringToByteArray(encryptedCode);
+                        byte[] decryptedBytes = MachineKey.Unprotect(encryptedBytes, null);
+                        string decryptedString = Encoding.UTF8.GetString(decryptedBytes);
+                        string[] parts = decryptedString.Split('_'); // 使用分隔符拆分
+                        if (parts.Length == 2)
                         {
-                            MySqlCommand cmd = new MySqlCommand("SELECT verification_code, is_verified FROM users WHERE email = @email", con);
-                            cmd.Parameters.AddWithValue("@email", email);
-                            con.Open();
-                            MySqlDataReader reader = cmd.ExecuteReader();
-                            if (reader.Read())
+                            string email = parts[0];
+                            string code = parts[1];
+                            using (MySqlConnection con = DatabaseHelper.GetConnection())
                             {
-                                if ((bool)reader["is_verified"])
+                                MySqlCommand cmd = new MySqlCommand("SELECT verification_code, is_verified FROM users WHERE email = @email", con);
+                                cmd.Parameters.AddWithValue("@email", email);
+                                con.Open();
+                                MySqlDataReader reader = cmd.ExecuteReader();
+                                if (reader.Read())
                                 {
-                                    msg = "This user has already been verified";
-                                }
-                                else
-                                {
-                                    if (reader["verification_code"].ToString() == code)
+                                    if ((bool)reader["is_verified"])
                                     {
-                                        using (MySqlConnection con_verify = DatabaseHelper.GetConnection())
-                                        {
-
-                                            cmd.CommandText = "UPDATE users SET is_verified = @isVerified WHERE email = @email";
-
-                                            cmd.Parameters.AddWithValue("@isVerified", true);
-                                            cmd.Connection = con_verify;
-                                            con_verify.Open();
-                                            msg = cmd.ExecuteNonQuery() > 0 ? "Account verification successful" : "Account verification error";
-                                        }
+                                        msg = "This user has already been verified";
                                     }
                                     else
                                     {
-                                        msg = "Account verification failed";
+                                        if (reader["verification_code"].ToString() == code)
+                                        {
+                                            using (MySqlConnection con_verify = DatabaseHelper.GetConnection())
+                                            {
+
+                                                cmd.CommandText = "UPDATE users SET is_verified = @isVerified WHERE email = @email";
+
+                                                cmd.Parameters.AddWithValue("@isVerified", true);
+                                                cmd.Connection = con_verify;
+                                                con_verify.Open();
+                                                msg = cmd.ExecuteNonQuery() > 0 ? "Account verification successful" : "Account verification error";
+                                            }
+                                        }
+                                        else
+                                        {
+                                            msg = "Account verification failed";
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+                    litMsg.Text = msg;
+                    log.Info($"Verification msg: {msg}");
                 }
-                litMsg.Text = msg;
-                Response.Headers.Add("Refresh", "5;url=Sign");
+                catch (Exception ex) { log.Info($"Verification exception: {ex}"); }
+                finally
+                {
+                    Response.Cache.SetNoStore();
+                    Response.Cache.AppendCacheExtension("no-cache");
+                    Response.Expires = 0;
+                    Response.Headers.Add("Refresh", "5;url=Sign");
+                }
+
             }
+        }
+
+        public static byte[] hexStringToByteArray(string hexString)
+        {
+            hexString = hexString.Replace("-", "");
+            int numberChars = hexString.Length;
+            byte[] bytes = new byte[numberChars / 2];
+            for (int i = 0; i < numberChars; i += 2)
+            {
+                bytes[i / 2] = Convert.ToByte(hexString.Substring(i, 2), 16);
+            }
+            return bytes;
         }
     }
 }

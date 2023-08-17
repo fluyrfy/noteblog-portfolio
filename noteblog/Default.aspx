@@ -162,7 +162,7 @@
                     </div>
                     <div class="w3-third w3-dark-grey">
                         <p><i class="fa fa-phone w3-xxlarge w3-text-light-grey"></i></p>
-                        <p>+886 965605173</p>
+                        <p><a href="tel:+886-965605173">+886 965605173</a></p>
                     </div>
                 </div>
                 <%--<hr class="w3-opacity">--%>
@@ -198,7 +198,6 @@
                 document.getElementById("myOverlay").style.display = "none";
             }
 
-            // 使用事件委托，在整个 Repeater 区域监听点击事件
             function redirectPage(noteId) {
                 console.log(noteId)
                 window.location.href = 'Note.aspx?id=' + encodeURIComponent(noteId);

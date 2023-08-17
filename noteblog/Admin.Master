@@ -9,14 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="~/Images/ico/user.ico" rel="shortcut icon" type="image/x-icon" />
 
+    <script src="https://kit.fontawesome.com/136fcdeb32.js" crossorigin="anonymous"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="Scripts/jquery-3.6.0.slim.min.js"></script>
+    <script src="Scripts/jquery-3.6.0.min.js"></script>
     <script src="Scripts/popper.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
-    <script src="Scripts/jquery-3.6.0.min.js"></script>
 </head>
-<body class="">
-    <form runat="server">
+<body id="mainBody" runat="server">
+    <form runat="server" id="form">
         <asp:ScriptManager runat="server">
             <Scripts>
             </Scripts>
