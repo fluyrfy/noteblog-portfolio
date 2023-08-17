@@ -349,7 +349,6 @@
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\AspNet.ScriptManager.jQuery.dll" />
     <Content Include="bin\BouncyCastle.Crypto.dll" />
-    <Content Include="bin\BouncyCastle.Crypto.xml" />
     <Content Include="bin\Dapper.dll" />
     <Content Include="bin\Dapper.xml" />
     <Content Include="bin\EntityFramework.dll" />
