@@ -383,7 +383,6 @@
 		<Content Include="bin\MySql.Data.EntityFramework.dll" />
 		<Content Include="bin\MySql.Web.dll" />
 		<Content Include="bin\MySqlConnector.dll" />
-		<Content Include="bin\MySqlConnector.xml" />
 		<Content Include="bin\Newtonsoft.Json.dll" />
 		<Content Include="bin\noteblog.dll" />
 		<Content Include="bin\noteblog.pdb" />
@@ -410,9 +409,7 @@
 		<Content Include="bin\roslyn\vbc.exe" />
 		<Content Include="bin\roslyn\VBCSCompiler.exe" />
 		<Content Include="bin\System.Buffers.dll" />
-		<Content Include="bin\System.Buffers.xml" />
 		<Content Include="bin\System.Collections.Immutable.dll" />
-		<Content Include="bin\System.Collections.Immutable.xml" />
 		<Content Include="bin\System.ComponentModel.Annotations.dll" />
 		<Content Include="bin\System.Diagnostics.DiagnosticSource.dll" />
 		<Content Include="bin\System.Interactive.Async.dll" />
@@ -899,7 +896,8 @@
 		<VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
 		<VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
 		<AllowedReferenceRelatedFileExtensions>
-			*.dll;
+			*.pdb;
+			*.dll
 		</AllowedReferenceRelatedFileExtensions>
 	</PropertyGroup>
 	<Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
