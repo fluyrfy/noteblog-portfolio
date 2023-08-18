@@ -360,8 +360,6 @@
     <Content Include="bin\K4os.Hash.xxHash.dll" />
     <Content Include="bin\Microsoft.AspNet.DynamicData.EFProvider.dll" />
     <Content Include="bin\Microsoft.AspNet.EntityDataSource.dll" />
-    <Content Include="bin\Microsoft.AspNet.FriendlyUrls.dll" />
-    <Content Include="bin\Microsoft.AspNet.Web.Optimization.WebForms.dll" />
     <Content Include="bin\Microsoft.Bcl.AsyncInterfaces.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.Extensions.Caching.Abstractions.dll" />
