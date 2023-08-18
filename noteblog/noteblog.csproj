@@ -433,8 +433,6 @@
     <Content Include="bin\WebGrease.dll" />
     <Content Include="bin\WebMatrix.Data.dll" />
     <Content Include="bin\WebMatrix.WebData.dll" />
-    <Content Include="bin\zh-Hant\Microsoft.AspNet.FriendlyUrls.resources.dll" />
-    <Content Include="bin\zh-Hant\System.Web.Optimization.resources.dll" />
     <Content Include="Shared\Sign.css" />
     <Content Include="Shared\Verify.css" />
     <Content Include="Verify.aspx" />
