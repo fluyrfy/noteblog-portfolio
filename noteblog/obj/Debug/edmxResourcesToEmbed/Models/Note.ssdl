@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="noteblogModel.Store" Provider="Devart.Data.MySql" ProviderManifestToken="MySQL, 8.0.29" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="notes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="decimal" Precision="20" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="note_category_id" Type="decimal" Precision="20" Scale="0" />
+    <Property Name="title" Type="varchar" MaxLength="191" Nullable="false" />
+    <Property Name="content" Type="text" Nullable="false" />
+    <Property Name="published_at" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="pic" Type="varchar" MaxLength="191" Nullable="false" />
+    <Property Name="status" Type="enum" Nullable="false" />
+    <Property Name="order" Type="int" Nullable="false" />
+    <Property Name="created_at" Type="timestamp" Precision="0" />
+    <Property Name="updated_at" Type="timestamp" Precision="0" />
+  </EntityType>
+  <EntityContainer Name="noteblogModelStoreContainer">
+    <EntitySet Name="notes" EntityType="Self.notes" Schema="noteblog" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
