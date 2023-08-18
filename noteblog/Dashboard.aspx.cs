@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
-using noteblog.Models;
 using noteblog.Utils;
-using static System.Web.Razor.Parser.SyntaxConstants;
 
 namespace noteblog
 {
@@ -34,10 +30,11 @@ namespace noteblog
                     FormsAuthentication.SignOut();
                     Response.Redirect("Login.aspx");
                     return;
-                } else
+                }
+                else
                 {
                     if (User.Identity is FormsIdentity formsIdentity)
-                    {                        
+                    {
                         FormsAuthenticationTicket ticket = formsIdentity.Ticket;
                         // 解析使用者資訊
                         string userData = ticket.UserData;

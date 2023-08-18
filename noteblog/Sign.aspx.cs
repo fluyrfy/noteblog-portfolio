@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Web.UI;
-using noteblog.Utils;
-using BCrypt;
-using System.Web.UI.WebControls;
 using System.Collections.Generic;
-using MySql.Data.MySqlClient;
-using System.Web.Security;
-using System.Web;
-using System.Net.Mail;
 using System.IO;
-using Org.BouncyCastle.Asn1.Ocsp;
-using System.Text.Encodings.Web;
+using System.Net.Mail;
 using System.Text;
-using System.Web.UI.HtmlControls;
-using System.Security.Cryptography;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using MySql.Data.MySqlClient;
+using noteblog.Utils;
 
 namespace noteblog
 {

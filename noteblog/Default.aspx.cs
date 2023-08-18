@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data.SqlClient;
-using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data;
-using MarkdownSharp;
-using System.Text.RegularExpressions;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using MySql.Data.MySqlClient;
 using noteblog.Utils;
-using System.Drawing.Printing;
 
 
 namespace noteblog

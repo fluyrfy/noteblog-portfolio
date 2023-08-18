@@ -1,16 +1,11 @@
-﻿using noteblog.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System;
+using System.Globalization;
 using System.IO;
-using noteblog.Utils;
 using System.Security.AccessControl;
 using System.Web;
 using System.Web.Optimization;
 using System.Web.Routing;
-using System.Web.Security;
-using System.Web.SessionState;
-using System.Globalization;
+using noteblog.Utils;
 
 namespace noteblog
 {

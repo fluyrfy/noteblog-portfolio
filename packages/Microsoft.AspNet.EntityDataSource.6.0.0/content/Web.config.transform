@@ -1,9 +1,0 @@
-﻿<configuration>
-  <system.web>
-    <pages>
-      <controls>
-        <add tagPrefix="ef" assembly="Microsoft.AspNet.EntityDataSource" namespace="Microsoft.AspNet.EntityDataSource"/>
-      </controls>
-    </pages>
-  </system.web>
-</configuration>
