@@ -506,8 +506,6 @@
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="obj\Release\noteblog.csproj.AssemblyReference.cache" />
-    <Content Include="Logs\20230802.log" />
-    <Content Include="Logs\20230803.log" />
     <Content Include="Scripts\ckeditor\ckeditor.js.map" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Models\NoteModel.Context.tt">
