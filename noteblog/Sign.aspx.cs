@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net.Mail;
+using System.Globalization;
 using System.Text;
 using System.Web;
 using System.Web.Security;
@@ -21,8 +20,123 @@ namespace noteblog
             log = new Logger(typeof(Sign).Name);
             if (!IsPostBack)
             {
-
+                string queryReset = Request.QueryString["reset"] as string;
+                string queryEmail = Request.QueryString["email"] as string;
+                string[] decryptEmail = EncryptionHelper.Decrypt(queryEmail).Split('|');
+                if (!string.IsNullOrEmpty(queryReset))
+                {
+                    pnlResetPwd.Visible = true;
+                    pnlConfirmEmail.Visible = true;
+                    pnlResetExistPwd.Visible = false;
+                    pnlSign.Visible = false;
+                    if (!string.IsNullOrEmpty(queryEmail) && queryReset == "2" && decryptEmail.Length == 4)
+                    {
+                        pnlConfirmEmail.Visible = false;
+                        pnlResetExistPwd.Visible = true;
+                        string time = decryptEmail[2];
+                        ViewState["ResetTime"] = time;
+                        if (DateTime.TryParseExact(time, "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime storedTime))
+                        {
+                            DateTime currentTime = DateTime.Now;
+                            TimeSpan timeDifference = currentTime - storedTime;
+                            if (timeDifference.TotalHours > 1)
+                            {
+                                setModalText("Link Expired", "Please request a new password reset.");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    pnlResetPwd.Visible = false;
+                    pnlSign.Visible = true;
+                }
             }
+        }
+
+        protected void btnConfirmEmail_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                using (MySqlConnection con = DatabaseHelper.GetConnection())
+                {
+                    MySqlCommand cmd = new MySqlCommand("SELECT email, verification_code FROM users WHERE email = @email", con);
+                    cmd.Parameters.AddWithValue("@email", txtConfirmEmail.Text);
+                    con.Open();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            string combinedData = $"{reader["email"].ToString()}|{reader["verification_code"]}|{DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")}";
+                            string hexString = EncryptionHelper.Encrypt(combinedData);
+                            string link = $"Sign?reset=2&email={hexString}";
+                            EmailHelper.SendVerificationEmail(txtConfirmEmail.Text, "Password Reset for Your Accoun", "Password Reset Instructions", "We received a request to reset the password for your account. To reset your password, please click the button below", "Reset Password", link);
+                            setModalText("Confirm email", "Please check your email and reset your password");
+                        }
+                    }
+                    else
+                    {
+                        lblConfirmHint.Text = "Email does not exist";
+                        return;
+                    }
+                }
+            }
+        }
+
+        protected void btnResetPwd_Click(object sender, EventArgs e)
+        {
+            if (DateTime.TryParseExact(ViewState["ResetTime"] as string, "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime storedTime))
+            {
+                DateTime currentTime = DateTime.Now;
+                TimeSpan timeDifference = currentTime - storedTime;
+                if (timeDifference.TotalHours > 1)
+                {
+                    setModalText("Link Expired", "Please request a new password reset.");
+                    return;
+                }
+                else
+                {
+                    if (Page.IsValid)
+                    {
+                        string queryEmail = Request.QueryString["email"].ToString();
+                        string hashEmail = EncryptionHelper.Decrypt(queryEmail);
+                        string[] parts = hashEmail.Split('|');
+                        if (parts.Length == 4)
+                        {
+                            string email = parts[0];
+                            string code = parts[1];
+                            using (MySqlConnection con = DatabaseHelper.GetConnection())
+                            {
+                                MySqlCommand cmd = new MySqlCommand("SELECT verification_code from users WHERE email = @email", con);
+                                cmd.Parameters.AddWithValue("@email", email);
+                                con.Open();
+                                string dataCode = cmd.ExecuteScalar() as string;
+                                if (code == dataCode)
+                                {
+                                    if (txtResetPwdConfirm.Text == txtResetPwd.Text)
+                                    {
+                                        string newPassword = BCrypt.Net.BCrypt.HashPassword(txtResetPwd.Text);
+                                        MySqlCommand resetPwdCmd = new MySqlCommand("UPDATE users SET password_hash = @newPassword WHERE email = @email", con);
+                                        resetPwdCmd.Parameters.AddWithValue("@email", email);
+                                        resetPwdCmd.Parameters.AddWithValue("@newPassword", newPassword);
+                                        int rowsAffected = resetPwdCmd.ExecuteNonQuery();
+
+                                        if (rowsAffected > 0)
+                                        {
+                                            // 密碼欄位已成功修改
+                                            setModalText("Password Reset", "Your password has been reset.");
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            setModalText("Password Reset Failed", "Password reset unsuccessful. Please check your information and try again.");
         }
 
         protected void btnSignUp_Click(object sender, EventArgs e)
@@ -59,8 +173,7 @@ namespace noteblog
                         sendVerifyEmail(name, email, verificationCode);
                         log.Debug($"New user info: {name} - {email}");
                         log.Info("User registration is successful");
-                        modalBgPanel.Visible = true;
-                        modalContentPanel.Visible = true;
+                        setModalText("Sign up success", "Please check your email and verify your account");
                     }
                 }
                 catch (Exception ex)
@@ -106,42 +219,19 @@ namespace noteblog
             return guid.Substring(0, 6).ToUpper();
         }
 
-        private string generateVerifyLink(string email, string code, out string domain)
+
+        private string generateVerifyLink(string email, string code)
         {
             string token = BitConverter.ToString(MachineKey.Protect(Encoding.UTF8.GetBytes($"{email}_{code}"), null));
-            domain = Request.Url.GetLeftPart(UriPartial.Authority);
+            string domain = Request.Url.GetLeftPart(UriPartial.Authority);
             //domain = $"{currentUrl.Scheme}://{currentUrl.Host}:{currentUrl.Port}";
-            return $"{domain}/Verify?token={token}";
+            return $"Verify?token={token}";
         }
 
         private void sendVerifyEmail(string userName, string userEmail, string verificationCode)
         {
-            string sender = "yufanliaocestlavie@gmail.com";
-            MailAddress from = new MailAddress(sender, "F.L.", Encoding.UTF8);
-            MailAddress to = new MailAddress(userEmail);
-            MailMessage mailMessage = new MailMessage(from, to);
-            mailMessage.Subject = "Account Verification for F.L.";
-            string htmlBody = File.ReadAllText(Server.MapPath("~/Templates/email.html"));
-            string link = generateVerifyLink(userEmail, verificationCode, out string domain);
-            htmlBody = htmlBody.Replace("{logoUrl}", "https://i.imgur.com/HeSD3Um.png");
-            htmlBody = htmlBody.Replace("{homeUrl}", domain);
-            htmlBody = htmlBody.Replace("{verifyLink}", link);
-            //          AlternateView plainView = AlternateView.CreateAlternateViewFromString(
-            //"Please click the link in this email to verify your account", Encoding.UTF8, "text/plain");
-            //          AlternateView htmlView = AlternateView.CreateAlternateViewFromString(
-            //htmlBody, null, "text/html");
-            //          mailMessage.AlternateViews.Add(plainView);
-            //          mailMessage.AlternateViews.Add(htmlView);
-            mailMessage.Body = htmlBody;
-            mailMessage.IsBodyHtml = true;
-            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-            smtpClient.Credentials = new System.Net.NetworkCredential()
-            {
-                UserName = "yufanliaocestlavie@gmail.com",
-                Password = "kouzymscksjckbye"
-            };
-            smtpClient.EnableSsl = true;
-            smtpClient.Send(mailMessage);
+            string link = generateVerifyLink(userEmail, verificationCode);
+            EmailHelper.SendVerificationEmail(userEmail, "Account Verification for F.L.", "Please verify your email", "Verifying your email allows you to access all features on F.L.", "Verify My Account", link);
         }
 
         private bool isEmailExists(string email)
@@ -170,6 +260,14 @@ namespace noteblog
                 con.Open();
                 cmd.ExecuteNonQuery();
             }
+        }
+
+        private void setModalText(string title, string content, bool visible = true)
+        {
+            modalBgPanel.Visible = visible;
+            modalContentPanel.Visible = visible;
+            litModalTitle.Text = title;
+            litModalContent.Text = content;
         }
 
         protected bool isTextValid(List<TextBox> textBoxs)

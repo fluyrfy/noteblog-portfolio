@@ -553,6 +553,8 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Utils\EmailHelper.cs" />
+    <Compile Include="Utils\EncryptionHelper.cs" />
     <Compile Include="Verify.aspx.cs">
       <DependentUpon>Verify.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

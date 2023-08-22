@@ -121,7 +121,7 @@ html, body {
             border-radius: 15px;
             display: block;
             margin: 15px auto;
-            padding: 15px 45px;
+            padding: 15px 0;
             width: 100%;
             font-size: 13px;
             font-weight: bold;
@@ -224,7 +224,7 @@ html, body {
                 border-radius: 15px;
                 display: block;
                 margin: 15px auto;
-                padding: 15px 45px;
+                padding: 15px 0;
                 width: 100%;
                 font-size: 13px;
                 font-weight: bold;
@@ -285,14 +285,23 @@ html, body {
     font-size: 12px;
     display: flex;
     align-items: center;
-    width: 100%;
     margin-top: 5px;
+}
+
+.btn-forgot {
+    display: block;
+    font-size: 12px;
+    color: white;
+    align-self: center;
+    text-align: center;
 }
 
 .hint {
     font-size: 12px;
     display: block;
     text-align: center;
+    color: red;
+    margin-top: 5px;
 }
 
 .modal-bg {
@@ -314,7 +323,7 @@ html, body {
     -ms-flex-pack: justify;
     justify-content: space-between;
     padding: 1rem;
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: 1px solid;
     border-top-left-radius: 0.3rem;
     border-top-right-radius: 0.3rem;
 }
@@ -373,4 +382,9 @@ html, body {
     cursor: pointer;
     opacity: 0.3;
     margin-right: 5px;
+}
+
+.submit-btn {
+    text-align: center;
+    padding: 15px 0 !important;
 }
