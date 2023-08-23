@@ -76,6 +76,15 @@
     <Reference Include="Google.Protobuf, Version=3.24.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.24.0\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.52.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.52\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="JiebaNet.Analyser, Version=0.42.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jieba.NET.0.42.2\lib\net45\JiebaNet.Analyser.dll</HintPath>
+    </Reference>
+    <Reference Include="JiebaNet.Segmenter, Version=0.42.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jieba.NET.0.42.2\lib\net45\JiebaNet.Segmenter.dll</HintPath>
+    </Reference>
     <Reference Include="K4os.Compression.LZ4, Version=1.3.5.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
       <HintPath>..\packages\K4os.Compression.LZ4.1.3.5\lib\net462\K4os.Compression.LZ4.dll</HintPath>
     </Reference>
@@ -433,6 +442,9 @@
     <Content Include="bin\WebGrease.dll" />
     <Content Include="bin\WebMatrix.Data.dll" />
     <Content Include="bin\WebMatrix.WebData.dll" />
+    <Content Include="Resources\dict.txt" />
+    <Content Include="Resources\idf.txt" />
+    <Content Include="Resources\stopwords.txt" />
     <Content Include="Shared\Sign.css" />
     <Content Include="Shared\Verify.css" />
     <Content Include="Verify.aspx" />
@@ -504,6 +516,12 @@
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="Scripts\ckeditor\ckeditor.js.map" />
+    <Content Include="Resources\char_state_tab.json" />
+    <Content Include="Resources\pos_prob_emit.json" />
+    <Content Include="Resources\pos_prob_start.json" />
+    <Content Include="Resources\pos_prob_trans.json" />
+    <Content Include="Resources\prob_emit.json" />
+    <Content Include="Resources\prob_trans.json" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Models\NoteModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -553,6 +571,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Utils\ConverterHelper.cs" />
     <Compile Include="Utils\EmailHelper.cs" />
     <Compile Include="Utils\EncryptionHelper.cs" />
     <Compile Include="Verify.aspx.cs">

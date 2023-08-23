@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.IO;
+using System.Web;
 using System.Web.UI;
 using MySql.Data.MySqlClient;
 using noteblog.Utils;
@@ -45,7 +46,7 @@ namespace noteblog
                                     txtTitle.Text = dr["title"].ToString();
                                     txtKeyword.Text = dr["keyword"].ToString();
                                     imgCover.ImageUrl = $"data:image/png;base64,{Convert.ToBase64String((byte[])dr["pic"])}";
-                                    txtContent.Text = dr["content"].ToString();
+                                    txtContent.Text = HttpUtility.HtmlDecode(dr["content"].ToString());
                                 }
                                 ViewState["SQL_QUERY"] = ct;
                                 ViewState["NOTE"] = dt;
@@ -77,7 +78,8 @@ namespace noteblog
                     {
                         DataRow dr = dt.Rows[0];
                         dr["title"] = txtTitle.Text;
-                        dr["content"] = txtContent.Text;
+                        dr["content"] = HttpUtility.HtmlEncode(txtContent.Text);
+                        dr["content_text"] = ConverterHelper.ExtractTextFromHtml(txtContent.Text);
                         dr["keyword"] = txtKeyword.Text;
                         log.Debug($"New note info: {txtTitle.Text} - {txtContent.Text}");
                         if (fuCoverPhoto.HasFile)

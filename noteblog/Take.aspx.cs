@@ -27,10 +27,12 @@ namespace noteblog
                         log.Info("Starting to create new note");
                         MySqlCommand cmd = new MySqlCommand();
                         cmd.Connection = con;
-                        cmd.CommandText = "INSERT INTO notes(development,title, content, keyword, published_at, pic) VALUES (@development, @title, @content, @keyword, @publishedAt, @pic)";
+                        cmd.CommandText = "INSERT INTO notes(development,title, content, content_text, keyword, published_at, pic) VALUES (@development, @title, @content, @keyword, @publishedAt, @pic)";
+                        var content = HttpUtility.HtmlEncode(txtContent.Text);
                         cmd.Parameters.AddWithValue("@development", rdlDevelopment.SelectedValue);
                         cmd.Parameters.AddWithValue("@title", txtTitle.Text);
                         cmd.Parameters.AddWithValue("@content", HttpUtility.HtmlEncode(txtContent.Text));
+                        cmd.Parameters.AddWithValue("@content_text", ConverterHelper.ExtractTextFromHtml(txtContent.Text));
                         cmd.Parameters.AddWithValue("@keyword", txtKeyword.Text);
                         cmd.Parameters.AddWithValue("@publishedAt", DateTime.UtcNow);
                         using (Stream fs = fuCoverPhoto.HasFile ? fuCoverPhoto.PostedFile.InputStream : new FileStream(Server.MapPath("~/Images/cover/default.jpg"), FileMode.Open, FileAccess.Read))

@@ -445,7 +445,7 @@
                 return false
             }
             var userInput = $("#MainContent_txtSearch").val();
-            var encodedInput = btoa(userInput); // 將用戶輸入的內容進行 Base64 編碼
+            var encodedInput = btoa(encodeURIComponent(userInput)); // 將用戶輸入的內容進行 Base64 編碼
             $("#MainContent_hdnSearch").val(encodedInput);
             $("#MainContent_txtSearch").val("");
             return true;

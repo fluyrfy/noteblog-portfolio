@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Text;
+using System.Web;
 using System.Web.UI;
 using MySql.Data.MySqlClient;
 
@@ -41,7 +42,7 @@ namespace noteblog
                                     {
                                         reader.Read();
                                         litTitle.Text = reader["title"].ToString();
-                                        litContent.Text = reader["content"].ToString();
+                                        litContent.Text = HttpUtility.HtmlDecode(reader["content"].ToString());
                                     }
                                     else
                                     {

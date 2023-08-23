@@ -58,3 +58,6 @@ D:\C#\noteblog\noteblog\bin\System.Threading.Tasks.Extensions.dll
 D:\C#\noteblog\noteblog\bin\Microsoft.AspNet.FriendlyUrls.dll
 D:\C#\noteblog\noteblog\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
 D:\C#\noteblog\noteblog\bin\zh-Hant\Microsoft.AspNet.FriendlyUrls.resources.dll
+D:\C#\noteblog\noteblog\bin\JiebaNet.Analyser.dll
+D:\C#\noteblog\noteblog\bin\JiebaNet.Segmenter.dll
+D:\C#\noteblog\noteblog\bin\HtmlAgilityPack.dll

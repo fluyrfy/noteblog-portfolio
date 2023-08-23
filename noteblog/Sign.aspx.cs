@@ -58,75 +58,99 @@ namespace noteblog
         {
             if (Page.IsValid)
             {
-                using (MySqlConnection con = DatabaseHelper.GetConnection())
+                try
                 {
-                    MySqlCommand cmd = new MySqlCommand("SELECT email, verification_code FROM users WHERE email = @email", con);
-                    cmd.Parameters.AddWithValue("@email", txtConfirmEmail.Text);
-                    con.Open();
-                    MySqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.HasRows)
+                    log.Info("Starting to confirm account");
+                    using (MySqlConnection con = DatabaseHelper.GetConnection())
                     {
-                        while (reader.Read())
+                        MySqlCommand cmd = new MySqlCommand("SELECT email, verification_code FROM users WHERE email = @email", con);
+                        cmd.Parameters.AddWithValue("@email", txtConfirmEmail.Text);
+                        con.Open();
+                        MySqlDataReader reader = cmd.ExecuteReader();
+                        if (reader.HasRows)
                         {
-                            string combinedData = $"{reader["email"].ToString()}|{reader["verification_code"]}|{DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")}";
-                            string hexString = EncryptionHelper.Encrypt(combinedData);
-                            string link = $"Sign?reset=2&email={hexString}";
-                            EmailHelper.SendVerificationEmail(txtConfirmEmail.Text, "Password Reset for Your Accoun", "Password Reset Instructions", "We received a request to reset the password for your account. To reset your password, please click the button below", "Reset Password", link);
-                            setModalText("Confirm email", "Please check your email and reset your password");
+                            while (reader.Read())
+                            {
+                                string combinedData = $"{reader["email"].ToString()}|{reader["verification_code"]}|{DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")}";
+                                log.Debug($"Confirm email: {reader["email"] as string}, verification_code: {reader["verification_code"] as string}, date_time: {DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")}");
+                                string hexString = EncryptionHelper.Encrypt(combinedData);
+                                string link = $"Sign?reset=2&email={hexString}";
+                                EmailHelper.SendVerificationEmail(txtConfirmEmail.Text, "Password Reset for Your Account", "Password Reset Instructions", "We received a request to reset the password for your account. To reset your password, please click the button below", "Reset Password", link);
+                                setModalText("Confirm email", "Please check your email and reset your password");
+                            }
+                            log.Info("Account confirmed successfully");
+                        }
+                        else
+                        {
+                            log.Info("Failed to confirm account: email does not exist");
+                            lblConfirmHint.Text = "Email does not exist";
+                            return;
                         }
                     }
-                    else
-                    {
-                        lblConfirmHint.Text = "Email does not exist";
-                        return;
-                    }
                 }
+                catch (Exception ex)
+                {
+                    log.Error("Account confirmation error", ex);
+                    throw;
+                }
+                finally
+                {
+                    log.Info("End of confirm account method");
+                }
+
             }
         }
 
         protected void btnResetPwd_Click(object sender, EventArgs e)
         {
-            if (DateTime.TryParseExact(ViewState["ResetTime"] as string, "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime storedTime))
+            log.Info("Starting to reset password");
+            try
             {
-                DateTime currentTime = DateTime.Now;
-                TimeSpan timeDifference = currentTime - storedTime;
-                if (timeDifference.TotalHours > 1)
-                {
-                    setModalText("Link Expired", "Please request a new password reset.");
-                    return;
-                }
-                else
-                {
-                    if (Page.IsValid)
-                    {
-                        string queryEmail = Request.QueryString["email"].ToString();
-                        string hashEmail = EncryptionHelper.Decrypt(queryEmail);
-                        string[] parts = hashEmail.Split('|');
-                        if (parts.Length == 4)
-                        {
-                            string email = parts[0];
-                            string code = parts[1];
-                            using (MySqlConnection con = DatabaseHelper.GetConnection())
-                            {
-                                MySqlCommand cmd = new MySqlCommand("SELECT verification_code from users WHERE email = @email", con);
-                                cmd.Parameters.AddWithValue("@email", email);
-                                con.Open();
-                                string dataCode = cmd.ExecuteScalar() as string;
-                                if (code == dataCode)
-                                {
-                                    if (txtResetPwdConfirm.Text == txtResetPwd.Text)
-                                    {
-                                        string newPassword = BCrypt.Net.BCrypt.HashPassword(txtResetPwd.Text);
-                                        MySqlCommand resetPwdCmd = new MySqlCommand("UPDATE users SET password_hash = @newPassword WHERE email = @email", con);
-                                        resetPwdCmd.Parameters.AddWithValue("@email", email);
-                                        resetPwdCmd.Parameters.AddWithValue("@newPassword", newPassword);
-                                        int rowsAffected = resetPwdCmd.ExecuteNonQuery();
 
-                                        if (rowsAffected > 0)
+                if (DateTime.TryParseExact(ViewState["ResetTime"] as string, "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime storedTime))
+                {
+                    DateTime currentTime = DateTime.Now;
+                    TimeSpan timeDifference = currentTime - storedTime;
+                    if (timeDifference.TotalHours > 1)
+                    {
+                        log.Info("Failed to reset password: link expired");
+                        setModalText("Link Expired", "Please request a new password reset.");
+                        return;
+                    }
+                    else
+                    {
+                        if (Page.IsValid)
+                        {
+                            string queryEmail = Request.QueryString["email"].ToString();
+                            string hashEmail = EncryptionHelper.Decrypt(queryEmail);
+                            string[] parts = hashEmail.Split('|');
+                            if (parts.Length == 4)
+                            {
+                                string email = parts[0];
+                                string code = parts[1];
+                                using (MySqlConnection con = DatabaseHelper.GetConnection())
+                                {
+                                    MySqlCommand cmd = new MySqlCommand("SELECT verification_code from users WHERE email = @email", con);
+                                    cmd.Parameters.AddWithValue("@email", email);
+                                    con.Open();
+                                    string dataCode = cmd.ExecuteScalar() as string;
+                                    if (code == dataCode)
+                                    {
+                                        if (txtResetPwdConfirm.Text == txtResetPwd.Text)
                                         {
-                                            // 密碼欄位已成功修改
-                                            setModalText("Password Reset", "Your password has been reset.");
-                                            return;
+                                            string newPassword = BCrypt.Net.BCrypt.HashPassword(txtResetPwd.Text);
+                                            MySqlCommand resetPwdCmd = new MySqlCommand("UPDATE users SET password_hash = @newPassword WHERE email = @email", con);
+                                            resetPwdCmd.Parameters.AddWithValue("@email", email);
+                                            resetPwdCmd.Parameters.AddWithValue("@newPassword", newPassword);
+                                            int rowsAffected = resetPwdCmd.ExecuteNonQuery();
+
+                                            if (rowsAffected > 0)
+                                            {
+                                                // 密碼欄位已成功修改
+                                                log.Info("Password reset successfully");
+                                                setModalText("Password Reset", "Your password has been reset.");
+                                                return;
+                                            }
                                         }
                                     }
                                 }
@@ -134,9 +158,18 @@ namespace noteblog
                         }
                     }
                 }
-            }
 
-            setModalText("Password Reset Failed", "Password reset unsuccessful. Please check your information and try again.");
+                setModalText("Password Reset Failed", "Password reset unsuccessful. Please check your information and try again.");
+            }
+            catch (Exception ex)
+            {
+                log.Error("Password reset error", ex);
+                throw;
+            }
+            finally
+            {
+                log.Info("End of password reset method");
+            }
         }
 
         protected void btnSignUp_Click(object sender, EventArgs e)
@@ -197,7 +230,7 @@ namespace noteblog
             List<TextBox> inTextBoxs = new List<TextBox> { txtInEmail, txtInPwd };
             if (isTextValid(inTextBoxs) && isUserValid(txtInEmail.Text, txtInPwd.Text, out errMsg, out userData))
             {
-                var expiration = cbRememberMe.Checked ? DateTime.Now.AddDays(1) : DateTime.Now.AddHours(1);
+                var expiration = cbRememberMe.Checked ? DateTime.Now.AddDays(3) : DateTime.Now.AddHours(1);
                 var ticket = new FormsAuthenticationTicket(1, txtInEmail.Text, DateTime.Now, expiration, cbRememberMe.Checked, userData);
                 string encryptedTicket = FormsAuthentication.Encrypt(ticket);
                 HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
