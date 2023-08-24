@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using JiebaNet.Segmenter;
 using MySql.Data.MySqlClient;
 using noteblog.Utils;
 using JiebaNet.Segmenter;
@@ -93,12 +94,13 @@ namespace noteblog
                     da.SelectCommand = new MySqlCommand();
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine("SELECT * FROM notes WHERE 1 = 1");
-                    string keyQuery = "AND MATCH (title, content_text, keyword) AGAINST (@word IN BOOLEAN MODE)";
+                    string keyQuery = "AND MATCH (title, content_text, keyword) AGAINST (@word IN BOOLEAN MODE) OR keyword LIKE @likeWord";
                     if (!string.IsNullOrEmpty(ViewState["Word"]?.ToString()))
                     {
                         string word = ViewState["Word"] as string;
                         sb.AppendLine(keyQuery);
                         da.SelectCommand.Parameters.AddWithValue("@word", word);
+                        da.SelectCommand.Parameters.AddWithValue("@likeWord", $"%{word}%");
                     }
                     sb.AppendLine("ORDER BY updated_at DESC");
                     sb.AppendLine("LIMIT 5 OFFSET @offset");
@@ -117,6 +119,7 @@ namespace noteblog
                         mSb.AppendLine(keyQuery);
                         var word = ViewState["Word"] as string;
                         mCmd.Parameters.AddWithValue("@word", word);
+                        mCmd.Parameters.AddWithValue("@likeWord", $"%{word}%");
                     }
                     mCmd.CommandText = mSb.ToString();
                     mCmd.Connection = conn;

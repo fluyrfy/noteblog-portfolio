@@ -77,11 +77,12 @@ namespace noteblog
                     if (dt.Rows.Count > 0)
                     {
                         DataRow dr = dt.Rows[0];
+                        dr["development"] = rdlDevelopment.SelectedValue;
                         dr["title"] = txtTitle.Text;
                         dr["content"] = HttpUtility.HtmlEncode(txtContent.Text);
                         dr["content_text"] = ConverterHelper.ExtractTextFromHtml(txtContent.Text);
                         dr["keyword"] = txtKeyword.Text;
-                        log.Debug($"New note info: {txtTitle.Text} - {txtContent.Text}");
+                        log.Debug($"New note development: {dr["development"] as string}, title: {dr["title"] as string}, content: {dr["content_text"] as string}, keyword: {dr["keyword"] as string}");
                         if (fuCoverPhoto.HasFile)
                         {
                             using (Stream fs = fuCoverPhoto.PostedFile.InputStream)
