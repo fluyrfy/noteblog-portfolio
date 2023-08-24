@@ -442,6 +442,13 @@
     <Content Include="bin\WebGrease.dll" />
     <Content Include="bin\WebMatrix.Data.dll" />
     <Content Include="bin\WebMatrix.WebData.dll" />
+    <Content Include="Data\20230824.sql" />
+    <Content Include="Images\**\*" />
+    <Content Include="Images\avatar.jpg" />
+    <Content Include="Images\email\email.png" />
+    <Content Include="Images\ico\user.ico" />
+    <Content Include="Images\logo\logo.png" />
+    <Content Include="Images\logo\logo.svg" />
     <Content Include="Resources\dict.txt" />
     <Content Include="Resources\idf.txt" />
     <Content Include="Resources\stopwords.txt" />
@@ -522,6 +529,7 @@
     <Content Include="Resources\pos_prob_trans.json" />
     <Content Include="Resources\prob_emit.json" />
     <Content Include="Resources\prob_trans.json" />
+    <Content Include="Files\Fan_Resume.pdf" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Models\NoteModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -879,9 +887,6 @@
   <ItemGroup>
     <Folder Include="Admin\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Files\" />
-    <Folder Include="Images\email\" />
-    <Folder Include="Images\logo\" />
     <Folder Include="Shared\highlight\" />
   </ItemGroup>
   <ItemGroup>
