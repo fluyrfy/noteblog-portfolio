@@ -136,6 +136,7 @@ namespace noteblog
                         totalPages = 0;
                         pageNumber = 0;
                         pageSize = 0;
+                        pnlPagination.Visible = false;
                     }
                     logger.Debug($"Current page number: {pageNumber}");
                     ViewState["CurrentPage"] = pageNumber;

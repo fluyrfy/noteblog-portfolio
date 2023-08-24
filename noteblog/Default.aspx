@@ -17,9 +17,9 @@
                         </h1>
                         <div class="w3-section w3-bottombar w3-padding-16" id="filter">
                             <span class="w3-margin-right">Filter:</span>
-                            <asp:LinkButton ID="btnAll" runat="server" OnCommand="btnFilter_Command" CommandArgument="NotesAll" type="button" Text="ALL" CssClass="w3-button"></asp:LinkButton>
-                            <asp:LinkButton ID="btnFrontEnd" OnCommand="btnFilter_Command" runat="server" CommandArgument="NotesFront"><i class="fa fa-code w3-margin-right" type="button"  CssClass="w3-button"></i>Front-End</asp:LinkButton>
-                            <asp:LinkButton ID="btnBackEnd" OnCommand="btnFilter_Command" CommandArgument="NotesBack" runat="server"><i class="fa fa-database w3-margin-right" type="button"  CssClass="w3-button"></i>Back-End</asp:LinkButton>
+                            <asp:LinkButton ID="btnAll" runat="server" OnCommand="btnFilter_Command" CommandArgument="NotesAll" type="button" Text="ALL" CssClass="w3-button w3-black"></asp:LinkButton>
+                            <asp:LinkButton ID="btnFrontEnd" OnCommand="btnFilter_Command" runat="server" CommandArgument="NotesFront" CssClass="w3-button w3-white"><i class="fa fa-code w3-margin-right" type="button"  CssClass="w3-button"></i>Front-End</asp:LinkButton>
+                            <asp:LinkButton ID="btnBackEnd" OnCommand="btnFilter_Command" CommandArgument="NotesBack" runat="server" CssClass="w3-button w3-white"><i class="fa fa-database w3-margin-right" type="button"></i>Back-End</asp:LinkButton>
                         </div>
                     </div>
                     <div class="w3-row-padding">
