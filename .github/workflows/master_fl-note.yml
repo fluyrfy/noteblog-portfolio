@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'fl-note'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3607D58BEE624FC286514D40C00ED037 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3CC90BF4A4FC4897B3E120025454D207 }}
           package: .
