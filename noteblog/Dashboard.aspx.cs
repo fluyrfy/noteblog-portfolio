@@ -7,13 +7,21 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using JiebaNet.Segmenter;
 using MySql.Data.MySqlClient;
 using noteblog.Utils;
 
 namespace noteblog
 {
+
     public partial class Dashboard : Page
     {
+        private JiebaSegmenter _segmenter;
+        public Dashboard()
+        {
+            _segmenter = new JiebaSegmenter();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!User.Identity.IsAuthenticated)
@@ -84,17 +92,13 @@ namespace noteblog
                     da.SelectCommand = new MySqlCommand();
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine("SELECT * FROM notes WHERE 1 = 1");
-                    string keyQuery = @"
-AND (
-title LIKE @word
-OR content LIKE @word
-OR keyword LIKE @word
-)
-";
+                    string keyQuery = "AND MATCH (title, content_text, keyword) AGAINST (@word IN BOOLEAN MODE) OR keyword LIKE @likeWord";
                     if (!string.IsNullOrEmpty(ViewState["Word"]?.ToString()))
                     {
+                        string word = ViewState["Word"] as string;
                         sb.AppendLine(keyQuery);
-                        da.SelectCommand.Parameters.AddWithValue("@word", $"%{ViewState["Word"]?.ToString()}%");
+                        da.SelectCommand.Parameters.AddWithValue("@word", word);
+                        da.SelectCommand.Parameters.AddWithValue("@likeWord", $"%{word}%");
                     }
                     sb.AppendLine("ORDER BY updated_at DESC");
                     sb.AppendLine("LIMIT 5 OFFSET @offset");
@@ -111,7 +115,9 @@ OR keyword LIKE @word
                     if (!string.IsNullOrEmpty(ViewState["Word"]?.ToString()))
                     {
                         mSb.AppendLine(keyQuery);
-                        mCmd.Parameters.AddWithValue("@word", $"%{ViewState["Word"]?.ToString()}%");
+                        var word = ViewState["Word"] as string;
+                        mCmd.Parameters.AddWithValue("@word", word);
+                        mCmd.Parameters.AddWithValue("@likeWord", $"%{word}%");
                     }
                     mCmd.CommandText = mSb.ToString();
                     mCmd.Connection = conn;
@@ -136,9 +142,13 @@ OR keyword LIKE @word
                     paginationActiveStyle();
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                throw;
+            }
             finally
             {
+
             }
         }
         protected void btnNoteDelete_Click(object sender, EventArgs e)
@@ -311,7 +321,7 @@ OR keyword LIKE @word
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             string encodedInput = hdnSearch.Value; // 獲取編碼後的值
-            string userInput = Encoding.UTF8.GetString(Convert.FromBase64String(encodedInput)); // 解碼處理
+            string userInput = HttpUtility.UrlDecode(Encoding.UTF8.GetString(Convert.FromBase64String(encodedInput))); // 解碼處理
             if (!string.IsNullOrEmpty(userInput))
             {
                 ViewState["Word"] = HttpUtility.HtmlEncode(userInput);
