@@ -141,13 +141,20 @@ namespace noteblog
                     logger.Debug($"Current page number: {pageNumber}");
                     ViewState["CurrentPage"] = pageNumber;
                     Session["CurrentPage"] = pageNumber;
-                    List<int> pageNumbers = new List<int>();
-                    for (int i = 1; i <= totalPages; i++)
+                    if (totalPages > 1)
                     {
-                        pageNumbers.Add(i);
+                        List<int> pageNumbers = new List<int>();
+                        for (int i = 1; i <= totalPages; i++)
+                        {
+                            pageNumbers.Add(i);
+                        }
+                        repPagination.DataSource = pageNumbers;
+                        repPagination.DataBind();
                     }
-                    repPagination.DataSource = pageNumbers;
-                    repPagination.DataBind();
+                    else
+                    {
+                        pnlPagination.Visible = false;
+                    }
 
                     // 樣式切換
                     paginationActiveStyle();
