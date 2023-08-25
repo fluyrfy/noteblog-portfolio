@@ -194,10 +194,11 @@
                                                     <span class="material-icons">settings</span>
                                                     Settings
                                                 </a></li>
-                                                <li><a href="#">
-                                                    <span class="material-icons">logout</span>
-                                                    Logout
-                                                </a></li>
+                                                <li>
+                                                    <asp:LinkButton runat="server" OnClick="btnOut_Click">
+                                                        <span class="material-icons">logout</span>
+                                                        Logout
+                                                    </asp:LinkButton></li>
                                             </ul>
                                         </li>
                                     </ul>

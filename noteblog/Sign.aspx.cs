@@ -220,28 +220,32 @@ namespace noteblog
         {
             modalBgPanel.Visible = false;
             modalContentPanel.Visible = false;
+            Response.AddHeader("Cache-Control", "no-store, no-cache, must-revalidate");
             Response.Redirect("~/Sign.aspx");
         }
 
         protected void btnLogIn_Click(object sender, EventArgs e)
         {
-            string errMsg = "";
-            string userData = "";
-            List<TextBox> inTextBoxs = new List<TextBox> { txtInEmail, txtInPwd };
-            if (isTextValid(inTextBoxs) && isUserValid(txtInEmail.Text, txtInPwd.Text, out errMsg, out userData))
+            if (Page.IsValid)
             {
-                var expiration = cbRememberMe.Checked ? DateTime.Now.AddDays(3) : DateTime.Now.AddHours(1);
-                var ticket = new FormsAuthenticationTicket(1, txtInEmail.Text, DateTime.Now, expiration, cbRememberMe.Checked, userData);
-                string encryptedTicket = FormsAuthentication.Encrypt(ticket);
-                HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-                authCookie.Expires = expiration;
-                Response.Cookies.Add(authCookie);
-                Response.Redirect("~/Dashboard.aspx");
-            }
-            else
-            {
-                lblInHint.Text = errMsg;
-                lblInHint.ForeColor = System.Drawing.Color.Red;
+                string errMsg = "";
+                string userData = "";
+                List<TextBox> inTextBoxs = new List<TextBox> { txtInEmail, txtInPwd };
+                if (isTextValid(inTextBoxs) && isUserValid(txtInEmail.Text, txtInPwd.Text, out errMsg, out userData))
+                {
+                    var expiration = cbRememberMe.Checked ? DateTime.Now.AddDays(3) : DateTime.Now.AddHours(1);
+                    var ticket = new FormsAuthenticationTicket(1, txtInEmail.Text, DateTime.Now, expiration, cbRememberMe.Checked, userData);
+                    string encryptedTicket = FormsAuthentication.Encrypt(ticket);
+                    HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                    authCookie.Expires = expiration;
+                    Response.Cookies.Add(authCookie);
+                    Response.Redirect("~/Dashboard.aspx");
+                }
+                else
+                {
+                    lblInHint.Text = errMsg;
+                    lblInHint.ForeColor = System.Drawing.Color.Red;
+                }
             }
         }
 
@@ -335,8 +339,8 @@ namespace noteblog
                             MySqlDataReader dr = cmd_auth.ExecuteReader();
                             if (dr.HasRows && dr.Read())
                             {
-                                string hashedPassword = dr["password_hash"].ToString();
-                                if (hashedPassword != null && BCrypt.Net.BCrypt.Verify(password, hashedPassword))
+                                string hashedPassword = dr["password_hash"] as string;
+                                if (!string.IsNullOrEmpty(hashedPassword) && BCrypt.Net.BCrypt.Verify(password, hashedPassword))
                                 {
                                     if (!(bool)dr["is_verified"])
                                     {

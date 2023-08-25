@@ -293,6 +293,7 @@ namespace noteblog
         protected void btnFilter_Command(object sender, CommandEventArgs e)
         {
             ViewState["Development"] = e.CommandArgument.ToString();
+            isRecacheRequired(e.CommandArgument as string);
             queryNotesData();
         }
         protected void toggleFilterCss()
@@ -328,5 +329,21 @@ namespace noteblog
         //        //Response.Redirect("Note.aspx?id=" + Server.UrlEncode(noteId));
         //    }
         //}
+
+        public bool isRecacheRequired(string param)
+        {
+            // 判斷是否要重新緩存輸出
+            // 例如，檢查三個獨立的 asp:linkbutton 的狀態
+
+            bool isRecacheRequired = false;
+            // 檢查其他按鈕的狀態
+            if (Session["Development"] as string != param || Cache["param"] == null)
+            {
+                isRecacheRequired = true;
+            }
+
+            return isRecacheRequired;
+        }
+
     }
 }

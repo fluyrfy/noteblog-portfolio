@@ -38,7 +38,7 @@ namespace noteblog
                 {
                     // 票證過期，執行登出操作
                     FormsAuthentication.SignOut();
-                    Response.Redirect("Login.aspx");
+                    Response.Redirect("~/Sign.aspx");
                     return;
                 }
                 else
@@ -69,6 +69,7 @@ namespace noteblog
             }
         }
         private Logger log = new Logger(typeof(Dashboard).Name);
+
 
         private bool FormsAuthenticationTicketExpired()
         {
@@ -152,6 +153,12 @@ namespace noteblog
             {
 
             }
+        }
+
+        protected void btnOut_Click(object sender, EventArgs e)
+        {
+            FormsAuthentication.SignOut();
+            Response.Redirect("~/Sign.aspx");
         }
         protected void btnNoteDelete_Click(object sender, EventArgs e)
         {

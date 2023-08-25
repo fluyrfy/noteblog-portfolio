@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="F.L." Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="noteblog._Default" %>
 
+<%@ OutputCache Duration="300" VaryByParam="none" VaryByCustom="isRecacheRequired" %>
+
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="Shared/Default.css" rel="stylesheet" />
 
@@ -104,7 +106,7 @@
                     </div>
                     <div class="w3-third w3-teal">
                         <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
-                        <p>HSC, TW</p>
+                        <p><a href="https://www.google.com/maps/place/%E6%96%B0%E7%AB%B9/@24.8015925,120.9690134,17z/data=!3m1!4b1!4m6!3m5!1s0x346835e9c2e07205:0x5e8cb484291aeeba!8m2!3d24.8015877!4d120.9715883!16s%2Fm%2F04lf1bd?hl=zh-TW&entry=ttu" target="_blank">HSC, TW</a></p>
                     </div>
                     <div class="w3-third w3-dark-grey">
                         <p><i class="fa fa-phone w3-xxlarge w3-text-light-grey"></i></p>
