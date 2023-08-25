@@ -452,6 +452,7 @@
     <Content Include="Resources\dict.txt" />
     <Content Include="Resources\idf.txt" />
     <Content Include="Resources\stopwords.txt" />
+    <Content Include="Shared\**\*" />
     <Content Include="Shared\Sign.css" />
     <Content Include="Shared\Verify.css" />
     <Content Include="Verify.aspx" />
