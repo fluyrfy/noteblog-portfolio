@@ -23,6 +23,7 @@
                     <label>Cover Image</label>
                     <asp:FileUpload ID="fuCoverPhoto" runat="server" accept=".png,.jpg,.jpeg" />
 <%--                    <asp:RequiredFieldValidator ID="rfvCI" runat="server" ErrorMessage="Cover Image is required" ControlToValidate="fuCoverPhoto" ForeColor="Red"></asp:RequiredFieldValidator>--%>
+                    <asp:Label ID="lblPhotoMsg" runat="server" />
                     <br />
                     <asp:Image ID="imgCover" runat="server" CssClass="cover-photo" />
                 </div>

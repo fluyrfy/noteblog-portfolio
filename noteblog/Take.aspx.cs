@@ -35,6 +35,13 @@ namespace noteblog
                         cmd.Parameters.AddWithValue("@content_text", ConverterHelper.ExtractTextFromHtml(txtContent.Text));
                         cmd.Parameters.AddWithValue("@keyword", txtKeyword.Text);
                         cmd.Parameters.AddWithValue("@publishedAt", DateTime.UtcNow);
+                        int maxFileSizeInBytes = 5 * 1024 * 1024;
+                        if (fuCoverPhoto.HasFile && fuCoverPhoto.PostedFile.ContentLength > maxFileSizeInBytes)
+                        {
+                            lblPhotoMsg.Text = "Image size exceeds limit（5MB）";
+                            lblPhotoMsg.ForeColor = System.Drawing.Color.Red;
+                            return;
+                        }
                         using (Stream fs = fuCoverPhoto.HasFile ? fuCoverPhoto.PostedFile.InputStream : new FileStream(Server.MapPath("~/Images/cover/default.jpg"), FileMode.Open, FileAccess.Read))
                         {
                             using (BinaryReader br = new BinaryReader(fs))

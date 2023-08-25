@@ -21,6 +21,7 @@
                 <div class="w3-section">
                     <label>Cover Photo</label>
                     <asp:FileUpload ID="fuCoverPhoto" runat="server" accept=".png,.jpg,.jpeg" /><br />
+                    <asp:Label ID="lblPhotoMsg" runat="server" />
                     <asp:Image ID="imgCover" runat="server" CssClass="cover-photo" />
                 </div>
                 <div class="w3-section">

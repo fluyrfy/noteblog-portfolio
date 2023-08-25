@@ -83,8 +83,15 @@ namespace noteblog
                         dr["content_text"] = ConverterHelper.ExtractTextFromHtml(txtContent.Text);
                         dr["keyword"] = txtKeyword.Text;
                         log.Debug($"New note development: {dr["development"] as string}, title: {dr["title"] as string}, content: {dr["content_text"] as string}, keyword: {dr["keyword"] as string}");
+                        int maxFileSizeInBytes = 5 * 1024 * 1024;
                         if (fuCoverPhoto.HasFile)
                         {
+                            if (fuCoverPhoto.PostedFile.ContentLength > maxFileSizeInBytes)
+                            {
+                                lblPhotoMsg.Text = "Image size exceeds limit（5MB）";
+                                lblPhotoMsg.ForeColor = System.Drawing.Color.Red;
+                                return;
+                            }
                             using (Stream fs = fuCoverPhoto.PostedFile.InputStream)
                             {
                                 using (BinaryReader br = new BinaryReader(fs))
