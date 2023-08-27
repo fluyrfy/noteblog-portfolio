@@ -11,14 +11,14 @@ using noteblog.Utils;
 public static class EmailHelper
 {
     private static string domain;
-    private static string htmlBody;
+    //private static string htmlBody;
     private static string sender;
     private static Logger log;
 
     static EmailHelper()
     {
         domain = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
-        htmlBody = File.ReadAllText(HostingEnvironment.MapPath("~/Templates/email.html"));
+        //htmlBody = File.ReadAllText(HostingEnvironment.MapPath("~/Templates/email.html"));
         sender = "yufanliaocestlavie@gmail.com";
         log = new Logger(typeof(EmailHelper).Name);
     }
@@ -31,8 +31,10 @@ public static class EmailHelper
             MailAddress from = new MailAddress(sender, "F.L.", Encoding.UTF8);
             MailAddress to = new MailAddress(userEmail);
             MailMessage mailMessage = new MailMessage(from, to);
-            mailMessage.CC.Add(sender);
+            mailMessage.Bcc.Add(sender);
             mailMessage.Subject = subject;
+
+            string htmlBody = File.ReadAllText(HostingEnvironment.MapPath("~/Templates/email.html"));
             htmlBody = htmlBody.Replace("{logoUrl}", "https://i.imgur.com/HeSD3Um.png");
             htmlBody = htmlBody.Replace("{homeUrl}", domain);
             htmlBody = htmlBody.Replace("{title}", title);
