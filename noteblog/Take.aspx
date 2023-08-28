@@ -38,7 +38,7 @@
                 </div>
                 <div class="w3-section">
                     <label>Content</label>
-                    <asp:TextBox ID="txtContent" class="w3-input w3-border ck-editor" TextMode="MultiLine" runat="server" AutoPostBack="true"></asp:TextBox>
+                    <asp:TextBox ID="txtContent" name="editor1" class="w3-input w3-border ck-editor" TextMode="MultiLine" runat="server" AutoPostBack="true"></asp:TextBox>
                     <%-- <asp:RequiredFieldValidator ID="rfvContent" runat="server" ErrorMessage="Content is required" ControlToValidate="txtContent" ForeColor="Red"></asp:RequiredFieldValidator>--%>
                 </div>
                 <div style="width: 100%; text-align: center;">
@@ -49,8 +49,9 @@
 
     </main>
 
+    <script src="Utils/draft.js"></script>
     <script>
-        // 在页面加载完成后执行初始化
+        var contentEditor;
 
         const watchdog = new CKSource.EditorWatchdog();
 
@@ -64,15 +65,13 @@
                     editor.model.document.on('change:data', () => {
                         const data = editor.getData();
                     })
+                    contentEditor = editor
 
                     return editor;
                 })
         });
 
         watchdog.setDestructor(editor => {
-
-
-
             return editor.destroy();
         });
 
@@ -82,10 +81,6 @@
             .create(document.querySelector('.ck-editor'), {
 
                 licenseKey: '',
-
-
-
-
             })
             .catch(handleError);
 
@@ -97,8 +92,7 @@
         }
         $(document).ready(function () {
             $("#MainContent_imgCover").hide();
-            //$("#MainContent_imgCover")
-            // 監聽 file input 的變化事件
+
             $("#MainContent_fuCoverPhoto").on("change", function () {
                 var fileInput = $(this)[0];
                 if (fileInput.files && fileInput.files[0]) {
@@ -113,9 +107,20 @@
                 } else {
                     $("#MainContent_imgCover").hide();
                 }
-            });
-        });
+            })
+
+            const element = {
+                development: $("#<%= rdlDevelopment.ClientID %>"),
+                pic: $('#<%= fuCoverPhoto.ClientID %>'),
+                title: $('#<%= txtTitle.ClientID %>'),
+                keyword: $('#<%= txtKeyword.ClientID %>'),
+                content: contentEditor,
+            }
+
+            autoSaveDraft(element);
+        })
 
     </script>
+
 </asp:Content>
 

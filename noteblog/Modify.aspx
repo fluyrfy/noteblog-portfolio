@@ -44,7 +44,10 @@
 
     </main>
 
+    <script src="Utils/draft.js"></script>
     <script>
+        var contentEditor;
+
         // init ckeditor
         const watchdog = new CKSource.EditorWatchdog();
 
@@ -54,19 +57,15 @@
             return CKSource.Editor
                 .create(element, config)
                 .then(editor => {
-                    // 在这里可以绑定其他事件或进行其他操作
                     editor.model.document.on('change:data', () => {
                         const data = editor.getData();
                     })
-
+                    contentEditor = editor
                     return editor;
                 })
         });
 
         watchdog.setDestructor(editor => {
-
-
-
             return editor.destroy();
         });
 
@@ -100,6 +99,16 @@
                     reader.readAsDataURL(fileInput.files[0]);
                 }
             });
+
+            const element = {
+                development: $("#<%= rdlDevelopment.ClientID %>"),
+                pic: $('#<%= fuCoverPhoto.ClientID %>'),
+                title: $('#<%= txtTitle.ClientID %>'),
+                keyword: $('#<%= txtKeyword.ClientID %>'),
+                content: contentEditor,
+            }
+
+            autoSaveDraft(element);
         });
     </script>
 </asp:Content>

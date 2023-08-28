@@ -61,3 +61,6 @@ D:\C#\noteblog\noteblog\bin\zh-Hant\Microsoft.AspNet.FriendlyUrls.resources.dll
 D:\C#\noteblog\noteblog\bin\JiebaNet.Analyser.dll
 D:\C#\noteblog\noteblog\bin\JiebaNet.Segmenter.dll
 D:\C#\noteblog\noteblog\bin\HtmlAgilityPack.dll
+D:\C#\noteblog\noteblog\bin\System.Net.Http.Formatting.dll
+D:\C#\noteblog\noteblog\bin\System.Web.Http.dll
+D:\C#\noteblog\noteblog\bin\System.Web.Http.WebHost.dll
