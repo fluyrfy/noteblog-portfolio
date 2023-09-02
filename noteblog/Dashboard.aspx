@@ -182,8 +182,8 @@
                                         </li>
                                         <li class="dropdown nav-item">
                                             <a class="nav-link" href="#" data-toggle="dropdown">
-                                                <img src="img/user.jpg" style="width: 40px; border-radius: 50%;" />
-                                                <span class="xp-user-live"></span>
+                                                <span class="material-icons">person</span>
+                                                <%--<span class="xp-user-live"></span>--%>
                                             </a>
                                             <ul class="dropdown-menu small-menu">
                                                 <li><a href="#">
@@ -210,9 +210,8 @@
                     <div class="xp-breadcrumbbar text-center">
                         <h4 class="page-title">Dashboard</h4>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <asp:HyperLink runat="server" NavigateUrl="~/Default.aspx" ID="hlkUser"></asp:HyperLink></li>
-                            <li class="breadcrumb-item active" aria-curent="page">Dashboard</li>
+                            <li class="breadcrumb-item">Notes</li>
+                            <li class="breadcrumb-item active" aria-curent="page">Users</li>
                         </ol>
                     </div>
 

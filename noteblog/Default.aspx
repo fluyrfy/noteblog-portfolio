@@ -15,13 +15,15 @@
                 <ContentTemplate>
                     <div class="w3-container">
                         <h1 style="display: flex; justify-content: space-between; align-items: center;">
-                            <b>My Portfolio</b><img src="Images/logo/logo.svg" alt="Alternate Text" height="54" style="display: block" />
+                            <b>My Portfolio</b>
+                            <%--<img src="Images/logo/logo.svg" alt="Alternate Text" height="54" style="display: block" />--%>
                         </h1>
                         <div class="w3-section w3-bottombar w3-padding-16" id="filter">
                             <span class="w3-margin-right">Filter:</span>
                             <asp:LinkButton ID="btnAll" runat="server" OnCommand="btnFilter_Command" CommandArgument="NotesAll" type="button" Text="ALL" CssClass="w3-button w3-white w3-black"></asp:LinkButton>
                             <asp:LinkButton ID="btnFrontEnd" OnCommand="btnFilter_Command" runat="server" CommandArgument="NotesFront" CssClass="w3-button w3-white"><i class="fa fa-code w3-margin-right" type="button"></i>Front-End</asp:LinkButton>
                             <asp:LinkButton ID="btnBackEnd" OnCommand="btnFilter_Command" CommandArgument="NotesBack" runat="server" CssClass="w3-button w3-white"><i class="fa fa-database w3-margin-right" type="button"></i>Back-End</asp:LinkButton>
+                            <asp:LinkButton ID="btnDataAnalysis" OnCommand="btnFilter_Command" CommandArgument="DA" runat="server" CssClass="w3-button w3-white"><i class="fa fa-laptop w3-margin-right" type="button"></i>Data analysis</asp:LinkButton>
                         </div>
                     </div>
                     <div class="w3-row-padding">
@@ -67,10 +69,10 @@
                     Hi, I'm Frank Liao, and the website name F.L. is an abbreviation of my name.
                 </p>
                 <p style="text-align: justify">
-                    F.L. is an interesting name that can represent various meanings. For instance, it could stand for Fast Learning, signifying my enthusiasm for rapidly acquiring new skills and knowledge. Alternatively, it could mean Fun Life, expressing my enjoyment of life's pleasures and adventures. Or, it could signify Future Leader, denoting my leadership abilities and ambitious aspirations.
+                    F.L. is an exciting name representing various meanings. For instance, it could stand for Fast Learning, signifying my enthusiasm for rapidly acquiring new skills and knowledge. It could also mean Fun Life, expressing my enjoyment of life's pleasures and adventures. Furthermore, it could indicate Future Leader, denoting my leadership abilities and ambitious aspirations.
                 </p>
                 <p style="text-align: justify">
-                    The keywords for F.L. are code, recode, and record. "Code" signifies my ability to create and solve problems using programming languages. "Recode" means that I continuously improve and optimize your code, making it more efficient and readable. "Record" implies that I document and share my learning journey and achievements, enabling others to benefit from it as well.
+                    In defining our strengths, I chose three keywords for F.L.: "code," "recode," and "record." "Code" exemplifies our ability to create and solve problems using programming languages, while "Recode" underscores our continuous efforts to enhance and refine code, ensuring it's both efficient and lucid. Meanwhile, "Record" portrays our commitment to documenting and sharing our journey and accomplishments while learning, allowing anyone interested to gain insights from our experiences.
                 </p>
                 <hr>
 

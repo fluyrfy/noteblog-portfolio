@@ -43,19 +43,8 @@ namespace noteblog
                 {
                     if (User.Identity is FormsIdentity formsIdentity)
                     {
-                        FormsAuthenticationTicket ticket = formsIdentity.Ticket;
-                        // 解析使用者資訊
-                        string userData = ticket.UserData;
-                        string[] userDataArray = userData.Split('|');
-
-                        if (userDataArray.Length == 2)
-                        {
-                            string username = userDataArray[0];
-                            string email = userDataArray[1];
-
-                            lblUser.Text = username;
-                            hlkUser.Text = username;
-                        }
+                        string name = AuthenticationHelper.GetUserData()["name"].ToString();
+                        lblUser.Text = name;
                     }
                 }
             }
@@ -213,11 +202,11 @@ namespace noteblog
                     string deleteQuery = $"DELETE FROM notes WHERE id IN ({ids})";
                     using (MySqlConnection con = DatabaseHelper.GetConnection())
                     {
+                        con.Open();
                         MySqlTransaction transaction = con.BeginTransaction();
                         try
                         {
                             MySqlCommand cmd = new MySqlCommand(deleteQuery, con, transaction);
-                            con.Open();
                             int affectedRows = cmd.ExecuteNonQuery();
                             transaction.Commit();
                             if (affectedRows > 0)

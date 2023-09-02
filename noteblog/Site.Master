@@ -57,7 +57,7 @@
                         <i class="fa fa-remove"></i>
                     </a>
 
-                    <asp:Image runat="server" ID="imgAvatar" Style="width: 45%;" class="w3-round" ImageUrl="~/Images/avatar.jpg" />
+                    <asp:Image runat="server" ID="imgAvatar" Style="width: 45%; display: block; margin: 0 auto;" class="w3-round" ImageUrl="~/Images/logo/logo.svg" />
                     <br />
                     <br />
                     <asp:HyperLink NavigateUrl="Dashboard.aspx" runat="server">
@@ -74,7 +74,7 @@
             </nav>
             <header id="portfolio">
                 <%--<a href="#">--%>
-                <asp:Image runat="server" ID="Image1" Style="width: 38px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity" ImageUrl="~/Images/avatar.jpg" />
+                <asp:Image runat="server" ID="Image1" Style="width: 38px;" class="w3-right w3-margin w3-hide-large w3-hover-opacity" ImageUrl="~/Images/logo/logo.svg" />
                 <%--<img src="/w3images/avatar_g2.jpg" style="width: 65px;">--%>
                 <%--</a>--%>
                 <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>

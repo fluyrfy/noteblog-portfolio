@@ -174,7 +174,7 @@ a, a:hover, a:focus {
     color: #333;
     font-size: 17px;
     margin: 0px;
-    text-transform: uppercase;
+    /*    text-transform: uppercase;*/
     transition: all 0.5s ease;
     font-weight: 600;
 }
