@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="New Post" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Take.aspx.cs" Inherits="noteblog.Take" ValidateRequest="false" %>
 
+
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="Shared/Take.css" rel="stylesheet" />
-
     <main>
         <!-- Overlay effect when opening sidebar on small screens -->
         <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor: pointer" title="close side menu" id="myOverlay"></div>
@@ -12,12 +12,10 @@
                 <h4 id="contact"><b>New Post</b></h4>
                 <hr class="w3-opacity">
                 <div class="w3-section" aria-orientation="horizontal">
-                    <label>Development</label>
-                    <asp:RadioButtonList ID="rdlDevelopment" runat="server" RepeatDirection="Horizontal">
-                        <asp:ListItem Value="F">Front-End</asp:ListItem>
-                        <asp:ListItem Value="B">Back-End</asp:ListItem>
+                    <label>Category</label>
+                    <asp:RadioButtonList ID="rdlCategory" runat="server" RepeatDirection="Horizontal">
                     </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator ID="rfvDevelopment" runat="server" ErrorMessage="Development is required" ControlToValidate="rdlDevelopment" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="rfvDevelopment" runat="server" ErrorMessage="Development is required" ControlToValidate="rdlCategory" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
                 <div class="w3-section">
                     <label>Cover Image</label>
@@ -26,6 +24,7 @@
                     <asp:Label ID="lblPhotoMsg" runat="server" />
                     <br />
                     <asp:Image ID="imgCover" runat="server" CssClass="cover-photo" />
+                    <asp:HiddenField ID="hdnImgData" runat="server" />
                 </div>
                 <div class="w3-section">
                     <label>Title</label>
@@ -101,6 +100,7 @@
                         // 將讀取的圖片數據設置為 <img> 的 src
                         $("#MainContent_imgCover").attr("src", e.target.result);
                         $("#MainContent_imgCover").show(); // 顯示圖片
+                        $("#<%= hdnImgData.ClientID %>").val(e.target.result.split(',')[1])
                     };
                     // 讀取選擇的文件
                     reader.readAsDataURL(fileInput.files[0]);
@@ -110,14 +110,17 @@
             })
 
             const element = {
-                development: $("#<%= rdlDevelopment.ClientID %>"),
+                noteId: 0,
+                category: $("#<%= rdlCategory.ClientID %>"),
                 pic: $('#<%= fuCoverPhoto.ClientID %>'),
                 title: $('#<%= txtTitle.ClientID %>'),
                 keyword: $('#<%= txtKeyword.ClientID %>'),
                 content: contentEditor,
+                preImg: $('#<%= imgCover.ClientID %>'),
+                hdnImg: $('#<%= hdnImgData.ClientID %>'),
             }
 
-            autoSaveDraft(element);
+            draft(element);
         })
 
     </script>

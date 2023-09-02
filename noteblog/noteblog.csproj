@@ -62,6 +62,9 @@
       <HintPath>..\packages\Dapper.2.0.151\lib\net461\Dapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Dapper.FluentMap, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.FluentMap.2.0.0\lib\netstandard2.0\Dapper.FluentMap.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -453,6 +456,7 @@
     <Content Include="bin\WebGrease.dll" />
     <Content Include="bin\WebMatrix.Data.dll" />
     <Content Include="bin\WebMatrix.WebData.dll" />
+    <Content Include="Controls\ModalDialogControl.ascx" />
     <Content Include="Data\20230824.sql" />
     <Content Include="Images\**\*" />
     <Content Include="Images\avatar.jpg" />
@@ -575,14 +579,27 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DraftsController.cs" />
+    <Compile Include="Controls\ModalDialogControl.ascx.cs">
+      <DependentUpon>ModalDialogControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ModalDialogControl.ascx.designer.cs">
+      <DependentUpon>ModalDialogControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Mappings\DraftMap.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Draft.cs" />
+    <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\NoteRepository.cs" />
     <Compile Include="Repositories\DraftRepository.cs" />
+    <Compile Include="Utils\AuthenticationHelper.cs" />
     <Compile Include="Utils\ConverterHelper.cs" />
     <Compile Include="Utils\EmailHelper.cs" />
     <Compile Include="Utils\EncryptionHelper.cs" />
+    <Compile Include="Utils\RepositoryHelper.cs" />
     <Compile Include="Verify.aspx.cs">
       <DependentUpon>Verify.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

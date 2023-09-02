@@ -3,8 +3,10 @@ using System.Globalization;
 using System.IO;
 using System.Security.AccessControl;
 using System.Web;
+using System.Web.Http;
 using System.Web.Optimization;
 using System.Web.Routing;
+using noteblog.App_Start;
 using noteblog.Utils;
 
 namespace noteblog
@@ -20,6 +22,7 @@ namespace noteblog
             // 應用程式啟動時執行的程式碼
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<NoteDBContext>());
 
             // map path

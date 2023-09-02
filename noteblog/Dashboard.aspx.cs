@@ -10,8 +10,6 @@ using System.Web.UI.WebControls;
 using JiebaNet.Segmenter;
 using MySql.Data.MySqlClient;
 using noteblog.Utils;
-using JiebaNet.Segmenter;
-using System.Web.Razor.Tokenizer.Symbols;
 
 namespace noteblog
 {
@@ -94,7 +92,7 @@ namespace noteblog
                     MySqlDataAdapter da = new MySqlDataAdapter();
                     da.SelectCommand = new MySqlCommand();
                     StringBuilder sb = new StringBuilder();
-                    sb.AppendLine("SELECT * FROM notes WHERE 1 = 1");
+                    sb.AppendLine("SELECT notes.*, categories.name as development FROM notes INNER JOIN categories ON notes.category_id = categories.id WHERE 1 = 1");
                     string keyQuery = "AND MATCH (title, content_text, keyword) AGAINST (@word IN BOOLEAN MODE) OR keyword LIKE @likeWord";
                     if (!string.IsNullOrEmpty(ViewState["Word"]?.ToString()))
                     {

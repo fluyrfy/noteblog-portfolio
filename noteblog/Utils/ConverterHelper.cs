@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -86,4 +87,12 @@ public class ConverterHelper
         return sb.ToString();
     }
 
+    public static byte[] ConvertFileToBytes(Stream fileStream)
+    {
+        using (MemoryStream memoryStream = new MemoryStream())
+        {
+            fileStream.CopyTo(memoryStream);
+            return memoryStream.ToArray();
+        }
+    }
 }

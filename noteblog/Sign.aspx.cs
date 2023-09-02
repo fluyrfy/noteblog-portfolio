@@ -7,6 +7,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using noteblog.Utils;
 
 namespace noteblog
@@ -353,7 +354,13 @@ namespace noteblog
                                         return false;
                                     }
                                     errMsg = null;
-                                    userData = $"{dr["name"].ToString()}|{dr["email"].ToString()}";
+                                    Dictionary<string, object> userDataObject = new Dictionary<string, object>
+                                    {
+                                        { "id", dr["id"] },
+                                        { "name", dr["name"] },
+                                        { "email", dr["email"] }
+                                    };
+                                    userData = JsonConvert.SerializeObject(userDataObject); ;
                                     return true;
                                 }
                                 else

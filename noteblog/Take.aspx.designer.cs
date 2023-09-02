@@ -15,13 +15,13 @@ namespace noteblog
     {
 
         /// <summary>
-        /// rdlDevelopment 控制項。
+        /// rdlCategory 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdlDevelopment;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdlCategory;
 
         /// <summary>
         /// rfvDevelopment 控制項。
@@ -58,6 +58,15 @@ namespace noteblog
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imgCover;
+
+        /// <summary>
+        /// hdnImgData 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnImgData;
 
         /// <summary>
         /// txtTitle 控制項。

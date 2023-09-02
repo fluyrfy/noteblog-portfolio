@@ -1,8 +1,6 @@
-﻿using noteblog.Models;
-using System.Data;
+﻿using System.Data;
 using Dapper;
-using System.Collections.Generic;
-using System.Data.Common;
+using noteblog.Models;
 
 public class NoteRepository
 {

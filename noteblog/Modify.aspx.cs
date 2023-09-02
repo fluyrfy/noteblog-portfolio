@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
+using noteblog.Models;
 using noteblog.Utils;
 
 namespace noteblog
@@ -26,6 +29,14 @@ namespace noteblog
                 {
                     if (int.TryParse(noteIdString, out int noteId))
                     {
+                        CategoryRepository categoryRepository = new CategoryRepository();
+                        List<Category> categories = categoryRepository.getAll();
+
+                        foreach (Category category in categories)
+                        {
+                            ListItem item = new ListItem(category.name, category.id.ToString());
+                            rdlCategory.Items.Add(item);
+                        }
                         using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Noteblog"].ConnectionString))
                         {
                             MySqlCommand cmd = new MySqlCommand();
@@ -42,10 +53,11 @@ namespace noteblog
                                 if (dt.Rows.Count > 0)
                                 {
                                     DataRow dr = dt.Rows[0];
-                                    rdlDevelopment.SelectedValue = dr["development"].ToString();
+                                    rdlCategory.SelectedValue = dr["category_id"].ToString();
                                     txtTitle.Text = dr["title"].ToString();
                                     txtKeyword.Text = dr["keyword"].ToString();
                                     imgCover.ImageUrl = $"data:image/png;base64,{Convert.ToBase64String((byte[])dr["pic"])}";
+                                    hdnImgData.Value = Convert.ToBase64String((byte[])dr["pic"]);
                                     txtContent.Text = HttpUtility.HtmlDecode(dr["content"].ToString());
                                 }
                                 ViewState["SQL_QUERY"] = ct;
@@ -77,12 +89,12 @@ namespace noteblog
                     if (dt.Rows.Count > 0)
                     {
                         DataRow dr = dt.Rows[0];
-                        dr["development"] = rdlDevelopment.SelectedValue;
+                        dr["category_id"] = rdlCategory.SelectedValue;
                         dr["title"] = txtTitle.Text;
                         dr["content"] = HttpUtility.HtmlEncode(txtContent.Text);
                         dr["content_text"] = ConverterHelper.ExtractTextFromHtml(txtContent.Text);
                         dr["keyword"] = txtKeyword.Text;
-                        log.Debug($"New note development: {dr["development"] as string}, title: {dr["title"] as string}, content: {dr["content_text"] as string}, keyword: {dr["keyword"] as string}");
+                        log.Debug($"New note category: {dr["category_id"] as string}, title: {dr["title"] as string}, content: {dr["content_text"] as string}, keyword: {dr["keyword"] as string}");
                         int maxFileSizeInBytes = 5 * 1024 * 1024;
                         if (fuCoverPhoto.HasFile)
                         {
@@ -101,6 +113,13 @@ namespace noteblog
                                 }
                             }
                         }
+                        else
+                        {
+                            if (!string.IsNullOrEmpty(hdnImgData.Value))
+                            {
+                                dr["pic"] = Convert.FromBase64String(hdnImgData.Value);
+                            }
+                        }
                         int rowsUpdated = da.Update(dt);
 
                         if (rowsUpdated > 0)
@@ -108,6 +127,9 @@ namespace noteblog
                             log.Info($"Note modified successfully, note ID: {dr["id"].ToString()}");
                         }
                     }
+                    var userId = AuthenticationHelper.GetUserId();
+                    DraftRepository draftRepository = new DraftRepository(userId);
+                    draftRepository.delete(userId, Convert.ToInt32(Request.QueryString["id"]));
                     CacheHelper.ClearAllCache();
                 }
 

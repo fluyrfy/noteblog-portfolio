@@ -1,25 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.InteropServices;
 using System.Web.Http;
+using System.Web.Http.Results;
 using noteblog.Models;
+using noteblog.Utils;
 
 namespace noteblog.Controllers
 {
     [RoutePrefix("api/drafts")]
     public class DraftsController : ApiController
     {
-        private readonly DraftRepository _repository = new DraftRepository();
+        private readonly int _userId;
+        private readonly DraftRepository _repository;
+
+        public DraftsController()
+        {
+            _userId = Convert.ToInt32(AuthenticationHelper.GetUserData()["id"]);
+            _repository = new DraftRepository(_userId);
+        }
 
         [HttpPost]
         [Route("save")]
-        public IHttpActionResult SaveDraft([FromBody] Draft draft)
+        public IHttpActionResult saveDraft([FromBody] Draft draft)
         {
             try
             {
-                if (_repository.isDraftExist())
+                draft.userId = _userId;
+                if (_repository.isDraftExist(_userId, draft.noteId))
                 {
                     bool updatedSuccessfully = _repository.update(draft);
                     if (updatedSuccessfully)
@@ -45,26 +53,46 @@ namespace noteblog.Controllers
         }
 
         [HttpGet]
-        [Route("get/{id}")]
-        public IHttpActionResult GetDraft(int id)
+        [Route("get/{noteId}")]
+        public HttpResponseMessage getDraft(int noteId)
         {
             try
             {
-                if (id >= 0 && id < drafts.Count)
+                Draft draft = _repository.get(_userId, noteId);
+
+                if (_repository.isDraftExist(_userId, noteId) && draft != null)
                 {
-                    // 根据 ID 获取草稿内容
-                    string draftContent = drafts[id];
-                    return Ok(draftContent);
+                    return Request.CreateResponse(System.Net.HttpStatusCode.OK, draft);
                 }
                 else
                 {
-                    return NotFound();
+                    return Request.CreateResponse(HttpStatusCode.NoContent);
                 }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(InternalServerError(ex));
+            }
+        }
+
+        [HttpDelete]
+        [Route("delete/{noteId}")]
+        public IHttpActionResult deleteDraft(int noteId)
+        {
+            try
+            {
+                bool deletedSuccessfully = _repository.delete(_userId, noteId);
+                if (deletedSuccessfully)
+                {
+                    return Ok("Draft deleted successfully.");
+                }
+                return NotFound();
             }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
         }
+
     }
 }

@@ -12,10 +12,8 @@
                 <h4 id="contact"><b>Modify Post</b></h4>
                 <hr class="w3-opacity">
                 <div class="w3-section" aria-orientation="horizontal">
-                    <label>Development</label>
-                    <asp:RadioButtonList ID="rdlDevelopment" runat="server" RepeatDirection="Horizontal">
-                        <asp:ListItem Value="F">Front-End</asp:ListItem>
-                        <asp:ListItem Value="B">Back-End</asp:ListItem>
+                    <label>Category</label>
+                    <asp:RadioButtonList ID="rdlCategory" runat="server" RepeatDirection="Horizontal">
                     </asp:RadioButtonList>
                 </div>
                 <div class="w3-section">
@@ -23,6 +21,7 @@
                     <asp:FileUpload ID="fuCoverPhoto" runat="server" accept=".png,.jpg,.jpeg" /><br />
                     <asp:Label ID="lblPhotoMsg" runat="server" />
                     <asp:Image ID="imgCover" runat="server" CssClass="cover-photo" />
+                    <asp:HiddenField ID="hdnImgData" runat="server" />
                 </div>
                 <div class="w3-section">
                     <label>Title</label>
@@ -94,6 +93,7 @@
                     reader.onload = function (e) {
                         // 將讀取的圖片數據設置為 <img> 的 src
                         $("#MainContent_imgCover").attr("src", e.target.result);
+                        $("#<%= hdnImgData.ClientID %>").val(e.target.result.split(',')[1])
                     };
                     // 讀取選擇的文件
                     reader.readAsDataURL(fileInput.files[0]);
@@ -101,14 +101,17 @@
             });
 
             const element = {
-                development: $("#<%= rdlDevelopment.ClientID %>"),
+                noteId: new URLSearchParams(window.location.search).get('id'),
+                category: $("#<%= rdlCategory.ClientID %>"),
                 pic: $('#<%= fuCoverPhoto.ClientID %>'),
                 title: $('#<%= txtTitle.ClientID %>'),
                 keyword: $('#<%= txtKeyword.ClientID %>'),
                 content: contentEditor,
+                preImg: $('#<%= imgCover.ClientID %>'),
+                hdnImg: $('#<%= hdnImgData.ClientID %>'),
             }
 
-            autoSaveDraft(element);
+            draft(element);
         });
     </script>
 </asp:Content>
