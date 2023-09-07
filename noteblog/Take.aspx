@@ -4,9 +4,6 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="Shared/Take.css" rel="stylesheet" />
     <main>
-        <!-- Overlay effect when opening sidebar on small screens -->
-        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor: pointer" title="close side menu" id="myOverlay"></div>
-
         <div class="w3-main" style="margin-left: 300px">
             <div class="w3-container w3-padding-large w3-grey">
                 <h4 id="contact"><b>New Post</b></h4>

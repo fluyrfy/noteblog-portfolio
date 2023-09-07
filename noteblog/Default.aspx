@@ -1,13 +1,13 @@
 ﻿<%@ Page Title="F.L." Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="noteblog._Default" %>
 
-<%@ OutputCache Duration="300" VaryByParam="none" VaryByCustom="isRecacheRequired" %>
+<%--<%@ OutputCache Duration="300" VaryByParam="none" VaryByCustom="isRecacheRequired" %>--%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="Shared/Default.css" rel="stylesheet" />
 
     <main>
         <!-- Overlay effect when opening sidebar on small screens -->
-        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor: pointer" title="close side menu" id="myOverlay"></div>
+ 
 
         <!-- !PAGE CONTENT! -->
         <div class="w3-main" style="margin-left: 300px">
@@ -20,16 +20,19 @@
                         </h1>
                         <div class="w3-section w3-bottombar w3-padding-16" id="filter">
                             <span class="w3-margin-right">Filter:</span>
-                            <asp:LinkButton ID="btnAll" runat="server" OnCommand="btnFilter_Command" CommandArgument="NotesAll" type="button" Text="ALL" CssClass="w3-button w3-white w3-black"></asp:LinkButton>
-                            <asp:LinkButton ID="btnFrontEnd" OnCommand="btnFilter_Command" runat="server" CommandArgument="NotesFront" CssClass="w3-button w3-white"><i class="fa fa-code w3-margin-right" type="button"></i>Front-End</asp:LinkButton>
-                            <asp:LinkButton ID="btnBackEnd" OnCommand="btnFilter_Command" CommandArgument="NotesBack" runat="server" CssClass="w3-button w3-white"><i class="fa fa-database w3-margin-right" type="button"></i>Back-End</asp:LinkButton>
-                            <asp:LinkButton ID="btnDataAnalysis" OnCommand="btnFilter_Command" CommandArgument="DA" runat="server" CssClass="w3-button w3-white"><i class="fa fa-laptop w3-margin-right" type="button"></i>Data analysis</asp:LinkButton>
+                            <asp:Repeater runat="server" ID="repCategory" OnItemCreated="repCategory_ItemCreated">
+                                <ItemTemplate>
+                                    <asp:LinkButton runat="server" OnCommand="btnFilter_Command" CommandArgument='<%# Eval("name") %>' type="button" Text='<%# Eval("name") %>' CssClass="w3-button w3-white"></asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:Repeater>
                         </div>
                     </div>
                     <div class="w3-row-padding">
-                        <asp:Repeater ID="repNote" runat="server" Visible="true">
+                        <asp:Repeater ID="repNote" runat="server" Visible="true" OnItemDataBound="repNote_ItemDataBound">
                             <ItemTemplate>
                                 <div class="w3-third w3-container w3-margin-bottom rep-item" onclick="redirectPage(<%# Eval("id") %>)">
+                                    <%--<div class="skeleton">
+                                    </div>--%>
                                     <asp:LinkButton runat="server" ID="lnkNote" CommandName="ReadNote" CommandArgument='<%# Eval("id") %>' />
                                     <img src="data:image/png;base64,<%# System.Convert.ToBase64String((byte[])Eval("pic"))%>" class="w3-hover-opacity cover-photo">
                                     <div class="w3-container w3-white">
@@ -42,6 +45,7 @@
                                             <asp:Literal ID="litContent" Text='<%# Eval("content").ToString() %>' runat="server" />
                                         </p>
                                     </div>
+
                                 </div>
                             </ItemTemplate>
                         </asp:Repeater>
@@ -121,24 +125,6 @@
         </div>
 
         <script>
-            $(document).ready(function () {
-                $("#filter a").on('click', function () {
-                    $(".filter a").removeClass("w3-black");
-                    $(this).addClass("w3-black");
-                })
-            })
-
-            // Script to open and close sidebar
-            function w3_open() {
-                document.getElementById("mySidebar").style.display = "block";
-                document.getElementById("myOverlay").style.display = "block";
-            }
-
-            function w3_close() {
-                document.getElementById("mySidebar").style.display = "none";
-                document.getElementById("myOverlay").style.display = "none";
-            }
-
             function redirectPage(noteId) {
                 console.log(noteId)
                 window.location.href = 'Note.aspx?id=' + encodeURIComponent(noteId);

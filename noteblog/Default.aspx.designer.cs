@@ -24,40 +24,13 @@ namespace noteblog
         protected global::System.Web.UI.UpdatePanel updatePanel1;
 
         /// <summary>
-        /// btnAll 控制項。
+        /// repCategory 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnAll;
-
-        /// <summary>
-        /// btnFrontEnd 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnFrontEnd;
-
-        /// <summary>
-        /// btnBackEnd 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnBackEnd;
-
-        /// <summary>
-        /// btnDataAnalysis 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnDataAnalysis;
+        protected global::System.Web.UI.WebControls.Repeater repCategory;
 
         /// <summary>
         /// repNote 控制項。

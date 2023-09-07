@@ -7,7 +7,9 @@ using System.Text.RegularExpressions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
+using noteblog.Models;
 using noteblog.Utils;
+using System.Linq;
 
 
 namespace noteblog
@@ -22,7 +24,8 @@ namespace noteblog
             if (!IsPostBack)
             {
                 ViewState["CurrentPage"] = Session["CurrentPage"] == null ? 1 : Convert.ToInt32(Session["CurrentPage"]);
-                ViewState["Development"] = Session["Development"] == null ? "NotesAll" : Session["Development"].ToString();
+                ViewState["Category"] = Session["Category"] == null ? "ALL" : Session["Category"].ToString();
+                bindCategoriesData(new CategoryRepository().getAll());
                 queryNotesData();
             }
         }
@@ -32,12 +35,45 @@ namespace noteblog
             repNote.DataSource = notes;
             repNote.DataBind();
         }
+
+        protected void bindCategoriesData(List<Category> categories)
+        {
+            repCategory.DataSource = categories;
+            repCategory.DataBind();
+        }
+
+        protected void repCategory_ItemCreated(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                List<Category> categories = new CategoryRepository().getAll();
+                foreach (Control c in e.Item.Controls)
+                {
+                    if (c is LinkButton)
+                    {
+                        LinkButton lb = (LinkButton)c;
+                        lb.ID = $"btn{categories[e.Item.ItemIndex].name}";
+                        lb.ClientIDMode = ClientIDMode.Static;
+                    }
+                }
+            }
+        }
+        protected void repNote_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                //ScriptManager.RegisterStartupScript(updatePanel1, updatePanel1.GetType(), "RemoveSkeleton", "removeSkeleton();", true);
+            }
+        }
+
+
         protected void queryNotesData()
         {
             try
             {
-                string cacheKey = ViewState["Development"].ToString();
-                if (Cache[cacheKey] == null)
+                string cacheKey = ViewState["Category"].ToString();
+                int currentPage = Convert.ToInt32(ViewState["CurrentPage"]);
+                if (Cache[$"{cacheKey}-{currentPage}"] == null)
                 {
                     logger.Info("Starting to query notes");
                     //SqlConnection conn = new SqlConnection("data source=localhost; database=noteblog; integrated security=SSPI");
@@ -46,16 +82,19 @@ namespace noteblog
                         MySqlCommand cmd = new MySqlCommand();
                         cmd.Connection = conn;
                         StringBuilder sb = new StringBuilder();
-                        sb.AppendLine("SELECT * FROM notes WHERE 1 = 1");
+                        sb.AppendLine("SELECT notes.*, categories.name as category_name FROM notes INNER JOIN categories ON notes.category_id = categories.id WHERE 1 = 1");
+                        if (cacheKey != "ALL")
+                        {
+                            sb.AppendLine("AND categories.name = @categoryName");
+                            cmd.Parameters.AddWithValue("@categoryName", cacheKey);
+                        }
                         sb.AppendLine("ORDER BY updated_at DESC");
-                        //sb.AppendLine("LIMIT @startIndex, @pageSize");
-                        //cmd.Parameters.AddWithValue("@startIndex", (pageIndex - 1) * 6);
-                        //cmd.Parameters.AddWithValue("@pageSize", 6);
+                        sb.AppendLine("LIMIT 6 OFFSET @offset");
                         cmd.CommandText = sb.ToString();
+                        cmd.Parameters.AddWithValue("@offset", (currentPage - 1) * 6);
                         conn.Open();
                         MySqlDataReader reader = cmd.ExecuteReader();
                         DataTable dt = new DataTable();
-                        DataTable filteredTable = new DataTable();
                         dt.Load(reader);
                         foreach (DataRow row in dt.Rows)
                         {
@@ -63,37 +102,7 @@ namespace noteblog
                             string strippedContent = StripHtmlTags(content);
                             row["content"] = strippedContent;
                         }
-                        string dev = ViewState["Development"].ToString();
-                        if (dev == "NotesAll")
-                        {
-                            filteredTable = dt;
-                            Cache["NotesAll"] = dt;
-                        }
-                        else
-                        {
-                            DataRow[] resultRows;
-                            if (dev == "NotesFront")
-                            {
-                                resultRows = dt.Select("development = 'F'");
-                                filteredTable = dt.Clone();
-                                foreach (DataRow row in resultRows)
-                                {
-                                    filteredTable.ImportRow(row);
-                                }
-                                Cache["NotesFront"] = filteredTable;
-                            }
-                            else if (dev == "NotesBack")
-                            {
-                                resultRows = dt.Select("development = 'B'");
-                                filteredTable = dt.Clone();
-                                foreach (DataRow row in resultRows)
-                                {
-                                    filteredTable.ImportRow(row);
-                                }
-                                Cache["NotesBack"] = filteredTable;
-                            }
-
-                        }
+                        Cache[$"{cacheKey}-{currentPage}"] = dt;
                     }
                     logger.Info("Notes queried successfully");
                     getPagedDataTableFromCache();
@@ -116,26 +125,27 @@ namespace noteblog
 
         protected void getPagedDataTableFromCache()
         {
+            var CR = new CategoryRepository();
+            var NR = new NoteRepository();
             logger.Info("Starting to load notes");
             try
             {
-                string cacheKey = ViewState["Development"].ToString();
-                Session["Development"] = cacheKey;
+                string cacheKey = ViewState["Category"].ToString();
+                int currentPage = Convert.ToInt32(ViewState["CurrentPage"]);
+                Session["Category"] = cacheKey;
                 int pageNumber = Convert.ToInt32(ViewState["CurrentPage"]) > 0 ? Convert.ToInt32(ViewState["CurrentPage"]) : 1;
-                logger.Debug($"Current development: {cacheKey}");
-                int pageSize = 6;
-                if (Cache[cacheKey] is DataTable dt)
+                logger.Debug($"Current Category: {cacheKey}");
+                if (Cache[$"{cacheKey}-{currentPage}"] is DataTable dt)
                 {
-                    int totalRecords = dt.Rows.Count;
+
+                    int totalRecords = NR.getTotalCount(CR.getId(cacheKey));
                     int totalPages;
                     totalPages = (int)Math.Ceiling((double)totalRecords / 6);
                     pageNumber = Math.Min(pageNumber, totalPages);
-                    pnlPagination.Visible = totalRecords == 0 ? false : true;
                     if (totalRecords == 0)
                     {
-                        totalPages = 0;
-                        pageNumber = 0;
-                        pageSize = 0;
+                        totalPages = 1;
+                        pageNumber = 1;
                         pnlPagination.Visible = false;
                     }
                     logger.Debug($"Current page number: {pageNumber}");
@@ -161,23 +171,8 @@ namespace noteblog
                     toggleFilterCss();
 
                     ViewState["TotalPages"] = totalPages;
-                    int startIndex = (pageNumber - 1) * pageSize;
-                    int endIndex = Math.Min(startIndex + pageSize - 1, dt.Rows.Count - 1);
-                    startIndex = startIndex < 0 ? 0 : startIndex;
-                    endIndex = endIndex < 0 ? 0 : endIndex;
-
-                    DataTable currentPageData = dt.Clone();
-
-                    if (dt.Rows.Count > 0)
-                    {
-                        for (int i = startIndex; i <= endIndex; i++)
-                        {
-                            currentPageData.ImportRow(dt.Rows[i]);
-                        }
-                    }
-                    bindNotesData(currentPageData);
-                    logger.Info($"Notes queried successfully, Datatable: {currentPageData}");
-
+                    bindNotesData(Cache[$"{cacheKey}-{currentPage}"] as DataTable);
+                    logger.Info($"Notes queried successfully, Datatable: {Cache[$"{cacheKey}-{currentPage}"] as DataTable}");
                 }
             }
             catch (Exception ex)
@@ -191,23 +186,6 @@ namespace noteblog
             }
         }
 
-        //protected void btnAll_Click(object sender, EventArgs e)
-        //{
-        //    ViewState["Development"] = "NotesAll";
-        //    queryNotesData();
-        //}
-
-        //protected void btnFront_Click(object sender, EventArgs e)
-        //{
-        //    ViewState["Development"] = "NotesFront";
-        //    queryNotesData();
-        //}
-
-        //protected void btnBack_Click(object sender, EventArgs e)
-        //{
-        //    ViewState["Development"] = "NotesBack";
-        //    queryNotesData();
-        //}
         protected void btnPage_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -292,58 +270,49 @@ namespace noteblog
 
         protected void btnFilter_Command(object sender, CommandEventArgs e)
         {
-            ViewState["Development"] = e.CommandArgument.ToString();
-            isRecacheRequired(e.CommandArgument as string);
+            ViewState["Category"] = e.CommandArgument.ToString();
             queryNotesData();
         }
         protected void toggleFilterCss()
         {
-            string active = "w3-button w3-black";
-            string inactive = "w3-button w3-white";
-            btnAll.CssClass = inactive;
-            btnFrontEnd.CssClass = inactive;
-            btnBackEnd.CssClass = inactive;
-            if (Session["Development"] != null)
+            Repeater repeater = this.Master.FindControl("MainContent").FindControl("repCategory") as Repeater;
+            var activeCategory = ViewState["Category"]?.ToString();
+            string active = " w3-black";
+            if (repeater != null && !string.IsNullOrEmpty(activeCategory))
             {
-                switch (Session["Development"].ToString())
+                foreach (RepeaterItem item in repeater.Items)
                 {
-                    case "NotesAll":
-                        btnAll.CssClass = active;
-                        break;
-                    case "NotesFront":
-                        btnFrontEnd.CssClass = active; break;
-                    case "NotesBack":
-                        btnBackEnd.CssClass = active; break;
-                    default:
-                        break;
+                    if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                    {
+                        foreach (Control control in item.Controls)
+                        {
+                            if (control is LinkButton)
+                            {
+                                LinkButton linkButton = (LinkButton)control;
+                                linkButton.CssClass = linkButton.CssClass.Replace(active, "");
+                                if (linkButton.ID == $"btn{activeCategory}")
+                                {
+                                    linkButton.CssClass += active;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        //protected void lnkNote_Command(object sender, CommandEventArgs e)
+        //public bool isRecacheRequired(string param)
         //{
-        //    if (e.CommandName == "ReadNote")
+        //    // 判斷是否要重新緩存輸出
+        //    bool isRecacheRequired = false;
+        //    // 檢查其他按鈕的狀態
+        //    if (Session["Category"] as string != param || Cache["param"] == null)
         //    {
-        //        string noteId = e.CommandArgument.ToString();
-        //        Response.Write(noteId);
-        //        //Response.Redirect("Note.aspx?id=" + Server.UrlEncode(noteId));
+        //        isRecacheRequired = true;
         //    }
+
+        //    return isRecacheRequired;
         //}
-
-        public bool isRecacheRequired(string param)
-        {
-            // 判斷是否要重新緩存輸出
-            // 例如，檢查三個獨立的 asp:linkbutton 的狀態
-
-            bool isRecacheRequired = false;
-            // 檢查其他按鈕的狀態
-            if (Session["Development"] as string != param || Cache["param"] == null)
-            {
-                isRecacheRequired = true;
-            }
-
-            return isRecacheRequired;
-        }
 
     }
 }

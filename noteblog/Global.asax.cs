@@ -23,7 +23,6 @@ namespace noteblog
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<NoteDBContext>());
 
             // map path
             string logPath = Server.MapPath("~/Logs");

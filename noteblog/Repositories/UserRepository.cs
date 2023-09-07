@@ -1,28 +1,37 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using System.Text;
 using Dapper;
+using Dapper.FluentMap;
 using noteblog.Models;
+using noteblog.Models.Mappings;
 
-public class NoteRepository
+public class UserRepository
 {
     private readonly IDbConnection _dbConnection;
 
-    public NoteRepository()
+    public UserRepository()
     {
         _dbConnection = DatabaseHelper.GetConnection();
+        FluentMapper.EntityMaps.Clear();
+        FluentMapper.Initialize(config =>
+        {
+            config.AddMap(new UserMap());
+        });
     }
 
-    public bool isNoteExist(int userId, int noteId)
-    {
-        string query = "SELECT COUNT(*) FROM notes WHERE user_id = @userId AND note_id = @noteId";
-        int count = _dbConnection.ExecuteScalar<int>(query, new { userId, noteId });
-        return count > 0;
-    }
+    //public bool isUserExist(int userId, int noteId)
+    //{
+    //    string query = "SELECT COUNT(*) FROM notes WHERE user_id = @userId AND note_id = @noteId";
+    //    int count = _dbConnection.ExecuteScalar<int>(query, new { userId, noteId });
+    //    return count > 0;
+    //}
 
-    public Draft get(int userId, int noteId)
+    public List<User> getAll()
     {
-        string query = "SELECT * FROM drafts WHERE user_id = @userId AND note_id = @noteId";
-        return _dbConnection.QueryFirstOrDefault<Draft>(query, new { userId, noteId });
+        string query = "SELECT * FROM users ORDER BY updated_at DESC";
+        return _dbConnection.Query<User>(query).ToList();
     }
 
     public int getTotalCount(int categoryId)

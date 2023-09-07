@@ -589,10 +589,13 @@
       <DependentUpon>ModalDialogControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Mappings\UserMap.cs" />
     <Compile Include="Models\Mappings\DraftMap.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Draft.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\NoteRepository.cs" />
     <Compile Include="Repositories\DraftRepository.cs" />
     <Compile Include="Utils\AuthenticationHelper.cs" />

@@ -17,6 +17,11 @@ public class CategoryRepository
     public List<Category> getAll()
     {
         var categories = _dbConnection.Query<Category>("SELECT * FROM categories").ToList();
-        return categories;        
+        return categories;
+    }
+
+    public int getId(string name)
+    {
+        return _dbConnection.QuerySingle<int>("SELECT id FROM categories WHERE name = @name", new { name });
     }
 }

@@ -314,20 +314,39 @@ namespace noteblog
             queryNotesData();
         }
 
-        protected void btnSearch_Click(object sender, EventArgs e)
+        protected void lbtnView_Command(object sender, CommandEventArgs e)
         {
-            string encodedInput = hdnSearch.Value; // 獲取編碼後的值
-            string userInput = HttpUtility.UrlDecode(Encoding.UTF8.GetString(Convert.FromBase64String(encodedInput))); // 解碼處理
-            if (!string.IsNullOrEmpty(userInput))
+            mvMainContent.ActiveViewIndex = Convert.ToInt32(e.CommandArgument);
+            hidActiveView.Value = e.CommandArgument.ToString();
+        }
+
+        protected void btnSearch_Command(object sender, CommandEventArgs e)
+        {
+            if (e.CommandArgument.ToString() == "user")
             {
-                ViewState["Word"] = HttpUtility.HtmlEncode(userInput);
+
             }
             else
             {
-                ViewState["Word"] = null;
+                string encodedInput = hdnSearch.Value; // 獲取編碼後的值
+                string userInput = HttpUtility.UrlDecode(Encoding.UTF8.GetString(Convert.FromBase64String(encodedInput))); // 解碼處理
+                if (!string.IsNullOrEmpty(userInput))
+                {
+                    ViewState["Word"] = HttpUtility.HtmlEncode(userInput);
+                }
+                else
+                {
+                    ViewState["Word"] = null;
+                }
+                queryNotesData();
+                hdnSearch.Value = "";
             }
-            queryNotesData();
-            hdnSearch.Value = "";
+        }
+
+        protected void vManageUsers_Activate(object sender, EventArgs e)
+        {
+            repUsers.DataSource = new UserRepository().getAll();
+            repUsers.DataBind();
         }
 
         protected void paginationActiveStyle()
@@ -349,6 +368,8 @@ namespace noteblog
                 }
             }
         }
+
+        protected void btnEditUser_Click(object sender, EventArgs e) { }
 
         private void updateMultiDeleteButtonClass()
         {
