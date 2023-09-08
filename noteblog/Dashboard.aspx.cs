@@ -7,9 +7,11 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 using JiebaNet.Segmenter;
 using MySql.Data.MySqlClient;
 using noteblog.Utils;
+using Spectre.Console;
 
 namespace noteblog
 {
@@ -45,6 +47,15 @@ namespace noteblog
                     {
                         string name = AuthenticationHelper.GetUserData()["name"].ToString();
                         lblUser.Text = name;
+                        byte[] avatar = new UserRepository().get(AuthenticationHelper.GetUserId()).avatar;
+                        if (avatar.Length == 0)
+                        {
+                            imgAvatar.ImageUrl = "~/Images/logo/logo-icononly.png";
+                        }
+                        else
+                        {
+                            imgAvatar.ImageUrl = $"data:image/png;base64,{Convert.ToBase64String(avatar)}";
+                        }
                     }
                 }
             }
@@ -345,8 +356,24 @@ namespace noteblog
 
         protected void vManageUsers_Activate(object sender, EventArgs e)
         {
+            bindUserRepeater();
+        }
+
+        protected void vManageCategories_Activate(object sender, EventArgs e)
+        {
+            bindCategoryRepeater();
+        }
+
+        protected void bindUserRepeater()
+        {
             repUsers.DataSource = new UserRepository().getAll();
             repUsers.DataBind();
+        }
+
+        protected void bindCategoryRepeater()
+        {
+            repCategories.DataSource = new CategoryRepository().getAll();
+            repCategories.DataBind();
         }
 
         protected void paginationActiveStyle()
@@ -369,7 +396,117 @@ namespace noteblog
             }
         }
 
-        protected void btnEditUser_Click(object sender, EventArgs e) { }
+        protected void btnManageUser_Command(object sender, CommandEventArgs e)
+        {
+            string method = e.CommandArgument.ToString();
+            int id = Convert.ToInt32(hidUserId.Value);
+            switch (method)
+            {
+                case "delete":
+                    try
+                    {
+                        log.Info("Starting to delete user");
+                        log.Debug($"Delete user id: {id}");
+                        new UserRepository().delete(id);
+                        log.Info("User deleted successfully");
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("Failed to delete user", ex);
+                    }
+                    finally
+                    {
+                        log.Info("End of user deletion method");
+                    }
+                    break;
+                case "update":
+                    try
+                    {
+                        log.Info("Starting to update user");
+                        string name = Request.Form["editUserName"];
+                        string role = Request.Form["editUserRole"];
+                        byte[] avatar = ConverterHelper.ConvertFileToBytes(Request.Files["editUserAvatar"].InputStream);
+                        log.Debug($"Update user id: {id}, name: {name}, role: {role}, avatar: {avatar.Length}");
+                        new UserRepository().update(name, avatar, role, id);
+                        log.Info("User updated successfully");
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("Failed to update user data", ex);
+                    }
+                    finally
+                    {
+                        log.Info("End of user data update method");
+                    }
+                    break;
+            }
+            bindUserRepeater();
+        }
+
+        protected void btnManageCategory_Command(object sender, CommandEventArgs e)
+        {
+            string method = e.CommandArgument.ToString();
+            int id = Convert.ToInt32(hidCategoryId.Value);
+            switch (method)
+            {
+                case "delete":
+                    try
+                    {
+                        log.Info("Starting to delete category");
+                        log.Debug($"Delete category id: {id}");
+                        new CategoryRepository().delete(id);
+                        log.Info("Category deleted successfully");
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("Failed to delete category", ex);
+                    }
+                    finally
+                    {
+                        log.Info("End of category delete method");
+                    }
+                    break;
+                case "update":
+                    try
+                    {
+                        log.Info("Starting to update category");
+                        string name = Request.Form["editCategoryName"];
+                        string description = Request.Form["editCategoryDescription"];
+                        log.Debug($"Update category name: {name}, description: {description}");
+                        new CategoryRepository().update(id, name, description);
+                        log.Info("Category updated successfully");
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("Failed to update category", ex);
+                    }
+                    finally
+                    {
+                        log.Info("End of category update method");
+                    }
+                    break;
+                case "insert":
+                    try
+                    {
+                        log.Info("Starting to insert category");
+                        string name = Request.Form["insertCategoryName"];
+                        string description = Request.Form["insertCategoryDescription"];
+                        log.Debug($"Insert category name: {name}, description: {description}");
+                        new CategoryRepository().insert(name, description);
+                        log.Info("Category inserted successfully");
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("Failed to insert category", ex);
+                    }
+                    finally
+                    {
+                        log.Info("End of category insert method");
+                    }
+                    break;
+            }
+            bindCategoryRepeater();
+        }
 
         private void updateMultiDeleteButtonClass()
         {

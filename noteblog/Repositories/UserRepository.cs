@@ -52,6 +52,11 @@ public class UserRepository
         return result;
     }
 
+    public User get(int id)
+    {
+        return _dbConnection.QueryFirst<User>("SELECT * FROM users WHERE id = @id", new { id });
+    }
+
 
     public bool insert(Draft draft)
     {
@@ -60,15 +65,26 @@ public class UserRepository
         return rowsAffected == 1;
     }
 
-    public bool update(Draft draft)
+    public bool update(string name, byte[] avatar, string role, int id)
     {
-        string query = "UPDATE drafts SET title = @title, content = @content, keyword = @keyword, pic = @pic, development = @development WHERE id = @id";
-        return _dbConnection.Execute(query, draft) == 1;
+        string query;
+        if (avatar != null && avatar.Length > 0)
+        {
+            var parameters = new { name, avatar, role, id };
+            query = "UPDATE users SET name = @name, avatar = @avatar, role = @role WHERE id = @id";
+            return _dbConnection.Execute(query, parameters) == 1;
+        }
+        else
+        {
+            var parameters = new { name, role, id };
+            query = "UPDATE users SET name = @name, role = @role WHERE id = @id";
+            return _dbConnection.Execute(query, parameters) == 1;
+        }
     }
 
-    public int delete(int id)
+    public bool delete(int id)
     {
-        string query = "DELETE FROM drafts WHERE id = @id";
-        return _dbConnection.Execute(query, new { id = id });
+        string query = "DELETE FROM users WHERE id = @id";
+        return _dbConnection.Execute(query, new { id }) >= 0;
     }
 }

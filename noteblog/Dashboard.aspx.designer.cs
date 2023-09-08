@@ -24,6 +24,15 @@ namespace noteblog
         protected global::System.Web.UI.WebControls.HiddenField hidActiveView;
 
         /// <summary>
+        /// imgAvatar 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgAvatar;
+
+        /// <summary>
         /// lblUser 控制項。
         /// </summary>
         /// <remarks>
@@ -177,6 +186,15 @@ namespace noteblog
         protected global::System.Web.UI.WebControls.View vManageUsers;
 
         /// <summary>
+        /// hidUserId 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hidUserId;
+
+        /// <summary>
         /// txtSearchUser 控制項。
         /// </summary>
         /// <remarks>
@@ -211,5 +229,41 @@ namespace noteblog
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater repUsers;
+
+        /// <summary>
+        /// btnUserDelete 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUserDelete;
+
+        /// <summary>
+        /// vManageCategories 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View vManageCategories;
+
+        /// <summary>
+        /// hidCategoryId 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hidCategoryId;
+
+        /// <summary>
+        /// repCategories 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater repCategories;
     }
 }

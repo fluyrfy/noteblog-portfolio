@@ -15,9 +15,11 @@
     <script src="Scripts/jquery-3.6.0.min.js"></script>
     <script src="Scripts/popper.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
+    <%--validate--%>
+    <%--<script src="https://unpkg.com/validator@latest/validator.min.js"></script>--%>
 </head>
 <body id="mainBody" runat="server">
-    <form runat="server" id="form">
+    <form runat="server" id="form" enctype="multipart/form-data">
         <asp:ScriptManager runat="server">
             <Scripts>
             </Scripts>

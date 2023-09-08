@@ -23,7 +23,7 @@
             <div class="sidebar-header">
                 <asp:HyperLink NavigateUrl="/" runat="server">
                     <h3>
-                        <img src="Images/logo/logo.svg" class="img-fluid" /><asp:Label ID="lblUser" runat="server" /></h3>
+                        <asp:Image runat="server" CssClass="img-fluid rounded-circle" ID="imgAvatar" /><asp:Label ID="lblUser" runat="server" /></h3>
                 </asp:HyperLink>
             </div>
 
@@ -33,6 +33,9 @@
                 </li>
                 <li class="sidebar-item">
                     <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="1" class="dashboard" ID="lbtnManageUsers"><i class="material-icons">manage_accounts</i>users</asp:LinkButton>
+                </li>
+                <li class="sidebar-item">
+                    <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="2" class="dashboard"><i class="material-icons">category</i>categories</asp:LinkButton>
                 </li>
                 <%--                        <li class="dropdown">
                             <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false"
@@ -211,6 +214,7 @@
 
             <!------main-content-start----------->
             <asp:MultiView ActiveViewIndex="0" runat="server" ID="mvMainContent">
+                <%--manage notes--%>
                 <asp:View runat="server">
                     <div class="main-content">
                         <div class="col-md-5 col-lg-3 order-3 order-md-2 mx-auto">
@@ -295,6 +299,8 @@
                                             </asp:Repeater>
                                         </tbody>
                                     </table>
+
+                                    <%--pagination--%>
                                     <div class="clearfix">
                                         <div class="hint-text">
                                             showing <b>
@@ -317,85 +323,8 @@
                                 </div>
                             </div>
 
-                            <!----add-modal start--------->
-                            <%--<div class="modal fade" tabindex="-1" id="addEmployeeModal" role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Add Notes</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label>Name</label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Email</label>
-                                        <input type="emil" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Address</label>
-                                        <textarea class="form-control" required></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Phone</label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-success">Add</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>--%>
-
-                            <!----edit-modal end--------->
-
-                            <!----edit-modal start--------->
-                            <%--<div class="modal fade" tabindex="-1" id="editEmployeeModal" role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Edit Notes</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label>Name</label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Email</label>
-                                        <input type="email" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Address</label>
-                                        <textarea class="form-control" required></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Phone</label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-success">Save</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>--%>
-
-                            <!----edit-modal end--------->
-
                             <!----delete-modal start--------->
                             <div class="modal fade" tabindex="-1" id="deleteNoteModal" role="dialog">
-
                                 <input type="hidden" name="noteId" id="noteId" />
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -417,14 +346,13 @@
                                 </div>
                             </div>
                             <!----delete-modal end--------->
-
                         </div>
                     </div>
                 </asp:View>
 
                 <%--manage users--%>
                 <asp:View ID="vManageUsers" runat="server" OnActivate="vManageUsers_Activate">
-                    <input type="hidden" name="userId" id="userId" />
+                    <asp:HiddenField ID="hidUserId" runat="server" ClientIDMode="Static" Value="-1" />
                     <div class="main-content">
                         <div class="col-md-5 col-lg-3 order-3 order-md-2 mx-auto">
                             <div class="xp-searchbar">
@@ -435,7 +363,6 @@
                                         <asp:Button runat="server" CssClass="btn" ID="btnSearchUser" Text="Go" OnCommand="btnSearch_Command" CommandArgument="user" OnClientClick="convertToBase64()" />
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <div class="row">
@@ -445,16 +372,6 @@
                                         <div class="row">
                                             <div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
                                                 <h2 class="ml-lg-2">Manage  Users</h2>
-                                            </div>
-                                            <div class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
-                                                <asp:HyperLink runat="server" NavigateUrl="Take.aspx" class="btn btn-success">
-                                            <i class="material-icons">&#xE147;</i>
-                                            <span>Add New Users</span>
-                                                </asp:HyperLink>
-                                                <%--                                                <a href="#deleteNoteModal" class="btn btn-danger disabled" data-toggle="modal" onclick="setNoteIds()" id="MultiDeleteUsers" runat="server">
-                                                    <i class="material-icons">&#xE15C;</i>
-                                                    <span>Delete</span>
-                                                </a>--%>
                                             </div>
                                         </div>
                                     </div>
@@ -480,10 +397,10 @@
                                                         <td><%# Eval("isVerified") %></td>
                                                         <td><%# DataBinder.Eval(Container.DataItem, "updatedAt", "{0:yyyy-MM-dd HH:mm:ss}") %></td>
                                                         <td>
-                                                            <a href="#editUserModal" css="edit" data-toggle="modal" onclick="setId(user, <%# Eval("id") %>)">
+                                                            <a href="#editUserModal" class="edit" data-toggle="modal" onclick="setId('User', <%# Eval("id") %>)">
                                                                 <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                                             </a>
-                                                            <a href="#deleteNoteModal" class="delete" data-toggle="modal" onclick="setId(user, <%# Eval("id") %>)">
+                                                            <a href="#deleteUserModal" class="delete" data-toggle="modal" onclick="setId('User', <%# Eval("id") %>)">
                                                                 <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                                             </a>
                                                         </td>
@@ -492,6 +409,65 @@
                                             </asp:Repeater>
                                         </tbody>
                                     </table>
+
+                                    <!----edit-modal--------->
+                                    <div class="modal fade" tabindex="-1" id="editUserModal" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Edit User</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>Name</label>
+                                                        <input type="text" class="form-control" name="editUserName" placeholder="new name" />
+                                                    </div>
+                                                    <%--<div class="form-group">
+                                                        <label>Email</label>
+                                                        <input type="email" class="form-control" disabled placeholder="new email">
+                                                    </div>--%>
+                                                    <div class="form-group">
+                                                        <label>Avatar</label>
+                                                        <input type="file" name="editUserAvatar" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Role</label>
+                                                        <input type="text" class="form-control" name="editUserRole" placeholder="new role">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                    <asp:Button Text="Save" runat="server" CssClass="btn btn-success" OnCommand="btnManageUser_Command" CommandArgument="update" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!----delete-modal--------->
+                                    <div class="modal fade" tabindex="-1" id="deleteUserModal" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Delete User</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete this User</p>
+                                                    <p class="text-warning"><small>this action Cannot be Undone</small></p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                    <asp:Button ID="btnUserDelete" runat="server" CssClass="btn btn-success" Text="Delete" OnCommand="btnManageUser_Command" CommandArgument="delete" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <%--           <div class="clearfix">
                                         <div class="hint-text">
                                             showing <b>
@@ -513,116 +489,165 @@
                                     </div>--%>
                                 </div>
                             </div>
-
-                            <!----add-modal start--------->
-                            <%--<div class="modal fade" tabindex="-1" id="addEmployeeModal" role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Add Notes</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label>Name</label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Email</label>
-                                        <input type="emil" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Address</label>
-                                        <textarea class="form-control" required></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Phone</label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-success">Add</button>
-                                </div>
-                            </div>
                         </div>
-                    </div>--%>
+                    </div>
+                </asp:View>
 
-                            <!----edit-modal end--------->
-
-                            <!----edit-modal start--------->
-                            <div class="modal fade" tabindex="-1" id="editUserModal" role="dialog">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Edit User</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label>Name</label>
-                                                <input type="text" class="form-control">
+                <%--manage categories--%>
+                <asp:View ID="vManageCategories" runat="server" OnActivate="vManageCategories_Activate">
+                    <asp:HiddenField ID="hidCategoryId" runat="server" ClientIDMode="Static" Value="-1" />
+                    <div class="main-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-wrapper">
+                                    <div class="table-title">
+                                        <div class="row">
+                                            <div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
+                                                <h2 class="ml-lg-2">Manage  Categories</h2>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Email</label>
-                                                <input type="email" class="form-control" disabled>
+                                            <div class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
+                                                <a href="#addCategoryModal" class="btn btn-success" data-toggle="modal">
+                                                    <i class="material-icons">&#xE147;</i>
+                                                    <span>Add New Category</span>
+                                                </a>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Avatar</label>
-                                                <input type="file" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Role</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <asp:Button Text="Save" runat="server" type="button" CssClass="btn btn-success" OnClick="btnEditUser_Click" />
                                         </div>
                                     </div>
+
+                                    <table class="table table-striped table-hover text-center">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <asp:Repeater ID="repCategories" runat="server">
+                                                <ItemTemplate>
+                                                    <tr>
+                                                        <td><%# Eval("name") %></td>
+                                                        <td><%# Eval("description") %></td>
+                                                        <td>
+                                                            <a href="#editCategoryModal" class="edit" data-toggle="modal" onclick="setId('Category', <%# Eval("id") %>)">
+                                                                <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                                                            </a>
+                                                            <a href="#deleteCategoryModal" class="delete" data-toggle="modal" onclick="setId('Category', <%# Eval("id") %>)">
+                                                                <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </tbody>
+                                    </table>
+
+                                    <!----add-modal--------->
+                                    <div class="modal fade" tabindex="-1" id="addCategoryModal" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Add Category</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>Name</label>
+                                                        <input name="insertCategoryName" class="form-control" placeholder="new name" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Description</label>
+                                                        <input name="insertCategoryDescription" class="form-control" placeholder="new description" />
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                    <asp:Button runat="server" CssClass="btn btn-success" Text="Add" OnCommand="btnManageCategory_Command" CommandArgument="insert" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!----edit-modal--------->
+                                    <div class="modal fade" tabindex="-1" id="editCategoryModal" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Edit Category</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>Name</label>
+                                                        <input type="text" class="form-control" name="editCategoryName" placeholder="new name" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Description</label>
+                                                        <input type="text" class="form-control" name="editCategoryDescription" placeholder="new description">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                    <asp:Button Text="Save" runat="server" type="button" CssClass="btn btn-success" OnCommand="btnManageCategory_Command" CommandArgument="update" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!----delete-modal--------->
+                                    <div class="modal fade" tabindex="-1" id="deleteCategoryModal" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Delete Category</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete this Category</p>
+                                                    <p class="text-warning"><small>this action Cannot be Undone</small></p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                    <asp:Button runat="server" CssClass="btn btn-success" Text="Delete" OnCommand="btnManageCategory_Command" CommandArgument="delete" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <%--pagination--%>
+                                    <%--<div class="clearfix">
+                                        <div class="hint-text">
+                                            showing <b>
+                                                <asp:Literal ID="litPageSize" runat="server" /></b> out of <b>
+                                                    <asp:Literal ID="litDataCount" runat="server" /></b>
+                                        </div>
+                                        <ul class="pagination">
+                                            <li class="page-item">
+                                                <asp:LinkButton runat="server" Text="Previous" CssClass="page-link btn disabled" OnCommand="btnPreNext_Command" CommandName="Previous" ID="btnPrevious" /></li>
+                                            <asp:Repeater runat="server" ID="repPage">
+                                                <ItemTemplate>
+                                                    <li class="page-item">
+                                                        <asp:LinkButton runat="server" CssClass="page-link active" Text='<%# Container.DataItem %>' OnClick="btnPage_Click" CommandArgument='<%# Container.DataItem %>' ID="btnPage" /></li>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                            <li class="page-item">
+                                                <asp:LinkButton runat="server" Text="Next" CssClass="page-link btn" OnCommand="btnPreNext_Command" CommandName="Next" ID="btnNext" /></li>
+                                        </ul>
+                                    </div>--%>
                                 </div>
                             </div>
-
-                            <!----edit-modal end--------->
-
-                            <!----delete-modal start--------->
-                            <%--    <div class="modal fade" tabindex="-1" id="deleteUserModal" role="dialog">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Delete Notes</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Are you sure you want to delete this Records</p>
-                                            <p class="text-warning"><small>this action Cannot be Undone</small></p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <asp:Button ID="btnNoteDelete" runat="server" CssClass="btn btn-success" Text="Delete" OnClick="btnNoteDelete_Click" UseSubmitBehavior="false" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>--%>
-                            <!----delete-modal end--------->
-
                         </div>
                     </div>
                 </asp:View>
             </asp:MultiView>
 
-            <!------main-content-end----------->
-
-            <!----footer-design------------->
-
-            <%--            <footer class="footer">
+            <%--<footer class="footer">
                 <div class="container-fluid">
                     <div class="footer-in">
                         <p class="mb-0">&copy 2021 Vishweb Design . All Rights Reserved.</p>
@@ -632,11 +657,9 @@
         </div>
     </div>
 
-
-
     <script type="text/javascript">
         function setId(type, id) {
-            document.getElementById(`${type}Id`).value = id;
+            document.getElementById(`hid${type}Id`).value = id;
         }
 
         function setNoteIds(noteIds = 0) {
@@ -681,6 +704,10 @@
             $(this).removeClass("active")
         })
         document.getElementsByClassName("sidebar-item")[$('#<%= hidActiveView.ClientID %>').val()].classList.add("active")
+
+        function getVal() {
+            console.log($("#insertA").val(), $("#insertB").val());
+        }
     </script>
 
 </asp:Content>

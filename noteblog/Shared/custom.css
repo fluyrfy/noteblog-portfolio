@@ -533,7 +533,7 @@ table.table tr th, table.table tr td {
     }
 
     table.table tr th:last-child {
-/*        width: 100px;*/
+        /*        width: 100px;*/
     }
 
 table.table-stripped tbody tr:nth-of-type(odd) {
@@ -569,11 +569,11 @@ table.table td a {
     }
 
 .edit {
-    color: #FFC107;
+    color: #FFC107 !important;
 }
 
 .delete {
-    color: #F44336;
+    color: #F44336 !important;
 }
 
 table.table td i {
