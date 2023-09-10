@@ -65,9 +65,13 @@ public class UserRepository
         return rowsAffected == 1;
     }
 
-    public bool update(string name, byte[] avatar, string role, int id)
+    public bool update(string name, byte[] avatar, int id, string role = "")
     {
         string query;
+        if (role == "")
+        {
+            role = get(id).role;
+        }
         if (avatar != null && avatar.Length > 0)
         {
             var parameters = new { name, avatar, role, id };

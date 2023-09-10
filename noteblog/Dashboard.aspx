@@ -37,106 +37,108 @@
                 <li class="sidebar-item">
                     <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="2" class="dashboard"><i class="material-icons">category</i>categories</asp:LinkButton>
                 </li>
+                <li class="sidebar-item">
+                    <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="3" class="dashboard"><i class="material-icons">badge</i>profile</asp:LinkButton>
+                </li>
+                <li class="sidebar-item">
+                    <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="4" class="dashboard"><i class="material-icons">receipt_long</i>logs</asp:LinkButton>
+                </li>
                 <%--                        <li class="dropdown">
-                            <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false"
-                                class="dropdown-toggle">
-                                <i class="material-icons">aspect_ratio</i>Layouts
-                            </a>
-                            <ul class="collapse list-unstyled menu" id="homeSubmenu1">
-                                <li><a href="#">layout 1</a></li>
-                                <li><a href="#">layout 2</a></li>
-                                <li><a href="#">layout 3</a></li>
-                            </ul>
-                        </li>
+							<a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false"
+								class="dropdown-toggle">
+								<i class="material-icons">aspect_ratio</i>Layouts
+							</a>
+							<ul class="collapse list-unstyled menu" id="homeSubmenu1">
+								<li><a href="#">layout 1</a></li>
+								<li><a href="#">layout 2</a></li>
+								<li><a href="#">layout 3</a></li>
+							</ul>
+						</li>
 
 
-                        <li class="dropdown">
-                            <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false"
-                                class="dropdown-toggle">
-                                <i class="material-icons">apps</i>widgets
-                            </a>
-                            <ul class="collapse list-unstyled menu" id="homeSubmenu2">
-                                <li><a href="#">Apps 1</a></li>
-                                <li><a href="#">Apps 2</a></li>
-                                <li><a href="#">Apps 3</a></li>
-                            </ul>
-                        </li>
+						<li class="dropdown">
+							<a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false"
+								class="dropdown-toggle">
+								<i class="material-icons">apps</i>widgets
+							</a>
+							<ul class="collapse list-unstyled menu" id="homeSubmenu2">
+								<li><a href="#">Apps 1</a></li>
+								<li><a href="#">Apps 2</a></li>
+								<li><a href="#">Apps 3</a></li>
+							</ul>
+						</li>
 
-                        <li class="dropdown">
-                            <a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false"
-                                class="dropdown-toggle">
-                                <i class="material-icons">equalizer</i>charts
-                            </a>
-                            <ul class="collapse list-unstyled menu" id="homeSubmenu3">
-                                <li><a href="#">Pages 1</a></li>
-                                <li><a href="#">Pages 2</a></li>
-                                <li><a href="#">Pages 3</a></li>
-                            </ul>
-                        </li>
-
-
-                        <li class="dropdown">
-                            <a href="#homeSubmenu4" data-toggle="collapse" aria-expanded="false"
-                                class="dropdown-toggle">
-                                <i class="material-icons">extension</i>UI Element
-                            </a>
-                            <ul class="collapse list-unstyled menu" id="homeSubmenu4">
-                                <li><a href="#">Pages 1</a></li>
-                                <li><a href="#">Pages 2</a></li>
-                                <li><a href="#">Pages 3</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a href="#homeSubmenu5" data-toggle="collapse" aria-expanded="false"
-                                class="dropdown-toggle">
-                                <i class="material-icons">border_color</i>forms
-                            </a>
-                            <ul class="collapse list-unstyled menu" id="homeSubmenu5">
-                                <li><a href="#">Pages 1</a></li>
-                                <li><a href="#">Pages 2</a></li>
-                                <li><a href="#">Pages 3</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a href="#homeSubmenu6" data-toggle="collapse" aria-expanded="false"
-                                class="dropdown-toggle">
-                                <i class="material-icons">grid_on</i>tables
-                            </a>
-                            <ul class="collapse list-unstyled menu" id="homeSubmenu6">
-                                <li><a href="#">table 1</a></li>
-                                <li><a href="#">table 2</a></li>
-                                <li><a href="#">table 3</a></li>
-                            </ul>
-                        </li>
+						<li class="dropdown">
+							<a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false"
+								class="dropdown-toggle">
+								<i class="material-icons">equalizer</i>charts
+							</a>
+							<ul class="collapse list-unstyled menu" id="homeSubmenu3">
+								<li><a href="#">Pages 1</a></li>
+								<li><a href="#">Pages 2</a></li>
+								<li><a href="#">Pages 3</a></li>
+							</ul>
+						</li>
 
 
-                        <li class="dropdown">
-                            <a href="#homeSubmenu7" data-toggle="collapse" aria-expanded="false"
-                                class="dropdown-toggle">
-                                <i class="material-icons">content_copy</i>Pages
-                            </a>
-                            <ul class="collapse list-unstyled menu" id="homeSubmenu7">
-                                <li><a href="#">Pages 1</a></li>
-                                <li><a href="#">Pages 2</a></li>
-                                <li><a href="#">Pages 3</a></li>
-                            </ul>
-                        </li>
+						<li class="dropdown">
+							<a href="#homeSubmenu4" data-toggle="collapse" aria-expanded="false"
+								class="dropdown-toggle">
+								<i class="material-icons">extension</i>UI Element
+							</a>
+							<ul class="collapse list-unstyled menu" id="homeSubmenu4">
+								<li><a href="#">Pages 1</a></li>
+								<li><a href="#">Pages 2</a></li>
+								<li><a href="#">Pages 3</a></li>
+							</ul>
+						</li>
+
+						<li class="dropdown">
+							<a href="#homeSubmenu5" data-toggle="collapse" aria-expanded="false"
+								class="dropdown-toggle">
+								<i class="material-icons">border_color</i>forms
+							</a>
+							<ul class="collapse list-unstyled menu" id="homeSubmenu5">
+								<li><a href="#">Pages 1</a></li>
+								<li><a href="#">Pages 2</a></li>
+								<li><a href="#">Pages 3</a></li>
+							</ul>
+						</li>
+
+						<li class="dropdown">
+							<a href="#homeSubmenu6" data-toggle="collapse" aria-expanded="false"
+								class="dropdown-toggle">
+								<i class="material-icons">grid_on</i>tables
+							</a>
+							<ul class="collapse list-unstyled menu" id="homeSubmenu6">
+								<li><a href="#">table 1</a></li>
+								<li><a href="#">table 2</a></li>
+								<li><a href="#">table 3</a></li>
+							</ul>
+						</li>
 
 
-                        <li class="">
-                            <a href="#" class=""><i class="material-icons">date_range</i>copy </a>
-                        </li>
-                        <li class="">
-                            <a href="#" class=""><i class="material-icons">library_books</i>calender </a>
-                        </li>--%>
+						<li class="dropdown">
+							<a href="#homeSubmenu7" data-toggle="collapse" aria-expanded="false"
+								class="dropdown-toggle">
+								<i class="material-icons">content_copy</i>Pages
+							</a>
+							<ul class="collapse list-unstyled menu" id="homeSubmenu7">
+								<li><a href="#">Pages 1</a></li>
+								<li><a href="#">Pages 2</a></li>
+								<li><a href="#">Pages 3</a></li>
+							</ul>
+						</li>
+
+
+						<li class="">
+							<a href="#" class=""><i class="material-icons">date_range</i>copy </a>
+						</li>
+						<li class="">
+							<a href="#" class=""><i class="material-icons">library_books</i>calender </a>
+						</li>--%>
             </ul>
         </div>
-
-        <!-------sidebar--design- close----------->
-
-
 
         <!-------page-content start----------->
 
@@ -191,8 +193,8 @@
                                                 </a></li>
                                                 <li>
                                                     <asp:LinkButton runat="server" OnClick="btnOut_Click">
-                                                        <span class="material-icons">logout</span>
-                                                        Logout
+														<span class="material-icons">logout</span>
+														Logout
                                                     </asp:LinkButton></li>
                                             </ul>
                                         </li>
@@ -203,10 +205,10 @@
                     </div>
 
                     <%--                    <div class="xp-breadcrumbbar text-center">
-                        <h4 class="page-title">Notes</h4>--%>
+						<h4 class="page-title">Notes</h4>--%>
                     <%--                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-curent="page">Notes</li>
-                        </ol>--%>
+							<li class="breadcrumb-item active" aria-curent="page">Notes</li>
+						</ol>--%>
                     <%--</div>--%>
                 </div>
             </div>
@@ -239,8 +241,8 @@
                                             </div>
                                             <div class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
                                                 <asp:HyperLink runat="server" NavigateUrl="Take.aspx" class="btn btn-success">
-                                            <i class="material-icons">&#xE147;</i>
-                                            <span>Add New Notes</span>
+											<i class="material-icons">&#xE147;</i>
+											<span>Add New Notes</span>
                                                 </asp:HyperLink>
                                                 <a href="#deleteNoteModal" class="btn btn-danger disabled" data-toggle="modal" onclick="setNoteIds()" id="MultiDelete" runat="server">
                                                     <i class="material-icons">&#xE15C;</i>
@@ -288,7 +290,7 @@
                                                         <th><%# DataBinder.Eval(Container.DataItem, "updated_at", "{0:yyyy-MM-dd HH:mm:ss}") %></th>
                                                         <th>
                                                             <asp:HyperLink runat="server" NavigateUrl='<%# "Modify.aspx?id=" + Eval("id") %>' CssClass="edit">
-                                                        <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+														<i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                                             </asp:HyperLink>
                                                             <a href="#deleteNoteModal" class="delete" data-toggle="modal" onclick="setNoteIds(<%# Eval("id") %>)">
                                                                 <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
@@ -426,9 +428,9 @@
                                                         <input type="text" class="form-control" name="editUserName" placeholder="new name" />
                                                     </div>
                                                     <%--<div class="form-group">
-                                                        <label>Email</label>
-                                                        <input type="email" class="form-control" disabled placeholder="new email">
-                                                    </div>--%>
+														<label>Email</label>
+														<input type="email" class="form-control" disabled placeholder="new email">
+													</div>--%>
                                                     <div class="form-group">
                                                         <label>Avatar</label>
                                                         <input type="file" name="editUserAvatar" />
@@ -469,24 +471,24 @@
                                     </div>
 
                                     <%--           <div class="clearfix">
-                                        <div class="hint-text">
-                                            showing <b>
-                                                <asp:Literal ID="litPageSize" runat="server" /></b> out of <b>
-                                                    <asp:Literal ID="litDataCount" runat="server" /></b>
-                                        </div>
-                                        <ul class="pagination">
-                                            <li class="page-item">
-                                                <asp:LinkButton runat="server" Text="Previous" CssClass="page-link btn disabled" OnCommand="btnPreNext_Command" CommandName="Previous" ID="btnPrevious" /></li>
-                                            <asp:Repeater runat="server" ID="repPage">
-                                                <ItemTemplate>
-                                                    <li class="page-item">
-                                                        <asp:LinkButton runat="server" CssClass="page-link active" Text='<%# Container.DataItem %>' OnClick="btnPage_Click" CommandArgument='<%# Container.DataItem %>' ID="btnPage" /></li>
-                                                </ItemTemplate>
-                                            </asp:Repeater>
-                                            <li class="page-item">
-                                                <asp:LinkButton runat="server" Text="Next" CssClass="page-link btn" OnCommand="btnPreNext_Command" CommandName="Next" ID="btnNext" /></li>
-                                        </ul>
-                                    </div>--%>
+										<div class="hint-text">
+											showing <b>
+												<asp:Literal ID="litPageSize" runat="server" /></b> out of <b>
+													<asp:Literal ID="litDataCount" runat="server" /></b>
+										</div>
+										<ul class="pagination">
+											<li class="page-item">
+												<asp:LinkButton runat="server" Text="Previous" CssClass="page-link btn disabled" OnCommand="btnPreNext_Command" CommandName="Previous" ID="btnPrevious" /></li>
+											<asp:Repeater runat="server" ID="repPage">
+												<ItemTemplate>
+													<li class="page-item">
+														<asp:LinkButton runat="server" CssClass="page-link active" Text='<%# Container.DataItem %>' OnClick="btnPage_Click" CommandArgument='<%# Container.DataItem %>' ID="btnPage" /></li>
+												</ItemTemplate>
+											</asp:Repeater>
+											<li class="page-item">
+												<asp:LinkButton runat="server" Text="Next" CssClass="page-link btn" OnCommand="btnPreNext_Command" CommandName="Next" ID="btnNext" /></li>
+										</ul>
+									</div>--%>
                                 </div>
                             </div>
                         </div>
@@ -622,38 +624,84 @@
 
                                     <%--pagination--%>
                                     <%--<div class="clearfix">
-                                        <div class="hint-text">
-                                            showing <b>
-                                                <asp:Literal ID="litPageSize" runat="server" /></b> out of <b>
-                                                    <asp:Literal ID="litDataCount" runat="server" /></b>
-                                        </div>
-                                        <ul class="pagination">
-                                            <li class="page-item">
-                                                <asp:LinkButton runat="server" Text="Previous" CssClass="page-link btn disabled" OnCommand="btnPreNext_Command" CommandName="Previous" ID="btnPrevious" /></li>
-                                            <asp:Repeater runat="server" ID="repPage">
-                                                <ItemTemplate>
-                                                    <li class="page-item">
-                                                        <asp:LinkButton runat="server" CssClass="page-link active" Text='<%# Container.DataItem %>' OnClick="btnPage_Click" CommandArgument='<%# Container.DataItem %>' ID="btnPage" /></li>
-                                                </ItemTemplate>
-                                            </asp:Repeater>
-                                            <li class="page-item">
-                                                <asp:LinkButton runat="server" Text="Next" CssClass="page-link btn" OnCommand="btnPreNext_Command" CommandName="Next" ID="btnNext" /></li>
-                                        </ul>
-                                    </div>--%>
+										<div class="hint-text">
+											showing <b>
+												<asp:Literal ID="litPageSize" runat="server" /></b> out of <b>
+													<asp:Literal ID="litDataCount" runat="server" /></b>
+										</div>
+										<ul class="pagination">
+											<li class="page-item">
+												<asp:LinkButton runat="server" Text="Previous" CssClass="page-link btn disabled" OnCommand="btnPreNext_Command" CommandName="Previous" ID="btnPrevious" /></li>
+											<asp:Repeater runat="server" ID="repPage">
+												<ItemTemplate>
+													<li class="page-item">
+														<asp:LinkButton runat="server" CssClass="page-link active" Text='<%# Container.DataItem %>' OnClick="btnPage_Click" CommandArgument='<%# Container.DataItem %>' ID="btnPage" /></li>
+												</ItemTemplate>
+											</asp:Repeater>
+											<li class="page-item">
+												<asp:LinkButton runat="server" Text="Next" CssClass="page-link btn" OnCommand="btnPreNext_Command" CommandName="Next" ID="btnNext" /></li>
+										</ul>
+									</div>--%>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </asp:View>
+
+                <%--manage profile--%>
+                <asp:View ID="vManageProfile" runat="server" OnActivate="vManageProfile_Activate">
+                    <div class="container bootstrap snippets bootdey">
+                        <h1 class="text-info">Edit Profile</h1>
+                        <hr>
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <asp:Image ID="imgProfileAvatar" runat="server" CssClass="avatar img-circle img-thumbnail" alt="avatar" Style="width: 200px; height: 200px" />
+                                    <h6>Upload a different photo...</h6>
+                                    <asp:FileUpload ID="fuEditProfileAvatar" runat="server" CssClass="form-control" accept=".png,.jpg,.jpeg" />
+                                </div>
+                            </div>
+
+                            <!-- edit form column -->
+                            <div class="col-md-9 personal-info">
+                                <%--<div class="alert alert-info alert-dismissable">
+							  <a class="panel-close close" data-dismiss="alert">×</a> 
+							  <i class="fa fa-coffee"></i>
+							  This is an <strong>.alert</strong>. Use this to show important messages to the user.
+							</div>--%>
+                                <h3>Personal info</h3>
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Name:</label>
+                                        <div class="col-lg-8">
+                                            <asp:TextBox ID="txtEditProfileName" runat="server" CssClass="form-control" type="text" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="text-center">
+                                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Update" OnCommand="btnManageProfile_Command" CommandArgument="update" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </asp:View>
+
+                <%--manage log--%>
+                <asp:View ID="vManageLogs" runat="server">
+                </asp:View>
             </asp:MultiView>
 
             <%--<footer class="footer">
-                <div class="container-fluid">
-                    <div class="footer-in">
-                        <p class="mb-0">&copy 2021 Vishweb Design . All Rights Reserved.</p>
-                    </div>
-                </div>
-            </footer>--%>
+				<div class="container-fluid">
+					<div class="footer-in">
+						<p class="mb-0">&copy 2021 Vishweb Design . All Rights Reserved.</p>
+					</div>
+				</div>
+			</footer>--%>
         </div>
     </div>
 

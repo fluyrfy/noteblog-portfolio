@@ -91,3 +91,14 @@ code {
     background-color: transparent;
     color: #128a00;
 }
+
+.note-info {
+    font-family: Lora,'Times New Roman',serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 20px;
+    display: block;
+    text-align: right;
+    line-height: 1.1;
+    margin-top: 30px;
+}

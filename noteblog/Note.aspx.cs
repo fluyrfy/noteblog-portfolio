@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Globalization;
 using System.Text;
 using System.Web;
 using System.Web.UI;
@@ -31,8 +32,8 @@ namespace noteblog
                                 MySqlCommand cmd = new MySqlCommand();
                                 cmd.Connection = conn;
                                 StringBuilder sb = new StringBuilder();
-                                sb.AppendLine("SELECT * FROM notes WHERE 1 = 1");
-                                sb.AppendLine("AND id = @id");
+                                sb.AppendLine("SELECT notes.*, users.name as user_name FROM notes INNER JOIN users ON notes.user_id = users.id WHERE 1 = 1");
+                                sb.AppendLine("AND notes.id = @id");
                                 cmd.Parameters.AddWithValue("@id", noteId);
                                 cmd.CommandText = sb.ToString();
                                 conn.Open();
@@ -43,6 +44,9 @@ namespace noteblog
                                         reader.Read();
                                         litTitle.Text = reader["title"].ToString();
                                         litContent.Text = HttpUtility.HtmlDecode(reader["content"].ToString());
+                                        litAuthor.Text = reader["user_name"].ToString();
+                                        DateTime createdAt = (DateTime)reader["created_at"];
+                                        litCreatedAt.Text = createdAt.ToString("MMMM dd, yyyy", new CultureInfo("en-US"));
                                     }
                                     else
                                     {

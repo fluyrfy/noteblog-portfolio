@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Xml.Linq;
 using JiebaNet.Segmenter;
 using MySql.Data.MySqlClient;
+using noteblog.Models;
 using noteblog.Utils;
 using Spectre.Console;
 
@@ -45,17 +46,7 @@ namespace noteblog
                 {
                     if (User.Identity is FormsIdentity formsIdentity)
                     {
-                        string name = AuthenticationHelper.GetUserData()["name"].ToString();
-                        lblUser.Text = name;
-                        byte[] avatar = new UserRepository().get(AuthenticationHelper.GetUserId()).avatar;
-                        if (avatar.Length == 0)
-                        {
-                            imgAvatar.ImageUrl = "~/Images/logo/logo-icononly.png";
-                        }
-                        else
-                        {
-                            imgAvatar.ImageUrl = $"data:image/png;base64,{Convert.ToBase64String(avatar)}";
-                        }
+                        bindUserData();
                     }
                 }
             }
@@ -364,6 +355,11 @@ namespace noteblog
             bindCategoryRepeater();
         }
 
+        protected void vManageProfile_Activate(object sender, EventArgs e)
+        {
+            bindProfileData();
+        }
+
         protected void bindUserRepeater()
         {
             repUsers.DataSource = new UserRepository().getAll();
@@ -374,6 +370,38 @@ namespace noteblog
         {
             repCategories.DataSource = new CategoryRepository().getAll();
             repCategories.DataBind();
+        }
+
+        protected void bindProfileData()
+        {
+            User user = new UserRepository().get(AuthenticationHelper.GetUserId());
+            byte[] avatar = user.avatar;
+            string name = user.name;
+            txtEditProfileName.Text = name;
+            if (avatar.Length == 0)
+            {
+                imgProfileAvatar.ImageUrl = "~/Images/logo/logo-icononly.png";
+            }
+            else
+            {
+                imgProfileAvatar.ImageUrl = $"data:image/png;base64,{Convert.ToBase64String(avatar)}";
+            }
+        }
+
+        protected void bindUserData()
+        {
+            int id = AuthenticationHelper.GetUserId();
+            string name = new UserRepository().get(id).name;
+            lblUser.Text = name;
+            byte[] avatar = new UserRepository().get(id).avatar;
+            if (avatar.Length == 0)
+            {
+                imgAvatar.ImageUrl = "~/Images/logo/logo-icononly.png";
+            }
+            else
+            {
+                imgAvatar.ImageUrl = $"data:image/png;base64,{Convert.ToBase64String(avatar)}";
+            }
         }
 
         protected void paginationActiveStyle()
@@ -427,7 +455,7 @@ namespace noteblog
                         string role = Request.Form["editUserRole"];
                         byte[] avatar = ConverterHelper.ConvertFileToBytes(Request.Files["editUserAvatar"].InputStream);
                         log.Debug($"Update user id: {id}, name: {name}, role: {role}, avatar: {avatar.Length}");
-                        new UserRepository().update(name, avatar, role, id);
+                        new UserRepository().update(name, avatar, id, role);
                         log.Info("User updated successfully");
                     }
                     catch (Exception ex)
@@ -506,6 +534,40 @@ namespace noteblog
                     break;
             }
             bindCategoryRepeater();
+        }
+
+        protected void btnManageProfile_Command(object sender, CommandEventArgs e)
+        {
+            string method = e.CommandArgument.ToString();
+            int id = AuthenticationHelper.GetUserId();
+            switch (method)
+            {
+                case "update":
+                    try
+                    {
+                        log.Info("Starting to update profile");
+                        string name = txtEditProfileName.Text;
+                        byte[] avatar = new byte[0];
+                        if (fuEditProfileAvatar.HasFile)
+                        {
+                            avatar = ConverterHelper.ConvertFileToBytes(fuEditProfileAvatar.PostedFile.InputStream);
+                        }
+                        log.Debug($"Update profile name: {name}, avatar: {avatar.Length}");
+                        new UserRepository().update(name, avatar, id);
+                        log.Info("Profile updated successfully");
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("Failed to update profile", ex);
+                    }
+                    finally
+                    {
+                        log.Info("End of profile update method");
+                    }
+                    break;
+            }
+            bindProfileData();
+            bindUserData();
         }
 
         private void updateMultiDeleteButtonClass()

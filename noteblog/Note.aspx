@@ -18,7 +18,12 @@
         <!-- !PAGE CONTENT! -->
         <div class="w3-main main-text">
             <h1 class="title">
-                <asp:Literal ID="litTitle" runat="server" /></h1>
+                <asp:Literal ID="litTitle" runat="server" />
+                <span class="note-info">Posted by
+                    <asp:Literal ID="litAuthor" runat="server" />
+                    on
+                    <asp:Literal ID="litCreatedAt" runat="server" /></span>
+            </h1>
             <asp:Literal ID="litContent" runat="server" Mode="PassThrough" />
         </div>
 
