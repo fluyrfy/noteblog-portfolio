@@ -95,4 +95,9 @@ public class ConverterHelper
             return memoryStream.ToArray();
         }
     }
+
+    public string RemoveSpaces(string input)
+    {
+        return Regex.Replace(input, @"\s+", "");
+    }
 }

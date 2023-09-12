@@ -221,7 +221,7 @@ namespace noteblog
         {
             modalBgPanel.Visible = false;
             modalContentPanel.Visible = false;
-            Response.AddHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+            //Response.AddHeader("Cache-Control", "no-store, no-cache, must-revalidate");
             Response.Redirect("~/Sign.aspx");
         }
 

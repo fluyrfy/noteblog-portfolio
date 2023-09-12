@@ -10,7 +10,7 @@ using MySql.Data.MySqlClient;
 using noteblog.Models;
 using noteblog.Utils;
 using System.Linq;
-
+using System.Web;
 
 namespace noteblog
 {
@@ -21,12 +21,13 @@ namespace noteblog
         protected void Page_Load(object sender, EventArgs e)
         {
             logger = new Logger(typeof(_Default).Name);
+            time.Text = DateTime.Now.ToString();
             if (!IsPostBack)
             {
                 ViewState["CurrentPage"] = Session["CurrentPage"] == null ? 1 : Convert.ToInt32(Session["CurrentPage"]);
                 ViewState["Category"] = Session["Category"] == null ? "ALL" : Session["Category"].ToString();
                 bindCategoriesData(new CategoryRepository().getAll());
-                queryNotesData();
+                queryNotesData("ALL");
             }
         }
 
@@ -52,26 +53,20 @@ namespace noteblog
                     if (c is LinkButton)
                     {
                         LinkButton lb = (LinkButton)c;
-                        lb.ID = $"btn{categories[e.Item.ItemIndex].name}";
+                        lb.ID = $"btn{Regex.Replace(categories[e.Item.ItemIndex].name, @"\s+", "")}";
                         lb.ClientIDMode = ClientIDMode.Static;
                     }
                 }
             }
         }
-        protected void repNote_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                //ScriptManager.RegisterStartupScript(updatePanel1, updatePanel1.GetType(), "RemoveSkeleton", "removeSkeleton();", true);
-            }
-        }
 
 
-        protected void queryNotesData()
+        protected void queryNotesData(string category)
         {
             try
             {
-                string cacheKey = ViewState["Category"].ToString();
+                //string cacheKey = ViewState["Category"].ToString();
+                string cacheKey = category;
                 int currentPage = Convert.ToInt32(ViewState["CurrentPage"]);
                 if (Cache[$"{cacheKey}-{currentPage}"] == null)
                 {
@@ -105,12 +100,8 @@ namespace noteblog
                         Cache[$"{cacheKey}-{currentPage}"] = dt;
                     }
                     logger.Info("Notes queried successfully");
-                    getPagedDataTableFromCache();
                 }
-                else
-                {
-                    getPagedDataTableFromCache();
-                }
+                getPagedDataTableFromCache(category);
             }
             catch (Exception ex)
             {
@@ -119,18 +110,25 @@ namespace noteblog
             finally
             {
                 logger.Info("End of notes query method");
-                logger.Shutdown();
             }
         }
 
-        protected void getPagedDataTableFromCache()
+        protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ViewState["Category"] = ddlCategory.SelectedValue;
+            queryNotesData(ddlCategory.SelectedValue);
+        }
+
+        protected void getPagedDataTableFromCache(string category)
         {
             var CR = new CategoryRepository();
             var NR = new NoteRepository();
             logger.Info("Starting to load notes");
             try
             {
-                string cacheKey = ViewState["Category"].ToString();
+                //string cacheKey = ViewState["Category"].ToString();
+                string cacheKey = category;
+                hidCategoryName.Value = Regex.Replace(cacheKey, @"\s+", "");
                 int currentPage = Convert.ToInt32(ViewState["CurrentPage"]);
                 Session["Category"] = cacheKey;
                 int pageNumber = Convert.ToInt32(ViewState["CurrentPage"]) > 0 ? Convert.ToInt32(ViewState["CurrentPage"]) : 1;
@@ -160,15 +158,12 @@ namespace noteblog
                         }
                         repPagination.DataSource = pageNumbers;
                         repPagination.DataBind();
+                        paginationActiveStyle();
                     }
                     else
                     {
                         pnlPagination.Visible = false;
                     }
-
-                    // 樣式切換
-                    paginationActiveStyle();
-                    toggleFilterCss();
 
                     ViewState["TotalPages"] = totalPages;
                     bindNotesData(Cache[$"{cacheKey}-{currentPage}"] as DataTable);
@@ -182,7 +177,6 @@ namespace noteblog
             finally
             {
                 logger.Info("End of notes load method");
-                logger.Shutdown();
             }
         }
 
@@ -190,7 +184,7 @@ namespace noteblog
         {
             Button button = (Button)sender;
             ViewState["CurrentPage"] = button.CommandArgument;
-            queryNotesData();
+            queryNotesData(button.CommandArgument);
         }
 
         private string StripHtmlTags(string input)
@@ -265,41 +259,43 @@ namespace noteblog
                 }
             }
             ViewState["CurrentPage"] = currentPage;
-            queryNotesData();
+            queryNotesData("ALL");
         }
 
         protected void btnFilter_Command(object sender, CommandEventArgs e)
         {
-            ViewState["Category"] = e.CommandArgument.ToString();
-            queryNotesData();
+            string category = e.CommandArgument.ToString();
+            hidCategoryName.Value = Regex.Replace(category, @"\s+", "");
+            ViewState["Category"] = category;
+            queryNotesData(category);
         }
-        protected void toggleFilterCss()
-        {
-            Repeater repeater = this.Master.FindControl("MainContent").FindControl("repCategory") as Repeater;
-            var activeCategory = ViewState["Category"]?.ToString();
-            string active = " w3-black";
-            if (repeater != null && !string.IsNullOrEmpty(activeCategory))
-            {
-                foreach (RepeaterItem item in repeater.Items)
-                {
-                    if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
-                    {
-                        foreach (Control control in item.Controls)
-                        {
-                            if (control is LinkButton)
-                            {
-                                LinkButton linkButton = (LinkButton)control;
-                                linkButton.CssClass = linkButton.CssClass.Replace(active, "");
-                                if (linkButton.ID == $"btn{activeCategory}")
-                                {
-                                    linkButton.CssClass += active;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        //protected void toggleFilterCss()
+        //{
+        //    Repeater repeater = this.Master.FindControl("MainContent").FindControl("repCategory") as Repeater;
+        //    var activeCategory = ViewState["Category"]?.ToString();
+        //    string active = " w3-black";
+        //    if (repeater != null && !string.IsNullOrEmpty(activeCategory))
+        //    {
+        //        foreach (RepeaterItem item in repeater.Items)
+        //        {
+        //            if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+        //            {
+        //                foreach (Control control in item.Controls)
+        //                {
+        //                    if (control is LinkButton)
+        //                    {
+        //                        LinkButton linkButton = (LinkButton)control;
+        //                        linkButton.CssClass = linkButton.CssClass.Replace(active, "");
+        //                        if (linkButton.ID == $"btn{activeCategory}")
+        //                        {
+        //                            linkButton.CssClass += active;
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
         //public bool isRecacheRequired(string param)
         //{

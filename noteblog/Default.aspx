@@ -1,71 +1,87 @@
 ﻿<%@ Page Title="F.L." Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="noteblog._Default" %>
 
-<%--<%@ OutputCache Duration="300" VaryByParam="none" VaryByCustom="isRecacheRequired" %>--%>
+<%@ OutputCache Duration="300" VaryByParam="none" VaryByControl="ddlCategory" %>
+
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="Shared/Default.css" rel="stylesheet" />
 
     <main>
         <!-- Overlay effect when opening sidebar on small screens -->
- 
 
         <!-- !PAGE CONTENT! -->
         <div class="w3-main" style="margin-left: 300px">
-            <asp:UpdatePanel ID="updatePanel1" runat="server">
-                <ContentTemplate>
-                    <div class="w3-container">
-                        <h1 style="display: flex; justify-content: space-between; align-items: center;">
-                            <b>My Portfolio</b>
-                            <%--<img src="Images/logo/logo.svg" alt="Alternate Text" height="54" style="display: block" />--%>
-                        </h1>
-                        <div class="w3-section w3-bottombar w3-padding-16" id="filter">
-                            <span class="w3-margin-right">Filter:</span>
-                            <asp:Repeater runat="server" ID="repCategory" OnItemCreated="repCategory_ItemCreated">
-                                <ItemTemplate>
-                                    <asp:LinkButton runat="server" OnCommand="btnFilter_Command" CommandArgument='<%# Eval("name") %>' type="button" Text='<%# Eval("name") %>' CssClass="w3-button w3-white"></asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                        </div>
-                    </div>
-                    <div class="w3-row-padding">
-                        <asp:Repeater ID="repNote" runat="server" Visible="true" OnItemDataBound="repNote_ItemDataBound">
-                            <ItemTemplate>
-                                <div class="w3-third w3-container w3-margin-bottom rep-item" onclick="redirectPage(<%# Eval("id") %>)">
-                                    <%--<div class="skeleton">
-                                    </div>--%>
-                                    <asp:LinkButton runat="server" ID="lnkNote" CommandName="ReadNote" CommandArgument='<%# Eval("id") %>' />
-                                    <img src="data:image/png;base64,<%# System.Convert.ToBase64String((byte[])Eval("pic"))%>" class="w3-hover-opacity cover-photo">
-                                    <div class="w3-container w3-white">
-                                        <p>
-                                            <b class="title">
-                                                <asp:Literal Text='<%# Eval("title").ToString() %>' runat="server" />
-                                            </b>
-                                        </p>
-                                        <p class="content">
-                                            <asp:Literal ID="litContent" Text='<%# Eval("content").ToString() %>' runat="server" />
-                                        </p>
-                                    </div>
+            <asp:DropDownList runat="server" ID="ddlCategory" OnSelectedIndexChanged="ddlCategory_SelectedIndexChanged" AutoPostBack="true" EnableViewState="False">
+                <asp:ListItem Text="ALL" Value="ALL" />
+                <asp:ListItem Text="Front-End" Value="Front-End" />
+                <asp:ListItem Text="Back-End" Value="Back-End" />
+            </asp:DropDownList>
+            Client Time:
+            <script type="text/javascript">
+                document.write(Date());
+            </script>
+            <br />
+            <asp:Label Text="" ID="time" runat="server" />
+            <%--            <asp:UpdatePanel ID="updatePanel1" runat="server">
+                <ContentTemplate>--%>
+            <asp:HiddenField ID="hidCategoryName" runat="server" />
+            <div class="w3-container">
+                <h1 style="display: flex; justify-content: space-between; align-items: center;">
+                    <b>My Portfolio</b>
+                </h1>
 
-                                </div>
+                <%--category--%>
+                <div class="w3-section w3-bottombar w3-padding-16" id="filter">
+                    <span class="w3-margin-right">Filter:</span>
+                    <asp:Repeater runat="server" ID="repCategory" OnItemCreated="repCategory_ItemCreated">
+                        <ItemTemplate>
+                            <asp:LinkButton runat="server" OnCommand="btnFilter_Command" CommandArgument='<%# Eval("name") %>' type="button" Text='<%# Eval("name") %>' CssClass="w3-button w3-white category-item"></asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </div>
+            </div>
+
+            <%--notes--%>
+            <div class="w3-row-padding">
+                <asp:Repeater ID="repNote" runat="server" Visible="true">
+                    <ItemTemplate>
+                        <div class="w3-third w3-container w3-margin-bottom rep-item" onclick="redirectPage(<%# Eval("id") %>)">
+                            <%--<div class="skeleton">
+                                    </div>--%>
+                            <asp:LinkButton runat="server" ID="lnkNote" CommandName="ReadNote" CommandArgument='<%# Eval("id") %>' />
+                            <img src="data:image/png;base64,<%# System.Convert.ToBase64String((byte[])Eval("pic"))%>" class="w3-hover-opacity cover-photo">
+                            <div class="w3-container w3-white">
+                                <p>
+                                    <b class="title">
+                                        <asp:Literal Text='<%# Eval("title").ToString() %>' runat="server" />
+                                    </b>
+                                </p>
+                                <p class="content">
+                                    <asp:Literal ID="litContent" Text='<%# Eval("content").ToString() %>' runat="server" />
+                                </p>
+                            </div>
+
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </div>
+
+            <!-- pagination -->
+            <asp:Panel runat="server" ID="pnlPagination">
+                <div class="w3-center w3-padding-32">
+                    <div class="w3-bar">
+                        <asp:Button runat="server" CssClass="w3-bar-item w3-button w3-hover-black" Text="«" OnCommand="btnNavigation_Command" CommandArgument="Previous" ID="btnPrevious" />
+                        <asp:Repeater runat="server" ID="repPagination" OnItemDataBound="repPagination_ItemDataBound">
+                            <ItemTemplate>
+                                <asp:Button runat="server" ID="btnPage" ClientIDMode="AutoID" CssClass="w3-bar-item w3-button w3-hover-black" Text='<%# Container.DataItem %>' OnClick="btnPage_Click" CommandArgument='<%# Container.DataItem %>' />
                             </ItemTemplate>
                         </asp:Repeater>
+                        <asp:Button runat="server" class="w3-bar-item w3-button w3-hover-black" Text="»" OnCommand="btnNavigation_Command" CommandArgument="Next" ID="btnNext" />
                     </div>
-                    <!-- Pagination -->
-                    <asp:Panel runat="server" ID="pnlPagination">
-                        <div class="w3-center w3-padding-32">
-                            <div class="w3-bar">
-                                <asp:Button runat="server" CssClass="w3-bar-item w3-button w3-hover-black" Text="«" OnCommand="btnNavigation_Command" CommandArgument="Previous" ID="btnPrevious" />
-                                <asp:Repeater runat="server" ID="repPagination" OnItemDataBound="repPagination_ItemDataBound">
-                                    <ItemTemplate>
-                                        <asp:Button runat="server" ID="btnPage" ClientIDMode="AutoID" CssClass="w3-bar-item w3-button w3-hover-black" Text='<%# Container.DataItem %>' OnClick="btnPage_Click" CommandArgument='<%# Container.DataItem %>' />
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                                <asp:Button runat="server" class="w3-bar-item w3-button w3-hover-black" Text="»" OnCommand="btnNavigation_Command" CommandArgument="Next" ID="btnNext" />
-                            </div>
-                        </div>
-                    </asp:Panel>
-                </ContentTemplate>
-            </asp:UpdatePanel>
+                </div>
+            </asp:Panel>
+            <%--</ContentTemplate>
+            </asp:UpdatePanel>--%>
 
             <div class="w3-container w3-padding-large" style="margin-bottom: 32px" id="about">
                 <h4><b>About Me</b></h4>
@@ -106,9 +122,11 @@
             <div class="w3-container w3-padding-large w3-grey">
                 <h4 id="contact"><b>Contact Me</b></h4>
                 <div class="w3-row-padding w3-center w3-padding-24" style="margin: 0 -16px">
-                    <div class="w3-third w3-dark-grey clickable" onclick="mailTo()">
-                        <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
-                        <p>yufanliaocestlavie@gmail.com</p>
+                    <div class="w3-third w3-dark-grey clickable">
+                        <a href="mailto:yufanliaocestlavie@gmail.com">
+                            <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
+                            <p>yufanliaocestlavie@gmail.com</p>
+                        </a>
                     </div>
                     <div class="w3-third w3-teal">
                         <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
@@ -125,13 +143,28 @@
         </div>
 
         <script>
-            function redirectPage(noteId) {
-                console.log(noteId)
-                window.location.href = 'Note.aspx?id=' + encodeURIComponent(noteId);
-            }
-            function mailTo() {
-                window.location.href = "mailto:yufanliaocestlavie@gmail.com";
-            }
+            $(document).ready(function () {
+                function redirectPage(noteId) {
+                    console.log(noteId)
+                    window.location.href = 'Note.aspx?id=' + encodeURIComponent(noteId);
+                }
+
+                function toggleFilterClass() {
+                    const category = $('#<%= hidCategoryName.ClientID %>');
+                    $(".category-item").each(function () {
+                        $(this).removeClass("w3-black");
+                    })
+                    $(`#btn${category.val()}`).addClass("w3-black");
+                }
+
+                toggleFilterClass();
+
+
+                var prm = Sys.WebForms.PageRequestManager.getInstance();
+                prm.add_endRequest(function () {
+                    toggleFilterClass();
+                });
+            })
         </script>
     </main>
 </asp:Content>

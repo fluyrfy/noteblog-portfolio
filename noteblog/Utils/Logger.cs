@@ -9,6 +9,7 @@ namespace noteblog.Utils
     {
         private readonly IDbConnection _dbConnection;
         private ILog log;
+        private LogRepository LR;
 
         public Logger(string className)
         {
@@ -17,41 +18,32 @@ namespace noteblog.Utils
 
             log = LogManager.GetLogger(className);
             _dbConnection = DatabaseHelper.GetConnection();
+            LR = new LogRepository();
         }
 
         public void Debug(string message)
         {
-            //log.Debug(message);
-            string query = "INSERT INTO logs (level, message) VALUES ('debug', @message)";
-            _dbConnection.Execute(query, new { message });
+            LR.insert("debug", message);
         }
 
         public void Info(string message)
         {
-            //log.Info(message);
-            string query = "INSERT INTO logs (level, message) VALUES ('info', @message)";
-            _dbConnection.Execute(query, new { message });
+            LR.insert("info", message);
         }
 
         public void Warn(string message)
         {
-            //log.Warn(message);
-            string query = "INSERT INTO logs (level, message) VALUES ('warn', @message)";
-            _dbConnection.Execute(query, new { message });
+            LR.insert("warn", message);
         }
 
         public void Error(string message, Exception ex)
         {
-            //log.Error(message, ex);
-            string query = "INSERT INTO logs (level, message, exception) VALUES ('error', @message, @ex)";
-            _dbConnection.Execute(query, new { message, ex = ex.ToString() });
+            LR.insert("error", message, ex.ToString());
         }
 
         public void Fatal(string message)
         {
-            //log.Fatal(message);
-            string query = "INSERT INTO logs (level, message) VALUES ('fatal', @message)";
-            _dbConnection.Execute(query, new { message });
+            LR.insert("fatal", message);
         }
 
         public void Shutdown()
