@@ -16,7 +16,7 @@ namespace noteblog.Controllers
 
         public DraftsController()
         {
-            _userId = Convert.ToInt32(AuthenticationHelper.GetUserData()["id"]);
+            _userId = AuthenticationHelper.GetUserId();
             _repository = new DraftRepository(_userId);
         }
 

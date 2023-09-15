@@ -221,7 +221,7 @@ namespace noteblog
         {
             modalBgPanel.Visible = false;
             modalContentPanel.Visible = false;
-            //Response.AddHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+            Response.AddHeader("Cache-Control", "no-store, no-cache, must-revalidate");
             Response.Redirect("~/Sign.aspx");
         }
 
@@ -234,7 +234,7 @@ namespace noteblog
                 List<TextBox> inTextBoxs = new List<TextBox> { txtInEmail, txtInPwd };
                 if (isTextValid(inTextBoxs) && isUserValid(txtInEmail.Text, txtInPwd.Text, out errMsg, out userData))
                 {
-                    var expiration = cbRememberMe.Checked ? DateTime.Now.AddDays(7) : DateTime.Now.AddHours(12);
+                    var expiration = cbRememberMe.Checked ? DateTime.Now.AddDays(3) : DateTime.Now.AddHours(12);
                     var ticket = new FormsAuthenticationTicket(1, txtInEmail.Text, DateTime.Now, expiration, cbRememberMe.Checked, userData);
                     string encryptedTicket = FormsAuthentication.Encrypt(ticket);
                     HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);

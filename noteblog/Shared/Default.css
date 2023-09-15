@@ -9,6 +9,21 @@ body {
     position: relative;
 }
 
+.category-item:not(#btnALL) {
+    padding-left: 50px;
+}
+
+.category-icon {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 16px;
+}
+
+    .category-icon.active {
+        color: white !important;
+    }
+
 .cover-photo {
     width: 100%;
     max-height: 274.66px;

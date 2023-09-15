@@ -456,7 +456,7 @@
     <Content Include="bin\WebGrease.dll" />
     <Content Include="bin\WebMatrix.Data.dll" />
     <Content Include="bin\WebMatrix.WebData.dll" />
-    <Content Include="Controls\ModalDialogControl.ascx" />
+    <Content Include="Controls\NoteListControl.ascx" />
     <Content Include="Data\20230824.sql" />
     <Content Include="Images\**\*" />
     <Content Include="Images\avatar.jpg" />
@@ -470,6 +470,7 @@
     <Content Include="Shared\**\*" />
     <Content Include="Shared\Sign.css" />
     <Content Include="Shared\Verify.css" />
+    <Content Include="Utils\note.js" />
     <Content Include="Utils\draft.js" />
     <Content Include="Verify.aspx" />
     <Content Include="Sign.aspx" />
@@ -580,13 +581,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\DraftsController.cs" />
-    <Compile Include="Controls\ModalDialogControl.ascx.cs">
-      <DependentUpon>ModalDialogControl.ascx</DependentUpon>
+    <Compile Include="Controls\NoteListControl.ascx.cs">
+      <DependentUpon>NoteListControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\ModalDialogControl.ascx.designer.cs">
-      <DependentUpon>ModalDialogControl.ascx</DependentUpon>
+    <Compile Include="Controls\NoteListControl.ascx.designer.cs">
+      <DependentUpon>NoteListControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Mappings\UserMap.cs" />

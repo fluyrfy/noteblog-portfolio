@@ -18,7 +18,7 @@ namespace noteblog
         void Application_Start(object sender, EventArgs e)
         {
 
-
+            Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
             log4net.Config.XmlConfigurator.Configure();
 
             // 應用程式啟動時執行的程式碼
@@ -55,10 +55,10 @@ namespace noteblog
         {
             log = new Logger(typeof(Global).Name);
 
-            // Delete over 3 days log file
+            // Delete over 1 days log file
             DateTime currentDate = DateTime.Now;
-            TimeSpan retentionPeriod = TimeSpan.FromDays(3);
-            DateTime expiredTime = DateTime.Now.AddDays(-2);
+            TimeSpan retentionPeriod = TimeSpan.FromDays(1);
+            DateTime expiredTime = DateTime.Now.AddDays(-1);
 
             new LogRepository().delete(expiredTime);
 
@@ -74,7 +74,6 @@ namespace noteblog
                 string fileName = Path.GetFileNameWithoutExtension(logFile);
                 if ((currentDate - fileCreationDate > retentionPeriod) || !DateTime.TryParseExact(fileName, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
                 {
-                    // 刪除超過三天的檔案或意外出現奇怪檔名的檔案
                     File.Delete(logFile);
                     log.Debug($"Delete log files older than seven days or other unexpected: {logFile}");
                 }

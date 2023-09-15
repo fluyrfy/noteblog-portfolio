@@ -91,7 +91,6 @@ namespace noteblog
                     finally
                     {
                         log.Info("End of note creation method");
-                        log.Shutdown();
                         Response.Redirect("Dashboard.aspx");
                     }
                 }

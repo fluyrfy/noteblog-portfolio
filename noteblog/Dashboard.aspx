@@ -31,12 +31,14 @@
 				<li class="active sidebar-item">
 					<asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="0" class="dashboard" ID="lbtnManageNotes"><i class="material-icons">article</i>notes</asp:LinkButton>
 				</li>
-				<li class="sidebar-item">
-					<asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="1" class="dashboard" ID="lbtnManageUsers"><i class="material-icons">manage_accounts</i>users</asp:LinkButton>
-				</li>
-				<li class="sidebar-item">
-					<asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="2" class="dashboard"><i class="material-icons">category</i>categories</asp:LinkButton>
-				</li>
+				<asp:Panel runat="server" Visible="false" ID="pnlAdmin">
+					<li class="sidebar-item">
+						<asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="1" class="dashboard" ID="lbtnManageUsers"><i class="material-icons">manage_accounts</i>users</asp:LinkButton>
+					</li>
+					<li class="sidebar-item">
+						<asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="2" class="dashboard"><i class="material-icons">category</i>categories</asp:LinkButton>
+					</li>
+				</asp:Panel>
 				<li class="sidebar-item">
 					<asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="3" class="dashboard"><i class="material-icons">badge</i>profile</asp:LinkButton>
 				</li>

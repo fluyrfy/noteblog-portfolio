@@ -72,8 +72,8 @@ namespace noteblog
                 catch (Exception ex) { log.Info($"Verification exception: {ex}"); }
                 finally
                 {
-                    //Response.Cache.SetNoStore();
-                    //Response.Cache.AppendCacheExtension("no-cache");
+                    Response.Cache.SetNoStore();
+                    Response.Cache.AppendCacheExtension("no-cache");
                     Response.Expires = 0;
                     Response.Headers.Add("Refresh", "5;url=Sign");
                 }

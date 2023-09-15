@@ -22,6 +22,8 @@ namespace noteblog.Utils
             {
                 cache.Remove(key);
             }
+
+            //HttpResponse.RemoveOutputCacheItem("/Default.aspx");
         }
     }
 }

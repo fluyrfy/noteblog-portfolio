@@ -19,10 +19,14 @@ namespace noteblog
 
     public partial class Dashboard : Page
     {
+        private int _userId;
+        private string _role;
         private JiebaSegmenter _segmenter;
         public Dashboard()
         {
             _segmenter = new JiebaSegmenter();
+            _userId = AuthenticationHelper.GetUserId();
+            _role = new UserRepository().get(AuthenticationHelper.GetUserId()).role;
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -84,6 +88,11 @@ namespace noteblog
                     da.SelectCommand = new MySqlCommand();
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine("SELECT notes.*, categories.name as development FROM notes INNER JOIN categories ON notes.category_id = categories.id WHERE 1 = 1");
+                    if (_role != "admin")
+                    {
+                        sb.AppendLine("AND user_id = @userId");
+                        da.SelectCommand.Parameters.AddWithValue("@userId", _userId);
+                    }
                     string keyQuery = "AND MATCH (title, content_text, keyword) AGAINST (@word IN BOOLEAN MODE) OR keyword LIKE @likeWord";
                     if (!string.IsNullOrEmpty(ViewState["Word"]?.ToString()))
                     {
@@ -104,6 +113,11 @@ namespace noteblog
                     MySqlCommand mCmd = new MySqlCommand();
                     StringBuilder mSb = new StringBuilder();
                     mSb.AppendLine("SELECT COUNT(*) FROM notes WHERE 1 = 1");
+                    if (_role != "admin")
+                    {
+                        mSb.AppendLine("AND user_id = @userId");
+                        mCmd.Parameters.AddWithValue("@userId", _userId);
+                    }
                     if (!string.IsNullOrEmpty(ViewState["Word"]?.ToString()))
                     {
                         mSb.AppendLine(keyQuery);
@@ -137,10 +151,6 @@ namespace noteblog
             catch (Exception ex)
             {
                 throw;
-            }
-            finally
-            {
-
             }
         }
 
@@ -375,7 +385,11 @@ namespace noteblog
         protected void bindProfileData()
         {
             User user = new UserRepository().get(AuthenticationHelper.GetUserId());
-            byte[] avatar = user.avatar;
+            byte[] avatar = new byte[0];
+            if(user.avatar != null)
+            {
+                avatar = user.avatar;
+            }
             string name = user.name;
             txtEditProfileName.Text = name;
             if (avatar.Length == 0)
@@ -391,10 +405,16 @@ namespace noteblog
         protected void bindUserData()
         {
             int id = AuthenticationHelper.GetUserId();
+            User user = new UserRepository().get(id);
             string name = new UserRepository().get(id).name;
             lblUser.Text = name;
+            string role = user.role;
+            if (role == "admin")
+            {
+                pnlAdmin.Visible = true;
+            }
             byte[] avatar = new UserRepository().get(id).avatar;
-            if (avatar.Length == 0)
+            if (avatar == null || avatar.Length == 0)
             {
                 imgAvatar.ImageUrl = "~/Images/logo/logo-icononly.png";
             }

@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="F.L." Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="noteblog._Default" %>
 
-<%@ OutputCache Duration="300" VaryByParam="none" VaryByControl="ddlCategory" %>
+<%@ Register Src="~/Controls/NoteListControl.ascx" TagName="NoteListControl" TagPrefix="uc" %>
+
+<%@ OutputCache Duration="86400" Location="Server" VaryByParam="none" VaryByControl="ctl00$MainContent$NoteListControl1$hidLastUpdateTime;ctl00$MainContent$NoteListControl1$hidCategoryName;ctl00$MainContent$NoteListControl1$hidPageNumber" %>
+
 
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -11,78 +14,13 @@
 
         <!-- !PAGE CONTENT! -->
         <div class="w3-main" style="margin-left: 300px">
-            <asp:DropDownList runat="server" ID="ddlCategory" OnSelectedIndexChanged="ddlCategory_SelectedIndexChanged" AutoPostBack="true" EnableViewState="False">
-                <asp:ListItem Text="ALL" Value="ALL" />
-                <asp:ListItem Text="Front-End" Value="Front-End" />
-                <asp:ListItem Text="Back-End" Value="Back-End" />
-            </asp:DropDownList>
-            Client Time:
-            <script type="text/javascript">
-                document.write(Date());
-            </script>
-            <br />
-            <asp:Label Text="" ID="time" runat="server" />
-            <%--            <asp:UpdatePanel ID="updatePanel1" runat="server">
-                <ContentTemplate>--%>
-            <asp:HiddenField ID="hidCategoryName" runat="server" />
             <div class="w3-container">
                 <h1 style="display: flex; justify-content: space-between; align-items: center;">
                     <b>My Portfolio</b>
                 </h1>
-
-                <%--category--%>
-                <div class="w3-section w3-bottombar w3-padding-16" id="filter">
-                    <span class="w3-margin-right">Filter:</span>
-                    <asp:Repeater runat="server" ID="repCategory" OnItemCreated="repCategory_ItemCreated">
-                        <ItemTemplate>
-                            <asp:LinkButton runat="server" OnCommand="btnFilter_Command" CommandArgument='<%# Eval("name") %>' type="button" Text='<%# Eval("name") %>' CssClass="w3-button w3-white category-item"></asp:LinkButton>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
+                <%= DateTime.Now.ToString() %>
+                <uc:NoteListControl ID="NoteListControl1" runat="server" />
             </div>
-
-            <%--notes--%>
-            <div class="w3-row-padding">
-                <asp:Repeater ID="repNote" runat="server" Visible="true">
-                    <ItemTemplate>
-                        <div class="w3-third w3-container w3-margin-bottom rep-item" onclick="redirectPage(<%# Eval("id") %>)">
-                            <%--<div class="skeleton">
-                                    </div>--%>
-                            <asp:LinkButton runat="server" ID="lnkNote" CommandName="ReadNote" CommandArgument='<%# Eval("id") %>' />
-                            <img src="data:image/png;base64,<%# System.Convert.ToBase64String((byte[])Eval("pic"))%>" class="w3-hover-opacity cover-photo">
-                            <div class="w3-container w3-white">
-                                <p>
-                                    <b class="title">
-                                        <asp:Literal Text='<%# Eval("title").ToString() %>' runat="server" />
-                                    </b>
-                                </p>
-                                <p class="content">
-                                    <asp:Literal ID="litContent" Text='<%# Eval("content").ToString() %>' runat="server" />
-                                </p>
-                            </div>
-
-                        </div>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </div>
-
-            <!-- pagination -->
-            <asp:Panel runat="server" ID="pnlPagination">
-                <div class="w3-center w3-padding-32">
-                    <div class="w3-bar">
-                        <asp:Button runat="server" CssClass="w3-bar-item w3-button w3-hover-black" Text="«" OnCommand="btnNavigation_Command" CommandArgument="Previous" ID="btnPrevious" />
-                        <asp:Repeater runat="server" ID="repPagination" OnItemDataBound="repPagination_ItemDataBound">
-                            <ItemTemplate>
-                                <asp:Button runat="server" ID="btnPage" ClientIDMode="AutoID" CssClass="w3-bar-item w3-button w3-hover-black" Text='<%# Container.DataItem %>' OnClick="btnPage_Click" CommandArgument='<%# Container.DataItem %>' />
-                            </ItemTemplate>
-                        </asp:Repeater>
-                        <asp:Button runat="server" class="w3-bar-item w3-button w3-hover-black" Text="»" OnCommand="btnNavigation_Command" CommandArgument="Next" ID="btnNext" />
-                    </div>
-                </div>
-            </asp:Panel>
-            <%--</ContentTemplate>
-            </asp:UpdatePanel>--%>
-
             <div class="w3-container w3-padding-large" style="margin-bottom: 32px" id="about">
                 <h4><b>About Me</b></h4>
                 <p>
@@ -141,30 +79,5 @@
             <div class="w3-black w3-center w3-padding-16">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
             <!-- End page content -->
         </div>
-
-        <script>
-            $(document).ready(function () {
-                function redirectPage(noteId) {
-                    console.log(noteId)
-                    window.location.href = 'Note.aspx?id=' + encodeURIComponent(noteId);
-                }
-
-                function toggleFilterClass() {
-                    const category = $('#<%= hidCategoryName.ClientID %>');
-                    $(".category-item").each(function () {
-                        $(this).removeClass("w3-black");
-                    })
-                    $(`#btn${category.val()}`).addClass("w3-black");
-                }
-
-                toggleFilterClass();
-
-
-                var prm = Sys.WebForms.PageRequestManager.getInstance();
-                prm.add_endRequest(function () {
-                    toggleFilterClass();
-                });
-            })
-        </script>
     </main>
 </asp:Content>
