@@ -75,7 +75,7 @@ namespace noteblog
                 if ((currentDate - fileCreationDate > retentionPeriod) || !DateTime.TryParseExact(fileName, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
                 {
                     File.Delete(logFile);
-                    log.Debug($"Delete log files older than seven days or other unexpected: {logFile}");
+                    log.Debug($"Delete log files older than seven days or other unexpected: {HttpUtility.UrlEncode(logFile)}");
                 }
             }
         }

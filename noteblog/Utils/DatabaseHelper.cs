@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Text;
 using MySql.Data.MySqlClient;
 
 public static class DatabaseHelper
@@ -15,5 +16,14 @@ public static class DatabaseHelper
     {
         // 提供一個方法回傳資料庫連線物件
         return new MySqlConnection(_connectionString);
+    }
+
+    public static string GetTotalRecords(string querySql)
+    {
+        StringBuilder countQuery = new StringBuilder();
+        countQuery.AppendLine("SELECT COUNT(*) FROM (");
+        countQuery.AppendLine(querySql); // 嵌套主查詢
+        countQuery.AppendLine(") AS subQuery");
+        return countQuery.ToString();
     }
 }

@@ -457,6 +457,7 @@
     <Content Include="bin\WebMatrix.Data.dll" />
     <Content Include="bin\WebMatrix.WebData.dll" />
     <Content Include="Controls\NoteListControl.ascx" />
+    <Content Include="Controls\PaginationControl.ascx" />
     <Content Include="Data\20230824.sql" />
     <Content Include="Images\**\*" />
     <Content Include="Images\avatar.jpg" />
@@ -589,6 +590,13 @@
     </Compile>
     <Compile Include="Controls\NoteListControl.ascx.designer.cs">
       <DependentUpon>NoteListControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PaginationControl.ascx.cs">
+      <DependentUpon>PaginationControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\PaginationControl.ascx.designer.cs">
+      <DependentUpon>PaginationControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Mappings\UserMap.cs" />

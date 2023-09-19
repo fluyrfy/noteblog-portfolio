@@ -30,7 +30,7 @@ namespace noteblog
                     if (int.TryParse(noteIdString, out int noteId))
                     {
                         CategoryRepository categoryRepository = new CategoryRepository();
-                        List<Category> categories = categoryRepository.getAll();
+                        List<Category> categories = categoryRepository.getAll(out int tr, out int nsr);
 
                         foreach (Category category in categories)
                         {

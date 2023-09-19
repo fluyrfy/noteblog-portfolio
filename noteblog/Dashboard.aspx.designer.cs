@@ -24,6 +24,15 @@ namespace noteblog
         protected global::System.Web.UI.WebControls.HiddenField hidActiveView;
 
         /// <summary>
+        /// hidActiveSidebarItem 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hidActiveSidebarItem;
+
+        /// <summary>
         /// imgAvatar 控制項。
         /// </summary>
         /// <remarks>
@@ -76,6 +85,15 @@ namespace noteblog
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.MultiView mvMainContent;
+
+        /// <summary>
+        /// vManageNotes 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View vManageNotes;
 
         /// <summary>
         /// txtSearch 控制項。
@@ -132,49 +150,13 @@ namespace noteblog
         protected global::System.Web.UI.WebControls.Repeater repNotes;
 
         /// <summary>
-        /// litPageSize 控制項。
+        /// PaginationControlNotes 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litPageSize;
-
-        /// <summary>
-        /// litDataCount 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litDataCount;
-
-        /// <summary>
-        /// btnPrevious 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnPrevious;
-
-        /// <summary>
-        /// repPage 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater repPage;
-
-        /// <summary>
-        /// btnNext 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnNext;
+        protected global::noteblog.Controls.PaginationControl PaginationControlNotes;
 
         /// <summary>
         /// btnNoteDelete 控制項。
@@ -240,6 +222,15 @@ namespace noteblog
         protected global::System.Web.UI.WebControls.Repeater repUsers;
 
         /// <summary>
+        /// PaginationControlUsers 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::noteblog.Controls.PaginationControl PaginationControlUsers;
+
+        /// <summary>
         /// btnUserDelete 控制項。
         /// </summary>
         /// <remarks>
@@ -274,6 +265,15 @@ namespace noteblog
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater repCategories;
+
+        /// <summary>
+        /// PaginationControlCategories 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::noteblog.Controls.PaginationControl PaginationControlCategories;
 
         /// <summary>
         /// vManageProfile 控制項。
@@ -319,5 +319,23 @@ namespace noteblog
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.View vManageLogs;
+
+        /// <summary>
+        /// repLogs 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater repLogs;
+
+        /// <summary>
+        /// PaginationControlLogs 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::noteblog.Controls.PaginationControl PaginationControlLogs;
     }
 }

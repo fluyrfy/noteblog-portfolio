@@ -28,10 +28,21 @@ public class UserRepository
     //    return count > 0;
     //}
 
-    public List<User> getAll()
+    public List<User> getAll(out int totalRecords, out int nowSetRecords, int nowPage = 0, int limit = 5)
     {
-        string query = "SELECT * FROM users ORDER BY updated_at DESC";
-        return _dbConnection.Query<User>(query).ToList();
+        using (_dbConnection)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("SELECT * FROM users ORDER BY updated_at DESC");
+            totalRecords = _dbConnection.ExecuteScalar<int>(DatabaseHelper.GetTotalRecords(sb.ToString()));
+            if (nowPage != 0)
+            {
+                sb.AppendLine("LIMIT @limit OFFSET @offset");
+            }
+            int offset = (nowPage - 1) * limit;
+            nowSetRecords = _dbConnection.ExecuteScalar<int>(DatabaseHelper.GetTotalRecords(sb.ToString()), new { limit, offset });
+            return _dbConnection.Query<User>(sb.ToString(), new { limit, offset }).ToList();
+        }
     }
 
     public int getTotalCount(int categoryId)

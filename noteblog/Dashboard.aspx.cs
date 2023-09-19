@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Linq.Expressions;
 using System.Text;
 using System.Web;
 using System.Web.Security;
@@ -10,24 +11,29 @@ using System.Web.UI.WebControls;
 using System.Xml.Linq;
 using JiebaNet.Segmenter;
 using MySql.Data.MySqlClient;
+using noteblog.Controls;
 using noteblog.Models;
 using noteblog.Utils;
 using Spectre.Console;
+using static noteblog.Controls.PaginationControl;
 
 namespace noteblog
 {
-
     public partial class Dashboard : Page
     {
         private int _userId;
         private string _role;
-        private JiebaSegmenter _segmenter;
         public Dashboard()
         {
-            _segmenter = new JiebaSegmenter();
-            _userId = AuthenticationHelper.GetUserId();
-            _role = new UserRepository().get(AuthenticationHelper.GetUserId()).role;
+            if (AuthenticationHelper.GetUserId() != 0)
+            {
+                _userId = AuthenticationHelper.GetUserId();
+                _role = new UserRepository().get(AuthenticationHelper.GetUserId()).role;
+            }
         }
+
+
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -55,97 +61,98 @@ namespace noteblog
                 }
             }
 
+            //PaginationControlNotes.PageIndexChanged += PaginationControl_PageButtonClick;
+            subscribeToChildControlEvents(this);
+
             if (!IsPostBack)
             {
                 ViewState["CurrentPage"] = 1;
                 queryNotesData();
             }
         }
+
         private Logger log = new Logger(typeof(Dashboard).Name);
 
-
-        private bool FormsAuthenticationTicketExpired()
+        // bind child control event
+        private void subscribeToChildControlEvents(Control parentControl)
         {
-            // 從 FormsIdentity 取得目前使用者的票證
-            FormsIdentity identity = (FormsIdentity)User.Identity;
-            FormsAuthenticationTicket ticket = identity.Ticket;
-
-            // 檢查票證的到期時間是否已過期
-            if (ticket.Expired)
+            foreach (Control childControl in parentControl.Controls)
             {
-                return true;
+                if (childControl is PaginationControl)
+                {
+                    var userControl = (PaginationControl)childControl;
+                    userControl.PageIndexChanged += PaginationControl_PageButtonClick;
+                }
+
+                if (childControl.HasControls())
+                {
+                    subscribeToChildControlEvents(childControl);
+                }
             }
-            return false;
         }
 
+        // child control pagination click event
+        public void PaginationControl_PageButtonClick(object sender, PageIndexChangedEventArgs e)
+        {
+            ViewState["CurrentPage"] = e._currentPage;
+            switch (hidActiveSidebarItem.Value)
+            {
+                case "notes":
+                    queryNotesData();
+                    break;
+                case "users":
+                    bindUserData();
+                    break;
+                case "categories":
+                    bindCategoryRepeater();
+                    break;
+                case "logs":
+                    bindLogData();
+                    break;
+            }
+        }
+
+        // get & bind notes list
         protected void queryNotesData()
         {
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Noteblog"].ConnectionString))
                 {
-                    MySqlDataAdapter da = new MySqlDataAdapter();
-                    da.SelectCommand = new MySqlCommand();
+                    MySqlCommand cmd = new MySqlCommand();
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine("SELECT notes.*, categories.name as development FROM notes INNER JOIN categories ON notes.category_id = categories.id WHERE 1 = 1");
                     if (_role != "admin")
                     {
                         sb.AppendLine("AND user_id = @userId");
-                        da.SelectCommand.Parameters.AddWithValue("@userId", _userId);
+                        cmd.Parameters.AddWithValue("@userId", _userId);
                     }
                     string keyQuery = "AND MATCH (title, content_text, keyword) AGAINST (@word IN BOOLEAN MODE) OR keyword LIKE @likeWord";
                     if (!string.IsNullOrEmpty(ViewState["Word"]?.ToString()))
                     {
                         string word = ViewState["Word"] as string;
                         sb.AppendLine(keyQuery);
-                        da.SelectCommand.Parameters.AddWithValue("@word", word);
-                        da.SelectCommand.Parameters.AddWithValue("@likeWord", $"%{word}%");
+                        cmd.Parameters.AddWithValue("@word", word);
+                        cmd.Parameters.AddWithValue("@likeWord", $"%{word}%");
                     }
                     sb.AppendLine("ORDER BY updated_at DESC");
+                    string dataCountSql = sb.ToString();
                     sb.AppendLine("LIMIT 5 OFFSET @offset");
-                    da.SelectCommand.CommandText = sb.ToString();
-                    da.SelectCommand.Connection = conn;
-                    da.SelectCommand.Parameters.AddWithValue("@offset", (Convert.ToInt32(ViewState["CurrentPage"]) - 1) * 5);
+                    string nowSetSql = sb.ToString();
+                    cmd.Parameters.AddWithValue("@offset", (Convert.ToInt32(ViewState["CurrentPage"]) - 1) * 5);
+                    int a = Convert.ToInt32(ViewState["CurrentPage"]);
+                    cmd.Connection = conn;
+                    cmd.CommandText = sb.ToString();
                     DataTable dt = new DataTable();
-                    da.Fill(dt);
+                    conn.Open();
+                    dt.Load(cmd.ExecuteReader());
                     repNotes.DataSource = dt;
                     repNotes.DataBind();
-                    MySqlCommand mCmd = new MySqlCommand();
-                    StringBuilder mSb = new StringBuilder();
-                    mSb.AppendLine("SELECT COUNT(*) FROM notes WHERE 1 = 1");
-                    if (_role != "admin")
-                    {
-                        mSb.AppendLine("AND user_id = @userId");
-                        mCmd.Parameters.AddWithValue("@userId", _userId);
-                    }
-                    if (!string.IsNullOrEmpty(ViewState["Word"]?.ToString()))
-                    {
-                        mSb.AppendLine(keyQuery);
-                        var word = ViewState["Word"] as string;
-                        mCmd.Parameters.AddWithValue("@word", word);
-                        mCmd.Parameters.AddWithValue("@likeWord", $"%{word}%");
-                    }
-                    mCmd.CommandText = mSb.ToString();
-                    mCmd.Connection = conn;
-                    conn.Open();
-                    int dataCount = Convert.ToInt32(mCmd.ExecuteScalar());
-                    litDataCount.Text = dataCount.ToString();
-                    litPageSize.Text = dataCount < 5 ? dataCount.ToString() : "5";
-                    int totalPages = (int)Math.Ceiling((double)dataCount / 5);
-                    ViewState["TotalPages"] = totalPages;
-                    List<int> pageNumbers = new List<int>();
-                    for (int i = 1; i <= totalPages; i++)
-                    {
-                        pageNumbers.Add(i);
-                    }
-                    repPage.DataSource = pageNumbers;
-                    repPage.DataBind();
-                    if (totalPages == 1)
-                    {
-                        btnNext.CssClass += " disabled";
-                        btnPrevious.CssClass += " disabled";
-                    }
-                    paginationActiveStyle();
+                    cmd.CommandText = DatabaseHelper.GetTotalRecords(dataCountSql);
+                    var totalRecords = Convert.ToInt32(cmd.ExecuteScalar());
+                    cmd.CommandText = DatabaseHelper.GetTotalRecords(nowSetSql);
+                    var nowSetRecords = Convert.ToInt32(cmd.ExecuteScalar());
+                    bindPagination("PaginationControlNotes", totalRecords, nowSetRecords);
                 }
             }
             catch (Exception ex)
@@ -243,13 +250,6 @@ namespace noteblog
             }
         }
 
-        protected void btnPage_Click(object sender, EventArgs e)
-        {
-            LinkButton button = (LinkButton)sender;
-            ViewState["CurrentPage"] = button.CommandArgument;
-            queryNotesData();
-        }
-
         protected void cbSelectAll_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox cbSelectAll = (CheckBox)sender;
@@ -277,57 +277,9 @@ namespace noteblog
             cbSelectAll.Checked = true;
         }
 
-        protected void btnPreNext_Command(object sender, CommandEventArgs e)
-        {
-            int cPage = Convert.ToInt16(ViewState["CurrentPage"]);
-            int tPage = Convert.ToInt16(ViewState["TotalPages"]);
-            string disabled = " disabled";
-            switch (e.CommandName)
-            {
-                case "Previous":
-                    if (cPage > 1)
-                    {
-                        cPage--;
-                        if (cPage == 1)
-                        {
-                            btnPrevious.CssClass += disabled;
-                        }
-                        btnNext.CssClass.Replace(disabled, "");
-                    }
-                    else
-                    {
-                        cPage = 1;
-                        btnPrevious.CssClass += disabled;
-                    }
-                    break;
-                case "Next":
-                    btnPrevious.CssClass.Replace(disabled, "");
-                    if (cPage < tPage)
-                    {
-                        cPage++;
-                        if (cPage == tPage)
-                        {
-                            btnNext.CssClass += disabled;
-                        }
-                        else
-                        {
-
-                            btnNext.CssClass.Replace(disabled, "");
-                        }
-                    }
-                    else
-                    {
-                        cPage = tPage;
-                        btnNext.CssClass += disabled;
-                    }
-                    break;
-            }
-            ViewState["CurrentPage"] = cPage;
-            queryNotesData();
-        }
-
         protected void lbtnView_Command(object sender, CommandEventArgs e)
         {
+            ViewState["CurrentPage"] = 1;
             mvMainContent.ActiveViewIndex = Convert.ToInt32(e.CommandArgument);
             hidActiveView.Value = e.CommandArgument.ToString();
         }
@@ -355,8 +307,30 @@ namespace noteblog
             }
         }
 
+        private bool FormsAuthenticationTicketExpired()
+        {
+            // 從 FormsIdentity 取得目前使用者的票證
+            FormsIdentity identity = (FormsIdentity)User.Identity;
+            FormsAuthenticationTicket ticket = identity.Ticket;
+
+            // 檢查票證的到期時間是否已過期
+            if (ticket.Expired)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+        protected void vManageNotes_Activate(object sender, EventArgs e)
+        {
+            ViewState["CurrentPage"] = 1;
+            queryNotesData();
+        }
+
         protected void vManageUsers_Activate(object sender, EventArgs e)
         {
+            ViewState["CurrentPage"] = 1;
             bindUserRepeater();
         }
 
@@ -370,23 +344,41 @@ namespace noteblog
             bindProfileData();
         }
 
+        protected void vManageLogs_Activate(object sender, EventArgs e)
+        {
+            bindLogData();
+        }
+
+        protected void bindPagination(string paginationControlId, int totalRecords, int nowSetRecords)
+        {
+            PaginationControl paginationControl = this.Master.FindControl("MainContent").FindControl(paginationControlId) as PaginationControl;
+            if (paginationControl != null)
+            {
+                paginationControl.totalRecords = totalRecords;
+                paginationControl.nowSetRecords = nowSetRecords;
+                paginationControl.bindPagination();
+            }
+        }
+
         protected void bindUserRepeater()
         {
-            repUsers.DataSource = new UserRepository().getAll();
+            repUsers.DataSource = new UserRepository().getAll(out int tr, out int nsr, Convert.ToInt32(ViewState["CurrentPage"]));
             repUsers.DataBind();
+            bindPagination("PaginationControlUsers", tr, nsr);
         }
 
         protected void bindCategoryRepeater()
         {
-            repCategories.DataSource = new CategoryRepository().getAll();
+            repCategories.DataSource = new CategoryRepository().getAll(out int tr, out int nsr, (int)ViewState["CurrentPage"]);
             repCategories.DataBind();
+            bindPagination("PaginationControlCategories", tr, nsr);
         }
 
         protected void bindProfileData()
         {
             User user = new UserRepository().get(AuthenticationHelper.GetUserId());
             byte[] avatar = new byte[0];
-            if(user.avatar != null)
+            if (user.avatar != null)
             {
                 avatar = user.avatar;
             }
@@ -400,6 +392,13 @@ namespace noteblog
             {
                 imgProfileAvatar.ImageUrl = $"data:image/png;base64,{Convert.ToBase64String(avatar)}";
             }
+        }
+
+        protected void bindLogData()
+        {
+            repLogs.DataSource = new LogRepository().getAll(out int tr, out int nsr, (int)ViewState["CurrentPage"]);
+            repLogs.DataBind();
+            bindPagination("PaginationControlLogs", tr, nsr);
         }
 
         protected void bindUserData()
@@ -421,26 +420,6 @@ namespace noteblog
             else
             {
                 imgAvatar.ImageUrl = $"data:image/png;base64,{Convert.ToBase64String(avatar)}";
-            }
-        }
-
-        protected void paginationActiveStyle()
-        {
-            foreach (RepeaterItem item in repPage.Items)
-            {
-                int index = item.ItemIndex;
-                LinkButton button = (LinkButton)item.FindControl("btnPage");
-
-                int currentPage = Convert.ToInt32(ViewState["CurrentPage"]);
-
-                if (index == currentPage - 1)
-                {
-                    button.CssClass += " active";
-                }
-                else
-                {
-                    button.CssClass = button.CssClass.Replace(" active", string.Empty);
-                }
             }
         }
 

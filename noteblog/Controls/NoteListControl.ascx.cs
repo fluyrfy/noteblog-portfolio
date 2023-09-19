@@ -26,7 +26,7 @@ namespace noteblog.Controls
                 ViewState["Category"] = Session["Category"] == null ? "ALL" : Session["Category"].ToString();
                 hidCategoryName.Value = ViewState["Category"].ToString();
                 hidPageNumber.Value = ViewState["CurrentPage"].ToString();
-                bindCategoriesData(new CategoryRepository().getAll());
+                bindCategoriesData(new CategoryRepository().getAll(out int tr, out int nsr));
                 queryNotesData();
             }
         }
@@ -47,7 +47,7 @@ namespace noteblog.Controls
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                List<Category> categories = new CategoryRepository().getAll();
+                List<Category> categories = new CategoryRepository().getAll(out int tr, out int nsr);
                 foreach (Control c in e.Item.Controls)
                 {
                     if (c is LinkButton)

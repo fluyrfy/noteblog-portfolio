@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using Dapper;
 using noteblog.Models;
 using System.Linq;
+using System.Text;
 
 public class CategoryRepository
 {
@@ -14,10 +15,20 @@ public class CategoryRepository
         _dbConnection = DatabaseHelper.GetConnection();
     }
 
-    public List<Category> getAll()
+    public List<Category> getAll(out int totalRecords, out int nowSetRecords, int nowPage = 1, int limit = 5)
     {
-        var categories = _dbConnection.Query<Category>("SELECT * FROM categories").ToList();
-        return categories;
+        using (_dbConnection)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("SELECT * FROM categories");
+            totalRecords = _dbConnection.ExecuteScalar<int>(DatabaseHelper.GetTotalRecords(sb.ToString()));
+            sb.AppendLine("LIMIT @limit OFFSET @offset");
+            int offset = (nowPage - 1) * limit;
+            var parameters = new { limit, offset };
+            nowSetRecords = _dbConnection.ExecuteScalar<int>(DatabaseHelper.GetTotalRecords(sb.ToString()), parameters);
+            var categories = _dbConnection.Query<Category>(sb.ToString(), parameters).ToList();
+            return categories;
+        }
     }
 
     public int getId(string name)
