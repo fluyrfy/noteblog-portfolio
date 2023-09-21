@@ -57,6 +57,37 @@ namespace noteblog.Controls
             }
         }
 
+
+        protected void btnPage_Command(object sender, CommandEventArgs e)
+        {
+            hidNowPage.Value = e.CommandArgument.ToString();
+            if (this.PageIndexChanged != null)
+            {
+                this.PageIndexChanged(this, new PageIndexChangedEventArgs(Convert.ToInt32(e.CommandArgument)));
+            }
+            litDataCount.Text = totalRecords.ToString();
+            litPageSize.Text = nowSetRecords < 5 ? nowSetRecords.ToString() : "5";
+        }
+
+        protected void btnPreNext_Command(object sender, CommandEventArgs e)
+        {
+            int nowPage = Convert.ToInt32(hidNowPage.Value);
+            switch (e.CommandName)
+            {
+                case "Previous":
+                    if (nowPage > 1)
+                    {
+                        nowPage = nowPage - 1;
+                    }
+                    break;
+                case "Next":
+                    nowPage = nowPage + 1;
+                    break;
+            }
+            PageIndexChanged(this, new PageIndexChangedEventArgs(nowPage));
+            hidNowPage.Value = nowPage.ToString();
+        }
+
         public void bindPagination()
         {
             try
@@ -82,64 +113,5 @@ namespace noteblog.Controls
                 throw;
             }
         }
-
-        protected void btnPage_Command(object sender, CommandEventArgs e)
-        {
-            hidNowPage.Value = e.CommandArgument.ToString();
-            if (this.PageIndexChanged != null)
-            {
-                this.PageIndexChanged(this, new PageIndexChangedEventArgs(Convert.ToInt32(e.CommandArgument)));
-            }
-            litDataCount.Text = totalRecords.ToString();
-            litPageSize.Text = nowSetRecords < 5 ? nowSetRecords.ToString() : "5";
-        }
-
-        protected void btnPreNext_Command(object sender, CommandEventArgs e)
-        {
-            int cPage = Convert.ToInt16(ViewState["CurrentPage"]);
-            int tPage = Convert.ToInt16(ViewState["TotalPages"]);
-            string disabled = " disabled";
-            switch (e.CommandName)
-            {
-                case "Previous":
-                    if (cPage > 1)
-                    {
-                        cPage--;
-                        if (cPage == 1)
-                        {
-                            btnPrevious.CssClass += disabled;
-                        }
-                        btnNext.CssClass.Replace(disabled, "");
-                    }
-                    else
-                    {
-                        cPage = 1;
-                        btnPrevious.CssClass += disabled;
-                    }
-                    break;
-                case "Next":
-                    btnPrevious.CssClass.Replace(disabled, "");
-                    if (cPage < tPage)
-                    {
-                        cPage++;
-                        if (cPage == tPage)
-                        {
-                            btnNext.CssClass += disabled;
-                        }
-                        else
-                        {
-
-                            btnNext.CssClass.Replace(disabled, "");
-                        }
-                    }
-                    else
-                    {
-                        cPage = tPage;
-                        btnNext.CssClass += disabled;
-                    }
-                    break;
-            }
-        }
-
     }
 }

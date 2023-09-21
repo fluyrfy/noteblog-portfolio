@@ -177,12 +177,15 @@ a, a:hover, a:focus {
     /*    text-transform: uppercase;*/
     transition: all 0.5s ease;
     font-weight: 600;
+    display: flex;
+    align-items: center;
 }
 
     .sidebar-header h3 img {
         width: 45px;
         margin-right: 10px;
     }
+
 
 #sidebar ul li {
     padding: 2px 0px;
@@ -623,6 +626,13 @@ table.table .avatar {
         padding-top: 6px;
     }
 
+.page-item {
+    display: flex;
+}
+
+
+
+
 .hint-text {
     float: left;
     margin-top: 10px;
@@ -691,6 +701,21 @@ table.table .avatar {
         box-shadow: none;
         background: #ddd;
     }
+
+.ellipsis-td {
+    flex: 1;
+    min-width: 25%;
+    margin: 0 !important;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+}
 
 /*--table design end----*/
 
@@ -800,19 +825,4 @@ footer {
         transition: all 150ms linear;
         background-color: rgba(0,0,0,0.5);
     }
-}
-
-.ellipsis-td {
-    flex: 1;
-    min-width: 25%;
-    margin: 0 !important;
-}
-
-.ellipsis {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    word-wrap: break-word;
 }

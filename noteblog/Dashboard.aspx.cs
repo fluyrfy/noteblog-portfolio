@@ -32,9 +32,6 @@ namespace noteblog
             }
         }
 
-
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!User.Identity.IsAuthenticated)
@@ -567,6 +564,26 @@ namespace noteblog
             }
             bindProfileData();
             bindUserData();
+        }
+
+        protected void btnLogsClear_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (new LogRepository().delete(DateTime.Now))
+                {
+                    log.Info("Logs clear successfully");
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error($"{ex.Message}", ex);
+            }
+            finally
+            {
+
+                bindLogData();
+            }
         }
 
         private void updateMultiDeleteButtonClass()

@@ -26,7 +26,9 @@
             <div class="sidebar-header">
                 <asp:HyperLink NavigateUrl="/" runat="server">
                     <h3>
-                        <asp:Image runat="server" CssClass="img-fluid rounded-circle" ID="imgAvatar" /><asp:Label ID="lblUser" runat="server" /></h3>
+                        <asp:Image runat="server" CssClass="img-fluid rounded-circle" ID="imgAvatar" />
+                        <asp:Label ID="lblUser" runat="server" />
+                    </h3>
                 </asp:HyperLink>
             </div>
 
@@ -186,19 +188,20 @@
                                                 <%--<span class="xp-user-live"></span>--%>
                                             </a>
                                             <ul class="dropdown-menu small-menu">
-                                                <li><a href="#">
-                                                    <span class="material-icons">person_outline</span>
-                                                    Profile
-                                                </a></li>
-                                                <li><a href="#">
-                                                    <span class="material-icons">settings</span>
-                                                    Settings
-                                                </a></li>
+                                                <%--												<li><a href="#">
+													<span class="material-icons">person_outline</span>
+													Profile
+												</a></li>
+												<li><a href="#">
+													<span class="material-icons">settings</span>
+													Settings
+												</a></li>--%>
                                                 <li>
                                                     <asp:LinkButton runat="server" OnClick="btnOut_Click">
-														<span class="material-icons">logout</span>
-														Logout
-                                                    </asp:LinkButton></li>
+                                                        <span class="material-icons">logout</span>
+                                                        Logout
+                                                    </asp:LinkButton>
+                                                </li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -243,8 +246,8 @@
                                             </div>
                                             <div class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
                                                 <asp:HyperLink runat="server" NavigateUrl="Take.aspx" class="btn btn-success">
-											<i class="material-icons">&#xE147;</i>
-											<span>Add New Notes</span>
+                                                    <i class="material-icons">&#xE147;</i>
+                                                    <span>Add New Notes</span>
                                                 </asp:HyperLink>
                                                 <a href="#deleteNoteModal" class="btn btn-danger disabled" data-toggle="modal" onclick="setNoteIds()" id="MultiDelete" runat="server">
                                                     <i class="material-icons">&#xE15C;</i>
@@ -292,7 +295,7 @@
                                                         <th><%# DataBinder.Eval(Container.DataItem, "updated_at", "{0:yyyy-MM-dd HH:mm:ss}") %></th>
                                                         <th>
                                                             <asp:HyperLink runat="server" NavigateUrl='<%# "Modify.aspx?id=" + Eval("id") %>' CssClass="edit">
-														<i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                                                                <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                                             </asp:HyperLink>
                                                             <a href="#deleteNoteModal" class="delete" data-toggle="modal" onclick="setNoteIds(<%# Eval("id") %>)">
                                                                 <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
@@ -328,7 +331,7 @@
                                 </div>
                             </div>
 
-                            <!----delete-modal start--------->
+                            <!----delete-modal--------->
                             <div class="modal fade" tabindex="-1" id="deleteNoteModal" role="dialog">
                                 <input type="hidden" name="noteId" id="noteId" />
                                 <div class="modal-dialog" role="document">
@@ -350,7 +353,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!----delete-modal end--------->
                         </div>
                     </div>
                 </asp:View>
@@ -402,7 +404,7 @@
                                                         <td><%# Eval("isVerified") %></td>
                                                         <td><%# DataBinder.Eval(Container.DataItem, "updatedAt", "{0:yyyy-MM-dd HH:mm:ss}") %></td>
                                                         <td>
-                                                            <a href="#editUserModal" class="edit" data-toggle="modal" onclick="setId('User', <%# Eval("id") %>)">
+                                                            <a href="#editUserModal" class="edit" data-toggle="modal" onclick="setId('User', <%# Eval("id") %>);">
                                                                 <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                                             </a>
                                                             <a href="#deleteUserModal" class="delete" data-toggle="modal" onclick="setId('User', <%# Eval("id") %>)">
@@ -431,19 +433,15 @@
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label>Name</label>
-                                                        <input type="text" class="form-control" name="editUserName" placeholder="new name" />
+                                                        <input type="text" class="form-control" name="editUserName" id="editUserName" placeholder="new name" />
                                                     </div>
-                                                    <%--<div class="form-group">
-														<label>Email</label>
-														<input type="email" class="form-control" disabled placeholder="new email">
-													</div>--%>
                                                     <div class="form-group">
                                                         <label>Avatar</label>
                                                         <input type="file" name="editUserAvatar" />
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Role</label>
-                                                        <input type="text" class="form-control" name="editUserRole" placeholder="new role">
+                                                        <input type="text" class="form-control" name="editUserRole" id="editUserRole" placeholder="new role">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -517,7 +515,7 @@
                                                         <td><%# Eval("name") %></td>
                                                         <td><%# Eval("description") %></td>
                                                         <td>
-                                                            <a href="#editCategoryModal" class="edit" data-toggle="modal" onclick="setId('Category', <%# Eval("id") %>)">
+                                                            <a href="#editCategoryModal" class="edit" data-toggle="modal" onclick="setId('Category', <%# Eval("id") %>); getCategoryValue(<%# Eval("id") %>)">
                                                                 <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                                             </a>
                                                             <a href="#deleteCategoryModal" class="delete" data-toggle="modal" onclick="setId('Category', <%# Eval("id") %>)">
@@ -574,11 +572,11 @@
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label>Name</label>
-                                                        <input type="text" class="form-control" name="editCategoryName" placeholder="new name" />
+                                                        <input type="text" class="form-control" name="editCategoryName" placeholder="new name" id="editCategoryName" />
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Description</label>
-                                                        <input type="text" class="form-control" name="editCategoryDescription" placeholder="new description">
+                                                        <input type="text" class="form-control" name="editCategoryDescription" placeholder="new description" id="editCategoryDescription">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -610,27 +608,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <%--pagination--%>
-                                    <%--<div class="clearfix">
-										<div class="hint-text">
-											showing <b>
-												<asp:Literal ID="litPageSize" runat="server" /></b> out of <b>
-													<asp:Literal ID="litDataCount" runat="server" /></b>
-										</div>
-										<ul class="pagination">
-											<li class="page-item">
-												<asp:LinkButton runat="server" Text="Previous" CssClass="page-link btn disabled" OnCommand="btnPreNext_Command" CommandName="Previous" ID="btnPrevious" /></li>
-											<asp:Repeater runat="server" ID="repPage">
-												<ItemTemplate>
-													<li class="page-item">
-														<asp:LinkButton runat="server" CssClass="page-link active" Text='<%# Container.DataItem %>' OnClick="btnPage_Click" CommandArgument='<%# Container.DataItem %>' ID="btnPage" /></li>
-												</ItemTemplate>
-											</asp:Repeater>
-											<li class="page-item">
-												<asp:LinkButton runat="server" Text="Next" CssClass="page-link btn" OnCommand="btnPreNext_Command" CommandName="Next" ID="btnNext" /></li>
-										</ul>
-									</div>--%>
                                 </div>
                             </div>
                         </div>
@@ -690,6 +667,12 @@
                                             <div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
                                                 <h2 class="ml-lg-2">Logs</h2>
                                             </div>
+                                            <div class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
+                                                <a href="#clearLogsModal" class="btn btn-danger" data-toggle="modal" runat="server">
+                                                    <i class="material-icons">&#xE15C;</i>
+                                                    <span>Clear</span>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -720,7 +703,7 @@
                                     <%--pagination--%>
                                     <uc:PaginationControl ID="PaginationControlLogs" runat="server" />
 
-                                    <!----log-content-modal--------->
+                                    <!----detail-modal--------->
                                     <div class="modal fade" tabindex="-1" id="logContentModal" role="dialog">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -732,6 +715,27 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <p id="logContent" style="word-wrap: break-word;"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!----delete-modal--------->
+                                    <div class="modal fade" tabindex="-1" id="clearLogsModal" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Clear Logs</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to clear Logs</p>
+                                                    <p class="text-warning"><small>this action Cannot be Undone</small></p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                    <asp:Button ID="btnLogsClear" runat="server" CssClass="btn btn-success" Text="Clear" OnClick="btnLogsClear_Click" UseSubmitBehavior="false" />
                                                 </div>
                                             </div>
                                         </div>
@@ -753,6 +757,7 @@
         </div>
     </div>
 
+    <script src="Utils/js/dashboard.js"></script>
     <script type="text/javascript">
         function setLogContent(content) {
             $("#logContent").text(decodeURIComponent(content));
@@ -760,6 +765,11 @@
 
         function setId(type, id) {
             document.getElementById(`hid${type}Id`).value = id;
+            switch (type) {
+              case 'User':
+                getUserValue(id);
+                break;
+            }
         }
 
         function setNoteIds(noteIds = 0) {

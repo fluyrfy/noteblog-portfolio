@@ -471,8 +471,10 @@
     <Content Include="Shared\**\*" />
     <Content Include="Shared\Sign.css" />
     <Content Include="Shared\Verify.css" />
-    <Content Include="Utils\note.js" />
-    <Content Include="Utils\draft.js" />
+    <Content Include="Utils\js\dashboard.js" />
+    <Content Include="Utils\js\user.js" />
+    <Content Include="Utils\js\note.js" />
+    <Content Include="Utils\js\draft.js" />
     <Content Include="Verify.aspx" />
     <Content Include="Sign.aspx" />
     <Content Include="Images\cover\default.jpg" />
@@ -582,6 +584,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\DraftsController.cs" />
     <Compile Include="Controls\NoteListControl.ascx.cs">

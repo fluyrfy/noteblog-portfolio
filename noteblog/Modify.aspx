@@ -40,7 +40,7 @@
 
     </main>
 
-    <script src="Utils/draft.js"></script>
+    <script src="Utils/js/draft.js"></script>
     <script>
         var contentEditor;
 

@@ -35,6 +35,11 @@ public class CategoryRepository
     {
         return _dbConnection.QuerySingle<int>("SELECT id FROM categories WHERE name = @name", new { name });
     }
+    
+    public Category get(int id)
+    {
+        return _dbConnection.QuerySingle<Category>("SELECT * FROM categories WHERE id = @id", new { id });
+    }
 
     public bool insert(string name, string description = null)
     {

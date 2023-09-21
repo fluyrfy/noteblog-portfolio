@@ -2,7 +2,7 @@
 
 <%@ Register Src="~/Controls/NoteListControl.ascx" TagName="NoteListControl" TagPrefix="uc" %>
 
-<%@ OutputCache Duration="86400" Location="Server" VaryByParam="none" VaryByControl="ctl00$MainContent$NoteListControl1$hidLastUpdateTime;ctl00$MainContent$NoteListControl1$hidCategoryName;ctl00$MainContent$NoteListControl1$hidPageNumber" %>
+<%@ OutputCache Duration="86400" Location="Server" VaryByParam="none" VaryByControl="ctl00$MainContent$NoteListControl1$hidLastUpdateTime;ctl00$MainContent$NoteListControl1$hidCategoryName;ctl00$MainContent$NoteListControl1$hidPageNumber;ctl00$MainContent$NoteListControl1$repPagination;ctl00$MainContent$NoteListControl1$repNote" %>
 
 
 

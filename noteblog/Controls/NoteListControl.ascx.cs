@@ -22,45 +22,14 @@ namespace noteblog.Controls
             logger = new Logger(typeof(_Default).Name);
             if (!IsPostBack)
             {
-                ViewState["CurrentPage"] = Session["CurrentPage"] == null ? 1 : Convert.ToInt32(Session["CurrentPage"]);
-                ViewState["Category"] = Session["Category"] == null ? "ALL" : Session["Category"].ToString();
+                ViewState["CurrentPage"] = 1;
+                ViewState["Category"] = "ALL";
                 hidCategoryName.Value = ViewState["Category"].ToString();
                 hidPageNumber.Value = ViewState["CurrentPage"].ToString();
                 bindCategoriesData(new CategoryRepository().getAll(out int tr, out int nsr));
                 queryNotesData();
             }
         }
-
-        protected void bindNotesData(DataTable notes)
-        {
-            repNote.DataSource = notes;
-            repNote.DataBind();
-        }
-
-        protected void bindCategoriesData(List<Category> categories)
-        {
-            repCategory.DataSource = categories;
-            repCategory.DataBind();
-        }
-
-        protected void repCategory_ItemCreated(object sender, RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                List<Category> categories = new CategoryRepository().getAll(out int tr, out int nsr);
-                foreach (Control c in e.Item.Controls)
-                {
-                    if (c is LinkButton)
-                    {
-                        LinkButton lb = (LinkButton)c;
-                        lb.ID = $"btn{Regex.Replace(categories[e.Item.ItemIndex].name, @"\s+", "")}";
-                        lb.ClientIDMode = ClientIDMode.Static;
-                    }
-                }
-            }
-        }
-
-
         protected void queryNotesData()
         {
             try
@@ -110,8 +79,6 @@ namespace noteblog.Controls
                 logger.Info("End of notes query method");
             }
         }
-
-
         protected void getPagedDataTableFromCache()
         {
             var CR = new CategoryRepository();
@@ -122,44 +89,21 @@ namespace noteblog.Controls
                 string cacheKey = ViewState["Category"].ToString();
                 hidCategoryName.Value = Regex.Replace(cacheKey, @"\s+", "");
                 int currentPage = Convert.ToInt32(ViewState["CurrentPage"]);
-                Session["Category"] = cacheKey;
-                int pageNumber = Convert.ToInt32(ViewState["CurrentPage"]) > 0 ? Convert.ToInt32(ViewState["CurrentPage"]) : 1;
                 logger.Debug($"Current Category: {cacheKey}");
                 if (Cache[$"{cacheKey}-{currentPage}"] is DataTable dt)
                 {
-
                     int totalRecords = NR.getTotalCount(CR.getId(cacheKey));
-                    int totalPages;
-                    totalPages = (int)Math.Ceiling((double)totalRecords / 6);
-                    pageNumber = Math.Min(pageNumber, totalPages);
+                    int totalPages = (int)Math.Ceiling((double)totalRecords / 6);
                     if (totalRecords == 0)
                     {
-                        totalPages = 1;
-                        pageNumber = 1;
-                        pnlPagination.Visible = false;
+                        totalPages = 0;
                     }
-                    logger.Debug($"Current page number: {pageNumber}");
-                    ViewState["CurrentPage"] = pageNumber;
-                    Session["CurrentPage"] = pageNumber;
-                    if (totalPages > 1)
-                    {
-                        List<int> pageNumbers = new List<int>();
-                        for (int i = 1; i <= totalPages; i++)
-                        {
-                            pageNumbers.Add(i);
-                        }
-                        repPagination.DataSource = pageNumbers;
-                        repPagination.DataBind();
-                        paginationActiveStyle();
-                    }
-                    else
-                    {
-                        pnlPagination.Visible = false;
-                    }
-
+                    logger.Debug($"Current page number: {currentPage}");
+                    bindPagination(totalPages);
                     ViewState["TotalPages"] = totalPages;
-                    bindNotesData(Cache[$"{cacheKey}-{currentPage}"] as DataTable);
-                    logger.Info($"Notes queried successfully, Datatable: {Cache[$"{cacheKey}-{currentPage}"] as DataTable}");
+                    DataTable dataTable = Cache[$"{cacheKey}-{currentPage}"] as DataTable;
+                    bindNotesData(dataTable);
+                    logger.Info($"Notes queried successfully, Datatable: {dataTable.Rows.Count} rows");
                 }
             }
             catch (Exception ex)
@@ -172,51 +116,11 @@ namespace noteblog.Controls
             }
         }
 
-        protected void btnPage_Click(object sender, EventArgs e)
+        protected void btnPage_Command(object sender, CommandEventArgs e)
         {
-            Button button = (Button)sender;
-            ViewState["CurrentPage"] = button.CommandArgument;
+            ViewState["CurrentPage"] = e.CommandArgument;
             queryNotesData();
         }
-
-        private string StripHtmlTags(string input)
-        {
-            return Regex.Replace(input, "<.*?>", string.Empty); // 使用正则表达式去除 HTML 标签
-        }
-
-        protected void repPagination_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                int index = e.Item.ItemIndex;
-
-                if (index == 0)
-                {
-                    Button button = (Button)e.Item.FindControl("btnPage");
-                    button.CssClass += " w3-black";
-                }
-            }
-        }
-        protected void paginationActiveStyle()
-        {
-            foreach (RepeaterItem item in repPagination.Items)
-            {
-                int index = item.ItemIndex;
-                Button button = (Button)item.FindControl("btnPage");
-
-                int currentPage = Convert.ToInt32(ViewState["CurrentPage"]);
-
-                if (index == currentPage - 1)
-                {
-                    button.CssClass += " w3-black";
-                }
-                else
-                {
-                    button.CssClass = button.CssClass.Replace(" w3-black", string.Empty);
-                }
-            }
-        }
-
         protected void btnNavigation_Command(object sender, CommandEventArgs e)
         {
             string commandArgument = e.CommandArgument.ToString();
@@ -239,12 +143,87 @@ namespace noteblog.Controls
             ViewState["CurrentPage"] = currentPage;
             queryNotesData();
         }
-
         protected void btnFilter_Command(object sender, CommandEventArgs e)
         {
             string category = e.CommandArgument.ToString();
             ViewState["Category"] = category;
+            ViewState["CurrentPage"] = 1;
             queryNotesData();
+        }
+
+        protected void repCategory_ItemCreated(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                List<Category> categories = new CategoryRepository().getAll(out int tr, out int nsr);
+                foreach (Control c in e.Item.Controls)
+                {
+                    if (c is LinkButton)
+                    {
+                        LinkButton lb = (LinkButton)c;
+                        lb.ID = $"btn{Regex.Replace(categories[e.Item.ItemIndex].name, @"\s+", "")}";
+                        lb.ClientIDMode = ClientIDMode.Static;
+                    }
+                }
+            }
+        }
+        protected void repPagination_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                int index = e.Item.ItemIndex;
+
+                if (index == 0)
+                {
+                    Button button = (Button)e.Item.FindControl("btnPage");
+                    button.CssClass += " w3-black";
+                }
+            }
+        }
+
+        protected void bindNotesData(DataTable notes)
+        {
+            repNote.DataSource = notes;
+            repNote.DataBind();
+        }
+        protected void bindCategoriesData(List<Category> categories)
+        {
+            repCategory.DataSource = categories;
+            repCategory.DataBind();
+        }
+        protected void bindPagination(int totalPages)
+        {
+            List<int> pageNumbers = new List<int>();
+            for (int i = 1; i <= totalPages; i++)
+            {
+                pageNumbers.Add(i);
+            }
+            repPagination.DataSource = pageNumbers;
+            repPagination.DataBind();
+        }
+
+        private string StripHtmlTags(string input)
+        {
+            return Regex.Replace(input, "<.*?>", string.Empty);
+        }
+        protected void paginationActiveStyle()
+        {
+            foreach (RepeaterItem item in repPagination.Items)
+            {
+                int index = item.ItemIndex;
+                Button button = (Button)item.FindControl("btnPage");
+
+                int currentPage = Convert.ToInt32(ViewState["CurrentPage"]);
+
+                if (index == currentPage - 1)
+                {
+                    button.CssClass += " w3-black";
+                }
+                else
+                {
+                    button.CssClass = button.CssClass.Replace(" w3-black", string.Empty);
+                }
+            }
         }
     }
 }

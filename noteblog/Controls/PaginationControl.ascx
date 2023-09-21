@@ -28,10 +28,22 @@
             $("#hidNowPage").val(1);
         })
         var maxIdx = $(".page-link").length - 2;
-        var nowPage = $("#hidNowPage").val();
+        var nowPage = parseInt($("#hidNowPage").val());
+        var totalButtons = $(".page-number").length;
         $(".page-next").toggleClass("disabled", nowPage == maxIdx);
         $(".page-previous").toggleClass("disabled", nowPage == "1");
-
+        var startPage = Math.max(1, nowPage - 2);
+        var endPage = Math.min(nowPage + 2, totalButtons);
+        $(".page-number").hide();
+        for (var i = startPage; i <= endPage; i++) {
+            $(".page-number").eq(i - 1).show();
+        }
+        if (startPage > 1) {
+            $(".page-number").eq(startPage - 1).before('<span>...</span>');
+        }
+        if (endPage < totalButtons) {
+            $(".page-number").eq(endPage - 1).after('<span>...</span>');
+        }
         $(".page-number").each(function () {
             $(this).removeClass("active");
             if ($(this).text() == $("#hidNowPage").val()) {
