@@ -22,7 +22,6 @@ namespace noteblog
                 }
                 else
                 {
-
                     if (int.TryParse(noteIdString, out int noteId))
                     {
                         try
@@ -59,6 +58,10 @@ namespace noteblog
                         catch (Exception ex)
                         {
                             throw;
+                        }
+                        finally
+                        {
+                            new AccessStatsRepository().insert("Note");
                         }
 
                     }

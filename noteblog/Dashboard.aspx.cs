@@ -7,6 +7,7 @@ using System.Text;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
+using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
 using JiebaNet.Segmenter;
@@ -54,18 +55,17 @@ namespace noteblog
                     if (User.Identity is FormsIdentity formsIdentity)
                     {
                         bindUserData();
+                        if (!IsPostBack)
+                        {
+                            ViewState["CurrentPage"] = 1;
+                            queryNotesData();
+                        }
                     }
                 }
             }
 
             //PaginationControlNotes.PageIndexChanged += PaginationControl_PageButtonClick;
             subscribeToChildControlEvents(this);
-
-            if (!IsPostBack)
-            {
-                ViewState["CurrentPage"] = 1;
-                queryNotesData();
-            }
         }
 
         private Logger log = new Logger(typeof(Dashboard).Name);
@@ -281,6 +281,22 @@ namespace noteblog
             hidActiveView.Value = e.CommandArgument.ToString();
         }
 
+        protected void lbtnStatsSearch_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtStatsStart.Text) && !string.IsNullOrEmpty(txtStatsEnd.Text))
+            {
+                ViewState["StatsStartDate"] = txtStatsStart.Text;
+                ViewState["StatsEndDate"] = txtStatsEnd.Text;
+                bindChartVistsData();
+                bindChartLocationsData();
+            }
+            getChartTypes();
+            txtStatsStart.Text = "";
+            txtStatsEnd.Text = "";
+            calStatsStart.SelectedDates.Clear();
+            calStatsEnd.SelectedDates.Clear();
+        }
+
         protected void btnSearch_Command(object sender, CommandEventArgs e)
         {
             if (e.CommandArgument.ToString() == "user")
@@ -301,6 +317,19 @@ namespace noteblog
                 }
                 queryNotesData();
                 hdnSearch.Value = "";
+            }
+        }
+
+        protected void btnCalendar_Command(object sender, CommandEventArgs e)
+        {
+            switch (e.CommandArgument.ToString())
+            {
+                case "start":
+                    calStatsStart.Visible = !calStatsStart.Visible;
+                    break;
+                case "end":
+                    calStatsEnd.Visible = !calStatsEnd.Visible;
+                    break;
             }
         }
 
@@ -344,6 +373,12 @@ namespace noteblog
         protected void vManageLogs_Activate(object sender, EventArgs e)
         {
             bindLogData();
+        }
+
+        protected void vManageStats_Activate(object sender, EventArgs e)
+        {
+            calStatsEnd.Visible = false;
+            calStatsStart.Visible = false;
         }
 
         protected void bindPagination(string paginationControlId, int totalRecords, int nowSetRecords)
@@ -419,6 +454,11 @@ namespace noteblog
                 imgAvatar.ImageUrl = $"data:image/png;base64,{Convert.ToBase64String(avatar)}";
             }
         }
+
+        //protected void bindVisitsChart()
+        //{
+        //    chtVisits.DataSource = new AccessStatsRepository().getCount(calStatsStart.SelectedDate, calStatsEnd.SelectedDate);
+        //}
 
         protected void btnManageUser_Command(object sender, CommandEventArgs e)
         {
@@ -586,6 +626,52 @@ namespace noteblog
             }
         }
 
+        protected void calStatsStart_SelectionChanged(object sender, EventArgs e)
+        {
+            txtStatsStart.Text = calStatsStart.SelectedDate.ToString("yyyy-MM-dd");
+            calStatsStart.Visible = false;
+            if (calStatsEnd.SelectedDate < calStatsStart.SelectedDate)
+            {
+                calStatsEnd.VisibleDate = calStatsEnd.VisibleDate;
+                txtStatsEnd.Text = "";
+            }
+        }
+
+        protected void calStatsEnd_SelectionChanged(object sender, EventArgs e)
+        {
+            if (calStatsEnd.SelectedDate >= calStatsStart.SelectedDate)
+            {
+                txtStatsEnd.Text = calStatsEnd.SelectedDate.ToString("yyyy-MM-dd");
+            }
+            else
+            {
+                txtStatsEnd.Text = "";
+            }
+            calStatsEnd.Visible = false;
+        }
+
+        protected void ddlChartType1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.chtVisits.Series["Visits"].ChartType = (SeriesChartType)Enum.Parse(
+                typeof(SeriesChartType), ddlChartType1.SelectedValue);
+            bindChartVistsData();
+        }
+
+        protected void ddlChartType2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.chtVisits.Series["Locations"].ChartType = (SeriesChartType)Enum.Parse(
+                typeof(SeriesChartType), ddlChartType2.SelectedValue);
+            bindChartLocationsData();
+        }
+
+        protected void calStatsEnd_DayRender(object sender, DayRenderEventArgs e)
+        {
+            if (e.Day.Date < calStatsStart.SelectedDate)
+            {
+                e.Day.IsSelectable = false;
+            }
+        }
+
         private void updateMultiDeleteButtonClass()
         {
             int checkedItem = 0;
@@ -630,5 +716,58 @@ namespace noteblog
             }
             return null;
         }
+
+        private void getChartTypes()
+        {
+            foreach (int chartType in Enum.GetValues(typeof(SeriesChartType)))
+            {
+                ListItem li = new ListItem(Enum.GetName(typeof(SeriesChartType),
+                    chartType), chartType.ToString());
+                ddlChartType1.Items.Add(li);
+            }
+        }
+
+        private void bindChartVistsData()
+        {
+            string startDate = ViewState["StatsStartDate"].ToString();
+            string endDate = ViewState["StatsEndDate"].ToString();
+            if (!string.IsNullOrEmpty(startDate) && !string.IsNullOrEmpty(endDate))
+            {
+                try
+                {
+                    var visits = new AccessStatsRepository().getVisits(startDate, endDate);
+                    chtVisits.DataSource = visits;
+                    chtVisits.DataBind();
+                    chtVisits.Series["Visits"].XValueMember = "visit_month";
+                    chtVisits.Series["Visits"].YValueMembers = "visit_count";
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
+
+        private void bindChartLocationsData()
+        {
+            string startDate = ViewState["StatsStartDate"].ToString();
+            string endDate = ViewState["StatsEndDate"].ToString();
+            if (!string.IsNullOrEmpty(startDate) && !string.IsNullOrEmpty(endDate))
+            {
+                try
+                {
+                    var visits = new AccessStatsRepository().getLocations(startDate, endDate);
+                    chtVisits.DataSource = visits;
+                    chtVisits.DataBind();
+                    chtVisits.Series["Visits"].XValueMember = "region";
+                    chtVisits.Series["Visits"].YValueMembers = "uv";
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
+
     }
 }

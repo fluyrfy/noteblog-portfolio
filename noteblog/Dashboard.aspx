@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="Dashboard" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="noteblog.Dashboard" EnableEventValidation="false" %>
 
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
+
 <%@ Register Src="~/Controls/PaginationControl.ascx" TagName="PaginationControl" TagPrefix="uc" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -31,25 +33,21 @@
                     </h3>
                 </asp:HyperLink>
             </div>
-
             <ul class="list-unstyled component m-0 sidebar-list">
                 <li class="active sidebar-item" data-sidebar-item="notes">
-                    <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="0" CssClass="dashboard" ID="lbtnManageNotes"><i class="material-icons">article</i>notes</asp:LinkButton>
-                </li>
+                    <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="0" CssClass="dashboard" ID="lbtnManageNotes"><i class="material-icons">article</i>notes</asp:LinkButton></li>
                 <asp:Panel runat="server" Visible="false" ID="pnlAdmin">
                     <li class="sidebar-item" data-sidebar-item="users">
-                        <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="1" CssClass="dashboard" ID="lbtnManageUsers"><i class="material-icons">manage_accounts</i>users</asp:LinkButton>
-                    </li>
+                        <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="1" CssClass="dashboard" ID="lbtnManageUsers"><i class="material-icons">manage_accounts</i>users</asp:LinkButton></li>
                     <li class="sidebar-item" data-sidebar-item="categories">
-                        <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="2" CssClass="dashboard"><i class="material-icons">category</i>categories</asp:LinkButton>
-                    </li>
+                        <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="2" CssClass="dashboard"><i class="material-icons">category</i>categories</asp:LinkButton></li>
                 </asp:Panel>
                 <li class="sidebar-item" data-sidebar-item="profile">
-                    <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="3" CssClass="dashboard"><i class="material-icons">badge</i>profile</asp:LinkButton>
-                </li>
+                    <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="3" CssClass="dashboard"><i class="material-icons">badge</i>profile</asp:LinkButton></li>
                 <li class="sidebar-item" data-sidebar-item="logs">
-                    <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="4" CssClass="dashboard"><i class="material-icons">receipt_long</i>logs</asp:LinkButton>
-                </li>
+                    <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="4" CssClass="dashboard"><i class="material-icons">receipt_long</i>logs</asp:LinkButton></li>
+                <li class="sidebar-item" data-sidebar-item="stats">
+                    <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="5" CssClass="dashboard"><i class="material-icons">query_stats</i>stats</asp:LinkButton></li>
                 <%--                        <li class="dropdown">
 							<a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false"
 								class="dropdown-toggle">
@@ -112,31 +110,6 @@
 							</ul>
 						</li>
 
-						<li class="dropdown">
-							<a href="#homeSubmenu6" data-toggle="collapse" aria-expanded="false"
-								class="dropdown-toggle">
-								<i class="material-icons">grid_on</i>tables
-							</a>
-							<ul class="collapse list-unstyled menu" id="homeSubmenu6">
-								<li><a href="#">table 1</a></li>
-								<li><a href="#">table 2</a></li>
-								<li><a href="#">table 3</a></li>
-							</ul>
-						</li>
-
-
-						<li class="dropdown">
-							<a href="#homeSubmenu7" data-toggle="collapse" aria-expanded="false"
-								class="dropdown-toggle">
-								<i class="material-icons">content_copy</i>Pages
-							</a>
-							<ul class="collapse list-unstyled menu" id="homeSubmenu7">
-								<li><a href="#">Pages 1</a></li>
-								<li><a href="#">Pages 2</a></li>
-								<li><a href="#">Pages 3</a></li>
-							</ul>
-						</li>
-
 
 						<li class="">
 							<a href="#" class=""><i class="material-icons">date_range</i>copy </a>
@@ -146,7 +119,6 @@
 						</li>--%>
             </ul>
         </div>
-
         <!-------page-content start----------->
         <div id="content">
 
@@ -159,17 +131,13 @@
                                 <span class="material-icons text-white">signal_cellular_alt</span>
                             </div>
                         </div>
-
-
                         <div class="col-10 col-md-6 col-lg-8 order-1 order-md-3">
                             <div class="xp-profilebar text-right">
                                 <nav class="navbar p-0">
                                     <ul class="nav navbar-nav flex-row ml-auto">
                                         <li class="dropdown nav-item active">
                                             <a class="nav-link" href="#" data-toggle="dropdown">
-                                                <span class="material-icons">notifications</span>
-                                                <span class="notification">4</span>
-                                            </a>
+                                                <span class="material-icons">notifications</span> <span class="notification">4</span> </a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="#">You Have 4 New Messages</a></li>
                                                 <li><a href="#">You Have 4 New Messages</a></li>
@@ -179,16 +147,11 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">
-                                                <span class="material-icons">question_answer</span>
-                                            </a>
-                                        </li>
+                                                <span class="material-icons">question_answer</span> </a></li>
                                         <li class="dropdown nav-item">
                                             <a class="nav-link" href="#" data-toggle="dropdown">
-                                                <span class="material-icons">person</span>
-                                                <%--<span class="xp-user-live"></span>--%>
-                                            </a>
-                                            <ul class="dropdown-menu small-menu">
-                                                <%--												<li><a href="#">
+                                                <span class="material-icons">person</span> <%--<span class="xp-user-live"></span>--%></a><ul class="dropdown-menu small-menu">
+                                                    <%--												<li><a href="#">
 													<span class="material-icons">person_outline</span>
 													Profile
 												</a></li>
@@ -196,29 +159,24 @@
 													<span class="material-icons">settings</span>
 													Settings
 												</a></li>--%>
-                                                <li>
-                                                    <asp:LinkButton runat="server" OnClick="btnOut_Click">
+                                                    <li>
+                                                        <asp:LinkButton runat="server" OnClick="btnOut_Click">
                                                         <span class="material-icons">logout</span>
                                                         Logout
-                                                    </asp:LinkButton>
-                                                </li>
-                                            </ul>
+                                                        </asp:LinkButton></li>
+                                                </ul>
                                         </li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                     </div>
-
                     <%--                    <div class="xp-breadcrumbbar text-center">
-						<h4 class="page-title">Notes</h4>--%>
-                    <%--                        <ol class="breadcrumb">
+						<h4 class="page-title">Notes</h4>--%><%--                        <ol class="breadcrumb">
 							<li class="breadcrumb-item active" aria-curent="page">Notes</li>
-						</ol>--%>
-                    <%--</div>--%>
+						</ol>--%><%--</div>--%>
                 </div>
             </div>
-
             <!------main-content----------->
             <asp:MultiView ActiveViewIndex="0" runat="server" ID="mvMainContent">
                 <%--manage notes--%>
@@ -248,15 +206,10 @@
                                                 <asp:HyperLink runat="server" NavigateUrl="Take.aspx" class="btn btn-success">
                                                     <i class="material-icons">&#xE147;</i>
                                                     <span>Add New Notes</span>
-                                                </asp:HyperLink>
-                                                <a href="#deleteNoteModal" class="btn btn-danger disabled" data-toggle="modal" onclick="setNoteIds()" id="MultiDelete" runat="server">
-                                                    <i class="material-icons">&#xE15C;</i>
-                                                    <span>Delete</span>
-                                                </a>
+                                                </asp:HyperLink><a href="#deleteNoteModal" class="btn btn-danger disabled" data-toggle="modal" onclick="setNoteIds()" id="MultiDelete" runat="server"><i class="material-icons">&#xE15C;</i> <span>Delete</span> </a>
                                             </div>
                                         </div>
                                     </div>
-
                                     <table class="table table-striped table-hover text-center">
                                         <thead>
                                             <tr>
@@ -272,7 +225,6 @@
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
                                             <asp:Repeater ID="repNotes" runat="server">
                                                 <ItemTemplate>
@@ -296,19 +248,13 @@
                                                         <th>
                                                             <asp:HyperLink runat="server" NavigateUrl='<%# "Modify.aspx?id=" + Eval("id") %>' CssClass="edit">
                                                                 <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
-                                                            </asp:HyperLink>
-                                                            <a href="#deleteNoteModal" class="delete" data-toggle="modal" onclick="setNoteIds(<%# Eval("id") %>)">
-                                                                <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-                                                            </a>
-                                                        </th>
+                                                            </asp:HyperLink><a href="#deleteNoteModal" class="delete" data-toggle="modal" onclick="setNoteIds(<%# Eval("id") %>)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i> </a></th>
                                                     </tr>
                                                 </ItemTemplate>
                                             </asp:Repeater>
                                         </tbody>
                                     </table>
-
-                                    <%--pagination--%>
-                                    <uc:PaginationControl ID="PaginationControlNotes" runat="server" />
+                                    <%--pagination--%><uc:PaginationControl ID="PaginationControlNotes" runat="server" />
                                     <%--<div class="clearfix">
 										<div class="hint-text">
 											showing <b>
@@ -339,16 +285,14 @@
                                         <div class="modal-header">
                                             <h5 class="modal-title">Delete Notes</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                                                <span aria-hidden="true">&times;</span></button>
                                         </div>
                                         <div class="modal-body">
                                             <p>Are you sure you want to delete this Records</p>
                                             <p class="text-warning"><small>this action Cannot be Undone</small></p>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <asp:Button ID="btnNoteDelete" runat="server" CssClass="btn btn-success" Text="Delete" OnClick="btnNoteDelete_Click" UseSubmitBehavior="false" />
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button><asp:Button ID="btnNoteDelete" runat="server" CssClass="btn btn-success" Text="Delete" OnClick="btnNoteDelete_Click" UseSubmitBehavior="false" />
                                         </div>
                                     </div>
                                 </div>
@@ -382,7 +326,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <table class="table table-striped table-hover text-center">
                                         <thead>
                                             <tr>
@@ -393,7 +336,6 @@
                                                 <th>Updated At</th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
                                             <asp:Repeater ID="repUsers" runat="server">
                                                 <ItemTemplate>
@@ -405,20 +347,13 @@
                                                         <td><%# DataBinder.Eval(Container.DataItem, "updatedAt", "{0:yyyy-MM-dd HH:mm:ss}") %></td>
                                                         <td>
                                                             <a href="#editUserModal" class="edit" data-toggle="modal" onclick="setId('User', <%# Eval("id") %>);">
-                                                                <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
-                                                            </a>
-                                                            <a href="#deleteUserModal" class="delete" data-toggle="modal" onclick="setId('User', <%# Eval("id") %>)">
-                                                                <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-                                                            </a>
-                                                        </td>
+                                                                <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </a><a href="#deleteUserModal" class="delete" data-toggle="modal" onclick="setId('User', <%# Eval("id") %>)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i> </a></td>
                                                     </tr>
                                                 </ItemTemplate>
                                             </asp:Repeater>
                                         </tbody>
                                     </table>
-
-                                    <%--pagination--%>
-                                    <uc:PaginationControl ID="PaginationControlUsers" runat="server" />
+                                    <%--pagination--%><uc:PaginationControl ID="PaginationControlUsers" runat="server" />
 
                                     <!----edit-modal--------->
                                     <div class="modal fade" tabindex="-1" id="editUserModal" role="dialog">
@@ -427,8 +362,7 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Edit User</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
+                                                        <span aria-hidden="true">&times;</span></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="form-group">
@@ -445,8 +379,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                    <asp:Button Text="Save" runat="server" CssClass="btn btn-success" OnCommand="btnManageUser_Command" CommandArgument="update" />
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button><asp:Button Text="Save" runat="server" CssClass="btn btn-success" OnCommand="btnManageUser_Command" CommandArgument="update" />
                                                 </div>
                                             </div>
                                         </div>
@@ -459,16 +392,14 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Delete User</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
+                                                        <span aria-hidden="true">&times;</span></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p>Are you sure you want to delete this User</p>
                                                     <p class="text-warning"><small>this action Cannot be Undone</small></p>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                    <asp:Button ID="btnUserDelete" runat="server" CssClass="btn btn-success" Text="Delete" OnCommand="btnManageUser_Command" CommandArgument="delete" />
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button><asp:Button ID="btnUserDelete" runat="server" CssClass="btn btn-success" Text="Delete" OnCommand="btnManageUser_Command" CommandArgument="delete" />
                                                 </div>
                                             </div>
                                         </div>
@@ -493,13 +424,10 @@
                                             </div>
                                             <div class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
                                                 <a href="#addCategoryModal" class="btn btn-success" data-toggle="modal">
-                                                    <i class="material-icons">&#xE147;</i>
-                                                    <span>Add New Category</span>
-                                                </a>
+                                                    <i class="material-icons">&#xE147;</i> <span>Add New Category</span> </a>
                                             </div>
                                         </div>
                                     </div>
-
                                     <table class="table table-striped table-hover text-center">
                                         <thead>
                                             <tr>
@@ -507,7 +435,6 @@
                                                 <th>Description</th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
                                             <asp:Repeater ID="repCategories" runat="server">
                                                 <ItemTemplate>
@@ -516,20 +443,13 @@
                                                         <td><%# Eval("description") %></td>
                                                         <td>
                                                             <a href="#editCategoryModal" class="edit" data-toggle="modal" onclick="setId('Category', <%# Eval("id") %>); getCategoryValue(<%# Eval("id") %>)">
-                                                                <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
-                                                            </a>
-                                                            <a href="#deleteCategoryModal" class="delete" data-toggle="modal" onclick="setId('Category', <%# Eval("id") %>)">
-                                                                <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-                                                            </a>
-                                                        </td>
+                                                                <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </a><a href="#deleteCategoryModal" class="delete" data-toggle="modal" onclick="setId('Category', <%# Eval("id") %>)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i> </a></td>
                                                     </tr>
                                                 </ItemTemplate>
                                             </asp:Repeater>
                                         </tbody>
                                     </table>
-
-                                    <%--pagination--%>
-                                    <uc:PaginationControl ID="PaginationControlCategories" runat="server" />
+                                    <%--pagination--%><uc:PaginationControl ID="PaginationControlCategories" runat="server" />
 
                                     <!----add-modal--------->
                                     <div class="modal fade" tabindex="-1" id="addCategoryModal" role="dialog">
@@ -538,8 +458,7 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Add Category</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
+                                                        <span aria-hidden="true">&times;</span></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="form-group">
@@ -552,8 +471,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                    <asp:Button runat="server" CssClass="btn btn-success" Text="Add" OnCommand="btnManageCategory_Command" CommandArgument="insert" />
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button><asp:Button runat="server" CssClass="btn btn-success" Text="Add" OnCommand="btnManageCategory_Command" CommandArgument="insert" />
                                                 </div>
                                             </div>
                                         </div>
@@ -566,8 +484,7 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Edit Category</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
+                                                        <span aria-hidden="true">&times;</span></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="form-group">
@@ -580,8 +497,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                    <asp:Button Text="Save" runat="server" type="button" CssClass="btn btn-success" OnCommand="btnManageCategory_Command" CommandArgument="update" />
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button><asp:Button Text="Save" runat="server" type="button" CssClass="btn btn-success" OnCommand="btnManageCategory_Command" CommandArgument="update" />
                                                 </div>
                                             </div>
                                         </div>
@@ -594,16 +510,14 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Delete Category</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
+                                                        <span aria-hidden="true">&times;</span></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p>Are you sure you want to delete this Category</p>
                                                     <p class="text-warning"><small>this action Cannot be Undone</small></p>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                    <asp:Button runat="server" CssClass="btn btn-success" Text="Delete" OnCommand="btnManageCategory_Command" CommandArgument="delete" />
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button><asp:Button runat="server" CssClass="btn btn-success" Text="Delete" OnCommand="btnManageCategory_Command" CommandArgument="delete" />
                                                 </div>
                                             </div>
                                         </div>
@@ -669,13 +583,10 @@
                                             </div>
                                             <div class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
                                                 <a href="#clearLogsModal" class="btn btn-danger" data-toggle="modal" runat="server">
-                                                    <i class="material-icons">&#xE15C;</i>
-                                                    <span>Clear</span>
-                                                </a>
+                                                    <i class="material-icons">&#xE15C;</i> <span>Clear</span> </a>
                                             </div>
                                         </div>
                                     </div>
-
                                     <table class="table table-striped table-hover text-center">
                                         <thead>
                                             <tr class="d-flex">
@@ -685,7 +596,6 @@
                                                 <th class="ellipsis-td">Created At</th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
                                             <asp:Repeater ID="repLogs" runat="server">
                                                 <ItemTemplate>
@@ -710,8 +620,7 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Log Detail</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
+                                                        <span aria-hidden="true">&times;</span></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p id="logContent" style="word-wrap: break-word;"></p>
@@ -726,16 +635,14 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Clear Logs</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
+                                                        <span aria-hidden="true">&times;</span></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p>Are you sure you want to clear Logs</p>
                                                     <p class="text-warning"><small>this action Cannot be Undone</small></p>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                    <asp:Button ID="btnLogsClear" runat="server" CssClass="btn btn-success" Text="Clear" OnClick="btnLogsClear_Click" UseSubmitBehavior="false" />
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button><asp:Button ID="btnLogsClear" runat="server" CssClass="btn btn-success" Text="Clear" OnClick="btnLogsClear_Click" UseSubmitBehavior="false" />
                                                 </div>
                                             </div>
                                         </div>
@@ -743,6 +650,108 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </asp:View>
+
+                <%--manage stats--%>
+                <asp:View ID="vManageStats" runat="server" OnActivate="vManageStats_Activate">
+                    <div class="main-content">
+                        <asp:UpdatePanel runat="server">
+                            <ContentTemplate>
+                                <div class="justify-content-between d-flex align-items-center flex-wrap mx-auto" style="max-width: 530px;">
+                                    <span class="d-flex align-items-center">
+                                        <asp:TextBox runat="server" ID="txtStatsStart" ClientIDMode="Static" ReadOnly="true" /><asp:LinkButton runat="server" class="material-icons" ClientIDMode="Static" OnCommand="btnCalendar_Command" CommandArgument="start">calendar_month</asp:LinkButton>
+                                    </span>
+                                    ~<span class="d-flex align-items-center">
+                                        <asp:TextBox runat="server" ID="txtStatsEnd" ClientIDMode="Static" ReadOnly="true" /><asp:LinkButton runat="server" class="material-icons" OnCommand="btnCalendar_Command" CommandArgument="end" ClientIDMode="Static" ID="lbtnStatsEnd">calendar_month</asp:LinkButton>
+                                    </span>
+                                    <asp:LinkButton runat="server" ID="lbtnStatsSearch" ClientIDMode="Static" CssClass="btn btn-secondary d-flex align-items-center" OnClick="lbtnStatsSearch_Click">
+                                        <i class="material-icons">search</i>
+                                    </asp:LinkButton><asp:Calendar ID="calStatsStart" runat="server" OnSelectionChanged="calStatsStart_SelectionChanged" BackColor="White" BorderColor="#999999" CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="Black" Height="180px" Width="200px">
+                                        <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
+                                        <NextPrevStyle VerticalAlign="Bottom" />
+                                        <OtherMonthDayStyle ForeColor="#808080" />
+                                        <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
+                                        <SelectorStyle BackColor="#CCCCCC" />
+                                        <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
+                                        <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
+                                        <WeekendDayStyle BackColor="#FFFFCC" />
+                                    </asp:Calendar>
+                                    <asp:Calendar ID="calStatsEnd" runat="server" OnSelectionChanged="calStatsEnd_SelectionChanged" OnDayRender="calStatsEnd_DayRender" BackColor="White" BorderColor="#999999" CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="Black" Height="180px" Width="200px" CssClass="ml-auto">
+                                        <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
+                                        <NextPrevStyle VerticalAlign="Bottom" />
+                                        <OtherMonthDayStyle ForeColor="#808080" />
+                                        <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
+                                        <SelectorStyle BackColor="#CCCCCC" />
+                                        <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
+                                        <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
+                                        <WeekendDayStyle BackColor="#FFFFCC" />
+                                    </asp:Calendar>
+                                </div>
+                                <div>
+                                    <table style="border: 1px solid black; font-family: Arial">
+                                        <tr>
+                                            <td>
+                                                <b>Select Chart Type:</b>
+                                            </td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlChartType1" AutoPostBack="true" runat="server"
+                                                    OnSelectedIndexChanged="ddlChartType1_SelectedIndexChanged">
+                                                </asp:DropDownList>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <asp:Chart runat="server" ID="chtVisits" ImageStorageMode="UseHttpHandler">
+                                                    <Titles>
+                                                        <asp:Title Text="Visits by Month"></asp:Title>
+                                                    </Titles>
+                                                    <Series>
+                                                        <asp:Series Name="Visits"></asp:Series>
+                                                    </Series>
+                                                    <ChartAreas>
+                                                        <asp:ChartArea Name="ChartArea1">
+                                                            <AxisX Title="Month" />
+                                                            <AxisY Title="Visits" />
+                                                        </asp:ChartArea>
+                                                    </ChartAreas>
+                                                </asp:Chart>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table style="border: 1px solid black; font-family: Arial">
+                                        <tr>
+                                            <td>
+                                                <b>Select Chart Type:</b>
+                                            </td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlChartType2" AutoPostBack="true" runat="server"
+                                                    OnSelectedIndexChanged="ddlChartType2_SelectedIndexChanged">
+                                                </asp:DropDownList>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <asp:Chart runat="server" ID="chtLocations" ImageStorageMode="UseHttpHandler">
+                                                    <Titles>
+                                                        <asp:Title Text="User Locations"></asp:Title>
+                                                    </Titles>
+                                                    <Series>
+                                                        <asp:Series Name="Locations"></asp:Series>
+                                                    </Series>
+                                                    <ChartAreas>
+                                                        <asp:ChartArea Name="ChartArea1">
+                                                            <AxisX Title="Locations" />
+                                                            <AxisY Title="Visits" />
+                                                        </asp:ChartArea>
+                                                    </ChartAreas>
+                                                </asp:Chart>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                     </div>
                 </asp:View>
             </asp:MultiView>
@@ -766,9 +775,9 @@
         function setId(type, id) {
             document.getElementById(`hid${type}Id`).value = id;
             switch (type) {
-              case 'User':
-                getUserValue(id);
-                break;
+                case 'User':
+                    getUserValue(id);
+                    break;
             }
         }
 
@@ -807,8 +816,9 @@
                 }
             });
 
-        });
+            $("#lbtnStatsSearch").toggleClass("disabled", $("#txtStatsStart").val() == "" && $("#txtStatsEnd").val() == "")
 
+        });
 
         $(".sidebar-item").on('click', function () {
             $("#hidActiveSidebarItem").val($(this).data("sidebar-item"));
@@ -820,7 +830,6 @@
                 $(this).addClass("active");
             }
         })
-
     </script>
 
 </asp:Content>

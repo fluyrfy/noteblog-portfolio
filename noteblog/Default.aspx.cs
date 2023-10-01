@@ -21,6 +21,7 @@ namespace noteblog
 
             if (!IsPostBack)
             {
+                new AccessStatsRepository().insert("Default");
             }
         }
 

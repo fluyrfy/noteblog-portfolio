@@ -290,6 +290,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -482,7 +483,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
     <Content Include="Scripts\popper.min.js" />
-    <Content Include="Shared\bootstrap.min.css" />
     <Content Include="Shared\Common.css" />
     <Content Include="Shared\custom.css" />
     <Content Include="Shared\Note.css" />
@@ -602,7 +602,9 @@
     <Compile Include="Controls\PaginationControl.ascx.designer.cs">
       <DependentUpon>PaginationControl.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccessStats.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\IpInfo.cs" />
     <Compile Include="Models\Mappings\UserMap.cs" />
     <Compile Include="Models\Mappings\DraftMap.cs" />
     <Compile Include="Models\Log.cs" />
@@ -610,11 +612,13 @@
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Draft.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
+    <Compile Include="Repositories\AccessStatsRepository.cs" />
     <Compile Include="Repositories\LogRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\NoteRepository.cs" />
     <Compile Include="Repositories\DraftRepository.cs" />
     <Compile Include="Utils\AuthenticationHelper.cs" />
+    <Compile Include="Utils\AccessHelper.cs" />
     <Compile Include="Utils\ConverterHelper.cs" />
     <Compile Include="Utils\EmailHelper.cs" />
     <Compile Include="Utils\EncryptionHelper.cs" />

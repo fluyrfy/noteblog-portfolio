@@ -15,11 +15,6 @@ public class LogRepository
     public LogRepository()
     {
         _dbConnection = DatabaseHelper.GetConnection();
-        FluentMapper.EntityMaps.Clear();
-        FluentMapper.Initialize(config =>
-        {
-            config.AddMap(new UserMap());
-        });
     }
 
 
@@ -60,7 +55,7 @@ public class LogRepository
 
     public bool insert(string level, string message, string exception = "")
     {
-        using(_dbConnection)
+        using (_dbConnection)
         {
             string query = "INSERT INTO logs (level, message, exception) VALUES (@level, @message, @exception)";
             return _dbConnection.Execute(query, new { level, message, exception }) == 1;

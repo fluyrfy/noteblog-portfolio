@@ -3,8 +3,6 @@
 <asp:HiddenField ID="hidCategoryName" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="hidLastUpdateTime" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="hidPageNumber" runat="server" ClientIDMode="Static" />
-<%--to do--%>
-<%--<asp:HiddenField ID="hidNowPage" runat="server" />--%>
 
 <%--category--%>
 <div class="w3-section w3-bottombar w3-padding-16" id="filter">
