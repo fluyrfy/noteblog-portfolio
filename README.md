@@ -15,11 +15,15 @@ NoteBlog is a blogging platform that allows users to create, share and manage bl
 - MVC-based presentation layer
 - Business logic layer for core functionality
 - Data access layer using Repository pattern
-- Caching with Memcached
+- Caching with Memcached & Output Cache
 - Layered architecture promotes separation of concerns
+- Utilizes ASP Chart
+- Utilizes encryption techniques
 
 ### Technologies
 - ASP.NET Web Forms 4.8
 - C# 7.0
 - MySQL
-- jQuery  Bootstrap W3.CSS
+- jQuery  
+- Bootstrap 
+- W3.CSS

@@ -65,19 +65,19 @@ namespace noteblog
 
 
             // 列出日誌目錄中的所有檔案
-            string logPath = Server.MapPath("~/Logs");
-            string[] logFiles = Directory.GetFiles(logPath, "*.log");
+            //string logPath = Server.MapPath("~/Logs");
+            //string[] logFiles = Directory.GetFiles(logPath, "*.log");
 
-            foreach (string logFile in logFiles)
-            {
-                DateTime fileCreationDate = File.GetCreationTime(logFile);
-                string fileName = Path.GetFileNameWithoutExtension(logFile);
-                if ((currentDate - fileCreationDate > retentionPeriod) || !DateTime.TryParseExact(fileName, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
-                {
-                    File.Delete(logFile);
-                    log.Debug($"Delete log files older than seven days or other unexpected: {HttpUtility.UrlEncode(logFile)}");
-                }
-            }
+            //foreach (string logFile in logFiles)
+            //{
+            //    DateTime fileCreationDate = File.GetCreationTime(logFile);
+            //    string fileName = Path.GetFileNameWithoutExtension(logFile);
+            //    if ((currentDate - fileCreationDate > retentionPeriod) || !DateTime.TryParseExact(fileName, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+            //    {
+            //        File.Delete(logFile);
+            //        log.Debug($"Delete log files older than seven days or other unexpected: {HttpUtility.UrlEncode(logFile)}");
+            //    }
+            //}
         }
     }
 }
