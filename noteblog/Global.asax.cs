@@ -27,27 +27,27 @@ namespace noteblog
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
             // map path
-            string logPath = Server.MapPath("~/Logs");
+            //string logPath = Server.MapPath("~/Logs");
 
             // check exist
-            if (!Directory.Exists(logPath))
-            {
-                Directory.CreateDirectory(logPath);
-            }
+            //if (!Directory.Exists(logPath))
+            //{
+            //    Directory.CreateDirectory(logPath);
+            //}
 
             // folder permissions
-            var writeAllow = new FileSystemAccessRule("Users",
-                                                       FileSystemRights.Write,
-                                                       AccessControlType.Allow);
-            var writeDeny = new FileSystemAccessRule("Users",
-                                                      FileSystemRights.Write,
-                                                      AccessControlType.Deny);
+            //var writeAllow = new FileSystemAccessRule("Users",
+            //                                           FileSystemRights.Write,
+            //                                           AccessControlType.Allow);
+            //var writeDeny = new FileSystemAccessRule("Users",
+            //                                          FileSystemRights.Write,
+            //                                          AccessControlType.Deny);
 
-            var directorySecurity = Directory.GetAccessControl(logPath);
+            //var directorySecurity = Directory.GetAccessControl(logPath);
 
-            directorySecurity.AddAccessRule(writeAllow);
+            //directorySecurity.AddAccessRule(writeAllow);
             //directorySecurity.AddAccessRule(writeDeny);
-            Directory.SetAccessControl(logPath, directorySecurity);
+            //Directory.SetAccessControl(logPath, directorySecurity);
 
         }
 

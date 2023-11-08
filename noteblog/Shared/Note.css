@@ -102,3 +102,7 @@ code {
     line-height: 1.1;
     margin-top: 30px;
 }
+
+img {
+  max-width: 100%
+}
