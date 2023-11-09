@@ -131,3 +131,4 @@ D:\Programs\C#\noteblog\noteblog\bin\System.Configuration.ConfigurationManager.d
 D:\Programs\C#\noteblog\noteblog\bin\System.Net.Http.Formatting.dll
 D:\Programs\C#\noteblog\noteblog\bin\System.Security.Permissions.dll
 D:\Programs\C#\noteblog\noteblog\bin\System.Web.Http.WebHost.dll
+D:\Programs\C#\noteblog\noteblog\bin\noteblog.dll.config
