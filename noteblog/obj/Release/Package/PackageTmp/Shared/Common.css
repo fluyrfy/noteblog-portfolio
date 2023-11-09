@@ -1,0 +1,14 @@
+﻿body {
+}
+
+nav {
+    border-right: 1px dashed #dedede;
+}
+
+    nav a {
+        text-decoration: none;
+    }
+
+header {
+    background-color: transparent;
+}

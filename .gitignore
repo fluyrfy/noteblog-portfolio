@@ -121,3 +121,7 @@ src/.vs/config/applicationhost.config
 
 # config
 Web.config
+
+# docker build file
+docker/*
+!docker/.gitkeep

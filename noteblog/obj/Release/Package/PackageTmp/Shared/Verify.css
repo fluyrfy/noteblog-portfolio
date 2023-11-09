@@ -1,0 +1,76 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+#blockedmssg2 {
+    width: 300px;
+    position: fixed;
+    top: 0px;
+    right: 0;
+    display: none;
+    border-radius: 0px 0px 0px 8px;
+    text-align: center;
+    background-color: #1e4860;
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+    -moz-box-shadow: 0 10px 6px -6px #777;
+    box-shadow: 0 10px 6px -6px #777;
+}
+
+.display {
+    display: block !important;
+}
+
+.hide {
+    display: none !important;
+}
+
+.blockedparagraph {
+    padding: 0px 10px;
+    text-align: center;
+    color: #fff;
+    font-family: 'roboto', 'arial';
+    font-size: .9rem;
+    cursor: default;
+}
+
+.blockedlink {
+    border-style: solid;
+    border-width: 0;
+    cursor: pointer;
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-weight: normal;
+    line-height: normal;
+    margin: 0 auto 1rem;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    -webkit-appearance: none;
+    border-radius: 0;
+    padding-top: .5rem;
+    padding-right: .5rem;
+    padding-bottom: .5rem;
+    padding-left: .5rem;
+    font-size: 1rem;
+    background-color: #008CBA;
+    border-color: #007095;
+    color: #FFFFFF;
+    transition: background-color 300ms ease-out;
+    display: block;
+    width: 100px;
+}
+
+    .blockedlink:hover {
+        background-color: #007095;
+    }
+
+.progress {
+}
+
+.progress-bar {
+    transition: width 4s ease-in-out;
+}
+
+.jumbotron {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    margin: 0;
+}

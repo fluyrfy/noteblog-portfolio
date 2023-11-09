@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Web;
 using Dapper;
-using Dapper.FluentMap;
 using Newtonsoft.Json;
 using noteblog.Models;
-using noteblog.Models.Mappings;
 using noteblog.Utils;
 
 public class AccessStatsRepository

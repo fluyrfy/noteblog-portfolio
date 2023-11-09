@@ -1,0 +1,89 @@
+﻿@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+body {
+}
+
+.rep-item {
+    cursor: pointer;
+    position: relative;
+}
+
+.category-item:not(#btnALL) {
+    padding-left: 50px;
+}
+
+.category-icon {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 16px;
+}
+
+    .category-icon.active {
+        color: white !important;
+    }
+
+.cover-photo {
+    width: 100%;
+    max-height: 274.66px;
+    object-fit: contain;
+    object-position: center;
+    aspect-ratio: 6/4;
+    background: white;
+}
+
+
+.title {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.content {
+    font-family: 'Fira Code', 'Noto Sans TC', monospace, sans-serif !important;
+    min-height: 45px;
+    max-height: 158px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+.skeleton-container {
+    width: 100%;
+    height: 100%;
+}
+
+.skeleton {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #f2f2f2; /* 浅灰色背景 */
+    animation: loading 1.5s ease-in-out infinite; /* 创建一个闪烁的动画 */
+}
+
+@keyframes loading {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}

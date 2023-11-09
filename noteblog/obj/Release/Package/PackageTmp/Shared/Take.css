@@ -1,0 +1,8 @@
+﻿.cover-photo {
+    width: 50%;
+    object-fit: contain;
+    object-position: center;
+    aspect-ratio: 6/4;
+    margin-top: 5px;
+    background-color: white;
+}

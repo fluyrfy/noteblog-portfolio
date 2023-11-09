@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using Dapper;
-using noteblog.Models;
 using System.Linq;
 using System.Text;
+using Dapper;
+using noteblog.Models;
 
 public class CategoryRepository
 {
@@ -35,7 +34,7 @@ public class CategoryRepository
     {
         return _dbConnection.QuerySingle<int>("SELECT id FROM categories WHERE name = @name", new { name });
     }
-    
+
     public Category get(int id)
     {
         return _dbConnection.QuerySingle<Category>("SELECT * FROM categories WHERE id = @id", new { id });

@@ -122,3 +122,12 @@ D:\Programs\C#\noteblog\noteblog\obj\Debug\noteblog.csproj.CoreCompileInputs.cac
 D:\Programs\C#\noteblog\noteblog\obj\Debug\noteblog.csproj.CopyComplete
 D:\Programs\C#\noteblog\noteblog\obj\Debug\noteblog.dll
 D:\Programs\C#\noteblog\noteblog\obj\Debug\noteblog.pdb
+D:\Programs\C#\noteblog\noteblog\bin\Microsoft.AspNet.FriendlyUrls.dll
+D:\Programs\C#\noteblog\noteblog\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
+D:\Programs\C#\noteblog\noteblog\bin\Microsoft.Extensions.Configuration.Binder.dll
+D:\Programs\C#\noteblog\noteblog\bin\Microsoft.Extensions.Configuration.dll
+D:\Programs\C#\noteblog\noteblog\bin\Microsoft.Extensions.Logging.Configuration.dll
+D:\Programs\C#\noteblog\noteblog\bin\System.Configuration.ConfigurationManager.dll
+D:\Programs\C#\noteblog\noteblog\bin\System.Net.Http.Formatting.dll
+D:\Programs\C#\noteblog\noteblog\bin\System.Security.Permissions.dll
+D:\Programs\C#\noteblog\noteblog\bin\System.Web.Http.WebHost.dll

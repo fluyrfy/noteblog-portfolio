@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Dapper;
-using Dapper.FluentMap;
-using Dapper.FluentMap.Mapping;
+﻿using Dapper.FluentMap.Mapping;
 
 namespace noteblog.Models.Mappings
 {

@@ -1,0 +1,108 @@
+﻿@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+
+
+body {
+}
+
+.title {
+    text-align: center
+}
+
+.main-text {
+    min-height: 100vh;
+    margin-left: 300px;
+    font-family: 'Fira Code', 'Noto Sans TC', monospace, sans-serif !important;
+    padding: 60px 30px;
+    background: #ffffff;
+    box-shadow: -2px -1px 88px 0px rgba(0,0,0,0.17);
+    line-height: 30px;
+}
+
+pre {
+    border-radius: 6px;
+    overflow: auto;
+    width: fit-content;
+    margin-inline: auto;
+    position: relative;
+    /*    background-color: hsl(0,0%,96.5%);*/
+}
+
+    pre > code.hljs {
+        padding-top: 15px !important;
+        padding: 1em;
+        max-width: 100%;
+        overflow-wrap: break-word;
+        font-family: 'Fira Code', monospace, sans-serif !important;
+        font-size: 13px;
+        width: fit-content;
+        margin: auto;
+        display: block;
+    }
+
+    pre:hover > button {
+        opacity: 1;
+    }
+
+
+
+code {
+    border-radius: 4px;
+    white-space: pre-wrap;
+    background-color: hsl(210,8%,90%);
+    padding: 2px 4px;
+    font-family: 'Fira Code', monospace;
+}
+
+.copy-btn {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: absolute;
+    right: 4px;
+    top: 3px;
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+    background-color: #eee;
+    background-image: linear-gradient(#fcfcfc, #eee);
+    cursor: pointer;
+    padding: 2px 6px;
+    margin: 0;
+}
+
+.marker-blue {
+    background-color: #72ccfd;
+}
+
+.marker-green {
+    background-color: #62f962;
+}
+
+.marker-pink {
+    background-color: #fc7899;
+}
+
+.pen-red {
+    background-color: transparent;
+    color: #e71313;
+}
+
+.pen-green {
+    background-color: transparent;
+    color: #128a00;
+}
+
+.note-info {
+    font-family: Lora,'Times New Roman',serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 20px;
+    display: block;
+    text-align: right;
+    line-height: 1.1;
+    margin-top: 30px;
+}
+
+img {
+  max-width: 100%
+}

@@ -9,8 +9,6 @@ using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
 using noteblog.Models;
 using noteblog.Utils;
-using System.Linq;
-using System.Web;
 
 namespace noteblog.Controls
 {

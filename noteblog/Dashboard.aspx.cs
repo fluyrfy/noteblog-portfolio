@@ -2,20 +2,16 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Linq.Expressions;
 using System.Text;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
-using System.Xml.Linq;
-using JiebaNet.Segmenter;
 using MySql.Data.MySqlClient;
 using noteblog.Controls;
 using noteblog.Models;
 using noteblog.Utils;
-using Spectre.Console;
 using static noteblog.Controls.PaginationControl;
 
 namespace noteblog

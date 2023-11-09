@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-using Dapper;
 using log4net;
 
 namespace noteblog.Utils

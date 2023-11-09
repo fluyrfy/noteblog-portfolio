@@ -1,0 +1,36 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.Master.cs" Inherits="noteblog.Admin" %>
+
+<!DOCTYPE html>
+
+<html lang="zh">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/Images/ico/user.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <script src="https://kit.fontawesome.com/136fcdeb32.js" crossorigin="anonymous"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="Scripts/jquery-3.6.0.slim.min.js"></script>
+    <script src="Scripts/jquery-3.6.0.min.js"></script>
+    <script src="Scripts/popper.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <%--validate--%>
+    <%--<script src="https://unpkg.com/validator@latest/validator.min.js"></script>--%>
+</head>
+<body id="mainBody" runat="server">
+    <form runat="server" id="form" enctype="multipart/form-data">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+            </Scripts>
+        </asp:ScriptManager>
+        <div>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+<script>
+
+</script>
+</html>

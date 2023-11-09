@@ -3,7 +3,6 @@ using System.Data;
 using System.Linq;
 using Dapper;
 using Dapper.FluentMap;
-using MySql.Data.MySqlClient;
 using noteblog.Models;
 using noteblog.Models.Mappings;
 

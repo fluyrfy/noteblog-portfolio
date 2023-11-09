@@ -4,9 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using Dapper;
-using Dapper.FluentMap;
 using noteblog.Models;
-using noteblog.Models.Mappings;
 
 public class LogRepository
 {

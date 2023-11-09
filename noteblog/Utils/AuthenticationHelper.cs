@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Security;
 using Newtonsoft.Json;
@@ -8,7 +7,7 @@ using Newtonsoft.Json;
 namespace noteblog.Utils
 {
     public class AuthenticationHelper
-    {        
+    {
         public static Dictionary<string, object> GetUserData()
         {
             if (HttpContext.Current.User.Identity.IsAuthenticated)
@@ -22,7 +21,8 @@ namespace noteblog.Utils
             return null;
         }
 
-        public static int GetUserId() {
+        public static int GetUserId()
+        {
             if (GetUserData() != null)
             {
                 return Convert.ToInt32(GetUserData()["id"]);
@@ -39,11 +39,11 @@ namespace noteblog.Utils
 
                 if (!ticket.Expired)
                 {
-                    return true; 
+                    return true;
                 }
             }
 
-            return false; 
+            return false;
         }
     }
 }

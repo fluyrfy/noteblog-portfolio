@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Dapper.FluentMap;
-using Dapper.FluentMap.Mapping;
-using K4os.Hash.xxHash;
-using noteblog.Models.Mappings;
+﻿using Dapper.FluentMap;
 
 namespace noteblog.Utils
 {
