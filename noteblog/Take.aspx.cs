@@ -50,10 +50,10 @@ namespace noteblog
                         cmd.Parameters.AddWithValue("@contentText", ConverterHelper.ExtractTextFromHtml(txtContent.Text));
                         cmd.Parameters.AddWithValue("@keyword", txtKeyword.Text);
                         cmd.Parameters.AddWithValue("@publishedAt", DateTime.UtcNow);
-                        int maxFileSizeInBytes = 5 * 1024 * 1024;
+                        int maxFileSizeInBytes = 1024 * 1024;
                         if (fuCoverPhoto.HasFile && fuCoverPhoto.PostedFile.ContentLength > maxFileSizeInBytes)
                         {
-                            lblPhotoMsg.Text = "Image size exceeds limit（5MB）";
+                            lblPhotoMsg.Text = "Image size exceeds limit（1MB）";
                             lblPhotoMsg.ForeColor = System.Drawing.Color.Red;
                             return;
                         }
