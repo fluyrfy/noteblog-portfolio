@@ -1,6 +1,5 @@
 ﻿
 async function startPolling() {
-    await getLastUpdateTime();
 
     var timer = setInterval(async function () {
         // 發送 Ajax 請求到 API，檢查是否有更新
@@ -15,12 +14,13 @@ async function startPolling() {
 
 async function getLastUpdateTime() {
     try {
-        const note = await $.ajax({
-            url: '/api/notes/getLatestNote',
+        const updatedAt = await $.ajax({
+            url: '/api/notes/getLatestNoteTime',
             method: 'GET',
             dataType: 'json',
         });
-        $("#hidLastUpdateTime").val(note.updatedAt);
+        console.log(updatedAt)
+        $("#hidLastUpdateTime").val(updatedAt);
     } catch (error) {
         console.error('error:', error);
     }

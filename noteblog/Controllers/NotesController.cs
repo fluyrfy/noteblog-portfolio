@@ -19,8 +19,8 @@ namespace noteblog.Controllers
         }
 
         [HttpGet]
-        [Route("getLatestNote")]
-        public HttpResponseMessage getLatestNote()
+        [Route("getLatestNoteTime")]
+        public HttpResponseMessage getLatestNoteTime()
         {
             try
             {
@@ -28,7 +28,7 @@ namespace noteblog.Controllers
 
                 if (note != null)
                 {
-                    return Request.CreateResponse(System.Net.HttpStatusCode.OK, note);
+                    return Request.CreateResponse(System.Net.HttpStatusCode.OK, note.updatedAt);
                 }
                 else
                 {
