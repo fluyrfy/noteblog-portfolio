@@ -468,7 +468,6 @@
     <Content Include="bin\WebMatrix.WebData.dll" />
     <Content Include="Controls\NoteListControl.ascx" />
     <Content Include="Controls\PaginationControl.ascx" />
-    <Content Include="Data\20230824.sql" />
     <Content Include="Images\avatar.jpg" />
     <Content Include="Images\avatar.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
