@@ -1,6 +1,6 @@
-# Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
-[Bb]in/
-[Oo]bj/
+# Build Folders (publish with github ci/cd must store, you can keep bin if you'd like, to store dlls and pdbs)
+# [Bb]in/
+# [Oo]bj/
 dist
 
 # Logs
@@ -31,7 +31,7 @@ x64/
 *.meta
 *.obj
 *.pch
-*.pdb
+# *.pdb
 *.pgc
 *.pgd
 *.rsp
