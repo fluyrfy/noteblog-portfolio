@@ -6,7 +6,6 @@ using System.Text;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
 using noteblog.Controls;
@@ -286,7 +285,7 @@ namespace noteblog
                 bindChartVistsData();
                 bindChartLocationsData();
             }
-            getChartTypes();
+            //getChartTypes();
             txtStatsStart.Text = "";
             txtStatsEnd.Text = "";
             calStatsStart.SelectedDates.Clear();
@@ -646,19 +645,19 @@ namespace noteblog
             calStatsEnd.Visible = false;
         }
 
-        protected void ddlChartType1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.chtVisits.Series["Visits"].ChartType = (SeriesChartType)Enum.Parse(
-                typeof(SeriesChartType), ddlChartType1.SelectedValue);
-            bindChartVistsData();
-        }
+        //protected void ddlChartType1_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    this.chtVisits.Series["Visits"].ChartType = (SeriesChartType)Enum.Parse(
+        //        typeof(SeriesChartType), ddlChartType1.SelectedValue);
+        //    bindChartVistsData();
+        //}
 
-        protected void ddlChartType2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.chtVisits.Series["Locations"].ChartType = (SeriesChartType)Enum.Parse(
-                typeof(SeriesChartType), ddlChartType2.SelectedValue);
-            bindChartLocationsData();
-        }
+        //protected void ddlChartType2_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    this.chtVisits.Series["Locations"].ChartType = (SeriesChartType)Enum.Parse(
+        //        typeof(SeriesChartType), ddlChartType2.SelectedValue);
+        //    bindChartLocationsData();
+        //}
 
         protected void calStatsEnd_DayRender(object sender, DayRenderEventArgs e)
         {
@@ -713,15 +712,15 @@ namespace noteblog
             return null;
         }
 
-        private void getChartTypes()
-        {
-            foreach (int chartType in Enum.GetValues(typeof(SeriesChartType)))
-            {
-                ListItem li = new ListItem(Enum.GetName(typeof(SeriesChartType),
-                    chartType), chartType.ToString());
-                ddlChartType1.Items.Add(li);
-            }
-        }
+        //private void getChartTypes()
+        //{
+        //    foreach (int chartType in Enum.GetValues(typeof(SeriesChartType)))
+        //    {
+        //        ListItem li = new ListItem(Enum.GetName(typeof(SeriesChartType),
+        //            chartType), chartType.ToString());
+        //        ddlChartType1.Items.Add(li);
+        //    }
+        //}
 
         private void bindChartVistsData()
         {
@@ -732,10 +731,6 @@ namespace noteblog
                 try
                 {
                     var visits = new AccessStatsRepository().getVisits(startDate, endDate);
-                    chtVisits.DataSource = visits;
-                    chtVisits.DataBind();
-                    chtVisits.Series["Visits"].XValueMember = "visit_month";
-                    chtVisits.Series["Visits"].YValueMembers = "visit_count";
                 }
                 catch (Exception ex)
                 {
@@ -753,10 +748,10 @@ namespace noteblog
                 try
                 {
                     var visits = new AccessStatsRepository().getLocations(startDate, endDate);
-                    chtVisits.DataSource = visits;
-                    chtVisits.DataBind();
-                    chtVisits.Series["Visits"].XValueMember = "region";
-                    chtVisits.Series["Visits"].YValueMembers = "uv";
+                    //chtVisits.DataSource = visits;
+                    //chtVisits.DataBind();
+                    //chtVisits.Series["Visits"].XValueMember = "region";
+                    //chtVisits.Series["Visits"].YValueMembers = "uv";
                 }
                 catch (Exception ex)
                 {

@@ -69,7 +69,6 @@ D:\Programs\C#\noteblog\noteblog\bin\Web.config
 D:\Programs\C#\noteblog\noteblog\bin\Web.Debug.config
 D:\Programs\C#\noteblog\noteblog\bin\Web.Release.config
 D:\Programs\C#\noteblog\noteblog\bin\noteblog.dll
-D:\Programs\C#\noteblog\noteblog\bin\noteblog.pdb
 D:\Programs\C#\noteblog\noteblog\bin\roslyn\csc.exe
 D:\Programs\C#\noteblog\noteblog\bin\roslyn\csc.exe.config
 D:\Programs\C#\noteblog\noteblog\bin\roslyn\csc.rsp
@@ -121,7 +120,6 @@ D:\Programs\C#\noteblog\noteblog\obj\Debug\noteblog.csproj.AssemblyReference.cac
 D:\Programs\C#\noteblog\noteblog\obj\Debug\noteblog.csproj.CoreCompileInputs.cache
 D:\Programs\C#\noteblog\noteblog\obj\Debug\noteblog.csproj.CopyComplete
 D:\Programs\C#\noteblog\noteblog\obj\Debug\noteblog.dll
-D:\Programs\C#\noteblog\noteblog\obj\Debug\noteblog.pdb
 D:\Programs\C#\noteblog\noteblog\bin\Microsoft.AspNet.FriendlyUrls.dll
 D:\Programs\C#\noteblog\noteblog\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
 D:\Programs\C#\noteblog\noteblog\bin\Microsoft.Extensions.Configuration.Binder.dll
@@ -132,3 +130,5 @@ D:\Programs\C#\noteblog\noteblog\bin\System.Net.Http.Formatting.dll
 D:\Programs\C#\noteblog\noteblog\bin\System.Security.Permissions.dll
 D:\Programs\C#\noteblog\noteblog\bin\System.Web.Http.WebHost.dll
 D:\Programs\C#\noteblog\noteblog\bin\noteblog.dll.config
+D:\Programs\C#\noteblog\noteblog\bin\BouncyCastle.Cryptography.dll
+D:\Programs\C#\noteblog\noteblog\bin\Images\avatar.jpg

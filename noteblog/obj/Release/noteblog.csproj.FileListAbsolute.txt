@@ -65,3 +65,5 @@ D:\Programs\C#\noteblog\noteblog\obj\Release\noteblog.csproj.CoreCompileInputs.c
 D:\Programs\C#\noteblog\noteblog\obj\Release\noteblog.csproj.CopyComplete
 D:\Programs\C#\noteblog\noteblog\obj\Release\noteblog.dll
 D:\Programs\C#\noteblog\noteblog\obj\Release\noteblog.pdb
+D:\Programs\C#\noteblog\noteblog\bin\BouncyCastle.Cryptography.dll
+D:\Programs\C#\noteblog\noteblog\bin\Images\avatar.jpg

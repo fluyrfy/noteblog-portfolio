@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="Dashboard" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="noteblog.Dashboard" EnableEventValidation="false" %>
 
-<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 
 <%@ Register Src="~/Controls/PaginationControl.ascx" TagName="PaginationControl" TagPrefix="uc" %>
 
@@ -695,14 +694,14 @@
                                                 <b>Select Chart Type:</b>
                                             </td>
                                             <td>
-                                                <asp:DropDownList ID="ddlChartType1" AutoPostBack="true" runat="server"
+                                                <%-- <asp:DropDownList ID="ddlChartType1" AutoPostBack="true" runat="server"
                                                     OnSelectedIndexChanged="ddlChartType1_SelectedIndexChanged">
-                                                </asp:DropDownList>
+                                                </asp:DropDownList>--%>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
-                                                <asp:Chart runat="server" ID="chtVisits" ImageStorageMode="UseHttpHandler">
+                                                <%--<asp:Chart runat="server" ID="chtVisits" ImageStorageMode="UseHttpHandler">
                                                     <Titles>
                                                         <asp:Title Text="Visits by Month"></asp:Title>
                                                     </Titles>
@@ -715,7 +714,7 @@
                                                             <AxisY Title="Visits" />
                                                         </asp:ChartArea>
                                                     </ChartAreas>
-                                                </asp:Chart>
+                                                </asp:Chart>--%>
                                             </td>
                                         </tr>
                                     </table>
@@ -725,14 +724,14 @@
                                                 <b>Select Chart Type:</b>
                                             </td>
                                             <td>
-                                                <asp:DropDownList ID="ddlChartType2" AutoPostBack="true" runat="server"
+                                                <%--<asp:DropDownList ID="ddlChartType2" AutoPostBack="true" runat="server"
                                                     OnSelectedIndexChanged="ddlChartType2_SelectedIndexChanged">
-                                                </asp:DropDownList>
+                                                </asp:DropDownList>--%>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
-                                                <asp:Chart runat="server" ID="chtLocations" ImageStorageMode="UseHttpHandler">
+                                                <%--<asp:Chart runat="server" ID="chtLocations" ImageStorageMode="UseHttpHandler">
                                                     <Titles>
                                                         <asp:Title Text="User Locations"></asp:Title>
                                                     </Titles>
@@ -745,7 +744,7 @@
                                                             <AxisY Title="Visits" />
                                                         </asp:ChartArea>
                                                     </ChartAreas>
-                                                </asp:Chart>
+                                                </asp:Chart>--%>
                                             </td>
                                         </tr>
                                     </table>
