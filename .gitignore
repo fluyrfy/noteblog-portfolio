@@ -123,3 +123,6 @@ src/.vs/config/applicationhost.config
 # docker build file
 docker/*
 !docker/.gitkeep
+
+#config
+Web.Release.config
