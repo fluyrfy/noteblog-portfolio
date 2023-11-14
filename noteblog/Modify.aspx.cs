@@ -72,7 +72,16 @@ namespace noteblog
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-
+            int maxFileSizeInBytes = 1024 * 1024;
+            if (fuCoverPhoto.HasFile)
+            {
+                if (fuCoverPhoto.PostedFile.ContentLength > maxFileSizeInBytes)
+                {
+                    lblPhotoMsg.Text = "Image size exceeds limit（1MB）";
+                    lblPhotoMsg.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+            }
             using (MySqlConnection con = new MySqlConnection(ConfigurationManager.ConnectionStrings["Noteblog"].ConnectionString))
             {
                 try
@@ -95,12 +104,12 @@ namespace noteblog
                         dr["content_text"] = ConverterHelper.ExtractTextFromHtml(txtContent.Text);
                         dr["keyword"] = txtKeyword.Text;
                         log.Debug($"New note category: {dr["category_id"] as string}, title: {dr["title"] as string}, content: {dr["content_text"] as string}, keyword: {dr["keyword"] as string}");
-                        int maxFileSizeInBytes = 5 * 1024 * 1024;
+                        //int maxFileSizeInBytes = 1024 * 1024;
                         if (fuCoverPhoto.HasFile)
                         {
                             if (fuCoverPhoto.PostedFile.ContentLength > maxFileSizeInBytes)
                             {
-                                lblPhotoMsg.Text = "Image size exceeds limit（5MB）";
+                                lblPhotoMsg.Text = "Image size exceeds limit（1MB）";
                                 lblPhotoMsg.ForeColor = System.Drawing.Color.Red;
                                 return;
                             }

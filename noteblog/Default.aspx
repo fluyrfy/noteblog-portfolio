@@ -18,7 +18,7 @@
                 <h1 style="display: flex; justify-content: space-between; align-items: center;">
                     <b>My Portfolio</b>
                 </h1>
-                <%= DateTime.Now.ToString() %>
+                last output cache time: <%= DateTime.Now.ToString() %>
                 <uc:NoteListControl ID="NoteListControl1" runat="server" />
             </div>
             <div class="w3-container w3-padding-large" style="margin-bottom: 32px" id="about">
