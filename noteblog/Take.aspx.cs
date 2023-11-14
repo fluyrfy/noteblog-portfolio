@@ -34,6 +34,16 @@ namespace noteblog
             if (Page.IsValid && AuthenticationHelper.IsUserAuthenticatedAndTicketValid())
             {
                 int userId = AuthenticationHelper.GetUserId();
+                int maxFileSizeInBytes = 1024 * 1024;
+                if (fuCoverPhoto.HasFile)
+                {
+                    if (fuCoverPhoto.PostedFile.ContentLength > maxFileSizeInBytes)
+                    {
+                        lblPhotoMsg.Text = "Image size exceeds limit（1MB）";
+                        lblPhotoMsg.ForeColor = System.Drawing.Color.Red;
+                        return;
+                    }
+                }
                 using (MySqlConnection con = new MySqlConnection(ConfigurationManager.ConnectionStrings["Noteblog"].ConnectionString))
                 {
                     try
@@ -50,13 +60,6 @@ namespace noteblog
                         cmd.Parameters.AddWithValue("@contentText", ConverterHelper.ExtractTextFromHtml(txtContent.Text));
                         cmd.Parameters.AddWithValue("@keyword", txtKeyword.Text);
                         cmd.Parameters.AddWithValue("@publishedAt", DateTime.UtcNow);
-                        int maxFileSizeInBytes = 1024 * 1024;
-                        if (fuCoverPhoto.HasFile && fuCoverPhoto.PostedFile.ContentLength > maxFileSizeInBytes)
-                        {
-                            lblPhotoMsg.Text = "Image size exceeds limit（1MB）";
-                            lblPhotoMsg.ForeColor = System.Drawing.Color.Red;
-                            return;
-                        }
                         byte[] imgData = new byte[0];
                         using (Stream fs = fuCoverPhoto.HasFile ? fuCoverPhoto.PostedFile.InputStream : new FileStream(Server.MapPath("~/Images/cover/default.jpg"), FileMode.Open, FileAccess.Read))
                         {
