@@ -5,7 +5,7 @@ async function startPolling() {
     var timer = setInterval(async function () {
         // 發送 Ajax 請求到 API，檢查是否有更新
         await getLastUpdateTime();
-    }, 30000);
+    }, 60000);
 
     window.addEventListener('beforeunload', function () {
         // 在卸載事件中停止計時器
