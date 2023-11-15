@@ -388,3 +388,10 @@ html, body {
     text-align: center;
     padding: 15px 0 !important;
 }
+
+.cfturnstile {
+    width: fit-content;
+    position: relative;
+    transform: translateX(-50%);
+    left: 50%;
+}
