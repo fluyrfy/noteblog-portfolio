@@ -189,7 +189,6 @@ html, body {
                 background-color: #fff;
                 border: 1px solid #eee;
                 overflow: hidden;
-                margin-top: 50px;
                 opacity: 1;
                 visibility: visible;
                 -webkit-transition: all 0.3s ease;
@@ -394,4 +393,14 @@ html, body {
     position: relative;
     transform: translateX(-50%);
     left: 50%;
+}
+
+    .cfturnstile iframe {
+        width: 100% !important;
+    }
+
+.submit-btn.disabled {
+    background-color: #ccc !important;
+    color: #666 !important;
+    cursor: not-allowed !important;
 }
