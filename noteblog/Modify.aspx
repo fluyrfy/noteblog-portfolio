@@ -11,7 +11,7 @@
                 <hr class="w3-opacity">
                 <div class="w3-section" aria-orientation="horizontal">
                     <label>Category</label>
-                    <asp:RadioButtonList ID="rdlCategory" runat="server" RepeatDirection="Horizontal">
+                    <asp:RadioButtonList ID="rdlCategory" runat="server" RepeatDirection="Horizontal" CssClass="category">
                     </asp:RadioButtonList>
                 </div>
                 <div class="w3-section">

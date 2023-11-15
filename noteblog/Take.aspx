@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="New Post" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Take.aspx.cs" Inherits="noteblog.Take" ValidateRequest="false" %>
 
 
-<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">    
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <script src="Scripts/ckeditor/ckeditor.js"></script>
     <link href="Shared/Take.css" rel="stylesheet" />
     <main>
@@ -11,7 +11,7 @@
                 <hr class="w3-opacity">
                 <div class="w3-section" aria-orientation="horizontal">
                     <label>Category</label>
-                    <asp:RadioButtonList ID="rdlCategory" runat="server" RepeatDirection="Horizontal">
+                    <asp:RadioButtonList ID="rdlCategory" runat="server" RepeatDirection="Horizontal" CssClass="category">
                     </asp:RadioButtonList>
                     <asp:RequiredFieldValidator ID="rfvDevelopment" runat="server" ErrorMessage="Development is required" ControlToValidate="rdlCategory" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
