@@ -112,7 +112,7 @@
         window.onloadTurnstileCallback = function () {
             turnstile.render('.cfturnstile', {
                 sitekey: '0x4AAAAAAANJgZydX09IuVou',
-                callback: function (token) {
+                callback: async function (token) {
                     console.log(`Challenge Success ${token}`);
                     const SECRET_KEY = '0x4AAAAAAANJgYb-x1-T1GeOsK5_G3SLgyI';
                     let formData = new FormData();
@@ -126,6 +126,7 @@
                     });
                     const outcome = await result.json();
                     console.log(outcome)
+
                 },
             });
         };
