@@ -5,7 +5,7 @@
     <link href="Shared/Sign.css" rel="stylesheet" />
 
     <div class="form-structor">
-        <asp:Panel runat="server" ID="pnlResetPwd">
+        <asp:Panel runat="server" ID="pnlResetPwd" ClientIDMode="Static">
             <%--reset password block--%>
             <div class="signup">
                 <h2 class="form-title" id="">Reset Password</h2>
@@ -39,7 +39,7 @@
             </div>
         </asp:Panel>
 
-        <asp:Panel runat="server" ID="pnlSign">
+        <asp:Panel runat="server" ID="pnlSign" ClientIDMode="Static">
             <%-- log in --%>
             <asp:Panel runat="server" DefaultButton="btnLogIn" ID="pnlLogIn">
                 <div class="signup">
@@ -57,7 +57,6 @@
                     <asp:RequiredFieldValidator runat="server" ErrorMessage="Email is required" ValidationGroup="Login" ControlToValidate="txtInEmail" CssClass="hidden-validator" Display="Dynamic"></asp:RequiredFieldValidator>
                     <asp:RequiredFieldValidator runat="server" ErrorMessage="Password is required" ValidationGroup="Login" ControlToValidate="txtInPwd" CssClass="hidden-validator" Display="Dynamic"></asp:RequiredFieldValidator>
                     <asp:Label ID="lblInHint" runat="server" CssClass="hint"></asp:Label>
-                    <div class="cfturnstile"></div>
                     <asp:Button ID="btnLogIn" ValidationGroup="Login" runat="server" CssClass="submit-btn" Text="Log in" OnClick="btnLogIn_Click" />
                 </div>
             </asp:Panel>
@@ -115,6 +114,18 @@
                 sitekey: '0x4AAAAAAANJgZydX09IuVou',
                 callback: function (token) {
                     console.log(`Challenge Success ${token}`);
+                    const SECRET_KEY = '0x4AAAAAAANJgYb-x1-T1GeOsK5_G3SLgyI';
+                    let formData = new FormData();
+                    formData.append('secret', SECRET_KEY);
+                    formData.append('response', token);
+
+                    const url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+                    const result = await fetch(url, {
+                        body: formData,
+                        method: 'POST',
+                    });
+                    const outcome = await result.json();
+                    console.log(outcome)
                 },
             });
         };
