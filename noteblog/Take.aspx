@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="New Post" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Take.aspx.cs" Inherits="noteblog.Take" ValidateRequest="false" %>
 
 
-<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">    
+    <script src="Scripts/ckeditor/ckeditor.js"></script>
     <link href="Shared/Take.css" rel="stylesheet" />
     <main>
         <div class="w3-main" style="margin-left: 300px">

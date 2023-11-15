@@ -2,6 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="Shared/Take.css" rel="stylesheet" />
+    <script src="Scripts/ckeditor/ckeditor.js"></script>
 
     <main>
         <div class="w3-main" style="margin-left: 300px">
