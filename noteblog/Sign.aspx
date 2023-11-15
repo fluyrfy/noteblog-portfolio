@@ -80,7 +80,8 @@
                             ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
                             ErrorMessage="Please enter a valid email" CssClass="hidden-validator" Display="Dynamic" />
                         <asp:Label ID="lblUpHint" runat="server" CssClass="hint"></asp:Label>
-                        <asp:Button ID="btnSignUp" ValidationGroup="Register" runat="server" CssClass="submit-btn" Text="Sign up" OnClick="btnSignUp_Click" />
+                        <div class="cfturnstile"></div>
+                        <asp:Button ID="btnSignUp" ValidationGroup="Register" runat="server" CssClass="submit-btn disabled" Text="Sign up" OnClick="btnSignUp_Click" ClientIDMode="Static" />
                     </div>
                 </div>
             </asp:Panel>
@@ -101,14 +102,35 @@
                         <asp:Literal ID="litModalContent" runat="server" />
                     </p>
                 </div>
-
             </asp:Panel>
         </asp:Panel>
     </div>
 
-
-    <script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script>
+    <script>        
         $(document).ready(function () {
+            window.onloadTurnstileCallback = function () {
+                turnstile.render('.cfturnstile', {
+                    sitekey: '0x4AAAAAAANJgZydX09IuVou',
+                    callback: async function (token) {
+                        console.log(`Challenge Success ${token}`);
+                        const result = await $.ajax({
+                            url: '/api/verify/turnstile',
+                            method: 'POST',
+                            data: {
+                                token
+                            }
+                        });
+                        const turnstile = JSON.parse(result).success
+                        $("#btnSignUp").toggleClass('disabled', !turnstile)
+                        if (turnstile == null || turnstile == false) {
+                            Page_IsValid = false;
+                            alert("User appears to be invalid or suspicious.");
+                            window.location.reload();
+                        }
+                    },
+                });
+            };
             $(".toggle-reset-password").click(function () {
                 $(this).toggleClass("fa-eye-slash fa-eye");
                 var input = $($(this).attr("toggle"));

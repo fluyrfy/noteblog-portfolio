@@ -132,3 +132,5 @@ D:\Programs\C#\noteblog\noteblog\bin\System.Web.Http.WebHost.dll
 D:\Programs\C#\noteblog\noteblog\bin\noteblog.dll.config
 D:\Programs\C#\noteblog\noteblog\bin\BouncyCastle.Cryptography.dll
 D:\Programs\C#\noteblog\noteblog\bin\Images\avatar.jpg
+D:\Programs\C#\noteblog\noteblog\bin\noteblog.pdb
+D:\Programs\C#\noteblog\noteblog\obj\Debug\noteblog.pdb
