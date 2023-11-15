@@ -19,7 +19,6 @@ async function getLastUpdateTime() {
             method: 'GET',
             dataType: 'json',
         });
-        console.log(updatedAt)
         $("#hidLastUpdateTime").val(updatedAt);
     } catch (error) {
         console.error('error:', error);

@@ -16,7 +16,7 @@ namespace noteblog
         {
 
             Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
-            log4net.Config.XmlConfigurator.Configure();
+            //log4net.Config.XmlConfigurator.Configure();
 
             // 應用程式啟動時執行的程式碼
             RouteConfig.RegisterRoutes(RouteTable.Routes);

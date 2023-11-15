@@ -14,10 +14,10 @@ namespace noteblog.Controls
 {
     public partial class NoteListControl : System.Web.UI.UserControl
     {
-        private Logger logger;
+        //private Logger logger;
         protected void Page_Load(object sender, EventArgs e)
         {
-            logger = new Logger(typeof(_Default).Name);
+            //logger = new Logger(typeof(_Default).Name);
             if (!IsPostBack)
             {
                 ViewState["CurrentPage"] = 1;
@@ -36,7 +36,7 @@ namespace noteblog.Controls
                 int currentPage = Convert.ToInt32(ViewState["CurrentPage"]);
                 if (Cache[$"{cacheKey}-{currentPage}"] == null)
                 {
-                    logger.Info("Starting to query notes");
+                    //logger.Info("Starting to query notes");
                     using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Noteblog"].ConnectionString))
                     {
                         MySqlCommand cmd = new MySqlCommand();
@@ -64,30 +64,30 @@ namespace noteblog.Controls
                         }
                         Cache[$"{cacheKey}-{currentPage}"] = dt;
                     }
-                    logger.Info("Notes queried successfully");
+                    //logger.Info("Notes queried successfully");
                 }
                 getPagedDataTableFromCache();
             }
             catch (Exception ex)
             {
-                logger.Error("Failed to query notes", ex);
+                //logger.Error("Failed to query notes", ex);
             }
             finally
             {
-                logger.Info("End of notes query method");
+                //logger.Info("End of notes query method");
             }
         }
         protected void getPagedDataTableFromCache()
         {
             var CR = new CategoryRepository();
             var NR = new NoteRepository();
-            logger.Info("Starting to load notes");
+            //logger.Info("Starting to load notes");
             try
             {
                 string cacheKey = ViewState["Category"].ToString();
                 hidCategoryName.Value = Regex.Replace(cacheKey, @"\s+", "");
                 int currentPage = Convert.ToInt32(ViewState["CurrentPage"]);
-                logger.Debug($"Current Category: {cacheKey}");
+                //logger.Debug($"Current Category: {cacheKey}");
                 if (Cache[$"{cacheKey}-{currentPage}"] is DataTable dt)
                 {
                     int totalRecords = NR.getTotalCount(CR.getId(cacheKey));
@@ -96,21 +96,21 @@ namespace noteblog.Controls
                     {
                         totalPages = 0;
                     }
-                    logger.Debug($"Current page number: {currentPage}");
+                    //logger.Debug($"Current page number: {currentPage}");
                     bindPagination(totalPages);
                     ViewState["TotalPages"] = totalPages;
                     DataTable dataTable = Cache[$"{cacheKey}-{currentPage}"] as DataTable;
                     bindNotesData(dataTable);
-                    logger.Info($"Notes queried successfully, Datatable: {dataTable.Rows.Count} rows");
+                    //logger.Info($"Notes queried successfully, Datatable: {dataTable.Rows.Count} rows");
                 }
             }
             catch (Exception ex)
             {
-                logger.Error("Failed to load notes", ex);
+                //logger.Error("Failed to load notes", ex);
             }
             finally
             {
-                logger.Info("End of notes load method");
+                //logger.Info("End of notes load method");
             }
         }
 
