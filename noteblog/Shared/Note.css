@@ -53,6 +53,7 @@ code {
     background-color: hsl(210,8%,90%);
     padding: 2px 4px;
     font-family: 'Fira Code', monospace;
+    overflow-wrap: anywhere;
 }
 
 .copy-btn {
@@ -104,5 +105,5 @@ code {
 }
 
 img {
-  max-width: 100%
+    max-width: 100%
 }
