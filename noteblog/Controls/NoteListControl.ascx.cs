@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
 using noteblog.Models;
+using noteblog.Utils;
 
 namespace noteblog.Controls
 {
@@ -16,6 +17,7 @@ namespace noteblog.Controls
         //private Logger logger;
         protected void Page_Load(object sender, EventArgs e)
         {
+            RequestHelper.HandleHeadRequest();
             //logger = new Logger(typeof(_Default).Name);
             if (!IsPostBack)
             {

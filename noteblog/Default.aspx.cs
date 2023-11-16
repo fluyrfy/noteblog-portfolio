@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using noteblog.Utils;
 
 namespace noteblog
 {
@@ -7,7 +8,7 @@ namespace noteblog
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            RequestHelper.HandleHeadRequest();
             if (!IsPostBack)
             {
                 new AccessStatsRepository().insert("Default");
