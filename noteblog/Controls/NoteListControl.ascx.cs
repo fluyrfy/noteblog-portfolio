@@ -8,7 +8,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
 using noteblog.Models;
-using noteblog.Utils;
 
 namespace noteblog.Controls
 {

@@ -17,5 +17,10 @@
                 window.location.reload();
             }
         },
+
+        'expired-callback': () => {
+            alert("The token has expired, please revalidate.");
+            window.location.reload();
+        },
     });
 };

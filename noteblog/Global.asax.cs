@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO.Compression;
 using System.Web;
 using System.Web.Http;
 using System.Web.Optimization;
@@ -76,5 +77,23 @@ namespace noteblog
             //    }
             //}
         }
+
+        void Application_BeginRequest(object sender, EventArgs e)
+        {
+            HttpContext context = HttpContext.Current;
+
+            // 檢查是否已經進行了壓縮
+            if (context.Request.Headers["Accept-encoding"] != null &&
+                context.Request.Headers["Accept-encoding"].Contains("gzip"))
+            {
+                return; // 如果已經進行過壓縮，不再進行
+            }
+
+            // 進行GZip壓縮
+            context.Response.Filter = new GZipStream(context.Response.Filter, CompressionMode.Compress);
+            context.Response.AppendHeader("Content-encoding", "gzip");
+            context.Response.Cache.VaryByHeaders["Accept-encoding"] = true;
+        }
+
     }
 }

@@ -1,1260 +1,1259 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6DB06206-42AD-4DEA-B296-4D2E72CA4F4A}</ProjectGuid>
-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>noteblog</RootNamespace>
-    <AssemblyName>noteblog</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
-    <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
-    <IISExpressSSLPort>44374</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
-    <UseGlobalApplicationHostFile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <LegacyPublishPropertiesPageEnabled>true</LegacyPublishPropertiesPageEnabled>
-    <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="AspNet.ScriptManager.jQuery, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AspNet.ScriptManager.jQuery.3.6.0\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
-    </Reference>
-    <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
-      <HintPath>..\packages\BCrypt.Net-Next.4.0.3\lib\net462\BCrypt.Net-Next.dll</HintPath>
-    </Reference>
-    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
-      <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
-    </Reference>
-    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
-      <HintPath>..\packages\BouncyCastle.Cryptography.2.2.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
-    </Reference>
-    <Reference Include="CommonMark, Version=0.1.0.0, Culture=neutral, PublicKeyToken=001ef8810438905d, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommonMark.NET.0.15.1\lib\net45\CommonMark.dll</HintPath>
-    </Reference>
-    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.2.0.151\lib\net461\Dapper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Dapper.FluentMap, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.FluentMap.2.0.0\lib\netstandard2.0\Dapper.FluentMap.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.Web.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.Web.UI.DataSource.1.0.0.0\lib\net45\EntityFramework.Web.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="FontAwesome, Version=1.0.5578.25903, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FontAwesome-ASP.NET.1.0.5578.25903\lib\net451\FontAwesome.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Protobuf, Version=3.24.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Protobuf.3.24.0\lib\net45\Google.Protobuf.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.11.52.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.11.52\lib\Net45\HtmlAgilityPack.dll</HintPath>
-    </Reference>
-    <Reference Include="JiebaNet.Analyser, Version=0.42.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\jieba.NET.0.42.2\lib\net45\JiebaNet.Analyser.dll</HintPath>
-    </Reference>
-    <Reference Include="JiebaNet.Segmenter, Version=0.42.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\jieba.NET.0.42.2\lib\net45\JiebaNet.Segmenter.dll</HintPath>
-    </Reference>
-    <Reference Include="K4os.Compression.LZ4, Version=1.3.5.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
-      <HintPath>..\packages\K4os.Compression.LZ4.1.3.5\lib\net462\K4os.Compression.LZ4.dll</HintPath>
-    </Reference>
-    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.3.5.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
-      <HintPath>..\packages\K4os.Compression.LZ4.Streams.1.3.5\lib\net462\K4os.Compression.LZ4.Streams.dll</HintPath>
-    </Reference>
-    <Reference Include="K4os.Hash.xxHash, Version=1.0.8.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
-      <HintPath>..\packages\K4os.Hash.xxHash.1.0.8\lib\net462\K4os.Hash.xxHash.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="MarkdownSharp, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MarkdownSharp.2.0.5\lib\net40\MarkdownSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.DynamicData.EFProvider, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.DynamicData.EFProvider.6.0.0\lib\net40\Microsoft.AspNet.DynamicData.EFProvider.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.EntityDataSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.EntityDataSource.6.0.0\lib\net40\Microsoft.AspNet.EntityDataSource.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.7.0.0\lib\net462\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.7.0.0\lib\net462\Microsoft.Extensions.Caching.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.7.0.0\lib\net462\Microsoft.Extensions.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.7.0.0\lib\net462\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=7.0.0.4, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.7.0.4\lib\net462\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.7.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.7.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.7.0.0\lib\net462\Microsoft.Extensions.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=7.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.7.0.1\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Configuration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.Configuration.7.0.0\lib\net462\Microsoft.Extensions.Logging.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Console, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.Console.7.0.0\lib\net462\Microsoft.Extensions.Logging.Console.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Options, Version=7.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Options.7.0.1\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Options.ConfigurationExtensions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Options.ConfigurationExtensions.7.0.0\lib\net462\Microsoft.Extensions.Options.ConfigurationExtensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Primitives.7.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.SqlServer.IntegrationServices.ODataConnectionManager, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.SqlServer.IntegrationServices.ODataSrc, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
-    <Reference Include="MySql.Data, Version=8.2.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.8.2.0\lib\net48\MySql.Data.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MySql.Data.EntityFramework, Version=8.2.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.EntityFramework.8.2.0\lib\net462\MySql.Data.EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="MySql.Web, Version=8.2.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Web.8.2.0\lib\net48\MySql.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="MySqlConnector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySqlConnector.2.2.7\lib\net471\MySqlConnector.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Pomelo.JsonObject, Version=2.2.1.0, Culture=neutral, PublicKeyToken=2cc498582444921b, processorArchitecture=MSIL">
-      <HintPath>..\packages\Pomelo.JsonObject.2.2.1\lib\netstandard2.0\Pomelo.JsonObject.dll</HintPath>
-    </Reference>
-    <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
-      <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="Spectre.Console, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Spectre.Console.0.47.0\lib\netstandard2.0\Spectre.Console.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Collections.Immutable, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Collections.Immutable.7.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel" />
-    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System" />
-    <Reference Include="System.Configuration.ConfigurationManager, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Configuration.ConfigurationManager.7.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Configuration.Install" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Drawing.Design" />
-    <Reference Include="System.Interactive.Async, Version=6.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Interactive.Async.6.0.1\lib\net48\System.Interactive.Async.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.Pipelines, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IO.Pipelines.7.0.0\lib\net462\System.IO.Pipelines.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Linq.Async, Version=6.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Linq.Async.6.0.1\lib\net48\System.Linq.Async.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Linq.Expressions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Linq.Expressions.4.3.0\lib\net463\System.Linq.Expressions.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Management" />
-    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Extensions, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.Extensions.4.3.1\lib\net462\System.Runtime.Extensions.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Permissions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Permissions.7.0.0\lib\net462\System.Security.Permissions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceProcess" />
-    <Reference Include="System.Text.Encodings.Web, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encodings.Web.7.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Json, Version=7.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Json.7.0.3\lib\net462\System.Text.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Extensions" />
-    <!-- <Reference Include="System.Web.DataVisualization">-->
-    <!--<Private>True</Private>-->
-    <!--</Reference>-->
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.9\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.1\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.ScriptManager.MSAjax">
-      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.ScriptManager.WebForms">
-      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="WebGrease">
-      <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
-    </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <Private>True</Private>
-      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.FriendlyUrls">
-      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
-    </Reference>
-    <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.9\lib\net45\WebMatrix.Data.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="WebMatrix.WebData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.3.2.9\lib\net45\WebMatrix.WebData.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="ZstdSharp, Version=0.7.2.0, Culture=neutral, PublicKeyToken=8d151af33a4ad5cf, processorArchitecture=MSIL">
-      <HintPath>..\packages\ZstdSharp.Port.0.7.2\lib\net461\ZstdSharp.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="bin\Antlr3.Runtime.dll" />
-    <Content Include="bin\AspNet.ScriptManager.jQuery.dll" />
-    <Content Include="bin\BouncyCastle.Crypto.dll" />
-    <Content Include="bin\Dapper.dll" />
-    <Content Include="bin\EntityFramework.dll" />
-    <Content Include="bin\EntityFramework.SqlServer.dll" />
-    <Content Include="bin\EntityFramework.Web.UI.dll" />
-    <Content Include="bin\FontAwesome.dll" />
-    <Content Include="bin\Google.Protobuf.dll" />
-    <Content Include="bin\K4os.Compression.LZ4.dll" />
-    <Content Include="bin\K4os.Compression.LZ4.Streams.dll" />
-    <Content Include="bin\K4os.Hash.xxHash.dll" />
-    <Content Include="bin\Microsoft.AspNet.DynamicData.EFProvider.dll" />
-    <Content Include="bin\Microsoft.AspNet.EntityDataSource.dll" />
-    <Content Include="bin\Microsoft.Bcl.AsyncInterfaces.dll" />
-    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
-    <Content Include="bin\Microsoft.Extensions.Caching.Abstractions.dll" />
-    <Content Include="bin\Microsoft.Extensions.Caching.Memory.dll" />
-    <Content Include="bin\Microsoft.Extensions.Configuration.Abstractions.dll" />
-    <Content Include="bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
-    <Content Include="bin\Microsoft.Extensions.DependencyInjection.dll" />
-    <Content Include="bin\Microsoft.Extensions.Logging.Abstractions.dll" />
-    <Content Include="bin\Microsoft.Extensions.Logging.Console.dll" />
-    <Content Include="bin\Microsoft.Extensions.Logging.dll" />
-    <Content Include="bin\Microsoft.Extensions.Options.dll" />
-    <Content Include="bin\Microsoft.Extensions.Primitives.dll" />
-    <Content Include="bin\Microsoft.ScriptManager.MSAjax.dll" />
-    <Content Include="bin\Microsoft.ScriptManager.WebForms.dll" />
-    <Content Include="bin\Microsoft.SqlServer.IntegrationServices.ODataConnectionManager.dll" />
-    <Content Include="bin\Microsoft.SqlServer.IntegrationServices.ODataSrc.dll" />
-    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
-    <Content Include="bin\MySql.Data.dll" />
-    <Content Include="bin\MySql.Data.EntityFramework.dll" />
-    <Content Include="bin\MySql.Web.dll" />
-    <Content Include="bin\MySqlConnector.dll" />
-    <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\noteblog.dll" />
-    <Content Include="bin\noteblog.pdb" />
-    <Content Include="bin\Pomelo.JsonObject.dll" />
-    <Content Include="bin\Remotion.Linq.dll" />
-    <Content Include="bin\roslyn\csc.exe" />
-    <Content Include="bin\roslyn\csi.exe" />
-    <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
-    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
-    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
-    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
-    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" />
-    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
-    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
-    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
-    <Content Include="bin\roslyn\System.Buffers.dll" />
-    <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
-    <Content Include="bin\roslyn\System.Memory.dll" />
-    <Content Include="bin\roslyn\System.Numerics.Vectors.dll" />
-    <Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
-    <Content Include="bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll" />
-    <Content Include="bin\roslyn\System.Text.Encoding.CodePages.dll" />
-    <Content Include="bin\roslyn\System.Threading.Tasks.Extensions.dll" />
-    <Content Include="bin\roslyn\vbc.exe" />
-    <Content Include="bin\roslyn\VBCSCompiler.exe" />
-    <Content Include="bin\System.Buffers.dll" />
-    <Content Include="bin\System.Collections.Immutable.dll" />
-    <Content Include="bin\System.ComponentModel.Annotations.dll" />
-    <Content Include="bin\System.Diagnostics.DiagnosticSource.dll" />
-    <Content Include="bin\System.Interactive.Async.dll" />
-    <Content Include="bin\System.IO.Pipelines.dll" />
-    <Content Include="bin\System.Linq.Expressions.dll" />
-    <Content Include="bin\System.Memory.dll" />
-    <Content Include="bin\System.Numerics.Vectors.dll" />
-    <Content Include="bin\System.Reflection.dll" />
-    <Content Include="bin\System.Runtime.CompilerServices.Unsafe.dll" />
-    <Content Include="bin\System.Runtime.dll" />
-    <Content Include="bin\System.Runtime.Extensions.dll" />
-    <Content Include="bin\System.Runtime.InteropServices.RuntimeInformation.dll" />
-    <Content Include="bin\System.Text.Encodings.Web.dll" />
-    <Content Include="bin\System.Text.Json.dll" />
-    <Content Include="bin\System.Threading.Tasks.Extensions.dll" />
-    <Content Include="bin\System.ValueTuple.dll" />
-    <Content Include="bin\System.Web.Helpers.dll" />
-    <Content Include="bin\System.Web.Optimization.dll" />
-    <Content Include="bin\System.Web.Razor.dll" />
-    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
-    <Content Include="bin\System.Web.WebPages.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.dll" />
-    <Content Include="bin\WebGrease.dll" />
-    <Content Include="bin\WebMatrix.Data.dll" />
-    <Content Include="bin\WebMatrix.WebData.dll" />
-    <Content Include="Controls\NoteListControl.ascx" />
-    <Content Include="Controls\PaginationControl.ascx" />
-    <Content Include="Images\avatar.jpg" />
-    <Content Include="Images\avatar.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\cover\default.jpg" />
-    <Content Include="Images\email\email.png" />
-    <Content Include="Images\ico\favicon.ico" />
-    <Content Include="Images\ico\user.ico" />
-    <Content Include="Images\logo\logo-icononly.png" />
-    <Content Include="Images\logo\logo.svg" />
-    <Content Include="Images\email\email.png" />
-    <Content Include="Images\ico\user.ico" />
-    <Content Include="Images\logo\logo.svg" />
-    <Content Include="Shared\bootstrap.min.css" />
-    <Content Include="Shared\Common.css" />
-    <Content Include="Shared\custom.css" />
-    <Content Include="Shared\Default.css" />
-    <Content Include="Shared\highlight\a11y-dark.css" />
-    <Content Include="Shared\highlight\a11y-light.css" />
-    <Content Include="Shared\highlight\agate.css" />
-    <Content Include="Shared\highlight\an-old-hope.css" />
-    <Content Include="Shared\highlight\androidstudio.css" />
-    <Content Include="Shared\highlight\arduino-light.css" />
-    <Content Include="Shared\highlight\arta.css" />
-    <Content Include="Shared\highlight\ascetic.css" />
-    <Content Include="Shared\highlight\atom-one-dark-reasonable.css" />
-    <Content Include="Shared\highlight\atom-one-dark.css" />
-    <Content Include="Shared\highlight\atom-one-light.css" />
-    <Content Include="Shared\highlight\base16\3024.css" />
-    <Content Include="Shared\highlight\base16\apathy.css" />
-    <Content Include="Shared\highlight\base16\apprentice.css" />
-    <Content Include="Shared\highlight\base16\ashes.css" />
-    <Content Include="Shared\highlight\base16\atelier-cave-light.css" />
-    <Content Include="Shared\highlight\base16\atelier-cave.css" />
-    <Content Include="Shared\highlight\base16\atelier-dune-light.css" />
-    <Content Include="Shared\highlight\base16\atelier-dune.css" />
-    <Content Include="Shared\highlight\base16\atelier-estuary-light.css" />
-    <Content Include="Shared\highlight\base16\atelier-estuary.css" />
-    <Content Include="Shared\highlight\base16\atelier-forest-light.css" />
-    <Content Include="Shared\highlight\base16\atelier-forest.css" />
-    <Content Include="Shared\highlight\base16\atelier-heath-light.css" />
-    <Content Include="Shared\highlight\base16\atelier-heath.css" />
-    <Content Include="Shared\highlight\base16\atelier-lakeside-light.css" />
-    <Content Include="Shared\highlight\base16\atelier-lakeside.css" />
-    <Content Include="Shared\highlight\base16\atelier-plateau-light.css" />
-    <Content Include="Shared\highlight\base16\atelier-plateau.css" />
-    <Content Include="Shared\highlight\base16\atelier-savanna-light.css" />
-    <Content Include="Shared\highlight\base16\atelier-savanna.css" />
-    <Content Include="Shared\highlight\base16\atelier-seaside-light.css" />
-    <Content Include="Shared\highlight\base16\atelier-seaside.css" />
-    <Content Include="Shared\highlight\base16\atelier-sulphurpool-light.css" />
-    <Content Include="Shared\highlight\base16\atelier-sulphurpool.css" />
-    <Content Include="Shared\highlight\base16\atlas.css" />
-    <Content Include="Shared\highlight\base16\bespin.css" />
-    <Content Include="Shared\highlight\base16\black-metal-bathory.css" />
-    <Content Include="Shared\highlight\base16\black-metal-burzum.css" />
-    <Content Include="Shared\highlight\base16\black-metal-dark-funeral.css" />
-    <Content Include="Shared\highlight\base16\black-metal-gorgoroth.css" />
-    <Content Include="Shared\highlight\base16\black-metal-immortal.css" />
-    <Content Include="Shared\highlight\base16\black-metal-khold.css" />
-    <Content Include="Shared\highlight\base16\black-metal-marduk.css" />
-    <Content Include="Shared\highlight\base16\black-metal-mayhem.css" />
-    <Content Include="Shared\highlight\base16\black-metal-nile.css" />
-    <Content Include="Shared\highlight\base16\black-metal-venom.css" />
-    <Content Include="Shared\highlight\base16\black-metal.css" />
-    <Content Include="Shared\highlight\base16\brewer.css" />
-    <Content Include="Shared\highlight\base16\bright.css" />
-    <Content Include="Shared\highlight\base16\brogrammer.css" />
-    <Content Include="Shared\highlight\base16\brush-trees-dark.css" />
-    <Content Include="Shared\highlight\base16\brush-trees.css" />
-    <Content Include="Shared\highlight\base16\chalk.css" />
-    <Content Include="Shared\highlight\base16\circus.css" />
-    <Content Include="Shared\highlight\base16\classic-dark.css" />
-    <Content Include="Shared\highlight\base16\classic-light.css" />
-    <Content Include="Shared\highlight\base16\codeschool.css" />
-    <Content Include="Shared\highlight\base16\colors.css" />
-    <Content Include="Shared\highlight\base16\cupcake.css" />
-    <Content Include="Shared\highlight\base16\cupertino.css" />
-    <Content Include="Shared\highlight\base16\danqing.css" />
-    <Content Include="Shared\highlight\base16\darcula.css" />
-    <Content Include="Shared\highlight\base16\dark-violet.css" />
-    <Content Include="Shared\highlight\base16\darkmoss.css" />
-    <Content Include="Shared\highlight\base16\darktooth.css" />
-    <Content Include="Shared\highlight\base16\decaf.css" />
-    <Content Include="Shared\highlight\base16\default-dark.css" />
-    <Content Include="Shared\highlight\base16\default-light.css" />
-    <Content Include="Shared\highlight\base16\dirtysea.css" />
-    <Content Include="Shared\highlight\base16\dracula.css" />
-    <Content Include="Shared\highlight\base16\edge-dark.css" />
-    <Content Include="Shared\highlight\base16\edge-light.css" />
-    <Content Include="Shared\highlight\base16\eighties.css" />
-    <Content Include="Shared\highlight\base16\embers.css" />
-    <Content Include="Shared\highlight\base16\equilibrium-dark.css" />
-    <Content Include="Shared\highlight\base16\equilibrium-gray-dark.css" />
-    <Content Include="Shared\highlight\base16\equilibrium-gray-light.css" />
-    <Content Include="Shared\highlight\base16\equilibrium-light.css" />
-    <Content Include="Shared\highlight\base16\espresso.css" />
-    <Content Include="Shared\highlight\base16\eva-dim.css" />
-    <Content Include="Shared\highlight\base16\eva.css" />
-    <Content Include="Shared\highlight\base16\flat.css" />
-    <Content Include="Shared\highlight\base16\framer.css" />
-    <Content Include="Shared\highlight\base16\fruit-soda.css" />
-    <Content Include="Shared\highlight\base16\gigavolt.css" />
-    <Content Include="Shared\highlight\base16\github.css" />
-    <Content Include="Shared\highlight\base16\google-dark.css" />
-    <Content Include="Shared\highlight\base16\google-light.css" />
-    <Content Include="Shared\highlight\base16\grayscale-dark.css" />
-    <Content Include="Shared\highlight\base16\grayscale-light.css" />
-    <Content Include="Shared\highlight\base16\green-screen.css" />
-    <Content Include="Shared\highlight\base16\gruvbox-dark-hard.css" />
-    <Content Include="Shared\highlight\base16\gruvbox-dark-medium.css" />
-    <Content Include="Shared\highlight\base16\gruvbox-dark-pale.css" />
-    <Content Include="Shared\highlight\base16\gruvbox-dark-soft.css" />
-    <Content Include="Shared\highlight\base16\gruvbox-light-hard.css" />
-    <Content Include="Shared\highlight\base16\gruvbox-light-medium.css" />
-    <Content Include="Shared\highlight\base16\gruvbox-light-soft.css" />
-    <Content Include="Shared\highlight\base16\hardcore.css" />
-    <Content Include="Shared\highlight\base16\harmonic16-dark.css" />
-    <Content Include="Shared\highlight\base16\harmonic16-light.css" />
-    <Content Include="Shared\highlight\base16\heetch-dark.css" />
-    <Content Include="Shared\highlight\base16\heetch-light.css" />
-    <Content Include="Shared\highlight\base16\helios.css" />
-    <Content Include="Shared\highlight\base16\hopscotch.css" />
-    <Content Include="Shared\highlight\base16\horizon-dark.css" />
-    <Content Include="Shared\highlight\base16\horizon-light.css" />
-    <Content Include="Shared\highlight\base16\humanoid-dark.css" />
-    <Content Include="Shared\highlight\base16\humanoid-light.css" />
-    <Content Include="Shared\highlight\base16\ia-dark.css" />
-    <Content Include="Shared\highlight\base16\ia-light.css" />
-    <Content Include="Shared\highlight\base16\icy-dark.css" />
-    <Content Include="Shared\highlight\base16\ir-black.css" />
-    <Content Include="Shared\highlight\base16\isotope.css" />
-    <Content Include="Shared\highlight\base16\kimber.css" />
-    <Content Include="Shared\highlight\base16\london-tube.css" />
-    <Content Include="Shared\highlight\base16\macintosh.css" />
-    <Content Include="Shared\highlight\base16\marrakesh.css" />
-    <Content Include="Shared\highlight\base16\materia.css" />
-    <Content Include="Shared\highlight\base16\material-darker.css" />
-    <Content Include="Shared\highlight\base16\material-lighter.css" />
-    <Content Include="Shared\highlight\base16\material-palenight.css" />
-    <Content Include="Shared\highlight\base16\material-vivid.css" />
-    <Content Include="Shared\highlight\base16\material.css" />
-    <Content Include="Shared\highlight\base16\mellow-purple.css" />
-    <Content Include="Shared\highlight\base16\mexico-light.css" />
-    <Content Include="Shared\highlight\base16\mocha.css" />
-    <Content Include="Shared\highlight\base16\monokai.css" />
-    <Content Include="Shared\highlight\base16\nebula.css" />
-    <Content Include="Shared\highlight\base16\nord.css" />
-    <Content Include="Shared\highlight\base16\nova.css" />
-    <Content Include="Shared\highlight\base16\ocean.css" />
-    <Content Include="Shared\highlight\base16\oceanicnext.css" />
-    <Content Include="Shared\highlight\base16\one-light.css" />
-    <Content Include="Shared\highlight\base16\onedark.css" />
-    <Content Include="Shared\highlight\base16\outrun-dark.css" />
-    <Content Include="Shared\highlight\base16\papercolor-dark.css" />
-    <Content Include="Shared\highlight\base16\papercolor-light.css" />
-    <Content Include="Shared\highlight\base16\paraiso.css" />
-    <Content Include="Shared\highlight\base16\pasque.css" />
-    <Content Include="Shared\highlight\base16\phd.css" />
-    <Content Include="Shared\highlight\base16\pico.css" />
-    <Content Include="Shared\highlight\base16\pop.css" />
-    <Content Include="Shared\highlight\base16\porple.css" />
-    <Content Include="Shared\highlight\base16\qualia.css" />
-    <Content Include="Shared\highlight\base16\railscasts.css" />
-    <Content Include="Shared\highlight\base16\rebecca.css" />
-    <Content Include="Shared\highlight\base16\ros-pine-dawn.css" />
-    <Content Include="Shared\highlight\base16\ros-pine-moon.css" />
-    <Content Include="Shared\highlight\base16\ros-pine.css" />
-    <Content Include="Shared\highlight\base16\sagelight.css" />
-    <Content Include="Shared\highlight\base16\sandcastle.css" />
-    <Content Include="Shared\highlight\base16\seti-ui.css" />
-    <Content Include="Shared\highlight\base16\shapeshifter.css" />
-    <Content Include="Shared\highlight\base16\silk-dark.css" />
-    <Content Include="Shared\highlight\base16\silk-light.css" />
-    <Content Include="Shared\highlight\base16\snazzy.css" />
-    <Content Include="Shared\highlight\base16\solar-flare-light.css" />
-    <Content Include="Shared\highlight\base16\solar-flare.css" />
-    <Content Include="Shared\highlight\base16\solarized-dark.css" />
-    <Content Include="Shared\highlight\base16\solarized-light.css" />
-    <Content Include="Shared\highlight\base16\spacemacs.css" />
-    <Content Include="Shared\highlight\base16\summercamp.css" />
-    <Content Include="Shared\highlight\base16\summerfruit-dark.css" />
-    <Content Include="Shared\highlight\base16\summerfruit-light.css" />
-    <Content Include="Shared\highlight\base16\synth-midnight-terminal-dark.css" />
-    <Content Include="Shared\highlight\base16\synth-midnight-terminal-light.css" />
-    <Content Include="Shared\highlight\base16\tango.css" />
-    <Content Include="Shared\highlight\base16\tender.css" />
-    <Content Include="Shared\highlight\base16\tomorrow-night.css" />
-    <Content Include="Shared\highlight\base16\tomorrow.css" />
-    <Content Include="Shared\highlight\base16\twilight.css" />
-    <Content Include="Shared\highlight\base16\unikitty-dark.css" />
-    <Content Include="Shared\highlight\base16\unikitty-light.css" />
-    <Content Include="Shared\highlight\base16\vulcan.css" />
-    <Content Include="Shared\highlight\base16\windows-10-light.css" />
-    <Content Include="Shared\highlight\base16\windows-10.css" />
-    <Content Include="Shared\highlight\base16\windows-95-light.css" />
-    <Content Include="Shared\highlight\base16\windows-95.css" />
-    <Content Include="Shared\highlight\base16\windows-high-contrast-light.css" />
-    <Content Include="Shared\highlight\base16\windows-high-contrast.css" />
-    <Content Include="Shared\highlight\base16\windows-nt-light.css" />
-    <Content Include="Shared\highlight\base16\windows-nt.css" />
-    <Content Include="Shared\highlight\base16\woodland.css" />
-    <Content Include="Shared\highlight\base16\xcode-dusk.css" />
-    <Content Include="Shared\highlight\base16\zenburn.css" />
-    <Content Include="Shared\highlight\brown-paper.css" />
-    <Content Include="Shared\highlight\brown-papersq.png" />
-    <Content Include="Shared\highlight\codepen-embed.css" />
-    <Content Include="Shared\highlight\color-brewer.css" />
-    <Content Include="Shared\highlight\dark.css" />
-    <Content Include="Shared\highlight\default.css" />
-    <Content Include="Shared\highlight\devibeans.css" />
-    <Content Include="Shared\highlight\docco.css" />
-    <Content Include="Shared\highlight\far.css" />
-    <Content Include="Shared\highlight\felipec.css" />
-    <Content Include="Shared\highlight\foundation.css" />
-    <Content Include="Shared\highlight\github-dark-dimmed.css" />
-    <Content Include="Shared\highlight\github-dark.css" />
-    <Content Include="Shared\highlight\github.css" />
-    <Content Include="Shared\highlight\gml.css" />
-    <Content Include="Shared\highlight\googlecode.css" />
-    <Content Include="Shared\highlight\gradient-dark.css" />
-    <Content Include="Shared\highlight\gradient-light.css" />
-    <Content Include="Shared\highlight\grayscale.css" />
-    <Content Include="Shared\highlight\hybrid.css" />
-    <Content Include="Shared\highlight\idea.css" />
-    <Content Include="Shared\highlight\intellij-light.css" />
-    <Content Include="Shared\highlight\ir-black.css" />
-    <Content Include="Shared\highlight\isbl-editor-dark.css" />
-    <Content Include="Shared\highlight\isbl-editor-light.css" />
-    <Content Include="Shared\highlight\kimbie-dark.css" />
-    <Content Include="Shared\highlight\kimbie-light.css" />
-    <Content Include="Shared\highlight\lightfair.css" />
-    <Content Include="Shared\highlight\lioshi.css" />
-    <Content Include="Shared\highlight\magula.css" />
-    <Content Include="Shared\highlight\mono-blue.css" />
-    <Content Include="Shared\highlight\monokai-sublime.css" />
-    <Content Include="Shared\highlight\monokai.css" />
-    <Content Include="Shared\highlight\night-owl.css" />
-    <Content Include="Shared\highlight\nnfx-dark.css" />
-    <Content Include="Shared\highlight\nnfx-light.css" />
-    <Content Include="Shared\highlight\nord.css" />
-    <Content Include="Shared\highlight\obsidian.css" />
-    <Content Include="Shared\highlight\panda-syntax-dark.css" />
-    <Content Include="Shared\highlight\panda-syntax-light.css" />
-    <Content Include="Shared\highlight\paraiso-dark.css" />
-    <Content Include="Shared\highlight\paraiso-light.css" />
-    <Content Include="Shared\highlight\pojoaque.css" />
-    <Content Include="Shared\highlight\pojoaque.jpg" />
-    <Content Include="Shared\highlight\purebasic.css" />
-    <Content Include="Shared\highlight\qtcreator-dark.css" />
-    <Content Include="Shared\highlight\qtcreator-light.css" />
-    <Content Include="Shared\highlight\rainbow.css" />
-    <Content Include="Shared\highlight\routeros.css" />
-    <Content Include="Shared\highlight\school-book.css" />
-    <Content Include="Shared\highlight\shades-of-purple.css" />
-    <Content Include="Shared\highlight\srcery.css" />
-    <Content Include="Shared\highlight\stackoverflow-dark.css" />
-    <Content Include="Shared\highlight\stackoverflow-light.css" />
-    <Content Include="Shared\highlight\sunburst.css" />
-    <Content Include="Shared\highlight\tokyo-night-dark.css" />
-    <Content Include="Shared\highlight\tokyo-night-light.css" />
-    <Content Include="Shared\highlight\tomorrow-night-blue.css" />
-    <Content Include="Shared\highlight\tomorrow-night-bright.css" />
-    <Content Include="Shared\highlight\vs.css" />
-    <Content Include="Shared\highlight\vs2015.css" />
-    <Content Include="Shared\highlight\xcode.css" />
-    <Content Include="Shared\highlight\xt256.css" />
-    <Content Include="Shared\Note.css" />
-    <Content Include="Shared\Sign.css" />
-    <Content Include="Shared\Take.css" />
-    <Content Include="Shared\Turnstile.css" />
-    <Content Include="Shared\Verify.css" />
-    <Content Include="Shared\Sign.css" />
-    <Content Include="Shared\Verify.css" />
-    <Content Include="Utils\js\dashboard.js" />
-    <Content Include="Utils\js\turnstile.js" />
-    <Content Include="Utils\js\user.js" />
-    <Content Include="Utils\js\note.js" />
-    <Content Include="Utils\js\draft.js" />
-    <Content Include="Verify.aspx" />
-    <Content Include="Sign.aspx" />
-    <Content Include="Images\cover\default.jpg" />
-    <Content Include="Note.aspx" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\ckeditor\ckeditor.js" />
-    <Content Include="Scripts\popper.min.js" />
-    <Content Include="Shared\Common.css" />
-    <Content Include="Shared\custom.css" />
-    <Content Include="Shared\Note.css" />
-    <Content Include="Modify.aspx" />
-    <Content Include="Dashboard.aspx" />
-    <Content Include="Shared\Take.css" />
-    <Content Include="Take.aspx" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Default.aspx" />
-    <Content Include="DynamicData\EntityTemplates\Default.ascx" />
-    <Content Include="DynamicData\EntityTemplates\Default_Edit.ascx" />
-    <Content Include="DynamicData\EntityTemplates\Default_Insert.ascx" />
-    <Content Include="DynamicData\FieldTemplates\Boolean.ascx" />
-    <Content Include="DynamicData\FieldTemplates\Boolean_Edit.ascx" />
-    <Content Include="DynamicData\FieldTemplates\Children.ascx" />
-    <Content Include="DynamicData\FieldTemplates\Children_Insert.ascx" />
-    <Content Include="DynamicData\FieldTemplates\DateTime.ascx" />
-    <Content Include="DynamicData\FieldTemplates\DateTime_Edit.ascx" />
-    <Content Include="DynamicData\FieldTemplates\Decimal_Edit.ascx" />
-    <Content Include="DynamicData\FieldTemplates\EmailAddress.ascx" />
-    <Content Include="DynamicData\FieldTemplates\Enumeration.ascx" />
-    <Content Include="DynamicData\FieldTemplates\Enumeration_Edit.ascx" />
-    <Content Include="DynamicData\FieldTemplates\ForeignKey.ascx" />
-    <Content Include="DynamicData\FieldTemplates\ForeignKey_Edit.ascx" />
-    <Content Include="DynamicData\FieldTemplates\Integer_Edit.ascx" />
-    <Content Include="DynamicData\FieldTemplates\ManyToMany.ascx" />
-    <Content Include="DynamicData\FieldTemplates\ManyToMany_Edit.ascx" />
-    <Content Include="DynamicData\FieldTemplates\MultilineText_Edit.ascx" />
-    <Content Include="DynamicData\FieldTemplates\Text.ascx" />
-    <Content Include="DynamicData\FieldTemplates\Text_Edit.ascx" />
-    <Content Include="DynamicData\FieldTemplates\Url.ascx" />
-    <Content Include="DynamicData\FieldTemplates\Url_Edit.ascx" />
-    <Content Include="DynamicData\PageTemplates\Details.aspx" />
-    <Content Include="DynamicData\PageTemplates\Edit.aspx" />
-    <Content Include="DynamicData\PageTemplates\Insert.aspx" />
-    <Content Include="DynamicData\PageTemplates\List.aspx" />
-    <Content Include="DynamicData\PageTemplates\ListDetails.aspx" />
-    <Content Include="Images\ico\favicon.ico" />
-    <Content Include="Global.asax" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="bin\noteblog.dll.config" />
-    <Content Include="bin\roslyn\csc.exe.config" />
-    <Content Include="bin\roslyn\csc.rsp" />
-    <Content Include="bin\roslyn\csi.exe.config" />
-    <Content Include="bin\roslyn\csi.rsp" />
-    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
-    <Content Include="bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets" />
-    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
-    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
-    <Content Include="bin\roslyn\vbc.exe.config" />
-    <Content Include="bin\roslyn\vbc.rsp" />
-    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
-    <Content Include="Scripts\ckeditor\ckeditor.js.map" />
-    <Content Include="Files\Fan_Resume.pdf" />
-    <None Include="Scripts\jquery-3.6.0.intellisense.js" />
-    <Content Include="Scripts\jquery-3.6.0.js" />
-    <Content Include="Scripts\jquery-3.6.0.min.js" />
-    <Content Include="Scripts\jquery-3.6.0.slim.js" />
-    <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\WebForms\DetailsView.js" />
-    <Content Include="Scripts\WebForms\Focus.js" />
-    <Content Include="Scripts\WebForms\GridView.js" />
-    <Content Include="Scripts\WebForms\Menu.js" />
-    <Content Include="Scripts\WebForms\MenuStandards.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
-    <Content Include="Scripts\WebForms\SmartNav.js" />
-    <Content Include="Scripts\WebForms\TreeView.js" />
-    <Content Include="Scripts\WebForms\WebForms.js" />
-    <Content Include="Scripts\WebForms\WebParts.js" />
-    <Content Include="Scripts\WebForms\WebUIValidation.js" />
-    <Content Include="Shared\Default.css" />
-    <Content Include="Site.Master" />
-    <Content Include="Templates\email.html" />
-    <Content Include="ViewSwitcher.ascx" />
-    <Content Include="Web.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Bundle.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\CategoriesController.cs" />
-    <Compile Include="Controllers\VerifyController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Controllers\NotesController.cs" />
-    <Compile Include="Controllers\DraftsController.cs" />
-    <Compile Include="Controls\NoteListControl.ascx.cs">
-      <DependentUpon>NoteListControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\NoteListControl.ascx.designer.cs">
-      <DependentUpon>NoteListControl.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\PaginationControl.ascx.cs">
-      <DependentUpon>PaginationControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\PaginationControl.ascx.designer.cs">
-      <DependentUpon>PaginationControl.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AccessStats.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\IpInfo.cs" />
-    <Compile Include="Models\Mappings\UserMap.cs" />
-    <Compile Include="Models\Mappings\DraftMap.cs" />
-    <Compile Include="Models\Log.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\Note.cs" />
-    <Compile Include="Models\Draft.cs" />
-    <Compile Include="Repositories\CategoryRepository.cs" />
-    <Compile Include="Repositories\AccessStatsRepository.cs" />
-    <Compile Include="Repositories\LogRepository.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="Repositories\NoteRepository.cs" />
-    <Compile Include="Repositories\DraftRepository.cs" />
-    <Compile Include="Utils\AuthenticationHelper.cs" />
-    <Compile Include="Utils\AccessHelper.cs" />
-    <Compile Include="Utils\ConverterHelper.cs" />
-    <Compile Include="Utils\EmailHelper.cs" />
-    <Compile Include="Utils\EncryptionHelper.cs" />
-    <Compile Include="Utils\RepositoryHelper.cs" />
-    <Compile Include="Verify.aspx.cs">
-      <DependentUpon>Verify.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Verify.aspx.designer.cs">
-      <DependentUpon>Verify.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Sign.aspx.cs">
-      <DependentUpon>Sign.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Sign.aspx.designer.cs">
-      <DependentUpon>Sign.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Note.aspx.cs">
-      <DependentUpon>Note.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Note.aspx.designer.cs">
-      <DependentUpon>Note.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin.Master.cs">
-      <DependentUpon>Admin.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin.Master.designer.cs">
-      <DependentUpon>Admin.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Site.Mobile - copy.Master.cs">
-      <DependentUpon>Site.Mobile - copy.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site.Mobile - copy.Master.designer.cs">
-      <DependentUpon>Site.Mobile - copy.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Modify.aspx.cs">
-      <DependentUpon>Modify.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Modify.aspx.designer.cs">
-      <DependentUpon>Modify.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Dashboard.aspx.cs">
-      <DependentUpon>Dashboard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Dashboard.aspx.designer.cs">
-      <DependentUpon>Dashboard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Take.aspx.cs">
-      <DependentUpon>Take.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Take.aspx.designer.cs">
-      <DependentUpon>Take.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\EntityTemplates\Default.ascx.cs">
-      <DependentUpon>Default.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\EntityTemplates\Default.ascx.designer.cs">
-      <DependentUpon>Default.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\EntityTemplates\Default_Edit.ascx.cs">
-      <DependentUpon>Default_Edit.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\EntityTemplates\Default_Edit.ascx.designer.cs">
-      <DependentUpon>Default_Edit.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\EntityTemplates\Default_Insert.ascx.cs">
-      <DependentUpon>Default_Insert.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\EntityTemplates\Default_Insert.ascx.designer.cs">
-      <DependentUpon>Default_Insert.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Boolean.ascx.cs">
-      <DependentUpon>Boolean.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Boolean.ascx.designer.cs">
-      <DependentUpon>Boolean.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Boolean_Edit.ascx.cs">
-      <DependentUpon>Boolean_Edit.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Boolean_Edit.ascx.designer.cs">
-      <DependentUpon>Boolean_Edit.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Children.ascx.cs">
-      <DependentUpon>Children.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Children.ascx.designer.cs">
-      <DependentUpon>Children.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Children_Insert.ascx.cs">
-      <DependentUpon>Children_Insert.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Children_Insert.ascx.designer.cs">
-      <DependentUpon>Children_Insert.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\DateTime.ascx.cs">
-      <DependentUpon>DateTime.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\DateTime.ascx.designer.cs">
-      <DependentUpon>DateTime.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\DateTime_Edit.ascx.cs">
-      <DependentUpon>DateTime_Edit.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\DateTime_Edit.ascx.designer.cs">
-      <DependentUpon>DateTime_Edit.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Decimal_Edit.ascx.cs">
-      <DependentUpon>Decimal_Edit.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Decimal_Edit.ascx.designer.cs">
-      <DependentUpon>Decimal_Edit.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\EmailAddress.ascx.cs">
-      <DependentUpon>EmailAddress.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\EmailAddress.ascx.designer.cs">
-      <DependentUpon>EmailAddress.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Enumeration.ascx.cs">
-      <DependentUpon>Enumeration.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Enumeration.ascx.designer.cs">
-      <DependentUpon>Enumeration.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Enumeration_Edit.ascx.cs">
-      <DependentUpon>Enumeration_Edit.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Enumeration_Edit.ascx.designer.cs">
-      <DependentUpon>Enumeration_Edit.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\ForeignKey.ascx.cs">
-      <DependentUpon>ForeignKey.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\ForeignKey.ascx.designer.cs">
-      <DependentUpon>ForeignKey.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\ForeignKey_Edit.ascx.cs">
-      <DependentUpon>ForeignKey_Edit.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\ForeignKey_Edit.ascx.designer.cs">
-      <DependentUpon>ForeignKey_Edit.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Integer_Edit.ascx.cs">
-      <DependentUpon>Integer_Edit.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Integer_Edit.ascx.designer.cs">
-      <DependentUpon>Integer_Edit.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\ManyToMany.ascx.cs">
-      <DependentUpon>ManyToMany.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\ManyToMany.ascx.designer.cs">
-      <DependentUpon>ManyToMany.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\ManyToMany_Edit.ascx.cs">
-      <DependentUpon>ManyToMany_Edit.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\ManyToMany_Edit.ascx.designer.cs">
-      <DependentUpon>ManyToMany_Edit.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\MultilineText_Edit.ascx.cs">
-      <DependentUpon>MultilineText_Edit.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\MultilineText_Edit.ascx.designer.cs">
-      <DependentUpon>MultilineText_Edit.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Text.ascx.cs">
-      <DependentUpon>Text.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Text.ascx.designer.cs">
-      <DependentUpon>Text.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Text_Edit.ascx.cs">
-      <DependentUpon>Text_Edit.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Text_Edit.ascx.designer.cs">
-      <DependentUpon>Text_Edit.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Url.ascx.cs">
-      <DependentUpon>Url.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Url.ascx.designer.cs">
-      <DependentUpon>Url.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Url_Edit.ascx.cs">
-      <DependentUpon>Url_Edit.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\FieldTemplates\Url_Edit.ascx.designer.cs">
-      <DependentUpon>Url_Edit.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\PageTemplates\Details.aspx.cs">
-      <DependentUpon>Details.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\PageTemplates\Details.aspx.designer.cs">
-      <DependentUpon>Details.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\PageTemplates\Edit.aspx.cs">
-      <DependentUpon>Edit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\PageTemplates\Edit.aspx.designer.cs">
-      <DependentUpon>Edit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\PageTemplates\Insert.aspx.cs">
-      <DependentUpon>Insert.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\PageTemplates\Insert.aspx.designer.cs">
-      <DependentUpon>Insert.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\PageTemplates\List.aspx.cs">
-      <DependentUpon>List.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\PageTemplates\List.aspx.designer.cs">
-      <DependentUpon>List.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicData\PageTemplates\ListDetails.aspx.cs">
-      <DependentUpon>ListDetails.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicData\PageTemplates\ListDetails.aspx.designer.cs">
-      <DependentUpon>ListDetails.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
-    <Compile Include="obj\Release\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Site.Master.cs">
-      <DependentUpon>Site.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site.Master.designer.cs">
-      <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Utils\CacheHelper.cs" />
-    <Compile Include="Utils\DatabaseHelper.cs" />
-    <Compile Include="Utils\Logger.cs" />
-    <Compile Include="ViewSwitcher.ascx.cs">
-      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ViewSwitcher.ascx.designer.cs">
-      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Admin\" />
-    <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="Logs\20230930.log">
-      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-    </None>
-    <None Include="Logs\20231108.log">
-      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-    </None>
-    <None Include="Logs\20231109.log">
-      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-    </None>
-    <None Include="Logs\20231113.log">
-      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-    </None>
-    <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
-    <Content Include="Scripts\jquery-3.6.0.min.map" />
-    <Content Include="Site.Mobile - copy.Master" />
-    <Content Include="Admin.Master" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <AllowedReferenceRelatedFileExtensions>
+	<Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+	<Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+		<ProductVersion>
+		</ProductVersion>
+		<SchemaVersion>2.0</SchemaVersion>
+		<ProjectGuid>{6DB06206-42AD-4DEA-B296-4D2E72CA4F4A}</ProjectGuid>
+		<ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+		<OutputType>Library</OutputType>
+		<AppDesignerFolder>Properties</AppDesignerFolder>
+		<RootNamespace>noteblog</RootNamespace>
+		<AssemblyName>noteblog</AssemblyName>
+		<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+		<UseIISExpress>true</UseIISExpress>
+		<Use64BitIISExpress />
+		<IISExpressSSLPort>44374</IISExpressSSLPort>
+		<IISExpressAnonymousAuthentication />
+		<IISExpressWindowsAuthentication />
+		<IISExpressUseClassicPipelineMode />
+		<UseGlobalApplicationHostFile />
+		<NuGetPackageImportStamp>
+		</NuGetPackageImportStamp>
+		<EnableSdkContainerSupport>true</EnableSdkContainerSupport>
+		<TargetFrameworkProfile />
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>bin\</OutputPath>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+		<LegacyPublishPropertiesPageEnabled>true</LegacyPublishPropertiesPageEnabled>
+		<ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>bin\</OutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<ItemGroup>
+		<Reference Include="AspNet.ScriptManager.jQuery, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+			<HintPath>..\packages\AspNet.ScriptManager.jQuery.3.6.0\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
+		</Reference>
+		<Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+			<HintPath>..\packages\BCrypt.Net-Next.4.0.3\lib\net462\BCrypt.Net-Next.dll</HintPath>
+		</Reference>
+		<Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+			<HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+		</Reference>
+		<Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+			<HintPath>..\packages\BouncyCastle.Cryptography.2.2.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+		</Reference>
+		<Reference Include="CommonMark, Version=0.1.0.0, Culture=neutral, PublicKeyToken=001ef8810438905d, processorArchitecture=MSIL">
+			<HintPath>..\packages\CommonMark.NET.0.15.1\lib\net45\CommonMark.dll</HintPath>
+		</Reference>
+		<Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+			<HintPath>..\packages\Dapper.2.0.151\lib\net461\Dapper.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="Dapper.FluentMap, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+			<HintPath>..\packages\Dapper.FluentMap.2.0.0\lib\netstandard2.0\Dapper.FluentMap.dll</HintPath>
+		</Reference>
+		<Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+			<HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+		</Reference>
+		<Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+			<HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+		</Reference>
+		<Reference Include="EntityFramework.Web.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+			<HintPath>..\packages\EntityFramework.Web.UI.DataSource.1.0.0.0\lib\net45\EntityFramework.Web.UI.dll</HintPath>
+		</Reference>
+		<Reference Include="FontAwesome, Version=1.0.5578.25903, Culture=neutral, processorArchitecture=MSIL">
+			<HintPath>..\packages\FontAwesome-ASP.NET.1.0.5578.25903\lib\net451\FontAwesome.dll</HintPath>
+		</Reference>
+		<Reference Include="Google.Protobuf, Version=3.24.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+			<HintPath>..\packages\Google.Protobuf.3.24.0\lib\net45\Google.Protobuf.dll</HintPath>
+		</Reference>
+		<Reference Include="HtmlAgilityPack, Version=1.11.52.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+			<HintPath>..\packages\HtmlAgilityPack.1.11.52\lib\Net45\HtmlAgilityPack.dll</HintPath>
+		</Reference>
+		<Reference Include="JiebaNet.Analyser, Version=0.42.2.0, Culture=neutral, processorArchitecture=MSIL">
+			<HintPath>..\packages\jieba.NET.0.42.2\lib\net45\JiebaNet.Analyser.dll</HintPath>
+		</Reference>
+		<Reference Include="JiebaNet.Segmenter, Version=0.42.2.0, Culture=neutral, processorArchitecture=MSIL">
+			<HintPath>..\packages\jieba.NET.0.42.2\lib\net45\JiebaNet.Segmenter.dll</HintPath>
+		</Reference>
+		<Reference Include="K4os.Compression.LZ4, Version=1.3.5.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+			<HintPath>..\packages\K4os.Compression.LZ4.1.3.5\lib\net462\K4os.Compression.LZ4.dll</HintPath>
+		</Reference>
+		<Reference Include="K4os.Compression.LZ4.Streams, Version=1.3.5.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+			<HintPath>..\packages\K4os.Compression.LZ4.Streams.1.3.5\lib\net462\K4os.Compression.LZ4.Streams.dll</HintPath>
+		</Reference>
+		<Reference Include="K4os.Hash.xxHash, Version=1.0.8.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+			<HintPath>..\packages\K4os.Hash.xxHash.1.0.8\lib\net462\K4os.Hash.xxHash.dll</HintPath>
+		</Reference>
+		<Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+			<HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
+		</Reference>
+		<Reference Include="MarkdownSharp, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+			<HintPath>..\packages\MarkdownSharp.2.0.5\lib\net40\MarkdownSharp.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.AspNet.DynamicData.EFProvider, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.AspNet.DynamicData.EFProvider.6.0.0\lib\net40\Microsoft.AspNet.DynamicData.EFProvider.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.AspNet.EntityDataSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.AspNet.EntityDataSource.6.0.0\lib\net40\Microsoft.AspNet.EntityDataSource.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.CSharp" />
+		<Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.7.0.0\lib\net462\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Caching.Memory, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.Extensions.Caching.Memory.7.0.0\lib\net462\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Configuration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.Extensions.Configuration.7.0.0\lib\net462\Microsoft.Extensions.Configuration.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.7.0.0\lib\net462\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Configuration.Binder, Version=7.0.0.4, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.7.0.4\lib\net462\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.DependencyInjection, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.Extensions.DependencyInjection.7.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.7.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Logging, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.Extensions.Logging.7.0.0\lib\net462\Microsoft.Extensions.Logging.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=7.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.7.0.1\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Logging.Configuration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.Extensions.Logging.Configuration.7.0.0\lib\net462\Microsoft.Extensions.Logging.Configuration.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Logging.Console, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.Extensions.Logging.Console.7.0.0\lib\net462\Microsoft.Extensions.Logging.Console.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Options, Version=7.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.Extensions.Options.7.0.1\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Options.ConfigurationExtensions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.Extensions.Options.ConfigurationExtensions.7.0.0\lib\net462\Microsoft.Extensions.Options.ConfigurationExtensions.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Primitives, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.Extensions.Primitives.7.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.SqlServer.IntegrationServices.ODataConnectionManager, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+		<Reference Include="Microsoft.SqlServer.IntegrationServices.ODataSrc, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+		<Reference Include="MySql.Data, Version=8.2.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+			<HintPath>..\packages\MySql.Data.8.2.0\lib\net48\MySql.Data.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="MySql.Data.EntityFramework, Version=8.2.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+			<HintPath>..\packages\MySql.Data.EntityFramework.8.2.0\lib\net462\MySql.Data.EntityFramework.dll</HintPath>
+		</Reference>
+		<Reference Include="MySql.Web, Version=8.2.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+			<HintPath>..\packages\MySql.Web.8.2.0\lib\net48\MySql.Web.dll</HintPath>
+		</Reference>
+		<Reference Include="MySqlConnector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
+			<HintPath>..\packages\MySqlConnector.2.2.7\lib\net471\MySqlConnector.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+			<HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+		</Reference>
+		<Reference Include="Pomelo.JsonObject, Version=2.2.1.0, Culture=neutral, PublicKeyToken=2cc498582444921b, processorArchitecture=MSIL">
+			<HintPath>..\packages\Pomelo.JsonObject.2.2.1\lib\netstandard2.0\Pomelo.JsonObject.dll</HintPath>
+		</Reference>
+		<Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+			<HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
+		</Reference>
+		<Reference Include="Spectre.Console, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+			<HintPath>..\packages\Spectre.Console.0.47.0\lib\netstandard2.0\Spectre.Console.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Collections.Immutable, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Collections.Immutable.7.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
+		</Reference>
+		<Reference Include="System.ComponentModel" />
+		<Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+		</Reference>
+		<Reference Include="System.ComponentModel.Composition" />
+		<Reference Include="System.ComponentModel.DataAnnotations" />
+		<Reference Include="System" />
+		<Reference Include="System.Configuration.ConfigurationManager, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Configuration.ConfigurationManager.7.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Configuration.Install" />
+		<Reference Include="System.Data" />
+		<Reference Include="System.Data.DataSetExtensions" />
+		<Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Drawing.Design" />
+		<Reference Include="System.Interactive.Async, Version=6.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Interactive.Async.6.0.1\lib\net48\System.Interactive.Async.dll</HintPath>
+		</Reference>
+		<Reference Include="System.IO.Pipelines, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.IO.Pipelines.7.0.0\lib\net462\System.IO.Pipelines.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
+			<Private>True</Private>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Linq.Async, Version=6.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Linq.Async.6.0.1\lib\net48\System.Linq.Async.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Linq.Expressions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Linq.Expressions.4.3.0\lib\net463\System.Linq.Expressions.dll</HintPath>
+			<Private>True</Private>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Management" />
+		<Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Net" />
+		<Reference Include="System.Net.Http" />
+		<Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Numerics" />
+		<Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
+			<Private>True</Private>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+			<Private>True</Private>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Runtime.Extensions, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Runtime.Extensions.4.3.1\lib\net462\System.Runtime.Extensions.dll</HintPath>
+			<Private>True</Private>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+			<Private>True</Private>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Runtime.Serialization" />
+		<Reference Include="System.Security" />
+		<Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Security.Permissions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Security.Permissions.7.0.0\lib\net462\System.Security.Permissions.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+		</Reference>
+		<Reference Include="System.ServiceProcess" />
+		<Reference Include="System.Text.Encodings.Web, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Text.Encodings.Web.7.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Text.Json, Version=7.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Text.Json.7.0.3\lib\net462\System.Text.Json.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Transactions" />
+		<Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+			<HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Web.Extensions" />
+		<!-- <Reference Include="System.Web.DataVisualization">-->
+		<!--<Private>True</Private>-->
+		<!--</Reference>-->
+		<Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Web.Http.WebHost, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.9\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="System.Drawing" />
+		<Reference Include="System.Web" />
+		<Reference Include="System.Xml" />
+		<Reference Include="System.Configuration" />
+		<Reference Include="System.Web.Services" />
+		<Reference Include="System.EnterpriseServices" />
+		<Reference Include="System.Web.DynamicData" />
+		<Reference Include="System.Web.Entity" />
+		<Reference Include="System.Web.ApplicationServices" />
+		<Reference Include="Microsoft.Web.Infrastructure, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<Private>True</Private>
+			<HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.1\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.ScriptManager.MSAjax">
+			<HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.ScriptManager.WebForms">
+			<HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+			<HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Xml.Linq" />
+		<Reference Include="WebGrease">
+			<Private>True</Private>
+			<HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+		</Reference>
+		<Reference Include="Antlr3.Runtime">
+			<Private>True</Private>
+			<HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
+			<Private>True</Private>
+			<HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.AspNet.FriendlyUrls">
+			<HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+		</Reference>
+		<Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.9\lib\net45\WebMatrix.Data.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="WebMatrix.WebData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.3.2.9\lib\net45\WebMatrix.WebData.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="WindowsBase" />
+		<Reference Include="ZstdSharp, Version=0.7.2.0, Culture=neutral, PublicKeyToken=8d151af33a4ad5cf, processorArchitecture=MSIL">
+			<HintPath>..\packages\ZstdSharp.Port.0.7.2\lib\net461\ZstdSharp.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="bin\Antlr3.Runtime.dll" />
+		<Content Include="bin\AspNet.ScriptManager.jQuery.dll" />
+		<Content Include="bin\BouncyCastle.Crypto.dll" />
+		<Content Include="bin\Dapper.dll" />
+		<Content Include="bin\EntityFramework.dll" />
+		<Content Include="bin\EntityFramework.SqlServer.dll" />
+		<Content Include="bin\EntityFramework.Web.UI.dll" />
+		<Content Include="bin\FontAwesome.dll" />
+		<Content Include="bin\Google.Protobuf.dll" />
+		<Content Include="bin\K4os.Compression.LZ4.dll" />
+		<Content Include="bin\K4os.Compression.LZ4.Streams.dll" />
+		<Content Include="bin\K4os.Hash.xxHash.dll" />
+		<Content Include="bin\Microsoft.AspNet.DynamicData.EFProvider.dll" />
+		<Content Include="bin\Microsoft.AspNet.EntityDataSource.dll" />
+		<Content Include="bin\Microsoft.Bcl.AsyncInterfaces.dll" />
+		<Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+		<Content Include="bin\Microsoft.Extensions.Caching.Abstractions.dll" />
+		<Content Include="bin\Microsoft.Extensions.Caching.Memory.dll" />
+		<Content Include="bin\Microsoft.Extensions.Configuration.Abstractions.dll" />
+		<Content Include="bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+		<Content Include="bin\Microsoft.Extensions.DependencyInjection.dll" />
+		<Content Include="bin\Microsoft.Extensions.Logging.Abstractions.dll" />
+		<Content Include="bin\Microsoft.Extensions.Logging.Console.dll" />
+		<Content Include="bin\Microsoft.Extensions.Logging.dll" />
+		<Content Include="bin\Microsoft.Extensions.Options.dll" />
+		<Content Include="bin\Microsoft.Extensions.Primitives.dll" />
+		<Content Include="bin\Microsoft.ScriptManager.MSAjax.dll" />
+		<Content Include="bin\Microsoft.ScriptManager.WebForms.dll" />
+		<Content Include="bin\Microsoft.SqlServer.IntegrationServices.ODataConnectionManager.dll" />
+		<Content Include="bin\Microsoft.SqlServer.IntegrationServices.ODataSrc.dll" />
+		<Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+		<Content Include="bin\MySql.Data.dll" />
+		<Content Include="bin\MySql.Data.EntityFramework.dll" />
+		<Content Include="bin\MySql.Web.dll" />
+		<Content Include="bin\MySqlConnector.dll" />
+		<Content Include="bin\Newtonsoft.Json.dll" />
+		<Content Include="bin\noteblog.dll" />
+		<Content Include="bin\noteblog.pdb" />
+		<Content Include="bin\Pomelo.JsonObject.dll" />
+		<Content Include="bin\Remotion.Linq.dll" />
+		<Content Include="bin\roslyn\csc.exe" />
+		<Content Include="bin\roslyn\csi.exe" />
+		<Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
+		<Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
+		<Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
+		<Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
+		<Content Include="bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" />
+		<Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
+		<Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
+		<Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
+		<Content Include="bin\roslyn\System.Buffers.dll" />
+		<Content Include="bin\roslyn\System.Collections.Immutable.dll" />
+		<Content Include="bin\roslyn\System.Memory.dll" />
+		<Content Include="bin\roslyn\System.Numerics.Vectors.dll" />
+		<Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
+		<Content Include="bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll" />
+		<Content Include="bin\roslyn\System.Text.Encoding.CodePages.dll" />
+		<Content Include="bin\roslyn\System.Threading.Tasks.Extensions.dll" />
+		<Content Include="bin\roslyn\vbc.exe" />
+		<Content Include="bin\roslyn\VBCSCompiler.exe" />
+		<Content Include="bin\System.Buffers.dll" />
+		<Content Include="bin\System.Collections.Immutable.dll" />
+		<Content Include="bin\System.ComponentModel.Annotations.dll" />
+		<Content Include="bin\System.Diagnostics.DiagnosticSource.dll" />
+		<Content Include="bin\System.Interactive.Async.dll" />
+		<Content Include="bin\System.IO.Pipelines.dll" />
+		<Content Include="bin\System.Linq.Expressions.dll" />
+		<Content Include="bin\System.Memory.dll" />
+		<Content Include="bin\System.Numerics.Vectors.dll" />
+		<Content Include="bin\System.Reflection.dll" />
+		<Content Include="bin\System.Runtime.CompilerServices.Unsafe.dll" />
+		<Content Include="bin\System.Runtime.dll" />
+		<Content Include="bin\System.Runtime.Extensions.dll" />
+		<Content Include="bin\System.Runtime.InteropServices.RuntimeInformation.dll" />
+		<Content Include="bin\System.Text.Encodings.Web.dll" />
+		<Content Include="bin\System.Text.Json.dll" />
+		<Content Include="bin\System.Threading.Tasks.Extensions.dll" />
+		<Content Include="bin\System.ValueTuple.dll" />
+		<Content Include="bin\System.Web.Helpers.dll" />
+		<Content Include="bin\System.Web.Optimization.dll" />
+		<Content Include="bin\System.Web.Razor.dll" />
+		<Content Include="bin\System.Web.WebPages.Deployment.dll" />
+		<Content Include="bin\System.Web.WebPages.dll" />
+		<Content Include="bin\System.Web.WebPages.Razor.dll" />
+		<Content Include="bin\WebGrease.dll" />
+		<Content Include="bin\WebMatrix.Data.dll" />
+		<Content Include="bin\WebMatrix.WebData.dll" />
+		<Content Include="Controls\NoteListControl.ascx" />
+		<Content Include="Controls\PaginationControl.ascx" />
+		<Content Include="Images\avatar.jpg" />
+		<Content Include="Images\avatar.jpg">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Images\cover\default.jpg" />
+		<Content Include="Images\email\email.png" />
+		<Content Include="Images\ico\favicon.ico" />
+		<Content Include="Images\ico\user.ico" />
+		<Content Include="Images\logo\logo-icononly.png" />
+		<Content Include="Images\logo\logo.svg" />
+		<Content Include="Images\email\email.png" />
+		<Content Include="Images\ico\user.ico" />
+		<Content Include="Images\logo\logo.svg" />
+		<Content Include="Shared\bootstrap.min.css" />
+		<Content Include="Shared\Common.css" />
+		<Content Include="Shared\custom.css" />
+		<Content Include="Shared\Default.css" />
+		<Content Include="Shared\highlight\a11y-dark.css" />
+		<Content Include="Shared\highlight\a11y-light.css" />
+		<Content Include="Shared\highlight\agate.css" />
+		<Content Include="Shared\highlight\an-old-hope.css" />
+		<Content Include="Shared\highlight\androidstudio.css" />
+		<Content Include="Shared\highlight\arduino-light.css" />
+		<Content Include="Shared\highlight\arta.css" />
+		<Content Include="Shared\highlight\ascetic.css" />
+		<Content Include="Shared\highlight\atom-one-dark-reasonable.css" />
+		<Content Include="Shared\highlight\atom-one-dark.css" />
+		<Content Include="Shared\highlight\atom-one-light.css" />
+		<Content Include="Shared\highlight\base16\3024.css" />
+		<Content Include="Shared\highlight\base16\apathy.css" />
+		<Content Include="Shared\highlight\base16\apprentice.css" />
+		<Content Include="Shared\highlight\base16\ashes.css" />
+		<Content Include="Shared\highlight\base16\atelier-cave-light.css" />
+		<Content Include="Shared\highlight\base16\atelier-cave.css" />
+		<Content Include="Shared\highlight\base16\atelier-dune-light.css" />
+		<Content Include="Shared\highlight\base16\atelier-dune.css" />
+		<Content Include="Shared\highlight\base16\atelier-estuary-light.css" />
+		<Content Include="Shared\highlight\base16\atelier-estuary.css" />
+		<Content Include="Shared\highlight\base16\atelier-forest-light.css" />
+		<Content Include="Shared\highlight\base16\atelier-forest.css" />
+		<Content Include="Shared\highlight\base16\atelier-heath-light.css" />
+		<Content Include="Shared\highlight\base16\atelier-heath.css" />
+		<Content Include="Shared\highlight\base16\atelier-lakeside-light.css" />
+		<Content Include="Shared\highlight\base16\atelier-lakeside.css" />
+		<Content Include="Shared\highlight\base16\atelier-plateau-light.css" />
+		<Content Include="Shared\highlight\base16\atelier-plateau.css" />
+		<Content Include="Shared\highlight\base16\atelier-savanna-light.css" />
+		<Content Include="Shared\highlight\base16\atelier-savanna.css" />
+		<Content Include="Shared\highlight\base16\atelier-seaside-light.css" />
+		<Content Include="Shared\highlight\base16\atelier-seaside.css" />
+		<Content Include="Shared\highlight\base16\atelier-sulphurpool-light.css" />
+		<Content Include="Shared\highlight\base16\atelier-sulphurpool.css" />
+		<Content Include="Shared\highlight\base16\atlas.css" />
+		<Content Include="Shared\highlight\base16\bespin.css" />
+		<Content Include="Shared\highlight\base16\black-metal-bathory.css" />
+		<Content Include="Shared\highlight\base16\black-metal-burzum.css" />
+		<Content Include="Shared\highlight\base16\black-metal-dark-funeral.css" />
+		<Content Include="Shared\highlight\base16\black-metal-gorgoroth.css" />
+		<Content Include="Shared\highlight\base16\black-metal-immortal.css" />
+		<Content Include="Shared\highlight\base16\black-metal-khold.css" />
+		<Content Include="Shared\highlight\base16\black-metal-marduk.css" />
+		<Content Include="Shared\highlight\base16\black-metal-mayhem.css" />
+		<Content Include="Shared\highlight\base16\black-metal-nile.css" />
+		<Content Include="Shared\highlight\base16\black-metal-venom.css" />
+		<Content Include="Shared\highlight\base16\black-metal.css" />
+		<Content Include="Shared\highlight\base16\brewer.css" />
+		<Content Include="Shared\highlight\base16\bright.css" />
+		<Content Include="Shared\highlight\base16\brogrammer.css" />
+		<Content Include="Shared\highlight\base16\brush-trees-dark.css" />
+		<Content Include="Shared\highlight\base16\brush-trees.css" />
+		<Content Include="Shared\highlight\base16\chalk.css" />
+		<Content Include="Shared\highlight\base16\circus.css" />
+		<Content Include="Shared\highlight\base16\classic-dark.css" />
+		<Content Include="Shared\highlight\base16\classic-light.css" />
+		<Content Include="Shared\highlight\base16\codeschool.css" />
+		<Content Include="Shared\highlight\base16\colors.css" />
+		<Content Include="Shared\highlight\base16\cupcake.css" />
+		<Content Include="Shared\highlight\base16\cupertino.css" />
+		<Content Include="Shared\highlight\base16\danqing.css" />
+		<Content Include="Shared\highlight\base16\darcula.css" />
+		<Content Include="Shared\highlight\base16\dark-violet.css" />
+		<Content Include="Shared\highlight\base16\darkmoss.css" />
+		<Content Include="Shared\highlight\base16\darktooth.css" />
+		<Content Include="Shared\highlight\base16\decaf.css" />
+		<Content Include="Shared\highlight\base16\default-dark.css" />
+		<Content Include="Shared\highlight\base16\default-light.css" />
+		<Content Include="Shared\highlight\base16\dirtysea.css" />
+		<Content Include="Shared\highlight\base16\dracula.css" />
+		<Content Include="Shared\highlight\base16\edge-dark.css" />
+		<Content Include="Shared\highlight\base16\edge-light.css" />
+		<Content Include="Shared\highlight\base16\eighties.css" />
+		<Content Include="Shared\highlight\base16\embers.css" />
+		<Content Include="Shared\highlight\base16\equilibrium-dark.css" />
+		<Content Include="Shared\highlight\base16\equilibrium-gray-dark.css" />
+		<Content Include="Shared\highlight\base16\equilibrium-gray-light.css" />
+		<Content Include="Shared\highlight\base16\equilibrium-light.css" />
+		<Content Include="Shared\highlight\base16\espresso.css" />
+		<Content Include="Shared\highlight\base16\eva-dim.css" />
+		<Content Include="Shared\highlight\base16\eva.css" />
+		<Content Include="Shared\highlight\base16\flat.css" />
+		<Content Include="Shared\highlight\base16\framer.css" />
+		<Content Include="Shared\highlight\base16\fruit-soda.css" />
+		<Content Include="Shared\highlight\base16\gigavolt.css" />
+		<Content Include="Shared\highlight\base16\github.css" />
+		<Content Include="Shared\highlight\base16\google-dark.css" />
+		<Content Include="Shared\highlight\base16\google-light.css" />
+		<Content Include="Shared\highlight\base16\grayscale-dark.css" />
+		<Content Include="Shared\highlight\base16\grayscale-light.css" />
+		<Content Include="Shared\highlight\base16\green-screen.css" />
+		<Content Include="Shared\highlight\base16\gruvbox-dark-hard.css" />
+		<Content Include="Shared\highlight\base16\gruvbox-dark-medium.css" />
+		<Content Include="Shared\highlight\base16\gruvbox-dark-pale.css" />
+		<Content Include="Shared\highlight\base16\gruvbox-dark-soft.css" />
+		<Content Include="Shared\highlight\base16\gruvbox-light-hard.css" />
+		<Content Include="Shared\highlight\base16\gruvbox-light-medium.css" />
+		<Content Include="Shared\highlight\base16\gruvbox-light-soft.css" />
+		<Content Include="Shared\highlight\base16\hardcore.css" />
+		<Content Include="Shared\highlight\base16\harmonic16-dark.css" />
+		<Content Include="Shared\highlight\base16\harmonic16-light.css" />
+		<Content Include="Shared\highlight\base16\heetch-dark.css" />
+		<Content Include="Shared\highlight\base16\heetch-light.css" />
+		<Content Include="Shared\highlight\base16\helios.css" />
+		<Content Include="Shared\highlight\base16\hopscotch.css" />
+		<Content Include="Shared\highlight\base16\horizon-dark.css" />
+		<Content Include="Shared\highlight\base16\horizon-light.css" />
+		<Content Include="Shared\highlight\base16\humanoid-dark.css" />
+		<Content Include="Shared\highlight\base16\humanoid-light.css" />
+		<Content Include="Shared\highlight\base16\ia-dark.css" />
+		<Content Include="Shared\highlight\base16\ia-light.css" />
+		<Content Include="Shared\highlight\base16\icy-dark.css" />
+		<Content Include="Shared\highlight\base16\ir-black.css" />
+		<Content Include="Shared\highlight\base16\isotope.css" />
+		<Content Include="Shared\highlight\base16\kimber.css" />
+		<Content Include="Shared\highlight\base16\london-tube.css" />
+		<Content Include="Shared\highlight\base16\macintosh.css" />
+		<Content Include="Shared\highlight\base16\marrakesh.css" />
+		<Content Include="Shared\highlight\base16\materia.css" />
+		<Content Include="Shared\highlight\base16\material-darker.css" />
+		<Content Include="Shared\highlight\base16\material-lighter.css" />
+		<Content Include="Shared\highlight\base16\material-palenight.css" />
+		<Content Include="Shared\highlight\base16\material-vivid.css" />
+		<Content Include="Shared\highlight\base16\material.css" />
+		<Content Include="Shared\highlight\base16\mellow-purple.css" />
+		<Content Include="Shared\highlight\base16\mexico-light.css" />
+		<Content Include="Shared\highlight\base16\mocha.css" />
+		<Content Include="Shared\highlight\base16\monokai.css" />
+		<Content Include="Shared\highlight\base16\nebula.css" />
+		<Content Include="Shared\highlight\base16\nord.css" />
+		<Content Include="Shared\highlight\base16\nova.css" />
+		<Content Include="Shared\highlight\base16\ocean.css" />
+		<Content Include="Shared\highlight\base16\oceanicnext.css" />
+		<Content Include="Shared\highlight\base16\one-light.css" />
+		<Content Include="Shared\highlight\base16\onedark.css" />
+		<Content Include="Shared\highlight\base16\outrun-dark.css" />
+		<Content Include="Shared\highlight\base16\papercolor-dark.css" />
+		<Content Include="Shared\highlight\base16\papercolor-light.css" />
+		<Content Include="Shared\highlight\base16\paraiso.css" />
+		<Content Include="Shared\highlight\base16\pasque.css" />
+		<Content Include="Shared\highlight\base16\phd.css" />
+		<Content Include="Shared\highlight\base16\pico.css" />
+		<Content Include="Shared\highlight\base16\pop.css" />
+		<Content Include="Shared\highlight\base16\porple.css" />
+		<Content Include="Shared\highlight\base16\qualia.css" />
+		<Content Include="Shared\highlight\base16\railscasts.css" />
+		<Content Include="Shared\highlight\base16\rebecca.css" />
+		<Content Include="Shared\highlight\base16\ros-pine-dawn.css" />
+		<Content Include="Shared\highlight\base16\ros-pine-moon.css" />
+		<Content Include="Shared\highlight\base16\ros-pine.css" />
+		<Content Include="Shared\highlight\base16\sagelight.css" />
+		<Content Include="Shared\highlight\base16\sandcastle.css" />
+		<Content Include="Shared\highlight\base16\seti-ui.css" />
+		<Content Include="Shared\highlight\base16\shapeshifter.css" />
+		<Content Include="Shared\highlight\base16\silk-dark.css" />
+		<Content Include="Shared\highlight\base16\silk-light.css" />
+		<Content Include="Shared\highlight\base16\snazzy.css" />
+		<Content Include="Shared\highlight\base16\solar-flare-light.css" />
+		<Content Include="Shared\highlight\base16\solar-flare.css" />
+		<Content Include="Shared\highlight\base16\solarized-dark.css" />
+		<Content Include="Shared\highlight\base16\solarized-light.css" />
+		<Content Include="Shared\highlight\base16\spacemacs.css" />
+		<Content Include="Shared\highlight\base16\summercamp.css" />
+		<Content Include="Shared\highlight\base16\summerfruit-dark.css" />
+		<Content Include="Shared\highlight\base16\summerfruit-light.css" />
+		<Content Include="Shared\highlight\base16\synth-midnight-terminal-dark.css" />
+		<Content Include="Shared\highlight\base16\synth-midnight-terminal-light.css" />
+		<Content Include="Shared\highlight\base16\tango.css" />
+		<Content Include="Shared\highlight\base16\tender.css" />
+		<Content Include="Shared\highlight\base16\tomorrow-night.css" />
+		<Content Include="Shared\highlight\base16\tomorrow.css" />
+		<Content Include="Shared\highlight\base16\twilight.css" />
+		<Content Include="Shared\highlight\base16\unikitty-dark.css" />
+		<Content Include="Shared\highlight\base16\unikitty-light.css" />
+		<Content Include="Shared\highlight\base16\vulcan.css" />
+		<Content Include="Shared\highlight\base16\windows-10-light.css" />
+		<Content Include="Shared\highlight\base16\windows-10.css" />
+		<Content Include="Shared\highlight\base16\windows-95-light.css" />
+		<Content Include="Shared\highlight\base16\windows-95.css" />
+		<Content Include="Shared\highlight\base16\windows-high-contrast-light.css" />
+		<Content Include="Shared\highlight\base16\windows-high-contrast.css" />
+		<Content Include="Shared\highlight\base16\windows-nt-light.css" />
+		<Content Include="Shared\highlight\base16\windows-nt.css" />
+		<Content Include="Shared\highlight\base16\woodland.css" />
+		<Content Include="Shared\highlight\base16\xcode-dusk.css" />
+		<Content Include="Shared\highlight\base16\zenburn.css" />
+		<Content Include="Shared\highlight\brown-paper.css" />
+		<Content Include="Shared\highlight\brown-papersq.png" />
+		<Content Include="Shared\highlight\codepen-embed.css" />
+		<Content Include="Shared\highlight\color-brewer.css" />
+		<Content Include="Shared\highlight\dark.css" />
+		<Content Include="Shared\highlight\default.css" />
+		<Content Include="Shared\highlight\devibeans.css" />
+		<Content Include="Shared\highlight\docco.css" />
+		<Content Include="Shared\highlight\far.css" />
+		<Content Include="Shared\highlight\felipec.css" />
+		<Content Include="Shared\highlight\foundation.css" />
+		<Content Include="Shared\highlight\github-dark-dimmed.css" />
+		<Content Include="Shared\highlight\github-dark.css" />
+		<Content Include="Shared\highlight\github.css" />
+		<Content Include="Shared\highlight\gml.css" />
+		<Content Include="Shared\highlight\googlecode.css" />
+		<Content Include="Shared\highlight\gradient-dark.css" />
+		<Content Include="Shared\highlight\gradient-light.css" />
+		<Content Include="Shared\highlight\grayscale.css" />
+		<Content Include="Shared\highlight\hybrid.css" />
+		<Content Include="Shared\highlight\idea.css" />
+		<Content Include="Shared\highlight\intellij-light.css" />
+		<Content Include="Shared\highlight\ir-black.css" />
+		<Content Include="Shared\highlight\isbl-editor-dark.css" />
+		<Content Include="Shared\highlight\isbl-editor-light.css" />
+		<Content Include="Shared\highlight\kimbie-dark.css" />
+		<Content Include="Shared\highlight\kimbie-light.css" />
+		<Content Include="Shared\highlight\lightfair.css" />
+		<Content Include="Shared\highlight\lioshi.css" />
+		<Content Include="Shared\highlight\magula.css" />
+		<Content Include="Shared\highlight\mono-blue.css" />
+		<Content Include="Shared\highlight\monokai-sublime.css" />
+		<Content Include="Shared\highlight\monokai.css" />
+		<Content Include="Shared\highlight\night-owl.css" />
+		<Content Include="Shared\highlight\nnfx-dark.css" />
+		<Content Include="Shared\highlight\nnfx-light.css" />
+		<Content Include="Shared\highlight\nord.css" />
+		<Content Include="Shared\highlight\obsidian.css" />
+		<Content Include="Shared\highlight\panda-syntax-dark.css" />
+		<Content Include="Shared\highlight\panda-syntax-light.css" />
+		<Content Include="Shared\highlight\paraiso-dark.css" />
+		<Content Include="Shared\highlight\paraiso-light.css" />
+		<Content Include="Shared\highlight\pojoaque.css" />
+		<Content Include="Shared\highlight\pojoaque.jpg" />
+		<Content Include="Shared\highlight\purebasic.css" />
+		<Content Include="Shared\highlight\qtcreator-dark.css" />
+		<Content Include="Shared\highlight\qtcreator-light.css" />
+		<Content Include="Shared\highlight\rainbow.css" />
+		<Content Include="Shared\highlight\routeros.css" />
+		<Content Include="Shared\highlight\school-book.css" />
+		<Content Include="Shared\highlight\shades-of-purple.css" />
+		<Content Include="Shared\highlight\srcery.css" />
+		<Content Include="Shared\highlight\stackoverflow-dark.css" />
+		<Content Include="Shared\highlight\stackoverflow-light.css" />
+		<Content Include="Shared\highlight\sunburst.css" />
+		<Content Include="Shared\highlight\tokyo-night-dark.css" />
+		<Content Include="Shared\highlight\tokyo-night-light.css" />
+		<Content Include="Shared\highlight\tomorrow-night-blue.css" />
+		<Content Include="Shared\highlight\tomorrow-night-bright.css" />
+		<Content Include="Shared\highlight\vs.css" />
+		<Content Include="Shared\highlight\vs2015.css" />
+		<Content Include="Shared\highlight\xcode.css" />
+		<Content Include="Shared\highlight\xt256.css" />
+		<Content Include="Shared\Note.css" />
+		<Content Include="Shared\Sign.css" />
+		<Content Include="Shared\Take.css" />
+		<Content Include="Shared\Verify.css" />
+		<Content Include="Shared\Sign.css" />
+		<Content Include="Shared\Verify.css" />
+		<Content Include="Utils\js\dashboard.js" />
+		<Content Include="Utils\js\turnstile.js" />
+		<Content Include="Utils\js\user.js" />
+		<Content Include="Utils\js\note.js" />
+		<Content Include="Utils\js\draft.js" />
+		<Content Include="Verify.aspx" />
+		<Content Include="Sign.aspx" />
+		<Content Include="Images\cover\default.jpg" />
+		<Content Include="Note.aspx" />
+		<Content Include="Scripts\bootstrap.min.js" />
+		<Content Include="Scripts\ckeditor\ckeditor.js" />
+		<Content Include="Scripts\popper.min.js" />
+		<Content Include="Shared\Common.css" />
+		<Content Include="Shared\custom.css" />
+		<Content Include="Shared\Note.css" />
+		<Content Include="Modify.aspx" />
+		<Content Include="Dashboard.aspx" />
+		<Content Include="Shared\Take.css" />
+		<Content Include="Take.aspx" />
+		<Content Include="Content\Site.css" />
+		<Content Include="Default.aspx" />
+		<Content Include="DynamicData\EntityTemplates\Default.ascx" />
+		<Content Include="DynamicData\EntityTemplates\Default_Edit.ascx" />
+		<Content Include="DynamicData\EntityTemplates\Default_Insert.ascx" />
+		<Content Include="DynamicData\FieldTemplates\Boolean.ascx" />
+		<Content Include="DynamicData\FieldTemplates\Boolean_Edit.ascx" />
+		<Content Include="DynamicData\FieldTemplates\Children.ascx" />
+		<Content Include="DynamicData\FieldTemplates\Children_Insert.ascx" />
+		<Content Include="DynamicData\FieldTemplates\DateTime.ascx" />
+		<Content Include="DynamicData\FieldTemplates\DateTime_Edit.ascx" />
+		<Content Include="DynamicData\FieldTemplates\Decimal_Edit.ascx" />
+		<Content Include="DynamicData\FieldTemplates\EmailAddress.ascx" />
+		<Content Include="DynamicData\FieldTemplates\Enumeration.ascx" />
+		<Content Include="DynamicData\FieldTemplates\Enumeration_Edit.ascx" />
+		<Content Include="DynamicData\FieldTemplates\ForeignKey.ascx" />
+		<Content Include="DynamicData\FieldTemplates\ForeignKey_Edit.ascx" />
+		<Content Include="DynamicData\FieldTemplates\Integer_Edit.ascx" />
+		<Content Include="DynamicData\FieldTemplates\ManyToMany.ascx" />
+		<Content Include="DynamicData\FieldTemplates\ManyToMany_Edit.ascx" />
+		<Content Include="DynamicData\FieldTemplates\MultilineText_Edit.ascx" />
+		<Content Include="DynamicData\FieldTemplates\Text.ascx" />
+		<Content Include="DynamicData\FieldTemplates\Text_Edit.ascx" />
+		<Content Include="DynamicData\FieldTemplates\Url.ascx" />
+		<Content Include="DynamicData\FieldTemplates\Url_Edit.ascx" />
+		<Content Include="DynamicData\PageTemplates\Details.aspx" />
+		<Content Include="DynamicData\PageTemplates\Edit.aspx" />
+		<Content Include="DynamicData\PageTemplates\Insert.aspx" />
+		<Content Include="DynamicData\PageTemplates\List.aspx" />
+		<Content Include="DynamicData\PageTemplates\ListDetails.aspx" />
+		<Content Include="Images\ico\favicon.ico" />
+		<Content Include="Global.asax" />
+		<Content Include="Scripts\bootstrap.js" />
+		<Content Include="Scripts\bootstrap.js.map" />
+		<Content Include="bin\noteblog.dll.config" />
+		<Content Include="bin\roslyn\csc.exe.config" />
+		<Content Include="bin\roslyn\csc.rsp" />
+		<Content Include="bin\roslyn\csi.exe.config" />
+		<Content Include="bin\roslyn\csi.rsp" />
+		<Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
+		<Content Include="bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets" />
+		<Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
+		<Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
+		<Content Include="bin\roslyn\vbc.exe.config" />
+		<Content Include="bin\roslyn\vbc.rsp" />
+		<Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+		<Content Include="Scripts\ckeditor\ckeditor.js.map" />
+		<Content Include="Files\Fan_Resume.pdf" />
+		<None Include="Scripts\jquery-3.6.0.intellisense.js" />
+		<Content Include="Scripts\jquery-3.6.0.js" />
+		<Content Include="Scripts\jquery-3.6.0.min.js" />
+		<Content Include="Scripts\jquery-3.6.0.slim.js" />
+		<Content Include="Scripts\jquery-3.6.0.slim.min.js" />
+		<Content Include="Scripts\modernizr-2.8.3.js" />
+		<Content Include="Scripts\WebForms\DetailsView.js" />
+		<Content Include="Scripts\WebForms\Focus.js" />
+		<Content Include="Scripts\WebForms\GridView.js" />
+		<Content Include="Scripts\WebForms\Menu.js" />
+		<Content Include="Scripts\WebForms\MenuStandards.js" />
+		<Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+		<Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+		<Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+		<Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+		<Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+		<Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+		<Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+		<Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+		<Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+		<Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+		<Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+		<Content Include="Scripts\WebForms\SmartNav.js" />
+		<Content Include="Scripts\WebForms\TreeView.js" />
+		<Content Include="Scripts\WebForms\WebForms.js" />
+		<Content Include="Scripts\WebForms\WebParts.js" />
+		<Content Include="Scripts\WebForms\WebUIValidation.js" />
+		<Content Include="Shared\Default.css" />
+		<Content Include="Site.Master" />
+		<Content Include="Templates\email.html" />
+		<Content Include="ViewSwitcher.ascx" />
+		<Content Include="Web.config">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Bundle.config" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="App_Start\BundleConfig.cs" />
+		<Compile Include="App_Start\RouteConfig.cs" />
+		<Compile Include="App_Start\WebApiConfig.cs" />
+		<Compile Include="Controllers\CategoriesController.cs" />
+		<Compile Include="Controllers\VerifyController.cs" />
+		<Compile Include="Controllers\UsersController.cs" />
+		<Compile Include="Controllers\NotesController.cs" />
+		<Compile Include="Controllers\DraftsController.cs" />
+		<Compile Include="Controls\NoteListControl.ascx.cs">
+			<DependentUpon>NoteListControl.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Controls\NoteListControl.ascx.designer.cs">
+			<DependentUpon>NoteListControl.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="Controls\PaginationControl.ascx.cs">
+			<DependentUpon>PaginationControl.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Controls\PaginationControl.ascx.designer.cs">
+			<DependentUpon>PaginationControl.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="Models\AccessStats.cs" />
+		<Compile Include="Models\Category.cs" />
+		<Compile Include="Models\IpInfo.cs" />
+		<Compile Include="Models\Mappings\UserMap.cs" />
+		<Compile Include="Models\Mappings\DraftMap.cs" />
+		<Compile Include="Models\Log.cs" />
+		<Compile Include="Models\User.cs" />
+		<Compile Include="Models\Note.cs" />
+		<Compile Include="Models\Draft.cs" />
+		<Compile Include="Repositories\CategoryRepository.cs" />
+		<Compile Include="Repositories\AccessStatsRepository.cs" />
+		<Compile Include="Repositories\LogRepository.cs" />
+		<Compile Include="Repositories\UserRepository.cs" />
+		<Compile Include="Repositories\NoteRepository.cs" />
+		<Compile Include="Repositories\DraftRepository.cs" />
+		<Compile Include="Utils\AuthenticationHelper.cs" />
+		<Compile Include="Utils\AccessHelper.cs" />
+		<Compile Include="Utils\ConverterHelper.cs" />
+		<Compile Include="Utils\EmailHelper.cs" />
+		<Compile Include="Utils\EncryptionHelper.cs" />
+		<Compile Include="Utils\RepositoryHelper.cs" />
+		<Compile Include="Verify.aspx.cs">
+			<DependentUpon>Verify.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Verify.aspx.designer.cs">
+			<DependentUpon>Verify.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Sign.aspx.cs">
+			<DependentUpon>Sign.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Sign.aspx.designer.cs">
+			<DependentUpon>Sign.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Note.aspx.cs">
+			<DependentUpon>Note.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Note.aspx.designer.cs">
+			<DependentUpon>Note.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin.Master.cs">
+			<DependentUpon>Admin.Master</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin.Master.designer.cs">
+			<DependentUpon>Admin.Master</DependentUpon>
+		</Compile>
+		<Compile Include="Site.Mobile - copy.Master.cs">
+			<DependentUpon>Site.Mobile - copy.Master</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Site.Mobile - copy.Master.designer.cs">
+			<DependentUpon>Site.Mobile - copy.Master</DependentUpon>
+		</Compile>
+		<Compile Include="Modify.aspx.cs">
+			<DependentUpon>Modify.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Modify.aspx.designer.cs">
+			<DependentUpon>Modify.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Dashboard.aspx.cs">
+			<DependentUpon>Dashboard.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Dashboard.aspx.designer.cs">
+			<DependentUpon>Dashboard.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Take.aspx.cs">
+			<DependentUpon>Take.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Take.aspx.designer.cs">
+			<DependentUpon>Take.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Default.aspx.cs">
+			<DependentUpon>Default.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Default.aspx.designer.cs">
+			<DependentUpon>Default.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\EntityTemplates\Default.ascx.cs">
+			<DependentUpon>Default.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\EntityTemplates\Default.ascx.designer.cs">
+			<DependentUpon>Default.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\EntityTemplates\Default_Edit.ascx.cs">
+			<DependentUpon>Default_Edit.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\EntityTemplates\Default_Edit.ascx.designer.cs">
+			<DependentUpon>Default_Edit.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\EntityTemplates\Default_Insert.ascx.cs">
+			<DependentUpon>Default_Insert.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\EntityTemplates\Default_Insert.ascx.designer.cs">
+			<DependentUpon>Default_Insert.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Boolean.ascx.cs">
+			<DependentUpon>Boolean.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Boolean.ascx.designer.cs">
+			<DependentUpon>Boolean.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Boolean_Edit.ascx.cs">
+			<DependentUpon>Boolean_Edit.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Boolean_Edit.ascx.designer.cs">
+			<DependentUpon>Boolean_Edit.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Children.ascx.cs">
+			<DependentUpon>Children.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Children.ascx.designer.cs">
+			<DependentUpon>Children.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Children_Insert.ascx.cs">
+			<DependentUpon>Children_Insert.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Children_Insert.ascx.designer.cs">
+			<DependentUpon>Children_Insert.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\DateTime.ascx.cs">
+			<DependentUpon>DateTime.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\DateTime.ascx.designer.cs">
+			<DependentUpon>DateTime.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\DateTime_Edit.ascx.cs">
+			<DependentUpon>DateTime_Edit.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\DateTime_Edit.ascx.designer.cs">
+			<DependentUpon>DateTime_Edit.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Decimal_Edit.ascx.cs">
+			<DependentUpon>Decimal_Edit.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Decimal_Edit.ascx.designer.cs">
+			<DependentUpon>Decimal_Edit.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\EmailAddress.ascx.cs">
+			<DependentUpon>EmailAddress.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\EmailAddress.ascx.designer.cs">
+			<DependentUpon>EmailAddress.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Enumeration.ascx.cs">
+			<DependentUpon>Enumeration.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Enumeration.ascx.designer.cs">
+			<DependentUpon>Enumeration.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Enumeration_Edit.ascx.cs">
+			<DependentUpon>Enumeration_Edit.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Enumeration_Edit.ascx.designer.cs">
+			<DependentUpon>Enumeration_Edit.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\ForeignKey.ascx.cs">
+			<DependentUpon>ForeignKey.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\ForeignKey.ascx.designer.cs">
+			<DependentUpon>ForeignKey.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\ForeignKey_Edit.ascx.cs">
+			<DependentUpon>ForeignKey_Edit.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\ForeignKey_Edit.ascx.designer.cs">
+			<DependentUpon>ForeignKey_Edit.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Integer_Edit.ascx.cs">
+			<DependentUpon>Integer_Edit.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Integer_Edit.ascx.designer.cs">
+			<DependentUpon>Integer_Edit.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\ManyToMany.ascx.cs">
+			<DependentUpon>ManyToMany.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\ManyToMany.ascx.designer.cs">
+			<DependentUpon>ManyToMany.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\ManyToMany_Edit.ascx.cs">
+			<DependentUpon>ManyToMany_Edit.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\ManyToMany_Edit.ascx.designer.cs">
+			<DependentUpon>ManyToMany_Edit.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\MultilineText_Edit.ascx.cs">
+			<DependentUpon>MultilineText_Edit.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\MultilineText_Edit.ascx.designer.cs">
+			<DependentUpon>MultilineText_Edit.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Text.ascx.cs">
+			<DependentUpon>Text.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Text.ascx.designer.cs">
+			<DependentUpon>Text.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Text_Edit.ascx.cs">
+			<DependentUpon>Text_Edit.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Text_Edit.ascx.designer.cs">
+			<DependentUpon>Text_Edit.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Url.ascx.cs">
+			<DependentUpon>Url.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Url.ascx.designer.cs">
+			<DependentUpon>Url.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Url_Edit.ascx.cs">
+			<DependentUpon>Url_Edit.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\FieldTemplates\Url_Edit.ascx.designer.cs">
+			<DependentUpon>Url_Edit.ascx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\PageTemplates\Details.aspx.cs">
+			<DependentUpon>Details.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\PageTemplates\Details.aspx.designer.cs">
+			<DependentUpon>Details.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\PageTemplates\Edit.aspx.cs">
+			<DependentUpon>Edit.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\PageTemplates\Edit.aspx.designer.cs">
+			<DependentUpon>Edit.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\PageTemplates\Insert.aspx.cs">
+			<DependentUpon>Insert.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\PageTemplates\Insert.aspx.designer.cs">
+			<DependentUpon>Insert.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\PageTemplates\List.aspx.cs">
+			<DependentUpon>List.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\PageTemplates\List.aspx.designer.cs">
+			<DependentUpon>List.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="DynamicData\PageTemplates\ListDetails.aspx.cs">
+			<DependentUpon>ListDetails.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="DynamicData\PageTemplates\ListDetails.aspx.designer.cs">
+			<DependentUpon>ListDetails.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Global.asax.cs">
+			<DependentUpon>Global.asax</DependentUpon>
+		</Compile>
+		<Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
+		<Compile Include="obj\Release\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
+		<Compile Include="Properties\AssemblyInfo.cs" />
+		<Compile Include="Site.Master.cs">
+			<DependentUpon>Site.Master</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Site.Master.designer.cs">
+			<DependentUpon>Site.Master</DependentUpon>
+		</Compile>
+		<Compile Include="Utils\CacheHelper.cs" />
+		<Compile Include="Utils\DatabaseHelper.cs" />
+		<Compile Include="Utils\Logger.cs" />
+		<Compile Include="ViewSwitcher.ascx.cs">
+			<DependentUpon>ViewSwitcher.ascx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="ViewSwitcher.ascx.designer.cs">
+			<DependentUpon>ViewSwitcher.ascx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Admin\" />
+		<Folder Include="App_Data\" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="packages.config" />
+		<None Include="Logs\20230930.log">
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</None>
+		<None Include="Logs\20231108.log">
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</None>
+		<None Include="Logs\20231109.log">
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</None>
+		<None Include="Logs\20231113.log">
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</None>
+		<Content Include="Scripts\jquery-3.6.0.slim.min.map" />
+		<Content Include="Scripts\jquery-3.6.0.min.map" />
+		<Content Include="Site.Mobile - copy.Master" />
+		<Content Include="Admin.Master" />
+		<None Include="Web.Debug.config">
+			<DependentUpon>Web.config</DependentUpon>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Include="Web.Release.config">
+			<DependentUpon>Web.config</DependentUpon>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<WCFMetadata Include="Connected Services\" />
+	</ItemGroup>
+	<ItemGroup>
+		<Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+	</ItemGroup>
+	<PropertyGroup>
+		<VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+		<VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+		<AllowedReferenceRelatedFileExtensions>
 			*.pdb
 			*.dll
 		</AllowedReferenceRelatedFileExtensions>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-  </PropertyGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-  <ProjectExtensions>
-    <VisualStudio>
-      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
-        <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>58078</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44374/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-        </WebProjectProperties>
-      </FlavorProperties>
-    </VisualStudio>
-  </ProjectExtensions>
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>
+	</PropertyGroup>
+	<PropertyGroup>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+	</PropertyGroup>
+	<Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+	<Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+	<Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+	<ProjectExtensions>
+		<VisualStudio>
+			<FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+				<WebProjectProperties>
+					<UseIIS>True</UseIIS>
+					<AutoAssignPort>True</AutoAssignPort>
+					<DevelopmentServerPort>58078</DevelopmentServerPort>
+					<DevelopmentServerVPath>/</DevelopmentServerVPath>
+					<IISUrl>https://localhost:44374/</IISUrl>
+					<NTLMAuthentication>False</NTLMAuthentication>
+					<UseCustomServer>False</UseCustomServer>
+					<CustomServerUrl>
+					</CustomServerUrl>
+					<SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+				</WebProjectProperties>
+			</FlavorProperties>
+		</VisualStudio>
+	</ProjectExtensions>
+	<Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+	<Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+		<PropertyGroup>
+			<ErrorText>
 				此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱
 				http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。
 			</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
-  </Target>
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+		</PropertyGroup>
+		<Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+		<Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+		<Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+	</Target>
+	<Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+	<!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
 	   Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
