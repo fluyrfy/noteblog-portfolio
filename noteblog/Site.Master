@@ -47,8 +47,9 @@
                     <a onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
                         <i class="fa fa-remove"></i>
                     </a>
-
-                    <asp:Image runat="server" ID="imgAvatar" Style="width: 45%; display: block; margin: 0 auto;" class="w3-round" ImageUrl="~/Images/logo/logo.svg" />
+                    <a href="/">
+                        <asp:Image runat="server" ID="imgAvatar" Style="width: 45%; display: block; margin: 0 auto;" class="w3-round" ImageUrl="~/Images/logo/logo.svg" />
+                    </a>
                     <br />
                     <br />
                     <asp:HyperLink NavigateUrl="Dashboard.aspx" runat="server">
