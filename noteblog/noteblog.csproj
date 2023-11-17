@@ -744,6 +744,7 @@
     <Content Include="Shared\Sign.css" />
     <Content Include="Shared\Verify.css" />
     <Content Include="Utils\js\dashboard.js" />
+    <Content Include="Utils\js\load.js" />
     <Content Include="Utils\js\turnstile.js" />
     <Content Include="Utils\js\user.js" />
     <Content Include="Utils\js\note.js" />

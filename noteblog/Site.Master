@@ -42,6 +42,7 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
+        <script src="Utils/js/load.js"></script>
         <div>
             <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index: 3; width: 300px;" id="mySidebar">
                 <br />
@@ -80,10 +81,8 @@
 </body>
 
 <script>
-    window.onload = function () {
-        $(".loading").hide();
-    }
     $(document).ready(function () {
+
         let fragment = window.location.hash.substring(1);
         if (fragment === "") {
             fragment = "portfolio";

@@ -21,7 +21,7 @@
 <div class="w3-row-padding">
     <asp:Repeater ID="repNote" runat="server" Visible="true">
         <ItemTemplate>
-            <div class="w3-third w3-container w3-margin-bottom rep-item hover-shadow">
+            <div class="w3-third w3-container w3-margin-bottom rep-item float-shadow">
                 <a href='<%# "Note.aspx?id=" + Eval("id") %>' target="_blank">
                     <img src="data:image/png;base64,<%# System.Convert.ToBase64String((byte[])Eval("pic"))%>" class="w3-hover-opacity cover-photo" alt="cover photo">
                     <div class="w3-container w3-white">
