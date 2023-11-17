@@ -1,5 +1,6 @@
 ﻿
 async function startPolling() {
+    getLastUpdateTime();
 
     var timer = setInterval(async function () {
         // 發送 Ajax 請求到 API，檢查是否有更新

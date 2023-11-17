@@ -849,6 +849,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\VerifyController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\NotesController.cs" />
