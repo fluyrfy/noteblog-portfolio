@@ -21,7 +21,7 @@
 <div class="w3-row-padding">
     <asp:Repeater ID="repNote" runat="server" Visible="true">
         <ItemTemplate>
-            <div class="w3-third w3-container w3-margin-bottom rep-item">
+            <div class="w3-third w3-container w3-margin-bottom rep-item hover-shadow">
                 <a href='<%# "Note.aspx?id=" + Eval("id") %>' target="_blank">
                     <img src="data:image/png;base64,<%# System.Convert.ToBase64String((byte[])Eval("pic"))%>" class="w3-hover-opacity cover-photo">
                     <div class="w3-container w3-white">
@@ -55,6 +55,7 @@
     </div>
 </asp:Panel>
 
+<link rel="stylesheet" href="Shared/hover.css" />
 <script src="Utils/js/note.js"></script>
 <script>
     function toggleChangePage(number) {
