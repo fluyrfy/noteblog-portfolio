@@ -16,11 +16,13 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link href="~/Shared/Common.css" rel="stylesheet" />
+    <link rel="stylesheet" href="Shared/effect/load.css" />
 
     <%--font-awesome--%>
     <script src="https://kit.fontawesome.com/136fcdeb32.js" crossorigin="anonymous"></script>
 </head>
 <body class="w3-light-grey w3-content">
+    <div class="loading">Loading&#8230;</div>
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -67,8 +69,7 @@
             <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor: pointer" title="close side menu" id="myOverlay"></div>
             <header id="portfolio">
                 <%--<a href="#">--%>
-                <asp:Image runat="server" ID="Image1" Style="width: 38px;" class="w3-right w3-margin w3-hide-large w3-hover-opacity" ImageUrl="~/Images/logo/logo.svg" />
-                <%--<img src="/w3images/avatar_g2.jpg" style="width: 65px;">--%>
+                <asp:Image runat="server" ID="Image1" Style="width: 38px;" class="w3-right w3-margin w3-hide-large w3-hover-opacity" ImageUrl="~/Images/logo/logo.svg" AlternateText="logo" />
                 <%--</a>--%>
                 <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
             </header>
@@ -77,8 +78,11 @@
         </div>
     </form>
 </body>
-<script>
 
+<script>
+    window.onload = function () {
+        $(".loading").hide();
+    }
     $(document).ready(function () {
         let fragment = window.location.hash.substring(1);
         if (fragment === "") {

@@ -701,6 +701,7 @@
     <Content Include="Shared\highlight\kimbie-light.css" />
     <Content Include="Shared\highlight\lightfair.css" />
     <Content Include="Shared\highlight\lioshi.css" />
+    <Content Include="Shared\effect\load.css" />
     <Content Include="Shared\highlight\magula.css" />
     <Content Include="Shared\highlight\mono-blue.css" />
     <Content Include="Shared\highlight\monokai-sublime.css" />
@@ -735,7 +736,7 @@
     <Content Include="Shared\highlight\vs2015.css" />
     <Content Include="Shared\highlight\xcode.css" />
     <Content Include="Shared\highlight\xt256.css" />
-    <Content Include="Shared\hover.css" />
+    <Content Include="Shared\effect\hover.css" />
     <Content Include="Shared\Note.css" />
     <Content Include="Shared\Sign.css" />
     <Content Include="Shared\Take.css" />
