@@ -13,17 +13,6 @@ namespace noteblog
     {
         private Logger log;
 
-        protected void Application_BeginRequest(object sender, EventArgs e)
-        {
-            if (HttpContext.Current.Request.HttpMethod == "HEAD")
-            {
-                HttpContext.Current.Response.StatusCode = 200;
-                HttpContext.Current.Response.StatusDescription = "OK";
-                HttpContext.Current.Response.ClearContent();
-                HttpContext.Current.Response.End();
-            }
-        }
-
         void Application_Start(object sender, EventArgs e)
         {
 
@@ -91,6 +80,15 @@ namespace noteblog
 
         void Application_BeginRequest(object sender, EventArgs e)
         {
+            if (HttpContext.Current.Request.HttpMethod == "HEAD")
+            {
+                HttpContext.Current.Response.StatusCode = 200;
+                HttpContext.Current.Response.StatusDescription = "OK";
+                HttpContext.Current.Response.ClearContent();
+                HttpContext.Current.Response.End();
+                return;
+            }
+
             HttpContext context = HttpContext.Current;
 
             // 檢查是否已經進行了壓縮
