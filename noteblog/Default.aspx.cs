@@ -8,7 +8,7 @@ namespace noteblog
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            RequestHelper.HandleHeadRequest();
+            //RequestHelper.HandleHeadRequest();
             if (!IsPostBack)
             {
                 new AccessStatsRepository().insert("Default");

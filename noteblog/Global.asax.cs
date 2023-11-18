@@ -13,6 +13,17 @@ namespace noteblog
     {
         private Logger log;
 
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            if (HttpContext.Current.Request.HttpMethod == "HEAD")
+            {
+                HttpContext.Current.Response.StatusCode = 200;
+                HttpContext.Current.Response.StatusDescription = "OK";
+                HttpContext.Current.Response.ClearContent();
+                HttpContext.Current.Response.End();
+            }
+        }
+
         void Application_Start(object sender, EventArgs e)
         {
 

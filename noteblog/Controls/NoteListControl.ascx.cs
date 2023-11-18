@@ -17,7 +17,7 @@ namespace noteblog.Controls
         //private Logger logger;
         protected void Page_Load(object sender, EventArgs e)
         {
-            RequestHelper.HandleHeadRequest();
+            //RequestHelper.HandleHeadRequest();
             //logger = new Logger(typeof(_Default).Name);
             if (!IsPostBack)
             {
