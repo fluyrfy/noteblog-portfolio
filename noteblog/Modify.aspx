@@ -34,7 +34,7 @@
                     <asp:TextBox ID="txtContent" class="w3-input w3-border ck-editor" TextMode="MultiLine" runat="server" AutoPostBack="true"></asp:TextBox>
                 </div>
                 <div style="width: 100%; text-align: center;">
-                    <button class="w3-button w3-black w3-round" runat="server" onserverclick="btnSubmit_Click"><i class="fa fa-pencil w3-margin-right"></i>Submit</button>
+                    <button class="w3-button w3-black w3-round loading-btn" runat="server" onserverclick="btnSubmit_Click"><i class="fa fa-pencil w3-margin-right"></i>Submit</button>
                 </div>
             </div>
         </div>
