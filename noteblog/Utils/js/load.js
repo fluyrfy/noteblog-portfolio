@@ -2,12 +2,25 @@
     $(".loading-btn").on('click', function () {
         $(this).addClass("btn-loading")
     });
+
 });
+
+function pageLoad() {
+    removeLoading();
+}
+
+
+
+window.onload = function () {
+    removeLoading();
+}
+
+
 
 function addLoading(btn) {
     btn.classList.add('btn-loading');
 }
-
-window.onload = function () {
+function removeLoading() {
+    console.log("remove")
     $(".loading-btn").removeClass("btn-loading")
 }

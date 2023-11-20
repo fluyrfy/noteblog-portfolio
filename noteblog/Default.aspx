@@ -49,7 +49,7 @@
                     <div class="w3-container w3-dark-grey w3-padding w3-center" style="width: 80%">80%</div>
                 </div>
                 <p>
-                    <button class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom loading-btn" runat="server" onserverclick="btnDownload_Click" type="button">
+                    <button class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom loading-btn" runat="server" onclick="downloadResume()" type="button">
                         <i class="fa fa-download w3-margin-right"></i>Download Resume
                     </button>
                 </p>
@@ -80,4 +80,28 @@
             <!-- End page content -->
         </div>
     </main>
+    <script>
+        function downloadResume() {
+            window.location.href = "/Files/Resume.ashx"
+            $.ajax({
+                url: "/Files/Resume.ashx",
+                type: "GET",
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function (data, statusText, xhr) {
+                    if (xhr.status === 200) {
+                        removeLoading();
+                    } else {
+                        console.error('Error: download fail');
+                        removeLoading();
+                    }
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                    removeLoading();
+                }
+            });
+        }
+    </script>
 </asp:Content>
