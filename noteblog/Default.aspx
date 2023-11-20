@@ -49,7 +49,7 @@
                     <div class="w3-container w3-dark-grey w3-padding w3-center" style="width: 80%">80%</div>
                 </div>
                 <p>
-                    <button class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom" runat="server" onserverclick="btnDownload_Click" type="button">
+                    <button class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom loading-btn" runat="server" onserverclick="btnDownload_Click" type="button">
                         <i class="fa fa-download w3-margin-right"></i>Download Resume
                     </button>
                 </p>
