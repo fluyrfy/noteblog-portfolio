@@ -41,7 +41,7 @@
 
         <asp:Panel runat="server" ID="pnlSign" ClientIDMode="Static">
             <%-- log in --%>
-            <asp:Panel runat="server" DefaultButton="btnLogIn" ID="pnlLogIn">
+            <asp:Panel runat="server" ID="pnlLogIn">
                 <div class="signup">
                     <h2 class="form-title" id="signup"><span>or</span>Log in</h2>
                     <div class="form-holder">
@@ -57,12 +57,12 @@
                     <asp:RequiredFieldValidator runat="server" ErrorMessage="Email is required" ValidationGroup="Login" ControlToValidate="txtInEmail" CssClass="hidden-validator" Display="Dynamic"></asp:RequiredFieldValidator>
                     <asp:RequiredFieldValidator runat="server" ErrorMessage="Password is required" ValidationGroup="Login" ControlToValidate="txtInPwd" CssClass="hidden-validator" Display="Dynamic"></asp:RequiredFieldValidator>
                     <asp:Label ID="lblInHint" runat="server" CssClass="hint"></asp:Label>
-                    <asp:Button ID="btnLogIn" ValidationGroup="Login" runat="server" CssClass="submit-btn" Text="Log in" OnClick="btnLogIn_Click" />
+                    <button id="btnLogIn" runat="server" class="submit-btn loading-btn" onserverclick="btnLogIn_Click" validationgroup="Login">Login</button>
                 </div>
             </asp:Panel>
 
             <%--register--%>
-            <asp:Panel runat="server" DefaultButton="btnSignUp" ID="pnlSignUp">
+            <asp:Panel runat="server" ID="pnlSignUp">
                 <div class="login slide-up">
                     <div class="center">
                         <h2 class="form-title" id="login"><span>or</span>Sign up</h2>
@@ -81,7 +81,7 @@
                             ErrorMessage="Please enter a valid email" CssClass="hidden-validator" Display="Dynamic" />
                         <asp:Label ID="lblUpHint" runat="server" CssClass="hint"></asp:Label>
                         <div class="cfturnstile"></div>
-                        <asp:Button ID="btnSignUp" ValidationGroup="Register" runat="server" CssClass="submit-btn disabled" Text="Sign up" OnClick="btnSignUp_Click" ClientIDMode="Static" />
+                        <button id="btnSignUp" validationgroup="Register" runat="server" class="submit-btn disabled loading-btn" onserverclick="btnSignUp_Click" disabled>Sign up</button>
                     </div>
                 </div>
             </asp:Panel>
@@ -110,6 +110,16 @@
     <script src="Utils/js/turnstile.js"></script>
     <script>        
         $(document).ready(function () {
+            $('.signup').keypress(function (e) {
+                if (e.keyCode == '13') {
+                    $(this).find('.btnLogin').click();
+                }
+            });
+            $('.login').keypress(function (e) {
+                if (e.keyCode == '13') {
+                    $(this).find('.btnSignup').click();
+                }
+            });
             $(".toggle-reset-password").click(function () {
                 $(this).toggleClass("fa-eye-slash fa-eye");
                 var input = $($(this).attr("toggle"));

@@ -156,7 +156,7 @@ namespace noteblog
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLogIn;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnLogIn;
 
         /// <summary>
         /// pnlSignUp 控制項。
@@ -210,7 +210,7 @@ namespace noteblog
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSignUp;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnSignUp;
 
         /// <summary>
         /// modalBgPanel 控制項。

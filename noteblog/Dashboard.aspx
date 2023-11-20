@@ -47,8 +47,6 @@
                     <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="4" CssClass="dashboard"><i class="material-icons">receipt_long</i>logs</asp:LinkButton></li>
                 <li class="sidebar-item" data-sidebar-item="stats">
                     <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="5" CssClass="dashboard"><i class="material-icons">query_stats</i>stats</asp:LinkButton></li>
-                <li class="sidebar-item" data-sidebar-item="monitor">
-                    <a href="/" target="_blank"><i class="material-icons">browse_activity</i>monitors</a></li>
                 <%--                        <li class="dropdown">
 							<a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false"
 								class="dropdown-toggle">

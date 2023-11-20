@@ -387,6 +387,7 @@ html, body {
     text-align: center;
     padding: 15px 0 !important;
 }
+
     .submit-btn.disabled {
         background-color: #ccc !important;
         color: #666 !important;
@@ -403,3 +404,4 @@ html, body {
     .cfturnstile iframe {
         width: 100% !important;
     }
+

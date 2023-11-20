@@ -124,3 +124,36 @@
         transform: rotate(360deg);
     }
 }
+
+
+.btn-loading {
+    position: relative;
+    opacity: 0.5 !important;
+    pointer-events: none !important;
+    background-color: #fff;
+    border-color: #ccc !important;
+}
+
+    .btn-loading::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 50%;
+        left: 50%;
+        margin: -8px 0 0 -8px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        border-color: #000 #000 #000 transparent;
+        animation: btn-loading 500ms linear infinite;
+    }
+
+@keyframes btn-loading {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

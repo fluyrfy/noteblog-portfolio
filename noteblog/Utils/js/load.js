@@ -1,9 +1,13 @@
 ﻿$(document).ready(function () {
-    $("a, button, input[type = 'submit']").on('click', function () {
-        $(".loading").show();
+    $(".loading-btn").on('click', function () {
+        $(this).addClass("btn-loading")
     });
 });
 
+function addLoading(btn) {
+    btn.classList.add('btn-loading');
+}
+
 window.onload = function () {
-    $(".loading").hide();
+    $(".loading-btn").removeClass("btn-loading")
 }

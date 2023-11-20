@@ -22,7 +22,7 @@
     <script src="https://kit.fontawesome.com/136fcdeb32.js" crossorigin="anonymous"></script>
 </head>
 <body class="w3-light-grey w3-content">
-    <div class="loading">Loading&#8230;</div>
+    <%--<div class="loading">Loading&#8230;</div>--%>
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>

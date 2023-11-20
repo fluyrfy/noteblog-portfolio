@@ -12,6 +12,7 @@
             });
             const turnstile = JSON.parse(result).success
             $("#btnSignUp").toggleClass('disabled', !turnstile)
+            $("#myButton").prop("disabled", !turnstile);
             if (turnstile == null || turnstile == false) {
                 Page_IsValid = false;
                 alert("User appears to be invalid or suspicious.");
