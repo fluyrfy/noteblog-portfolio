@@ -21,6 +21,5 @@ function addLoading(btn) {
     btn.classList.add('btn-loading');
 }
 function removeLoading() {
-    console.log("remove")
     $(".loading-btn").removeClass("btn-loading")
 }
