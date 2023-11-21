@@ -81,7 +81,7 @@
                             ErrorMessage="Please enter a valid email" CssClass="hidden-validator" Display="Dynamic" />
                         <asp:Label ID="lblUpHint" runat="server" CssClass="hint"></asp:Label>
                         <div class="cfturnstile"></div>
-                        <button id="btnSignUp" validationgroup="Register" runat="server" class="submit-btn disabled loading-btn" onserverclick="btnSignUp_Click" disabled>Sign up</button>
+                        <button id="btnSignUp" validationgroup="Register" runat="server" class="submit-btn disabled loading-btn signup-btn" onserverclick="btnSignUp_Click" disabled>Sign up</button>
                     </div>
                 </div>
             </asp:Panel>
