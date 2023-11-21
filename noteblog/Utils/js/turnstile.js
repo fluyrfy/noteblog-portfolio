@@ -2,22 +2,28 @@
     turnstile.render('.cfturnstile', {
         sitekey: '0x4AAAAAAANJgZydX09IuVou',
         theme: "light",
-        callback: async function (token) {
-            const result = await $.ajax({
+        callback: function (token) {
+            $.ajax({
                 url: '/api/verify/turnstile',
                 method: 'POST',
                 data: {
                     token
-                }
+                },
+                success: function (result) {
+                    const turnstile = JSON.parse(result).success;
+                    if (turnstile == null || turnstile == false) {
+                        Page_IsValid = false;
+                        alert("User appears to be invalid or suspicious.");
+                        window.location.reload();
+                    } else {
+                        $(".signup-btn").toggleClass("disabled", !turnstile);
+                        $(".signup-btn").prop("disabled", !turnstile);
+                    }
+                },
+                error: function (error) {
+                    alert('Error:', error);
+                },
             });
-            const turnstile = JSON.parse(result).success
-            $("#btnSignUp").toggleClass('disabled', !turnstile)
-            $("#myButton").prop("disabled", !turnstile);
-            if (turnstile == null || turnstile == false) {
-                Page_IsValid = false;
-                alert("User appears to be invalid or suspicious.");
-                window.location.reload();
-            }
         },
 
         'expired-callback': () => {
