@@ -17,7 +17,7 @@ namespace noteblog
         protected void btnDownload_Click(object sender, EventArgs e)
         {
             // 設定下載檔案的路徑和檔名
-            string filePath = Server.MapPath("~/Files/Fan_Resume.pdf"); ;
+            string filePath = Server.MapPath("~/Files/Fan_Resume.pdf");
             string fileName = "FrankLiao_Resume.pdf";
 
             // 執行下載檔案的動作

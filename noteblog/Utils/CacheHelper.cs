@@ -22,7 +22,7 @@ namespace noteblog.Utils
             {
                 cache.Remove(key);
             }
-            HttpResponse.RemoveOutputCacheItem("*");
+            HttpResponse.RemoveOutputCacheItem("/Default.aspx");
         }
     }
 }
