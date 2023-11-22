@@ -1,4 +1,4 @@
-﻿async function draft(element) {
+﻿export default async function draft(element) {
     const draftData = await getDraft(element.noteId)
     if (draftData) {
         const confirmed = confirm("You have an unsaved draft. Would you like to restore your edits?");

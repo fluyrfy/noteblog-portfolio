@@ -3,6 +3,91 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <%--    <link href="Shared/bootstrap.min.css" rel="stylesheet" />--%>
     <link href="Shared/Sign.css" rel="stylesheet" />
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script>
+    <script src="Utils/js/turnstile.js" type="module"></script>
+    <script>        
+        $(document).ready(function () {
+            $('.signup').keypress(function (e) {
+                if (e.keyCode == '13') {
+                    $(this).find('.btnLogin').click();
+                }
+            });
+            $('.login').keypress(function (e) {
+                if (e.keyCode == '13') {
+                    $(this).find('.btnSignup').click();
+                }
+            });
+            $(".toggle-reset-password").click(function () {
+                $(this).toggleClass("fa-eye-slash fa-eye");
+                var input = $($(this).attr("toggle"));
+                if (input.attr("type") == "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });
+
+            $(".toggle-reset-password-confirm").click(function () {
+
+                $(this).toggleClass("fa-eye-slash fa-eye");
+                var input = $($(this).attr("toggle"));
+                if (input.attr("type") == "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });
+
+            const loginBtn = document.getElementById('login');
+            const signupBtn = document.getElementById('signup');
+
+            loginBtn?.addEventListener('click', (e) => {
+                let parent = e.target.parentNode.parentNode;
+                Array.from(e.target.parentNode.parentNode.classList).find((element) => {
+                    if (element !== "slide-up") {
+                        parent.classList.add('slide-up')
+                    } else {
+                        signupBtn.parentNode.classList.add('slide-up')
+                        parent.classList.remove('slide-up')
+                    }
+                });
+            });
+
+            signupBtn?.addEventListener('click', (e) => {
+                let parent = e.target.parentNode;
+                Array.from(e.target.parentNode.classList).find((element) => {
+                    if (element !== "slide-up") {
+                        parent.classList.add('slide-up')
+                    } else {
+                        loginBtn.parentNode.parentNode.classList.add('slide-up')
+                        parent.classList.remove('slide-up')
+                    }
+                });
+            });
+
+            $(".toggle-in-password").click(function () {
+
+                $(this).toggleClass("fa-eye-slash fa-eye");
+                var input = $($(this).attr("toggle"));
+                if (input.attr("type") == "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });
+
+            $(".toggle-up-password").click(function () {
+
+                $(this).toggleClass("fa-eye-slash fa-eye");
+                var input = $($(this).attr("toggle"));
+                if (input.attr("type") == "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });
+        });
+    </script>
 
     <div class="form-structor">
         <asp:Panel runat="server" ID="pnlResetPwd" ClientIDMode="Static">
@@ -105,91 +190,5 @@
             </asp:Panel>
         </asp:Panel>
     </div>
-
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script>
-    <script src="Utils/js/turnstile.js"></script>
-    <script>        
-        $(document).ready(function () {
-            $('.signup').keypress(function (e) {
-                if (e.keyCode == '13') {
-                    $(this).find('.btnLogin').click();
-                }
-            });
-            $('.login').keypress(function (e) {
-                if (e.keyCode == '13') {
-                    $(this).find('.btnSignup').click();
-                }
-            });
-            $(".toggle-reset-password").click(function () {
-                $(this).toggleClass("fa-eye-slash fa-eye");
-                var input = $($(this).attr("toggle"));
-                if (input.attr("type") == "password") {
-                    input.attr("type", "text");
-                } else {
-                    input.attr("type", "password");
-                }
-            });
-
-            $(".toggle-reset-password-confirm").click(function () {
-
-                $(this).toggleClass("fa-eye-slash fa-eye");
-                var input = $($(this).attr("toggle"));
-                if (input.attr("type") == "password") {
-                    input.attr("type", "text");
-                } else {
-                    input.attr("type", "password");
-                }
-            });
-
-            const loginBtn = document.getElementById('login');
-            const signupBtn = document.getElementById('signup');
-
-            loginBtn?.addEventListener('click', (e) => {
-                let parent = e.target.parentNode.parentNode;
-                Array.from(e.target.parentNode.parentNode.classList).find((element) => {
-                    if (element !== "slide-up") {
-                        parent.classList.add('slide-up')
-                    } else {
-                        signupBtn.parentNode.classList.add('slide-up')
-                        parent.classList.remove('slide-up')
-                    }
-                });
-            });
-
-            signupBtn?.addEventListener('click', (e) => {
-                let parent = e.target.parentNode;
-                Array.from(e.target.parentNode.classList).find((element) => {
-                    if (element !== "slide-up") {
-                        parent.classList.add('slide-up')
-                    } else {
-                        loginBtn.parentNode.parentNode.classList.add('slide-up')
-                        parent.classList.remove('slide-up')
-                    }
-                });
-            });
-
-            $(".toggle-in-password").click(function () {
-
-                $(this).toggleClass("fa-eye-slash fa-eye");
-                var input = $($(this).attr("toggle"));
-                if (input.attr("type") == "password") {
-                    input.attr("type", "text");
-                } else {
-                    input.attr("type", "password");
-                }
-            });
-
-            $(".toggle-up-password").click(function () {
-
-                $(this).toggleClass("fa-eye-slash fa-eye");
-                var input = $($(this).attr("toggle"));
-                if (input.attr("type") == "password") {
-                    input.attr("type", "text");
-                } else {
-                    input.attr("type", "password");
-                }
-            });
-        });
-    </script>
 </asp:Content>
 

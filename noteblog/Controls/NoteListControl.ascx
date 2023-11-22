@@ -4,6 +4,53 @@
 <asp:HiddenField ID="hidLastUpdateTime" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="hidPageNumber" runat="server" ClientIDMode="Static" />
 
+<link rel="stylesheet" href="Shared/effect/hover.css" />
+<script type="module" src="./Utils/js/note.js"></script>
+<script>
+    function toggleChangePage(number) {
+        $("#hidPageNumber").val(number);
+    }
+
+    $(document).ready(function () {
+        $(".category-item").on('click', function () {
+            $('#hidCategoryName').val($(this).attr("id").split("btn")[1])
+            $("#hidPageNumber").val(1);
+        })
+
+        var pageItem = $(".page-item");
+        var hidPageNumber = $("#hidPageNumber");
+        $("#btnPrevious").toggle(pageItem.length > 1);
+        $("#btnNext").toggle(pageItem.length > 1);
+        pageItem.each(function (index) {
+            $(this).toggleClass("w3-black", index == (hidPageNumber.val() - 1));
+        })
+        $(".page-previous").on("click", function () {
+            if (hidPageNumber.val() > 1) {
+                hidPageNumber.val(hidPageNumber.val() - 1);
+            }
+        })
+        $(".page-next").on("click", function () {
+            if (hidPageNumber.val() < $(".page-item").length) {
+                hidPageNumber.val(hidPageNumber.val() + 1);
+            }
+        })
+
+
+        function toggleFilterClass() {
+            const category = $('#hidCategoryName');
+            $(".category-item").each(function () {
+                $(this).removeClass("w3-black");
+                $(this).siblings('i').removeClass("active");
+            })
+            $(`#btn${category.val()}`).addClass("w3-black");
+            $(`#btn${category.val()}`).siblings('i').addClass("active");
+        }
+
+        toggleFilterClass();
+
+    })
+</script>
+
 <%--category--%>
 <div class="w3-section w3-bottombar w3-padding-16" id="filter">
     <span class="w3-margin-right">Filter:</span>
@@ -55,54 +102,5 @@
     </div>
 </asp:Panel>
 
-<link rel="stylesheet" href="Shared/effect/hover.css" />
-<script src="Utils/js/note.js"></script>
-<script>
-    function toggleChangePage(number) {
-        $("#hidPageNumber").val(number);
-    }
 
-    $(document).ready(function () {
-        getLastUpdateTime();
-
-        $(".category-item").on('click', function () {
-            $('#hidCategoryName').val($(this).attr("id").split("btn")[1])
-            getLastUpdateTime();
-            $("#hidPageNumber").val(1);
-        })
-
-        var pageItem = $(".page-item");
-        var hidPageNumber = $("#hidPageNumber");
-        $("#btnPrevious").toggle(pageItem.length > 1);
-        $("#btnNext").toggle(pageItem.length > 1);
-        pageItem.each(function (index) {
-            $(this).toggleClass("w3-black", index == (hidPageNumber.val() - 1));
-        })
-        $(".page-previous").on("click", function () {
-            if (hidPageNumber.val() > 1) {
-                hidPageNumber.val(hidPageNumber.val() - 1);
-            }
-        })
-        $(".page-next").on("click", function () {
-            if (hidPageNumber.val() < $(".page-item").length) {
-                hidPageNumber.val(hidPageNumber.val() + 1);
-            }
-        })
-
-
-        function toggleFilterClass() {
-            const category = $('#hidCategoryName');
-            $(".category-item").each(function () {
-                $(this).removeClass("w3-black");
-                $(this).siblings('i').removeClass("active");
-            })
-            $(`#btn${category.val()}`).addClass("w3-black");
-            $(`#btn${category.val()}`).siblings('i').addClass("active");
-        }
-
-        toggleFilterClass();
-
-        startPolling();
-    })
-</script>
 

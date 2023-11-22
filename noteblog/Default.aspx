@@ -7,7 +7,8 @@
 
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <link href="Shared/Default.css" rel="stylesheet" />
+    <link href="Shared/Default.css" rel="stylesheet" />    
+    <script src="Utils/js/download.js" async></script>
 
     <main>
         <!-- Overlay effect when opening sidebar on small screens -->
@@ -80,5 +81,4 @@
             <!-- End page content -->
         </div>
     </main>
-    <script src="Utils/js/download.js"></script>
 </asp:Content>

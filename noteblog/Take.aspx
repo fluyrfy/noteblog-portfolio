@@ -46,8 +46,8 @@
 
     </main>
 
-    <script src="Utils/js/draft.js"></script>
-    <script>
+    <script type="module">
+        import draft from './Utils/js/draft.js'
         var contentEditor;
 
         const watchdog = new CKSource.EditorWatchdog();

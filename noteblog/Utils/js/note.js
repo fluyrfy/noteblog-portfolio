@@ -8,7 +8,6 @@ async function startPolling() {
     }, 60000);
 
     window.addEventListener('beforeunload', function () {
-        // 在卸載事件中停止計時器
         clearInterval(timer);
     });
 }
@@ -26,7 +25,6 @@ async function getLastUpdateTime() {
     }
 }
 
-function clearCache() {
-    location.reload(true);
-}
-
+$(document).ready(function () {
+    startPolling()
+})
