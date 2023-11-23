@@ -481,6 +481,7 @@
     <Content Include="Images\email\email.png" />
     <Content Include="Images\ico\user.ico" />
     <Content Include="Images\logo\logo.svg" />
+    <Content Include="robots.txt" />
     <Content Include="Shared\bootstrap.min.css" />
     <Content Include="Shared\Common.css" />
     <Content Include="Shared\custom.css" />

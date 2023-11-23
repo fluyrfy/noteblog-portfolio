@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /bin/
+Disallow: /Sign.aspx
+Disallow: Dashboard.aspx
+Disallow: Verify.aspx
+Disallow: /App_Data/
+Disallow: /App_Start/
+Disallow: /Utils/
+Disallow: /Shared/
+Disallow: /Repositories/
+Disallow: /Scripts
+Disallow: /Models/
+Disallow: /Controllers
+Sitemap: https://fl-note.azurewebsites.net/sitemap.xml
