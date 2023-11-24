@@ -1,0 +1,17 @@
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Filter: ALL Front-End Back-End Data analysis UI UX",
+  "author": {
+    "@type": "Person",
+    "name": "About Me Hi, I'm Frank Liao, and the website name F.L. is an abbreviation of my name. F.L. is an exciting name representing various meanings. For instance, it could stand for Fast Learning, signifying my enthusiasm for rapidly acquiring new skills and knowledge. It could also mean Fun Life, expressing my enjoyment of life's pleasures and adventures. Furthermore, it could indicate Future Leader, denoting my leadership abilities and ambitious aspirations. In defining our strengths, I chose three keywords for F.L.: \"code,\" \"recode,\" and \"record.\" \"Code\" exemplifies our ability to create and solve problems using programming languages, while \"Recode\" underscores our continuous efforts to enhance and refine code, ensuring it's both efficient and lucid. Meanwhile, \"Record\" portrays our commitment to documenting and sharing our journey and accomplishments while learning, allowing anyone interested to gain insights from our experiences."
+  },
+  "articleBody": [
+    "Site SEO Implementation Checklist\n                            </B>\n                        </P>\n                        <P class=\"content\">\n                            網站速度優化 - 減少圖片、JS檔案大小,開啟壓縮,使用 CDN 加速。",
+    "Coordinating File Downloads and UI Updates\n                            </B>\n                        </P>\n                        <P class=\"content\">\n                            原本的檔案下載是使用aspx頁面的事件來處理string filePath =",
+    "ASP.NET Literal vs Label\n                            </B>\n                        </P>\n                        <P class=\"content\">\n                            基於開發需求，需要尋找一個可以顯示文字的控件，但Label內置的一些特點不符合我的開發需求",
+    "Cross webform send data method\n                            </B>\n                        </P>\n                        <P class=\"content\">\n                            Context.HandlerQueryStringname/value的形式透過URL傳遞第一個參數前使用",
+    "Azure Web Apps 初始頁面延遲顯示對策\n                            </B>\n                        </P>\n                        <P class=\"content\">\n                            本網站是放置在Azure的服務上，那它正在經歷第一年的免費試用期，",
+    "MySQL fulltext search\n                            </B>\n                        </P>\n                        <P class=\"content\">\n                            fulltext search跟LIKE都有各自的使用場景，我認為雙方沒有絕對優劣也沒有取代性"
+  ]
+}

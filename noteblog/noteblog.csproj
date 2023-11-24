@@ -818,6 +818,7 @@
     <Content Include="Scripts\ckeditor\ckeditor.js.map" />
     <Content Include="Files\Fan_Resume.pdf" />
     <Content Include="Files\Resume.ashx" />
+    <Content Include="schema.json" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
