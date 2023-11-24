@@ -3,6 +3,25 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="Shared/Take.css" rel="stylesheet" />
     <script src="Scripts/ckeditor/ckeditor.js"></script>
+    <script src="Utils/js/ckeditor.js" defer></script>
+    <script type="module" src="Utils/js/edit.js"></script>
+    <script type="module">
+        import draft from './Utils/js/draft.js'
+        $(document).ready(function () {
+            const element = {
+                noteId: new URLSearchParams(window.location.search).get('id'),
+                category: $("#<%= rdlCategory.ClientID %>"),
+                pic: $('#<%= fuCoverPhoto.ClientID %>'),
+                title: $('#<%= txtTitle.ClientID %>'),
+                keyword: $('#<%= txtKeyword.ClientID %>'),
+                content: contentEditor,
+                preImg: $('#<%= imgCover.ClientID %>'),
+                hdnImg: $('#<%= hdnImgData.ClientID %>'),
+            }
+
+            draft(element);
+        });
+    </script>
 
     <main>
         <div class="w3-main" style="margin-left: 300px">
@@ -16,10 +35,15 @@
                 </div>
                 <div class="w3-section">
                     <label>Cover Photo</label>
-                    <asp:FileUpload ID="fuCoverPhoto" runat="server" accept=".png,.jpg,.jpeg" /><br />
-                    <asp:Image ID="imgCover" runat="server" CssClass="cover-photo" />
+                    <asp:FileUpload ID="fuCoverPhoto" runat="server" accept=".png,.jpg,.jpeg" ClientIDMode="Static" /><br />
+                    <div class="cover-container">
+                        <asp:Image ID="imgCover" runat="server" CssClass="cover-photo" />
+                        <button class="remove-img-btn" type="button">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
                     <asp:Label ID="lblPhotoMsg" runat="server" />
-                    <asp:HiddenField ID="hdnImgData" runat="server" />
+                    <asp:HiddenField ID="hdnImgData" runat="server" ClientIDMode="Static" />
                 </div>
                 <div class="w3-section">
                     <label>Title</label>
@@ -38,79 +62,6 @@
                 </div>
             </div>
         </div>
-
     </main>
-
-    <script src="Utils/js/draft.js"></script>
-    <script>
-        var contentEditor;
-
-        // init ckeditor
-        const watchdog = new CKSource.EditorWatchdog();
-
-        window.watchdog = watchdog;
-
-        watchdog.setCreator((element, config) => {
-            return CKSource.Editor
-                .create(element, config)
-                .then(editor => {
-                    editor.model.document.on('change:data', () => {
-                        const data = editor.getData();
-                    })
-                    contentEditor = editor
-                    return editor;
-                })
-        });
-
-        watchdog.setDestructor(editor => {
-            return editor.destroy();
-        });
-
-        watchdog.on('error', handleError);
-
-        watchdog
-            .create(document.querySelector('.ck-editor'), {
-                licenseKey: '',
-                removePlugins: ['MediaEmbedToolbar']
-            })
-            .catch(handleError);
-
-        function handleError(error) {
-            console.error('Oops, something went wrong!');
-            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
-            console.warn('Build id: 31o3b59jzmiv-rq35etlei2s');
-            console.error(error);
-        }
-
-        $(document).ready(function () {
-            // 監聽 file input 的變化事件
-            $("#MainContent_fuCoverPhoto").on("change", function () {
-                var fileInput = $(this)[0];
-                if (fileInput.files && fileInput.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        // 將讀取的圖片數據設置為 <img> 的 src
-                        $("#MainContent_imgCover").attr("src", e.target.result);
-                        $("#<%= hdnImgData.ClientID %>").val(e.target.result.split(',')[1])
-                    };
-                    // 讀取選擇的文件
-                    reader.readAsDataURL(fileInput.files[0]);
-                }
-            });
-
-            const element = {
-                noteId: new URLSearchParams(window.location.search).get('id'),
-                category: $("#<%= rdlCategory.ClientID %>"),
-                pic: $('#<%= fuCoverPhoto.ClientID %>'),
-                title: $('#<%= txtTitle.ClientID %>'),
-                keyword: $('#<%= txtKeyword.ClientID %>'),
-                content: contentEditor,
-                preImg: $('#<%= imgCover.ClientID %>'),
-                hdnImg: $('#<%= hdnImgData.ClientID %>'),
-            }
-
-            draft(element);
-        });
-    </script>
 </asp:Content>
 

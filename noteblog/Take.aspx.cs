@@ -61,13 +61,13 @@ namespace noteblog
                         cmd.Parameters.AddWithValue("@keyword", txtKeyword.Text);
                         cmd.Parameters.AddWithValue("@publishedAt", DateTime.UtcNow);
                         byte[] imgData = new byte[0];
-                        using (Stream fs = fuCoverPhoto.HasFile ? fuCoverPhoto.PostedFile.InputStream : new FileStream(Server.MapPath("~/Images/cover/default.jpg"), FileMode.Open, FileAccess.Read))
-                        {
-                            using (BinaryReader br = new BinaryReader(fs))
-                            {
-                                imgData = br.ReadBytes((Int32)fs.Length);
-                            }
-                        }
+                        //using (Stream fs = fuCoverPhoto.HasFile ? fuCoverPhoto.PostedFile.InputStream : new FileStream(Server.MapPath("~/Images/cover/default.jpg"), FileMode.Open, FileAccess.Read))
+                        //{
+                        //    using (BinaryReader br = new BinaryReader(fs))
+                        //    {
+                        //        imgData = br.ReadBytes((Int32)fs.Length);
+                        //    }
+                        //}
                         if (!string.IsNullOrEmpty(hdnImgData.Value))
                         {
                             imgData = Convert.FromBase64String(hdnImgData.Value);

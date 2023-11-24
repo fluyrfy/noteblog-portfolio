@@ -2,8 +2,24 @@
 
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <script src="Scripts/ckeditor/ckeditor.js"></script>
     <link href="Shared/Take.css" rel="stylesheet" />
+    <script src="Scripts/ckeditor/ckeditor.js"></script>
+    <script src="Utils/js/ckeditor.js" defer></script>
+    <script type="module" src="Utils/js/edit.js"></script>
+    <script type="module">
+        import draft from './Utils/js/draft.js'
+        const element = {
+            noteId: 0,
+            category: $("#<%= rdlCategory.ClientID %>"),
+            pic: $('#<%= fuCoverPhoto.ClientID %>'),
+            title: $('#<%= txtTitle.ClientID %>'),
+            keyword: $('#<%= txtKeyword.ClientID %>'),
+            content: contentEditor,
+            preImg: $('#<%= imgCover.ClientID %>'),
+            hdnImg: $('#<%= hdnImgData.ClientID %>'),
+        }
+        draft(element);
+    </script>
     <main>
         <div class="w3-main" style="margin-left: 300px">
             <div class="w3-container w3-padding-large w3-grey">
@@ -17,12 +33,17 @@
                 </div>
                 <div class="w3-section">
                     <label>Cover Image</label>
-                    <asp:FileUpload ID="fuCoverPhoto" runat="server" accept=".png,.jpg,.jpeg" />
+                    <asp:FileUpload ID="fuCoverPhoto" runat="server" accept=".png,.jpg,.jpeg" ClientIDMode="Static" />
                     <%--                    <asp:RequiredFieldValidator ID="rfvCI" runat="server" ErrorMessage="Cover Image is required" ControlToValidate="fuCoverPhoto" ForeColor="Red"></asp:RequiredFieldValidator>--%>
                     <asp:Label ID="lblPhotoMsg" runat="server" />
                     <br />
-                    <asp:Image ID="imgCover" runat="server" CssClass="cover-photo" />
-                    <asp:HiddenField ID="hdnImgData" runat="server" />
+                    <div class="cover-container">
+                        <asp:Image ID="imgCover" runat="server" CssClass="cover-photo" />
+                        <button class="remove-img-btn" type="button">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                    <asp:HiddenField ID="hdnImgData" runat="server" ClientIDMode="Static" />
                 </div>
                 <div class="w3-section">
                     <label>Title</label>
@@ -43,85 +64,7 @@
                 </div>
             </div>
         </div>
-
     </main>
-
-    <script type="module">
-        import draft from './Utils/js/draft.js'
-        var contentEditor;
-
-        const watchdog = new CKSource.EditorWatchdog();
-
-        window.watchdog = watchdog;
-
-        watchdog.setCreator((element, config) => {
-            return CKSource.Editor
-                .create(element, config)
-                .then(editor => {
-                    // 在这里可以绑定其他事件或进行其他操作
-                    editor.model.document.on('change:data', () => {
-                        const data = editor.getData();
-                    })
-                    contentEditor = editor
-
-                    return editor;
-                })
-        });
-
-        watchdog.setDestructor(editor => {
-            return editor.destroy();
-        });
-
-        watchdog.on('error', handleError);
-
-        watchdog
-            .create(document.querySelector('.ck-editor'), {
-
-                licenseKey: '',
-            })
-            .catch(handleError);
-
-        function handleError(error) {
-            console.error('Oops, something went wrong!');
-            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
-            console.warn('Build id: 31o3b59jzmiv-rq35etlei2s');
-            console.error(error);
-        }
-        $(document).ready(function () {
-            $("#MainContent_imgCover").hide();
-
-            $("#MainContent_fuCoverPhoto").on("change", function () {
-                var fileInput = $(this)[0];
-                if (fileInput.files && fileInput.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        // 將讀取的圖片數據設置為 <img> 的 src
-                        $("#MainContent_imgCover").attr("src", e.target.result);
-                        $("#MainContent_imgCover").show(); // 顯示圖片
-                        $("#<%= hdnImgData.ClientID %>").val(e.target.result.split(',')[1])
-                    };
-                    // 讀取選擇的文件
-                    reader.readAsDataURL(fileInput.files[0]);
-                } else {
-                    $("#MainContent_imgCover").hide();
-                }
-            })
-
-            const element = {
-                noteId: 0,
-                category: $("#<%= rdlCategory.ClientID %>"),
-                pic: $('#<%= fuCoverPhoto.ClientID %>'),
-                title: $('#<%= txtTitle.ClientID %>'),
-                keyword: $('#<%= txtKeyword.ClientID %>'),
-                content: contentEditor,
-                preImg: $('#<%= imgCover.ClientID %>'),
-                hdnImg: $('#<%= hdnImgData.ClientID %>'),
-            }
-
-            draft(element);
-        })
-
-    </script>
 
 </asp:Content>
 

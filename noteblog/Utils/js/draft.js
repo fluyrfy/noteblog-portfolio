@@ -26,12 +26,16 @@ function fillElementWithDraft({ category, title, content, keyword, pic, preImg, 
             reader.onload = function (e) {
                 // 將讀取的圖片數據設置為 <img> 的 src
                 preImg.attr("src", `data:image/png;base64,${draft.pic}`);
-                preImg.show(); // 顯示圖片
+                $(".cover-container").show(); // 顯示圖片
                 hdnImg.val(draft.pic)
             };
             // 讀取選擇的文件
             reader.readAsDataURL(file);
         }
+    } else {
+        preImg.attr("src", "");
+        $(".cover-container").hide();
+        hdnImg.val('')
     }
 }
 
@@ -76,15 +80,14 @@ function saveDraft(element) {
 }
 
 function callSaveApi({ noteId, category, title, content, keyword }, fileByteArray) {
-    var draftData = {
+    let draftData = {
         noteId,
         categoryId: category.find(":checked").val(),
-        pic: fileByteArray.length != 0 || fileByteArray.byteLength != 0 ? fileByteArray : null,
         title: title.val(),
         keyword: keyword.val(),
         content: content.getData(),
     }
-    console.log(fileByteArray);
+    draftData.pic = fileByteArray.length === 0 ? null : fileByteArray;
     if (navigator.onLine) {
         fetch('/api/drafts/save', {
             method: 'POST',
