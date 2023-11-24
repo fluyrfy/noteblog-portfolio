@@ -70,7 +70,7 @@
         <ItemTemplate>
             <div class="w3-third w3-container w3-margin-bottom rep-item float-shadow">
                 <a href='<%# "Note.aspx?id=" + Eval("id") %>' target="_blank">
-                    <img src='<%# string.IsNullOrEmpty(Convert.ToBase64String((byte[])Eval("pic"))) ? "Images/cover/default.jpg" : $"data:image/png;base64,{System.Convert.ToBase64String((byte[])Eval("pic"))}" %>' class="w3-hover-opacity cover-photo" alt="cover photo">
+                    <img src='<%# Eval("pic") == DBNull.Value ? "Images/cover/default.jpg" : $"data:image/png;base64,{System.Convert.ToBase64String((byte[])Eval("pic"))}" %>' class="w3-hover-opacity cover-photo" alt="cover photo">
                     <div class="w3-container w3-white">
                         <p>
                             <b class="title">

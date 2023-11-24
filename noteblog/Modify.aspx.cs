@@ -56,8 +56,12 @@ namespace noteblog
                                     rdlCategory.SelectedValue = dr["category_id"].ToString();
                                     txtTitle.Text = dr["title"].ToString();
                                     txtKeyword.Text = dr["keyword"].ToString();
-                                    imgCover.ImageUrl = $"data:image/png;base64,{Convert.ToBase64String((byte[])dr["pic"])}";
-                                    hdnImgData.Value = Convert.ToBase64String((byte[])dr["pic"]);
+                                    if (dr["pic"] != DBNull.Value)
+                                    {
+                                        string picString = Convert.ToBase64String((byte[])dr["pic"]);
+                                        imgCover.ImageUrl = $"data:image/png;base64,{picString}";
+                                        hdnImgData.Value = picString;
+                                    }
                                     txtContent.Text = HttpUtility.HtmlDecode(dr["content"].ToString());
                                 }
                                 ViewState["SQL_QUERY"] = ct;
@@ -127,6 +131,10 @@ namespace noteblog
                             if (!string.IsNullOrEmpty(hdnImgData.Value))
                             {
                                 dr["pic"] = Convert.FromBase64String(hdnImgData.Value);
+                            }
+                            else
+                            {
+                                dr["pic"] = null;
                             }
                         }
                         int rowsUpdated = da.Update(dt);

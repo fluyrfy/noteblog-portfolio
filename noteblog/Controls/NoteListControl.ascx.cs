@@ -61,15 +61,6 @@ namespace noteblog.Controls
                             string content = Server.HtmlDecode(row["content"].ToString());
                             string strippedContent = StripHtmlTags(content);
                             row["content"] = strippedContent;
-                            //string picString = Convert.ToBase64String((byte[])row["pic"]);
-                            //if (picString.Length == 0)
-                            //{
-                            //    row["pic"] = "/Images/cover/default.jpg";
-                            //}
-                            //else
-                            //{
-                            //    row["pic"] = $"data:image/png;base64,{picString}";
-                            //}
                         }
                         Cache[$"{cacheKey}-{currentPage}"] = dt;
                     }

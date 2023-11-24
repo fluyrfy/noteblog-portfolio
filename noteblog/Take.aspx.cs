@@ -68,10 +68,9 @@ namespace noteblog
                         //        imgData = br.ReadBytes((Int32)fs.Length);
                         //    }
                         //}
-                        if (!string.IsNullOrEmpty(hdnImgData.Value))
-                        {
-                            imgData = Convert.FromBase64String(hdnImgData.Value);
-                        }
+
+                        imgData = !string.IsNullOrEmpty(hdnImgData.Value) ? Convert.FromBase64String(hdnImgData.Value) : null;
+
                         cmd.Parameters.AddWithValue("@pic", imgData);
                         log.Debug($"New note info: {txtTitle.Text} - {txtContent.Text}");
                         con.Open();
