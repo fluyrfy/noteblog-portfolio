@@ -468,6 +468,7 @@
     <Content Include="bin\WebMatrix.WebData.dll" />
     <Content Include="Controls\NoteListControl.ascx" />
     <Content Include="Controls\PaginationControl.ascx" />
+    <Content Include="google8859b173112989c9.html" />
     <Content Include="Images\avatar.jpg" />
     <Content Include="Images\avatar.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
