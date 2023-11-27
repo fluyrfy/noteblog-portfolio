@@ -3,6 +3,7 @@
 <asp:HiddenField ID="hidCategoryName" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="hidLastUpdateTime" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="hidPageNumber" runat="server" ClientIDMode="Static" />
+<asp:HiddenField ID="hidTotalPages" runat="server" ClientIDMode="Static" />
 
 <link rel="stylesheet" href="Shared/effect/hover.css" />
 <script type="module" src="./Utils/js/note.js"></script>
@@ -11,30 +12,37 @@
         $("#hidPageNumber").val(number);
     }
 
-    $(document).ready(function () {
+    $(window).on("load", function () {
         $(".category-item").on('click', function () {
             $('#hidCategoryName').val($(this).attr("id").split("btn")[1])
             $("#hidPageNumber").val(1);
         })
 
-        var pageItem = $(".page-item");
+        //var pageItem = $(".page-item");
         var hidPageNumber = $("#hidPageNumber");
-        $("#btnPrevious").toggle(pageItem.length > 1);
-        $("#btnNext").toggle(pageItem.length > 1);
-        pageItem.each(function (index) {
-            $(this).toggleClass("w3-black", index == (hidPageNumber.val() - 1));
-        })
+        let curNumber = parseInt(hidPageNumber.val());
+        let totalPages = parseInt($("#hidTotalPages").val());
+        $("#btnPrevious, #btnNext").toggle(totalPages > 1);
+        $("#btnPrevious").toggleClass("disabled",  curNumber == 1);
+        $("#btnNext").toggleClass("disabled",  curNumber == totalPages);
+        //pageItem.each(function (index) {
+        //    $(this).toggleClass("w3-black", index == (hidPageNumber.val() - 1));
+        //    $(this).on("click", function () {
+        //        hidPageNumber.val(index + 1);
+        //    });
+        //})
         $(".page-previous").on("click", function () {
-            if (hidPageNumber.val() > 1) {
-                hidPageNumber.val(hidPageNumber.val() - 1);
+            if (curNumber > 1) {
+                curNumber = curNumber--;
+                hidPageNumber.val(curNumber);
             }
         })
         $(".page-next").on("click", function () {
-            if (hidPageNumber.val() < $(".page-item").length) {
-                hidPageNumber.val(hidPageNumber.val() + 1);
+            if (curNumber < totalPages) {
+                curNumber = curNumber++;
+                hidPageNumber.val(curNumber);
             }
         })
-
 
         function toggleFilterClass() {
             const category = $('#hidCategoryName');
@@ -91,13 +99,13 @@
 <asp:Panel runat="server" ID="pnlPagination">
     <div class="w3-center w3-padding-32">
         <div class="w3-bar">
-            <asp:Button runat="server" CssClass="w3-bar-item w3-button w3-hover-black page-previous" Text="«" OnCommand="btnNavigation_Command" CommandArgument="Previous" ID="btnPrevious" ClientIDMode="Static" />
-            <asp:Repeater runat="server" ID="repPagination" OnItemDataBound="repPagination_ItemDataBound">
+            <asp:Button runat="server" CssClass="w3-bar-item w3-button w3-hover-black page-previous loading-btn" Text="«" OnCommand="btnNavigation_Command" CommandArgument="Previous" ID="btnPrevious" ClientIDMode="Static" />
+            <asp:Repeater runat="server" ID="repPagination">
                 <ItemTemplate>
                     <asp:Button runat="server" ID="btnPage" ClientIDMode="Static" CssClass="w3-bar-item w3-button w3-hover-black page-item loading-btn" Text='<%# Container.DataItem %>' OnClientClick='<%# "toggleChangePage(" + Container.DataItem + ");" %>' OnCommand="btnPage_Command" CommandArgument='<%# Container.DataItem %>' />
                 </ItemTemplate>
             </asp:Repeater>
-            <asp:Button runat="server" class="w3-bar-item w3-button w3-hover-black page-next" Text="»" OnCommand="btnNavigation_Command" CommandArgument="Next" ID="btnNext" ClientIDMode="Static" />
+            <asp:Button runat="server" class="w3-bar-item w3-button w3-hover-black page-next loading-btn" Text="»" OnCommand="btnNavigation_Command" CommandArgument="Next"  ID="btnNext" ClientIDMode="Static" />
         </div>
     </div>
 </asp:Panel>

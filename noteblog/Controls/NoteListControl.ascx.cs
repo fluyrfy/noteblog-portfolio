@@ -97,8 +97,9 @@ namespace noteblog.Controls
                         totalPages = 0;
                     }
                     //logger.Debug($"Current page number: {currentPage}");
-                    bindPagination(totalPages);
+                    //bindPagination(totalPages);
                     ViewState["TotalPages"] = totalPages;
+                    hidTotalPages.Value = totalPages.ToString();
                     DataTable dataTable = Cache[$"{cacheKey}-{currentPage}"] as DataTable;
                     bindNotesData(dataTable);
                     //logger.Info($"Notes queried successfully, Datatable: {dataTable.Rows.Count} rows");
@@ -138,6 +139,7 @@ namespace noteblog.Controls
                     currentPage++;
                 }
             }
+            hidPageNumber.Value = currentPage.ToString();
             ViewState["CurrentPage"] = currentPage;
             queryNotesData();
         }
@@ -165,19 +167,19 @@ namespace noteblog.Controls
                 }
             }
         }
-        protected void repPagination_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                int index = e.Item.ItemIndex;
+        //protected void repPagination_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        //{
+        //    if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+        //    {
+        //        int index = e.Item.ItemIndex;
 
-                if (index == 0)
-                {
-                    Button button = (Button)e.Item.FindControl("btnPage");
-                    button.CssClass += " w3-black";
-                }
-            }
-        }
+        //        if (index == 0)
+        //        {
+        //            Button button = (Button)e.Item.FindControl("btnPage");
+        //            button.CssClass += " w3-black";
+        //        }
+        //    }
+        //}
 
         protected void bindNotesData(DataTable notes)
         {
