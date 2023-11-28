@@ -97,14 +97,14 @@
 
 <!-- pagination -->
 <asp:Panel runat="server" ID="pnlPagination">
-    <div class="w3-center w3-padding-32">
+    <div class="w3-center">
         <div class="w3-bar">
             <asp:Button runat="server" CssClass="w3-bar-item w3-button w3-hover-black page-previous" Text="«" OnCommand="btnNavigation_Command" CommandArgument="Previous" ID="btnPrevious" ClientIDMode="Static" />
-            <asp:Repeater runat="server" ID="repPagination">
+<%--            <asp:Repeater runat="server" ID="repPagination">
                 <ItemTemplate>
                     <asp:Button runat="server" ID="btnPage" ClientIDMode="Static" CssClass="w3-bar-item w3-button w3-hover-black page-item loading-btn" Text='<%# Container.DataItem %>' OnClientClick='<%# "toggleChangePage(" + Container.DataItem + ");" %>' OnCommand="btnPage_Command" CommandArgument='<%# Container.DataItem %>' />
                 </ItemTemplate>
-            </asp:Repeater>
+            </asp:Repeater>--%>
             <asp:Button runat="server" class="w3-bar-item w3-button w3-hover-black page-next" Text="»" OnCommand="btnNavigation_Command" CommandArgument="Next" ID="btnNext" ClientIDMode="Static" />
         </div>
     </div>

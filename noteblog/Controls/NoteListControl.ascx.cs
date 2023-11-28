@@ -191,39 +191,39 @@ namespace noteblog.Controls
             repCategory.DataSource = categories;
             repCategory.DataBind();
         }
-        protected void bindPagination(int totalPages)
-        {
-            List<int> pageNumbers = new List<int>();
-            for (int i = 1; i <= totalPages; i++)
-            {
-                pageNumbers.Add(i);
-            }
-            repPagination.DataSource = pageNumbers;
-            repPagination.DataBind();
-        }
+        //protected void bindPagination(int totalPages)
+        //{
+        //    List<int> pageNumbers = new List<int>();
+        //    for (int i = 1; i <= totalPages; i++)
+        //    {
+        //        pageNumbers.Add(i);
+        //    }
+        //    repPagination.DataSource = pageNumbers;
+        //    repPagination.DataBind();
+        //}
 
         private string StripHtmlTags(string input)
         {
             return Regex.Replace(input, "<.*?>", string.Empty);
         }
-        protected void paginationActiveStyle()
-        {
-            foreach (RepeaterItem item in repPagination.Items)
-            {
-                int index = item.ItemIndex;
-                Button button = (Button)item.FindControl("btnPage");
+        //protected void paginationActiveStyle()
+        //{
+        //    foreach (RepeaterItem item in repPagination.Items)
+        //    {
+        //        int index = item.ItemIndex;
+        //        Button button = (Button)item.FindControl("btnPage");
 
-                int currentPage = Convert.ToInt32(ViewState["CurrentPage"]);
+        //        int currentPage = Convert.ToInt32(ViewState["CurrentPage"]);
 
-                if (index == currentPage - 1)
-                {
-                    button.CssClass += " w3-black";
-                }
-                else
-                {
-                    button.CssClass = button.CssClass.Replace(" w3-black", string.Empty);
-                }
-            }
-        }
+        //        if (index == currentPage - 1)
+        //        {
+        //            button.CssClass += " w3-black";
+        //        }
+        //        else
+        //        {
+        //            button.CssClass = button.CssClass.Replace(" w3-black", string.Empty);
+        //        }
+        //    }
+        //}
     }
 }
