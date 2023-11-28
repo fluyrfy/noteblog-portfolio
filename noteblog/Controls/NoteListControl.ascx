@@ -23,8 +23,8 @@
         let curNumber = parseInt(hidPageNumber.val());
         let totalPages = parseInt($("#hidTotalPages").val());
         $("#btnPrevious, #btnNext").toggle(totalPages > 1);
-        $("#btnPrevious").toggleClass("disabled",  curNumber == 1);
-        $("#btnNext").toggleClass("disabled",  curNumber == totalPages);
+        $("#btnPrevious").prop("disabled", curNumber == 1);
+        $("#btnNext").prop("disabled", curNumber == totalPages);
         //pageItem.each(function (index) {
         //    $(this).toggleClass("w3-black", index == (hidPageNumber.val() - 1));
         //    $(this).on("click", function () {
@@ -99,13 +99,13 @@
 <asp:Panel runat="server" ID="pnlPagination">
     <div class="w3-center w3-padding-32">
         <div class="w3-bar">
-            <asp:Button runat="server" CssClass="w3-bar-item w3-button w3-hover-black page-previous loading-btn" Text="«" OnCommand="btnNavigation_Command" CommandArgument="Previous" ID="btnPrevious" ClientIDMode="Static" />
+            <asp:Button runat="server" CssClass="w3-bar-item w3-button w3-hover-black page-previous" Text="«" OnCommand="btnNavigation_Command" CommandArgument="Previous" ID="btnPrevious" ClientIDMode="Static" />
             <asp:Repeater runat="server" ID="repPagination">
                 <ItemTemplate>
                     <asp:Button runat="server" ID="btnPage" ClientIDMode="Static" CssClass="w3-bar-item w3-button w3-hover-black page-item loading-btn" Text='<%# Container.DataItem %>' OnClientClick='<%# "toggleChangePage(" + Container.DataItem + ");" %>' OnCommand="btnPage_Command" CommandArgument='<%# Container.DataItem %>' />
                 </ItemTemplate>
             </asp:Repeater>
-            <asp:Button runat="server" class="w3-bar-item w3-button w3-hover-black page-next loading-btn" Text="»" OnCommand="btnNavigation_Command" CommandArgument="Next"  ID="btnNext" ClientIDMode="Static" />
+            <asp:Button runat="server" class="w3-bar-item w3-button w3-hover-black page-next" Text="»" OnCommand="btnNavigation_Command" CommandArgument="Next" ID="btnNext" ClientIDMode="Static" />
         </div>
     </div>
 </asp:Panel>
