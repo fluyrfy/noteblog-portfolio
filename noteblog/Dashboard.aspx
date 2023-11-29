@@ -16,6 +16,8 @@
 
     <!--google material icon-->
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js" integrity="sha512-7U4rRB8aGAHGVad3u2jiC7GA5/1YhQcQjxKeaVms/bT66i3LVBMRcBI9KwABNWnxOSwulkuSXxZLGuyfvo7V1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="Utils/js/chart.js" type="module"></script>
 
     <div class="wrapper">
         <asp:HiddenField ID="hidActiveView" runat="server" Value="0" ClientIDMode="Static" />
@@ -47,73 +49,6 @@
                     <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="4" CssClass="dashboard"><i class="material-icons">receipt_long</i>logs</asp:LinkButton></li>
                 <li class="sidebar-item" data-sidebar-item="stats">
                     <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="5" CssClass="dashboard"><i class="material-icons">query_stats</i>stats</asp:LinkButton></li>
-                <%--                        <li class="dropdown">
-							<a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false"
-								class="dropdown-toggle">
-								<i class="material-icons">aspect_ratio</i>Layouts
-							</a>
-							<ul class="collapse list-unstyled menu" id="homeSubmenu1">
-								<li><a href="#">layout 1</a></li>
-								<li><a href="#">layout 2</a></li>
-								<li><a href="#">layout 3</a></li>
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false"
-								class="dropdown-toggle">
-								<i class="material-icons">apps</i>widgets
-							</a>
-							<ul class="collapse list-unstyled menu" id="homeSubmenu2">
-								<li><a href="#">Apps 1</a></li>
-								<li><a href="#">Apps 2</a></li>
-								<li><a href="#">Apps 3</a></li>
-							</ul>
-						</li>
-
-						<li class="dropdown">
-							<a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false"
-								class="dropdown-toggle">
-								<i class="material-icons">equalizer</i>charts
-							</a>
-							<ul class="collapse list-unstyled menu" id="homeSubmenu3">
-								<li><a href="#">Pages 1</a></li>
-								<li><a href="#">Pages 2</a></li>
-								<li><a href="#">Pages 3</a></li>
-							</ul>
-						</li>
-
-
-						<li class="dropdown">
-							<a href="#homeSubmenu4" data-toggle="collapse" aria-expanded="false"
-								class="dropdown-toggle">
-								<i class="material-icons">extension</i>UI Element
-							</a>
-							<ul class="collapse list-unstyled menu" id="homeSubmenu4">
-								<li><a href="#">Pages 1</a></li>
-								<li><a href="#">Pages 2</a></li>
-								<li><a href="#">Pages 3</a></li>
-							</ul>
-						</li>
-
-						<li class="dropdown">
-							<a href="#homeSubmenu5" data-toggle="collapse" aria-expanded="false"
-								class="dropdown-toggle">
-								<i class="material-icons">border_color</i>forms
-							</a>
-							<ul class="collapse list-unstyled menu" id="homeSubmenu5">
-								<li><a href="#">Pages 1</a></li>
-								<li><a href="#">Pages 2</a></li>
-								<li><a href="#">Pages 3</a></li>
-							</ul>
-						</li>
-
-
-						<li class="">
-							<a href="#" class=""><i class="material-icons">date_range</i>copy </a>
-						</li>
-						<li class="">
-							<a href="#" class=""><i class="material-icons">library_books</i>calender </a>
-						</li>--%>
             </ul>
         </div>
         <!-------page-content start----------->
@@ -158,9 +93,10 @@
 												</a></li>--%>
                                                     <li>
                                                         <asp:LinkButton runat="server" OnClick="btnOut_Click">
-                                                        <span class="material-icons">logout</span>
-                                                        Logout
-                                                        </asp:LinkButton></li>
+                                                            <span class="material-icons">logout</span>
+                                                            Logout
+                                                        </asp:LinkButton>
+                                                    </li>
                                                 </ul>
                                         </li>
                                     </ul>
@@ -203,7 +139,8 @@
                                                 <asp:HyperLink runat="server" NavigateUrl="Take.aspx" class="btn btn-success">
                                                     <i class="material-icons">&#xE147;</i>
                                                     <span>Add New Notes</span>
-                                                </asp:HyperLink><a href="#deleteNoteModal" class="btn btn-danger disabled" data-toggle="modal" onclick="setNoteIds()" id="MultiDelete" runat="server"><i class="material-icons">&#xE15C;</i> <span>Delete</span> </a>
+                                                </asp:HyperLink>
+                                                <a href="#deleteNoteModal" class="btn btn-danger disabled" data-toggle="modal" onclick="setNoteIds()" id="MultiDelete" runat="server"><i class="material-icons">&#xE15C;</i> <span>Delete</span> </a>
                                             </div>
                                         </div>
                                     </div>
@@ -245,7 +182,8 @@
                                                         <th>
                                                             <asp:HyperLink runat="server" NavigateUrl='<%# "Modify.aspx?id=" + Eval("id") %>' CssClass="edit">
                                                                 <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
-                                                            </asp:HyperLink><a href="#deleteNoteModal" class="delete" data-toggle="modal" onclick="setNoteIds(<%# Eval("id") %>)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i> </a></th>
+                                                            </asp:HyperLink>
+                                                            <a href="#deleteNoteModal" class="delete" data-toggle="modal" onclick="setNoteIds(<%# Eval("id") %>)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i> </a></th>
                                                     </tr>
                                                 </ItemTemplate>
                                             </asp:Repeater>
@@ -651,104 +589,12 @@
                 </asp:View>
 
                 <%--manage stats--%>
-                <asp:View ID="vManageStats" runat="server" OnActivate="vManageStats_Activate">
+                <asp:View ID="vManageStats" runat="server">
                     <div class="main-content">
-                        <asp:UpdatePanel runat="server">
-                            <ContentTemplate>
-                                <div class="justify-content-between d-flex align-items-center flex-wrap mx-auto" style="max-width: 530px;">
-                                    <span class="d-flex align-items-center">
-                                        <asp:TextBox runat="server" ID="txtStatsStart" ClientIDMode="Static" ReadOnly="true" /><asp:LinkButton runat="server" class="material-icons" ClientIDMode="Static" OnCommand="btnCalendar_Command" CommandArgument="start">calendar_month</asp:LinkButton>
-                                    </span>
-                                    ~<span class="d-flex align-items-center">
-                                        <asp:TextBox runat="server" ID="txtStatsEnd" ClientIDMode="Static" ReadOnly="true" /><asp:LinkButton runat="server" class="material-icons" OnCommand="btnCalendar_Command" CommandArgument="end" ClientIDMode="Static" ID="lbtnStatsEnd">calendar_month</asp:LinkButton>
-                                    </span>
-                                    <asp:LinkButton runat="server" ID="lbtnStatsSearch" ClientIDMode="Static" CssClass="btn btn-secondary d-flex align-items-center" OnClick="lbtnStatsSearch_Click">
-                                        <i class="material-icons">search</i>
-                                    </asp:LinkButton><asp:Calendar ID="calStatsStart" runat="server" OnSelectionChanged="calStatsStart_SelectionChanged" BackColor="White" BorderColor="#999999" CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="Black" Height="180px" Width="200px">
-                                        <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
-                                        <NextPrevStyle VerticalAlign="Bottom" />
-                                        <OtherMonthDayStyle ForeColor="#808080" />
-                                        <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
-                                        <SelectorStyle BackColor="#CCCCCC" />
-                                        <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
-                                        <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
-                                        <WeekendDayStyle BackColor="#FFFFCC" />
-                                    </asp:Calendar>
-                                    <asp:Calendar ID="calStatsEnd" runat="server" OnSelectionChanged="calStatsEnd_SelectionChanged" OnDayRender="calStatsEnd_DayRender" BackColor="White" BorderColor="#999999" CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="Black" Height="180px" Width="200px" CssClass="ml-auto">
-                                        <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
-                                        <NextPrevStyle VerticalAlign="Bottom" />
-                                        <OtherMonthDayStyle ForeColor="#808080" />
-                                        <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
-                                        <SelectorStyle BackColor="#CCCCCC" />
-                                        <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
-                                        <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
-                                        <WeekendDayStyle BackColor="#FFFFCC" />
-                                    </asp:Calendar>
-                                </div>
-                                <div>
-                                    <table style="border: 1px solid black; font-family: Arial">
-                                        <tr>
-                                            <td>
-                                                <b>Select Chart Type:</b>
-                                            </td>
-                                            <td>
-                                                <%-- <asp:DropDownList ID="ddlChartType1" AutoPostBack="true" runat="server"
-                                                    OnSelectedIndexChanged="ddlChartType1_SelectedIndexChanged">
-                                                </asp:DropDownList>--%>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <%--<asp:Chart runat="server" ID="chtVisits" ImageStorageMode="UseHttpHandler">
-                                                    <Titles>
-                                                        <asp:Title Text="Visits by Month"></asp:Title>
-                                                    </Titles>
-                                                    <Series>
-                                                        <asp:Series Name="Visits"></asp:Series>
-                                                    </Series>
-                                                    <ChartAreas>
-                                                        <asp:ChartArea Name="ChartArea1">
-                                                            <AxisX Title="Month" />
-                                                            <AxisY Title="Visits" />
-                                                        </asp:ChartArea>
-                                                    </ChartAreas>
-                                                </asp:Chart>--%>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <table style="border: 1px solid black; font-family: Arial">
-                                        <tr>
-                                            <td>
-                                                <b>Select Chart Type:</b>
-                                            </td>
-                                            <td>
-                                                <%--<asp:DropDownList ID="ddlChartType2" AutoPostBack="true" runat="server"
-                                                    OnSelectedIndexChanged="ddlChartType2_SelectedIndexChanged">
-                                                </asp:DropDownList>--%>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <%--<asp:Chart runat="server" ID="chtLocations" ImageStorageMode="UseHttpHandler">
-                                                    <Titles>
-                                                        <asp:Title Text="User Locations"></asp:Title>
-                                                    </Titles>
-                                                    <Series>
-                                                        <asp:Series Name="Locations"></asp:Series>
-                                                    </Series>
-                                                    <ChartAreas>
-                                                        <asp:ChartArea Name="ChartArea1">
-                                                            <AxisX Title="Locations" />
-                                                            <AxisY Title="Visits" />
-                                                        </asp:ChartArea>
-                                                    </ChartAreas>
-                                                </asp:Chart>--%>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
+                        <div class="">
+                            Date:<input type="text" name="date" id="date">
+                            <canvas id="myChart"></canvas>
+                        </div>
                     </div>
                 </asp:View>
             </asp:MultiView>

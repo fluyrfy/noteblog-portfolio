@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="Shared/effect/load.css" />
     <script src="https://kit.fontawesome.com/136fcdeb32.js" crossorigin="anonymous" async></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="Scripts/jquery-3.6.0.slim.min.js"></script>
+    <link rel="stylesheet" href="Vendor/jquery-ui/jquery-ui.min.css">
     <script src="Scripts/jquery-3.6.0.min.js"></script>
+    <script src="Vendor/jquery-ui/jquery-ui.min.js"></script>
     <script src="Scripts/popper.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Utils/js/load.js" type="module"></script>

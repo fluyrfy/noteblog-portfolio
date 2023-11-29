@@ -276,21 +276,6 @@ namespace noteblog
             hidActiveView.Value = e.CommandArgument.ToString();
         }
 
-        protected void lbtnStatsSearch_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtStatsStart.Text) && !string.IsNullOrEmpty(txtStatsEnd.Text))
-            {
-                ViewState["StatsStartDate"] = txtStatsStart.Text;
-                ViewState["StatsEndDate"] = txtStatsEnd.Text;
-                bindChartVistsData();
-                bindChartLocationsData();
-            }
-            //getChartTypes();
-            txtStatsStart.Text = "";
-            txtStatsEnd.Text = "";
-            calStatsStart.SelectedDates.Clear();
-            calStatsEnd.SelectedDates.Clear();
-        }
 
         protected void btnSearch_Command(object sender, CommandEventArgs e)
         {
@@ -315,18 +300,6 @@ namespace noteblog
             }
         }
 
-        protected void btnCalendar_Command(object sender, CommandEventArgs e)
-        {
-            switch (e.CommandArgument.ToString())
-            {
-                case "start":
-                    calStatsStart.Visible = !calStatsStart.Visible;
-                    break;
-                case "end":
-                    calStatsEnd.Visible = !calStatsEnd.Visible;
-                    break;
-            }
-        }
 
         private bool FormsAuthenticationTicketExpired()
         {
@@ -370,11 +343,6 @@ namespace noteblog
             bindLogData();
         }
 
-        protected void vManageStats_Activate(object sender, EventArgs e)
-        {
-            calStatsEnd.Visible = false;
-            calStatsStart.Visible = false;
-        }
 
         protected void bindPagination(string paginationControlId, int totalRecords, int nowSetRecords)
         {
@@ -621,30 +589,6 @@ namespace noteblog
             }
         }
 
-        protected void calStatsStart_SelectionChanged(object sender, EventArgs e)
-        {
-            txtStatsStart.Text = calStatsStart.SelectedDate.ToString("yyyy-MM-dd");
-            calStatsStart.Visible = false;
-            if (calStatsEnd.SelectedDate < calStatsStart.SelectedDate)
-            {
-                calStatsEnd.VisibleDate = calStatsEnd.VisibleDate;
-                txtStatsEnd.Text = "";
-            }
-        }
-
-        protected void calStatsEnd_SelectionChanged(object sender, EventArgs e)
-        {
-            if (calStatsEnd.SelectedDate >= calStatsStart.SelectedDate)
-            {
-                txtStatsEnd.Text = calStatsEnd.SelectedDate.ToString("yyyy-MM-dd");
-            }
-            else
-            {
-                txtStatsEnd.Text = "";
-            }
-            calStatsEnd.Visible = false;
-        }
-
         //protected void ddlChartType1_SelectedIndexChanged(object sender, EventArgs e)
         //{
         //    this.chtVisits.Series["Visits"].ChartType = (SeriesChartType)Enum.Parse(
@@ -659,13 +603,6 @@ namespace noteblog
         //    bindChartLocationsData();
         //}
 
-        protected void calStatsEnd_DayRender(object sender, DayRenderEventArgs e)
-        {
-            if (e.Day.Date < calStatsStart.SelectedDate)
-            {
-                e.Day.IsSelectable = false;
-            }
-        }
 
         private void updateMultiDeleteButtonClass()
         {

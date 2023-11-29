@@ -746,6 +746,7 @@
     <Content Include="Shared\Sign.css" />
     <Content Include="Shared\Verify.css" />
     <Content Include="sitemap.xml" />
+    <Content Include="Utils\js\chart.js" />
     <Content Include="Utils\js\ckeditor.js" />
     <Content Include="Utils\js\dashboard.js" />
     <Content Include="Utils\js\download.js" />
