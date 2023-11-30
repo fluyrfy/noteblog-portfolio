@@ -65,16 +65,16 @@ public class AccessStatsRepository
     public string insert(string accessPage)
     {
         IpInfo ipInfo = new IpInfo();
+        var ipAddress = AccessHelper.GetIPAddress();
         using (_dbConnection)
         {
             try
             {
-                var ipAddress = AccessHelper.GetIPAddress();
                 //if (ipAddress == "::1" || ipAddress == "127.0.0.1" || isIpRecordExistToday(ipAddress))
                 //{
                 //    return true;
                 //}
-                string info = new WebClient().DownloadString("http://ipinfo.io/" + ipAddress);
+                string info = new WebClient().DownloadString("https://ipinfo.io/" + ipAddress);
                 ipInfo = JsonConvert.DeserializeObject<IpInfo>(info);
                 string city = ipInfo.city ?? "unknown";
                 string country = ipInfo.country ?? "unknown";
@@ -87,7 +87,7 @@ public class AccessStatsRepository
             }
             catch (Exception ex)
             {
-                return ex.ToString();
+                return $"{ipAddress},{ex.ToString()}";
                 throw;
             }
         }
