@@ -76,9 +76,9 @@ public class AccessStatsRepository
                 }
                 string info = new WebClient().DownloadString("http://ipinfo.io/" + ipAddress);
                 ipInfo = JsonConvert.DeserializeObject<IpInfo>(info);
-                string city = ipInfo.city;
-                string country = ipInfo.country;
-                string region = ipInfo.region;
+                string city = ipInfo.city ?? "unknown";
+                string country = ipInfo.country ?? "unknown";
+                string region = ipInfo.region ?? "unknown";
                 string queryVisits = "INSERT INTO access_stats (access_page, ip_address) VALUES (@accessPage, @ipAddress)";
                 string queryLocations = "INSERT INTO user_locations (ip_address, country, region, city) VALUES (@ipAddress, @country, @region, @city)";
 
