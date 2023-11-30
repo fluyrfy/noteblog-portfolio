@@ -70,10 +70,10 @@ public class AccessStatsRepository
         {
             try
             {
-                //if (ipAddress == "::1" || ipAddress == "127.0.0.1" || isIpRecordExistToday(ipAddress))
-                //{
-                //    return true;
-                //}
+                if (string.IsNullOrEmpty(ipAddress) || ipAddress == "127.0.0.1" || isIpRecordExistToday(ipAddress))
+                {
+                    return "ip is incorrect or already exists.";
+                }
                 string info = new WebClient().DownloadString("https://ipinfo.io/" + ipAddress);
                 ipInfo = JsonConvert.DeserializeObject<IpInfo>(info);
                 string city = ipInfo.city ?? "unknown";
@@ -81,13 +81,13 @@ public class AccessStatsRepository
                 string region = ipInfo.region ?? "unknown";
                 string queryVisits = "INSERT INTO access_stats (access_page, ip_address) VALUES (@accessPage, @ipAddress)";
                 string queryLocations = "INSERT INTO user_locations (ip_address, country, region, city) VALUES (@ipAddress, @country, @region, @city)";
-                var a = _dbConnection.Execute(queryVisits, new { accessPage, ipAddress });
-                var b = _dbConnection.Execute(queryLocations, new { ipAddress, country, region, city });
-                return $"{ipAddress}, {info}, {a}, {b}";
+                _dbConnection.Execute(queryVisits, new { accessPage, ipAddress });
+                _dbConnection.Execute(queryLocations, new { ipAddress, country, region, city });
+                return $"ip: {ipAddress}, info: {info}";
             }
             catch (Exception ex)
             {
-                return $"{ipAddress},{ex.ToString()}";
+                return $"ip: {ipAddress}, ex: {ex.ToString()}";
                 throw;
             }
         }

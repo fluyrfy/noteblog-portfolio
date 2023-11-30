@@ -22,8 +22,8 @@ namespace noteblog.Controllers
         public HttpResponseMessage saveStats([FromBody] dynamic value)
         {
             var pageName = value.pageName.Value;
-            string a = _repository.insert(pageName);
-            return Request.CreateResponse(HttpStatusCode.OK, a);
+            string response = _repository.insert(pageName);
+            return Request.CreateResponse(HttpStatusCode.OK, response);
         }
     }
 }
