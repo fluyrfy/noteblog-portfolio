@@ -70,7 +70,7 @@ public class AccessStatsRepository
             try
             {
                 var ipAddress = AccessHelper.GetIPAddress();
-                if (ipAddress != "::1" && ipAddress != "127.0.0.1" || isIpRecordExistToday(ipAddress))
+                if (ipAddress == "::1" || ipAddress == "127.0.0.1" || isIpRecordExistToday(ipAddress))
                 {
                     return true;
                 }
