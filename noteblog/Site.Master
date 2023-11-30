@@ -25,6 +25,7 @@
     <script src="https://kit.fontawesome.com/136fcdeb32.js" crossorigin="anonymous" async></script>
     <!-- 由 Google 結構化資料標記協助工具產生的 JSON-LD 標記。 -->
     <script type="application/ld+json" src="schema.json"></script>
+    <script src="Utils/js/stats.js" type="module"></script>
     <script>
         window.addEventListener('load', function () {
             let fragment = window.location.hash.substring(1);

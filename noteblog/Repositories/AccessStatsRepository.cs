@@ -15,6 +15,12 @@ public class AccessStatsRepository
         _dbConnection = DatabaseHelper.GetConnection();
     }
 
+    public bool isIpRecordExistToday(string ipAddress)
+    {
+        string query = "SELECT EXISTS(SELECT 1 FROM access_stats WHERE ip_address = @ipAddress AND DATE(access_time) = CURDATE()) as 'exists'";
+        return _dbConnection.QuerySingleOrDefault<bool>(query, new { ipAddress });
+    }
+
     public DataTable getVisits(string startDate, string endDate)
     {
         string query = @"
@@ -64,6 +70,10 @@ public class AccessStatsRepository
             try
             {
                 var ipAddress = AccessHelper.GetIPAddress();
+                if (ipAddress != "::1" && ipAddress != "127.0.0.1" || isIpRecordExistToday(ipAddress))
+                {
+                    return true;
+                }
                 string info = new WebClient().DownloadString("http://ipinfo.io/" + ipAddress);
                 ipInfo = JsonConvert.DeserializeObject<IpInfo>(info);
                 string city = ipInfo.city;
