@@ -62,7 +62,7 @@ public class AccessStatsRepository
         return dt;
     }
 
-    public bool insert(string accessPage)
+    public string insert(string accessPage)
     {
         IpInfo ipInfo = new IpInfo();
         using (_dbConnection)
@@ -81,12 +81,13 @@ public class AccessStatsRepository
                 string region = ipInfo.region ?? "unknown";
                 string queryVisits = "INSERT INTO access_stats (access_page, ip_address) VALUES (@accessPage, @ipAddress)";
                 string queryLocations = "INSERT INTO user_locations (ip_address, country, region, city) VALUES (@ipAddress, @country, @region, @city)";
-
-                return _dbConnection.Execute(queryVisits, new { accessPage, ipAddress }) == 1 && _dbConnection.Execute(queryLocations, new { ipAddress, country, region, city }) == 1;
+                var a = _dbConnection.Execute(queryVisits, new { accessPage, ipAddress });
+                var b = _dbConnection.Execute(queryLocations, new { ipAddress, country, region, city });
+                return $"{ipAddress}, {info}, {a}, {b}";
             }
             catch (Exception ex)
             {
-                return false;
+                return ex.ToString();
                 throw;
             }
         }

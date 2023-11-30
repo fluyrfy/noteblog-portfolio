@@ -22,8 +22,8 @@ namespace noteblog.Controllers
         public HttpResponseMessage saveStats([FromBody] dynamic value)
         {
             var pageName = value.pageName.Value;
-            _repository.insert(pageName);
-            return Request.CreateResponse(HttpStatusCode.OK, "catch ip info!");
+            string a = _repository.insert(pageName);
+            return Request.CreateResponse(HttpStatusCode.OK, a);
         }
     }
 }
