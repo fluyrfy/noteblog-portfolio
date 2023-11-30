@@ -752,10 +752,13 @@
     <Content Include="Utils\js\download.js" />
     <Content Include="Utils\js\edit.js" />
     <Content Include="Utils\js\load.js" />
+    <Content Include="Utils\js\stats.js" />
     <Content Include="Utils\js\turnstile.js" />
     <Content Include="Utils\js\user.js" />
     <Content Include="Utils\js\note.js" />
     <Content Include="Utils\js\draft.js" />
+    <Content Include="Vendor\jquery-ui\jquery-ui.min.css" />
+    <Content Include="Vendor\jquery-ui\jquery-ui.min.js" />
     <Content Include="Verify.aspx" />
     <Content Include="Sign.aspx" />
     <Content Include="Images\cover\default.jpg" />
@@ -861,6 +864,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\VerifyController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
