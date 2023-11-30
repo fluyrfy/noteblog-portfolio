@@ -70,10 +70,10 @@ public class AccessStatsRepository
             try
             {
                 var ipAddress = AccessHelper.GetIPAddress();
-                if (ipAddress == "::1" || ipAddress == "127.0.0.1" || isIpRecordExistToday(ipAddress))
-                {
-                    return true;
-                }
+                //if (ipAddress == "::1" || ipAddress == "127.0.0.1" || isIpRecordExistToday(ipAddress))
+                //{
+                //    return true;
+                //}
                 string info = new WebClient().DownloadString("http://ipinfo.io/" + ipAddress);
                 ipInfo = JsonConvert.DeserializeObject<IpInfo>(info);
                 string city = ipInfo.city ?? "unknown";
