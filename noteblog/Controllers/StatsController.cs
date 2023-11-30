@@ -23,7 +23,7 @@ namespace noteblog.Controllers
         {
             var pageName = value.pageName.Value;
             _repository.insert(pageName);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, "catch ip info!");
         }
     }
 }
