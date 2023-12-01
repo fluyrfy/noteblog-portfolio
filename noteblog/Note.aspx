@@ -13,7 +13,39 @@
 
     <%--clipboard js--%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+    
+    <script>
+      $(function() {
+        // Initialize Prism.js Highlight.js
+        hljs.highlightAll();
+        hljs.configure({
+            ignoreUnescapedHTML: true
+        });
+        const codeElements = document.querySelectorAll('pre');
+        codeElements.forEach(code => {
+      })
+        const btn = document.createElement('button');
+        btn.classList.add('copy-btn', 'fa-solid', 'fa-clipboard-list');
+        btn.setAttribute("type", "button");
+        code.appendChild(btn);
+        const codeBlock = code.querySelector('code');
+        const clipboard = new ClipboardJS(btn, {
+            text: function () {
+                return codeBlock.textContent;
+            }
+        });
 
+        clipboard.on('success', function (e) {
+            e.clearSelection();
+            btn.classList.remove('fa-clipboard-list');
+            btn.classList.add('fa-clipboard-check');
+            setTimeout(() => {
+                btn.classList.remove('fa-clipboard-check');
+                btn.classList.add('fa-clipboard-list');
+            }, 2000)
+        });
+      });
+  </script>
     <main>
         <!-- !PAGE CONTENT! -->
         <div class="w3-main main-text">
@@ -26,39 +58,5 @@
             </h1>
             <asp:Literal ID="litContent" runat="server" Mode="PassThrough" />
         </div>
-
-        <script>
-            // Initialize Prism.js Highlight.js
-            //Prism.highlightAll();
-            hljs.highlightAll();
-            hljs.configure({
-                ignoreUnescapedHTML: true
-            });
-
-            const codeElements = document.querySelectorAll('pre');
-            codeElements.forEach(code => {
-                const btn = document.createElement('button');
-                btn.classList.add('copy-btn', 'fa-solid', 'fa-clipboard-list');
-                btn.setAttribute("type", "button");
-                code.appendChild(btn);
-                const codeBlock = code.querySelector('code');
-                const clipboard = new ClipboardJS(btn, {
-                    text: function () {
-                        return codeBlock.textContent;
-                    }
-                });
-
-                clipboard.on('success', function (e) {
-                    e.clearSelection();
-                    // 這裡可以加入一些提示或反饋，例如按鈕文字更改
-                    btn.classList.remove('fa-clipboard-list');
-                    btn.classList.add('fa-clipboard-check');
-                    setTimeout(() => {
-                        btn.classList.remove('fa-clipboard-check');
-                        btn.classList.add('fa-clipboard-list');
-                    }, 2000)
-                });
-            });
-        </script>
     </main>
 </asp:Content>

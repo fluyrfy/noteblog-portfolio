@@ -5,8 +5,8 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link rel="stylesheet" href="Shared/bootstrap.min.css">
-    <!----css3---->
     <link rel="stylesheet" href="Shared/custom.css">
+    <link rel="stylesheet" href="Shared/Stats.css">
 
 
     <!--google fonts -->
@@ -16,8 +16,10 @@
 
     <!--google material icon-->
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js" integrity="sha512-7U4rRB8aGAHGVad3u2jiC7GA5/1YhQcQjxKeaVms/bT66i3LVBMRcBI9KwABNWnxOSwulkuSXxZLGuyfvo7V1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="Utils/js/chart.js" type="module"></script>
+
+    <!-- chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="Utils/js/chart.js" defer></script>
 
     <div class="wrapper">
         <asp:HiddenField ID="hidActiveView" runat="server" Value="0" ClientIDMode="Static" />
@@ -591,10 +593,23 @@
                 <%--manage stats--%>
                 <asp:View ID="vManageStats" runat="server">
                     <div class="main-content">
-                        <div class="">
-                            Date:<input type="text" name="date" id="date">
-                            <canvas id="myChart"></canvas>
-                        </div>
+                        <section class="block-date">
+                          Date: <input type="text" name="date" id="startDate" required> - <input type="text" name="date" id="endDate" required><button class="btn-search" type="button"><span class="material-icons">
+                            search
+                            </span></button>
+                        </section>
+                        <section class="block-chart">
+                          <div class="container-canvas">
+                            <canvas id="notesChart"></canvas>
+                          </div>
+                          <div class="container-canvas">
+                            <canvas id="visitsChart"></canvas>
+                          </div>
+                          <div class="container-canvas">
+                            <canvas id="regionsChart"></canvas>
+                          </div>
+                          <div></div>
+                        </section>
                     </div>
                 </asp:View>
             </asp:MultiView>

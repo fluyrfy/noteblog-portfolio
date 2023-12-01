@@ -741,6 +741,7 @@
     <Content Include="Shared\effect\hover.css" />
     <Content Include="Shared\Note.css" />
     <Content Include="Shared\Sign.css" />
+    <Content Include="Shared\Stats.css" />
     <Content Include="Shared\Take.css" />
     <Content Include="Shared\Verify.css" />
     <Content Include="Shared\Sign.css" />
@@ -757,6 +758,12 @@
     <Content Include="Utils\js\user.js" />
     <Content Include="Utils\js\note.js" />
     <Content Include="Utils\js\draft.js" />
+    <Content Include="Vendor\jquery-ui\images\ui-icons_444444_256x240.png" />
+    <Content Include="Vendor\jquery-ui\images\ui-icons_555555_256x240.png" />
+    <Content Include="Vendor\jquery-ui\images\ui-icons_777620_256x240.png" />
+    <Content Include="Vendor\jquery-ui\images\ui-icons_777777_256x240.png" />
+    <Content Include="Vendor\jquery-ui\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Vendor\jquery-ui\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Vendor\jquery-ui\jquery-ui.min.css" />
     <Content Include="Vendor\jquery-ui\jquery-ui.min.js" />
     <Content Include="Verify.aspx" />
