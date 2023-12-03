@@ -23,19 +23,17 @@
         });
         const codeElements = document.querySelectorAll('pre');
         codeElements.forEach(code => {
-      })
-        const btn = document.createElement('button');
-        btn.classList.add('copy-btn', 'fa-solid', 'fa-clipboard-list');
-        btn.setAttribute("type", "button");
-        code.appendChild(btn);
-        const codeBlock = code.querySelector('code');
-        const clipboard = new ClipboardJS(btn, {
-            text: function () {
-                return codeBlock.textContent;
-            }
-        });
-
-        clipboard.on('success', function (e) {
+          const btn = document.createElement('button');
+          btn.classList.add('copy-btn', 'fa-solid', 'fa-clipboard-list');
+          btn.setAttribute("type", "button");
+          code.appendChild(btn);
+          const codeBlock = code.querySelector('code');
+          const clipboard = new ClipboardJS(btn, {
+              text: function () {
+                  return codeBlock.textContent;
+              }
+          });
+          clipboard.on('success', function (e) {
             e.clearSelection();
             btn.classList.remove('fa-clipboard-list');
             btn.classList.add('fa-clipboard-check');
@@ -43,7 +41,8 @@
                 btn.classList.remove('fa-clipboard-check');
                 btn.classList.add('fa-clipboard-list');
             }, 2000)
-        });
+          });
+        })
       });
   </script>
     <main>
