@@ -21,6 +21,19 @@ header {
     background-color: transparent;
 }
 
+/* div.container-donate {
+  display: flex;  
+  flex-direction: column;
+  align-items: center;
+} */
+
+/* .bmc-btn {
+  font-size: 15px !important;
+  min-width: fit-content !important;
+  height: fit-content !important;
+  padding: 12px !important;
+} */
+
 h4#contact {
   display: flex;
   justify-content: space-between;
@@ -32,7 +45,8 @@ a#donate {
   background-color: #17171B;
   border: none;
   border-radius: 5px;
-  color: #fff
+  color: #fff;
+  width: fit-content;
 }
 a#donate:hover {
   background-color: #0A0A0C;
