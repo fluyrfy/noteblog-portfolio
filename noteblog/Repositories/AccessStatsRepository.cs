@@ -27,7 +27,7 @@ public class AccessStatsRepository
     string query = @"
       SELECT DATE_FORMAT(created_at, '%Y-%m') AS month, COUNT(*) AS notes
       FROM notes
-      WHERE created_at BETWEEN @startDate AND @endDate
+      WHERE date(created_at) BETWEEN @startDate AND @endDate
       GROUP BY month
       ORDER BY month;
     ";
@@ -49,7 +49,7 @@ public class AccessStatsRepository
     string query = @"
       SELECT DATE_FORMAT(access_time, '%Y-%m') AS month, COUNT(*) AS visits
       FROM access_stats
-      WHERE access_time BETWEEN @startDate AND @endDate
+      WHERE date(access_time) BETWEEN @startDate AND @endDate
       GROUP BY month
       ORDER BY month;
     ";
@@ -68,7 +68,7 @@ public class AccessStatsRepository
   public object getRegions(string startDate, string endDate)
   {
     string query = @"
-      SELECT DATE_FORMAT(timestamp, '%Y-%m') AS month, region, COUNT(*) AS data FROM user_locations WHERE timestamp BETWEEN @startDate AND @endDate GROUP BY country;
+      SELECT DATE_FORMAT(timestamp, '%Y-%m') AS month, region, COUNT(*) AS data FROM user_locations WHERE date(timestamp) BETWEEN @startDate AND @endDate GROUP BY country;
     ";
     var result = _dbConnection.ExecuteReader(query, new { startDate, endDate });
     DataTable dt = new DataTable();
@@ -83,29 +83,26 @@ public class AccessStatsRepository
     return response;
   }
 
-  public DataTable getLocations(string startDate, string endDate)
+  public object getNoteCTR(string startDate, string endDate)
   {
     string query = @"
-                        SELECT 
-                          region,
-                          COUNT(*) AS uv
-                        FROM
-                        (
-                          SELECT 
-                            ip_address, 
-                            region,
-                            timestamp
-                          FROM user_locations 
-                          WHERE timestamp >= @startDate
-                            AND timestamp < @endDate
-                          GROUP BY ip_address, timestamp
-                        ) AS daily_ip
-                        GROUP BY region
-                        ";
+      SELECT note_id, COUNT(*) AS ctr, n.title AS note_title
+      FROM note_ctr nc
+      JOIN notes n ON nc.note_id = n.id
+      WHERE date(nc.timestamp) BETWEEN @startDate AND @endDate
+      GROUP BY nc.note_id;
+    ";
     var result = _dbConnection.ExecuteReader(query, new { startDate, endDate });
     DataTable dt = new DataTable();
     dt.Load(result);
-    return dt;
+    var noteTitle = dt.AsEnumerable().Select(row => row.Field<string>("note_title")).ToArray();
+    var data = dt.AsEnumerable().Select(row => row.Field<long>("ctr")).ToArray();
+    var response = new
+    {
+      filter = noteTitle,
+      results = data
+    };
+    return response;
   }
 
   public string insert(string accessPage)

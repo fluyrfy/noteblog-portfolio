@@ -608,7 +608,9 @@
                           <div class="container-canvas">
                             <canvas id="regionsChart"></canvas>
                           </div>
-                          <div></div>
+                          <div class="container-canvas">
+                            <canvas id="ctrChart"></canvas>
+                          </div>
                         </section>
                     </div>
                 </asp:View>

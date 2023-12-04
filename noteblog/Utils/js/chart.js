@@ -1,6 +1,7 @@
 ﻿let notesChart;
 let visitsChart;
 let regionsChart;
+let ctrChart;
 const chartInfo = [
 	{
 		label: "Number of New notes",
@@ -19,6 +20,12 @@ const chartInfo = [
 		type: "pie",
 		element: "regionsChart",
 		chart: regionsChart,
+	},
+	{
+		label: "CTR of note",
+		type: "pie",
+		element: "ctrChart",
+		chart: ctrChart,
 	},
 ];
 $(function () {

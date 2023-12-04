@@ -25,11 +25,13 @@ namespace noteblog.Controllers
       var notes = _repository.getNotes(startDate, endDate);
       var visits = _repository.getVisits(startDate, endDate);
       var regions = _repository.getRegions(startDate, endDate);
+      var ctr = _repository.getNoteCTR(startDate, endDate);
       return new
       {
         notes = notes,
         visits = visits,
-        regions = regions
+        regions = regions,
+        ctr = ctr
       };
     }
 
