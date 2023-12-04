@@ -25,6 +25,12 @@
   justify-content: space-between;
 }
 .block-chart div.container-canvas {
-  width: 49% !important;
+  width: 49%;
   margin-block: 10px;
+}
+
+@media (max-width: 768px) {
+  .block-chart div.container-canvas {
+    width: 100%;
+  }
 }

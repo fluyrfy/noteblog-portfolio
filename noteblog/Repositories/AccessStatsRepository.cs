@@ -138,4 +138,21 @@ public class AccessStatsRepository
       }
     }
   }
+
+  public string insertNoteCTR(string noteId)
+  {
+    using (_dbConnection)
+    {
+      try
+      {
+        string query = "INSERT INTO note_ctr (note_id) VALUES (@noteId)";
+        int count = _dbConnection.Execute(query, new { noteId });
+        return count > 0 ? "success" : "error";
+      }
+      catch (Exception ex)
+      {
+        throw;
+      }
+    }
+  }
 }

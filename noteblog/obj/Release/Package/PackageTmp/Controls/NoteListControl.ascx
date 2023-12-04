@@ -55,7 +55,7 @@
     </div>
 </asp:Panel>
 
-<script src="Utils/js/note.js"></script>
+<script src="Utils/js/note.js" type="module"></script>
 <script>
     function toggleChangePage(number) {
         $("#hidPageNumber").val(number);

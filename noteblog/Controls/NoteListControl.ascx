@@ -6,7 +6,6 @@
 <asp:HiddenField ID="hidTotalPages" runat="server" ClientIDMode="Static" />
 
 <link rel="stylesheet" href="Shared/effect/hover.css" />
-<script type="module" src="./Utils/js/note.js"></script>
 <script>
     function toggleChangePage(number) {
         $("#hidPageNumber").val(number);
