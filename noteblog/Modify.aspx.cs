@@ -104,7 +104,7 @@ namespace noteblog
                         DataRow dr = dt.Rows[0];
                         dr["category_id"] = rdlCategory.SelectedValue;
                         dr["title"] = txtTitle.Text;
-                        dr["content"] = HttpUtility.HtmlEncode(txtContent.Text);
+                        dr["content"] = HttpUtility.HtmlEncode(hdnContent.Value);
                         dr["content_text"] = ConverterHelper.ExtractTextFromHtml(txtContent.Text);
                         dr["keyword"] = txtKeyword.Text;
                         log.Debug($"New note category: {dr["category_id"] as string}, title: {dr["title"] as string}, content: {dr["content_text"] as string}, keyword: {dr["keyword"] as string}");

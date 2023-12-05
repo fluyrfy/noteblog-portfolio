@@ -60,7 +60,8 @@
                     <%-- <asp:RequiredFieldValidator ID="rfvContent" runat="server" ErrorMessage="Content is required" ControlToValidate="txtContent" ForeColor="Red"></asp:RequiredFieldValidator>--%>
                 </div>
                 <div style="width: 100%; text-align: center;">
-                    <button class="w3-button w3-black w3-round loading-btn" runat="server" onserverclick="btnSubmit_Click"><i class="fa fa-pencil w3-margin-right"></i>Submit</button>
+                    <button class="w3-button w3-black w3-round loading-btn" runat="server" onclick="addDataLanguage();" onserverclick="btnSubmit_Click"><i class="fa fa-pencil w3-margin-right"></i>Submit</button>
+                    <asp:HiddenField ID="hdnContent" runat="server" ClientIDMode="Static" />
                 </div>
             </div>
         </div>

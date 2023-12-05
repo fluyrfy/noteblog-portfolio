@@ -6,9 +6,8 @@ window.watchdog = watchdog;
 
 watchdog.setCreator((element, config) => {
 	return CKSource.Editor.create(element, config).then((editor) => {
-		editor.model.document.on("change:data", () => {
-			const data = editor.getData();
-		});
+		editor.model.document.on("change:data", () => {});
+
 		contentEditor = editor;
 
 		return editor;
@@ -42,6 +41,7 @@ watchdog
 				{ language: "xml", label: "XML" },
 			],
 		},
+		extraAllowedContent: "pre[data-language]",
 	})
 	.catch(handleError);
 
@@ -53,3 +53,18 @@ function handleError(error) {
 	console.warn("Build id: 31o3b59jzmiv-rq35etlei2s");
 	console.error(error);
 }
+
+const addDataLanguage = () => {
+	const data = contentEditor.getData();
+	const tempDiv = document.createElement("div");
+	tempDiv.innerHTML = data;
+	const renderedPres = tempDiv.querySelectorAll("pre");
+	const originalPres = document.querySelectorAll("div.ck-editor__main pre");
+	renderedPres.forEach((pre, idx) => {
+		pre.setAttribute(
+			"data-language",
+			originalPres[idx].attributes["data-language"].textContent
+		);
+	});
+	$("#hdnContent").val(tempDiv["innerHTML"]);
+};

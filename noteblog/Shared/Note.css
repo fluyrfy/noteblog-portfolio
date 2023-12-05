@@ -30,6 +30,19 @@ pre {
     /*    background-color: hsl(0,0%,96.5%);*/
 }
 
+pre::after {
+  content: attr(data-language);
+  position: absolute;
+  background: #757575;
+  color: #fff;
+  font-size: 10px;
+  line-height: 16px;
+  padding: 1.8px 4.8px;
+  right: 30px;
+  top: -1px;
+  white-space: nowrap;
+}
+
     pre > code.hljs {
         padding-top: 15px !important;
         padding: 1em;
@@ -47,7 +60,6 @@ pre {
     }
 
 
-
 code {
     border-radius: 4px;
     white-space: pre-wrap;
@@ -56,6 +68,8 @@ code {
     font-family: 'Fira Code', monospace;
     overflow-wrap: anywhere;
 }
+
+
 
 .copy-btn {
     opacity: 0;
