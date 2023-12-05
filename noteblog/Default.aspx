@@ -9,7 +9,31 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="Shared/Default.css" rel="stylesheet" />    
     <script src="Utils/js/download.js" async></script>
-
+    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="FrankLiao" data-description="Support me on Buy me a coffee!" data-message="" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+    <script>
+      $(function() {      // 取得父元素和子元素
+        function init() {        
+          var parentElement = document.getElementById("donate-container");
+          var childElement = document.getElementById("bmc-wbtn");
+          var iframeElement = document.getElementById("bmc-iframe");
+          var iconElement = document.createElement("i");
+          iconElement.className = "fa fa-credit-card";
+          iconElement.setAttribute("aria-hidden", "true");
+          childElement.innerHTML = "Send me a tip"
+          childElement.appendChild(iconElement);
+          parentElement.appendChild(childElement);
+          parentElement.appendChild(iframeElement);
+        }
+        init();
+        $("#bmc-wbtn").click(function() {
+          init();
+        })
+        let closeButton = document.getElementById("bmc-close-btn");
+        closeButton.parentElement.addEventListener("click", function() {
+          init()
+        });
+      })
+    </script>
     <main>
         <!-- Overlay effect when opening sidebar on small screens -->
 
@@ -59,7 +83,8 @@
 
             <!-- Contact Section -->
             <div class="w3-container w3-padding-large w3-grey">
-                <h4 id="contact"><b>Contact Me</b><a id="donate" href="https://paypal.me/yufanliaocestlavie?country.x=TW&locale.x=zh_TW" target="_blank" class="wobble-top">Send me a tip<i class="fa fa-credit-card" aria-hidden="true"></i></a></h4>
+                <h4 id="contact"><b>Contact Me</b><div id="donate-container"></div>
+                </h4>
                 <div class="w3-row-padding w3-center w3-padding-24" style="margin: 0 -16px">
                     <div class="w3-third w3-dark-grey clickable">
                         <a href="mailto:yufanliaocestlavie@gmail.com">

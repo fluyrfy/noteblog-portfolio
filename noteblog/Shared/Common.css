@@ -39,49 +39,52 @@ h4#contact {
   justify-content: space-between;
   align-items: center;
 }
-a#donate {
-  font-size: 15px;
-  padding: 12px;
-  background-color: #17171B;
-  border: none;
-  border-radius: 5px;
-  color: #fff;
-  width: fit-content;
+
+div#donate-container {
+  position: relative;
 }
-a#donate:hover {
-  background-color: #0A0A0C;
-  animation-name: wobble-top;
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: 1;
+div#bmc-wbtn {
+  font-size: 15px !important;
+  padding: 12px !important;
+  background-color: #17171B !important;
+  border: none !important;
+  border-radius: 5px !important;
+  color: #fff !important;
+  width: fit-content !important;
+  position: relative !important;
+  font-weight:unset !important;
+  height: fit-content !important;
+  top: 0 !important;
+  left: 0 !important;
 }
-
-@keyframes wobble-top {
-  16.65% {
-      transform: skew(-12deg);
-  }
-
-  33.3% {
-      transform: skew(10deg);
-  }
-
-  49.95% {
-      transform: skew(-6deg);
-  }
-
-  66.6% {
-      transform: skew(4deg);
-  }
-
-  83.25% {
-      transform: skew(-2deg);
-  }
-
-  100% {
-      transform: skew(0);
-  }
+div#bmc-wbtn i {
+  margin-left: 5px !important;
+}
+/* div#bmc-wbtn:hover {
+  background-color: #0A0A0C !important;
+  animation-name: wobble-top !important;
+  animation-duration: 1s !important;
+  animation-timing-function: ease-in-out !important;
+  animation-iteration-count: 1 !important; */
+/* } */
+div#bmc-wbtn img {
+  display: none !important;
 }
 
-a#donate i {
-  margin-left: 5px
+iframe#bmc-iframe {
+  right: 100% !important;
+  bottom: 0 !important;
+  z-index: 99999999 !important;
+  position: absolute !important;
+}
+
+@media screen and (max-width: 768px) {
+  iframe#bmc-iframe {
+    position: fixed !important;
+    transform: translate(-50%, -50%) !important;
+    left: 50% !important;
+    top: 50% !important;
+    min-height: fit-content !important;
+    min-width: fit-content !important;
+  }
 }
