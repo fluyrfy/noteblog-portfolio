@@ -122,3 +122,11 @@ code {
 img {
     max-width: 100%
 }
+
+figure {
+  margin: 1em auto;
+}
+
+figure table {
+  width: 100%;
+}
