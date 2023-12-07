@@ -575,34 +575,25 @@ namespace noteblog
       {
         if (new LogRepository().delete(DateTime.Now))
         {
-          log.Info("Logs clear successfully");
+          try
+          {
+            log.Info("Logs clear successfully");
+          }
+          catch (Exception)
+          {
+
+          }
+          finally
+          {
+            bindLogData();
+          }
         }
       }
       catch (Exception ex)
       {
         log.Error($"{ex.Message}", ex);
       }
-      finally
-      {
-
-        bindLogData();
-      }
     }
-
-    //protected void ddlChartType1_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-    //    this.chtVisits.Series["Visits"].ChartType = (SeriesChartType)Enum.Parse(
-    //        typeof(SeriesChartType), ddlChartType1.SelectedValue);
-    //    bindChartVistsData();
-    //}
-
-    //protected void ddlChartType2_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-    //    this.chtVisits.Series["Locations"].ChartType = (SeriesChartType)Enum.Parse(
-    //        typeof(SeriesChartType), ddlChartType2.SelectedValue);
-    //    bindChartLocationsData();
-    //}
-
 
     private void updateMultiDeleteButtonClass()
     {
