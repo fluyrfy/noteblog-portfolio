@@ -72,7 +72,7 @@ namespace noteblog
             imgData = !string.IsNullOrEmpty(hdnImgData.Value) ? Convert.FromBase64String(hdnImgData.Value) : null;
 
             cmd.Parameters.AddWithValue("@pic", imgData);
-            log.Debug($"New note info: {txtTitle.Text} - {txtContent.Text}");
+            log.Debug($"New note info: {txtTitle.Text}");
             con.Open();
             cmd.ExecuteNonQuery();
             MySqlCommand cmd2 = new MySqlCommand();

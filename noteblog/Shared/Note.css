@@ -23,7 +23,6 @@ body {
 
 pre {
     border-radius: 6px;
-    overflow: auto;
     width: fit-content;
     margin-inline: auto;
     position: relative;
