@@ -61,10 +61,14 @@
             })
 
 
-            $("a.bar-item").on("click", function () {
+            $("a.bar-item, div.bar-item").on("click", function () {
                 $("a.bar-item").removeClass("w3-text-teal");
                 $(this).addClass("w3-text-teal");
             });
+
+            $("div.bar-item div").click(function(e) {
+              e.stopPropagation();
+         });
 
         });
         function w3_open() {
@@ -121,6 +125,16 @@
                     <a href="/#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding bar-item" data-fragment="about"><i class="fa fa-user fa-fw w3-margin-right"></i>ABOUT</a>
                     <a href="/#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding bar-item" data-fragment="contact"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
                     <a href="https://github.com/fluyrfy" target="_blank" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-github fa-fw w3-margin-right"></i>GITHUB</a>
+                    <div class="w3-bar-item w3-button w3-padding bar-item bar-item-chat"><div style="width: 19px;" class="w3-margin-right"><img src="/Images/ico/openai.svg" width="15" height="15" style="margin: auto" ></div>ChatGPT
+                      <div class="block_openai_chat">
+                        <div class="openai_chat_title">
+                          <span>How can I help you today?</span>
+                        </div>
+                        <div id="openai_chat_log">
+                        </div>
+                        <input id="openai_input" placeholder="Type message..." type="text" name="message" />
+                      </div>
+                    </div>
                 </div>
             </nav>
             <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor: pointer" title="close side menu" id="myOverlay"></div>

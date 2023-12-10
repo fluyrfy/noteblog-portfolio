@@ -476,6 +476,7 @@
     <Content Include="Images\cover\default.jpg" />
     <Content Include="Images\email\email.png" />
     <Content Include="Images\ico\favicon.ico" />
+    <Content Include="Images\ico\openai.svg" />
     <Content Include="Images\ico\user.ico" />
     <Content Include="Images\logo\logo-icononly.png" />
     <Content Include="Images\logo\logo.svg" />
