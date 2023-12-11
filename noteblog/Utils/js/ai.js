@@ -1,3 +1,7 @@
+$(window).on("load", function () {
+	$("#apiScript").remove();
+});
+
 let messages = [];
 var questionString = "Ask a question...";
 var errorString = "An error occurred! Please try again later.";

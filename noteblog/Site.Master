@@ -68,7 +68,7 @@
 
             $("div.bar-item div").click(function(e) {
               e.stopPropagation();
-         });
+            });
 
         });
         function w3_open() {
