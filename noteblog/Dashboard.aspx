@@ -50,7 +50,11 @@
                 <li class="sidebar-item" data-sidebar-item="logs">
                     <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="4" CssClass="dashboard"><i class="material-icons">receipt_long</i>logs</asp:LinkButton></li>
                 <li class="sidebar-item" data-sidebar-item="stats">
-                    <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="5" CssClass="dashboard"><i class="material-icons">query_stats</i>stats</asp:LinkButton></li>
+                    <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="5" CssClass="dashboard"><i class="material-icons">query_stats</i>stats</asp:LinkButton>
+                </li>
+                <li class="sidebar-item" data-sidebar-item="email">
+                    <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="6" CssClass="dashboard"><i class="material-icons">mail</i>email</asp:LinkButton>
+                </li>
             </ul>
         </div>
         <!-------page-content start----------->
@@ -614,83 +618,26 @@
                         </section>
                     </div>
                 </asp:View>
+
+                <%--manage email--%>
+                <asp:View ID="vManageEmail" runat="server">
+                    <div class="main-content">
+                        <section>
+                        </section>
+                    </div>
+                </asp:View>
+
             </asp:MultiView>
 
-            <%--<footer class="footer">
-				<div class="container-fluid">
-					<div class="footer-in">
-						<p class="mb-0">&copy 2021 Vishweb Design . All Rights Reserved.</p>
-					</div>
-				</div>
-			</footer>--%>
-        </div>
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="footer-in">
+              <p class="mb-0">&copy 2021 Vishweb Design . All Rights Reserved.</p>
+            </div>
+          </div>
+			  </footer>
+      </div>
     </div>
-
     <script src="Utils/js/dashboard.js"></script>
-    <script type="text/javascript">
-        function setLogContent(content) {
-            $("#logContent").text(decodeURIComponent(content));
-        }
-
-        function setId(type, id) {
-            document.getElementById(`hid${type}Id`).value = id;
-            switch (type) {
-                case 'User':
-                    getUserValue(id);
-                    break;
-            }
-        }
-
-        function setNoteIds(noteIds = 0) {
-            document.getElementById("noteId").value = noteIds == 0 ? 0 : noteIds;
-        }
-
-        function convertToBase64() {
-            if ($("#MainContent_txtSearch").val() == "") {
-                return false
-            }
-            var userInput = $("#MainContent_txtSearch").val();
-            var encodedInput = btoa(encodeURIComponent(userInput)); // 將用戶輸入的內容進行 Base64 編碼
-            $("#MainContent_hdnSearch").val(encodedInput);
-            $("#MainContent_txtSearch").val("");
-            return true;
-        }
-
-        $(document).ready(function () {
-            $(".xp-menubar").on('click', function () {
-                $("#sidebar").toggleClass('active');
-                $("#content").toggleClass('active');
-            });
-
-            $('.xp-menubar,.body-overlay').on('click', function () {
-                $("#sidebar,.body-overlay").toggleClass('show-nav');
-            });
-
-            $('.cb-note').on('click', function () {
-                var selectedCheckBoxes = $('.cb-note:checked');
-                var multiDelete = $('.multi-delete');
-                if (selectedCheckBoxes.length > 0) {
-                    multiDelete.removeClass('disabled');
-                } else {
-                    multiDelete.addClass('disabled');
-                }
-            });
-
-            $("#lbtnStatsSearch").toggleClass("disabled", $("#txtStatsStart").val() == "" && $("#txtStatsEnd").val() == "")
-
-        });
-
-        $(".sidebar-item").on('click', function () {
-            $("#hidActiveSidebarItem").val($(this).data("sidebar-item"));
-        })
-
-        $(".sidebar-item").each(function (index) {
-            $(this).removeClass("active")
-            if ($(this).data("sidebar-item") === $("#hidActiveSidebarItem").val()) {
-                $(this).addClass("active");
-            }
-        })
-    </script>
-
 </asp:Content>
 

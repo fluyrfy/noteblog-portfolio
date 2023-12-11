@@ -40,7 +40,6 @@ const createCompletion = (message) => {
 	document.querySelector("#openai_input").blur();
 	addToChatLog("bot loading", "...");
 
-	let apiKey = "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";
 	let newMessages = {
 		role: "user",
 		content: message,

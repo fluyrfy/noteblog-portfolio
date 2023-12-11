@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Web.Configuration;
+using System.Configuration;
 using System.Web.UI;
 
 namespace noteblog
@@ -8,7 +8,7 @@ namespace noteblog
   {
     protected void Page_Load(object sender, EventArgs e)
     {
-      string apiKey = WebConfigurationManager.AppSettings["ChatGPTApiKey"];
+      string apiKey = ConfigurationManager.AppSettings["ChatGPTApiKey"];
       Response.Write("<script id='apiScript'>");
       Response.Write("var apiKey = '" + apiKey + "'");
       Response.Write("</script>");

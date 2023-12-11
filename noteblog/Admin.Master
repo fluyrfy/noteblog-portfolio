@@ -20,7 +20,6 @@
     <script src="Utils/js/load.js" type="module"></script>
 </head>
 <body id="mainBody" runat="server">
-    <%--<div class="loading">Loading&#8230;</div>--%>
     <form runat="server" id="form" enctype="multipart/form-data">
         <asp:ScriptManager runat="server">
             <Scripts>
