@@ -1,8 +1,10 @@
+@import url("./effect/code.css");
+
 .block_openai_chat {
   width: 300px;
-  height: 80vh;
-  max-height: 350px;
-  z-index: 2;
+  height: auto;
+  max-height: 95vh;
+  z-index: 10;
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -16,6 +18,16 @@
   font-size: 12px;
   cursor: default;
 }
+.block_openai_chat::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
 .openai_chat_title {
   height: 50px;
@@ -28,18 +40,30 @@
   color: white;
   font-size: 12px;
   font-weight: bold;
+  position: relative;
 }
 .openai_chat_title img {
   max-height: 100%;
   filter: invert(92%) sepia(74%) saturate(14%) hue-rotate(7deg) brightness(109%) contrast(102%);
 }
+.openai_chat_title .btn-close-chat {
+  position: absolute;
+  background: transparent;
+  right: 0;
+  top: 0;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  padding: 6px;
+}
 
 .block_openai_chat #openai_chat_log {
   display: flex;
   flex-direction: column;
-  height: calc(100% - 84px);
+  height: 300px;
   overflow-y: scroll;
   overflow-x: hidden;
+  background-color: #fff;
   /* margin-bottom: 0.5rem; */
 }
 .block_openai_chat #openai_chat_log p {
@@ -54,6 +78,7 @@
   border: none;
   width: 100%;
   transition: background 0.4s ease;
+  resize: none;
 }
 
 .block_openai_chat #openai_input:focus-visible {
@@ -107,6 +132,7 @@
   opacity: 0;
 }
 
+
 @keyframes block_openai_chat_popup {
   0% {
       opacity: 0;
@@ -143,4 +169,17 @@
   to {
       opacity: 1;
   }
+}
+
+@media screen and (max-width:  768px) {
+  .block_openai_chat {
+    position: fixed;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
+}
+
+pre > code.hljs {
+  font-size: 12px !important;
 }

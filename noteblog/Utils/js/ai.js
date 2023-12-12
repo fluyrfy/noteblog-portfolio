@@ -1,17 +1,21 @@
 $(window).on("load", function () {
 	$("#apiScript").remove();
 	// $(".block_openai_chat").hide();
-	$(".bar-item-chat").on("click", function () {
-		$(".block_openai_chat").toggle();
-	});
+	$(".bar-item-chat, .btn-close-chat, .block_openai_chat::before").on(
+		"click",
+		function () {
+			$(".block_openai_chat").toggle();
+		}
+	);
 });
 
 let messages = [];
 var questionString = "Ask a question...";
 var errorString = "An error occurred! Please try again later.";
+var codeBlockRegex = /```(\w+)\n([\s\S]*?)```/g;
 
 document.querySelector("#openai_input").addEventListener("keyup", (e) => {
-	if (e.which === 13 && e.target.value !== "") {
+	if (e.which === 13 && !e.shiftKey && e.target.value.trim().length > 0) {
 		addToChatLog("user", e.target.value);
 		createCompletion(e.target.value);
 		e.target.value = "";
@@ -79,18 +83,22 @@ const createCompletion = (message) => {
 			try {
 				let ansContent = "";
 				if (ans.text) {
-					addToChatLog("bot", ans.text);
 					ansContent = ans.text;
 				} else {
-					addToChatLog("bot", ans.message.content);
 					ansContent = ans.message.content;
 				}
 				messages.push({
 					role: "assistant",
 					content: ansContent,
 				});
-
-				console.log(messages);
+				var processedText = ansContent.replace(
+					codeBlockRegex,
+					function (match, language, code) {
+						return `<pre><code class="language-${language}">${code.trim()}</code></pre>`;
+					}
+				);
+				addToChatLog("bot", processedText);
+				hljs.highlightAll();
 			} catch (error) {
 				addToChatLog("bot", data.error.message);
 			}

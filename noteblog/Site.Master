@@ -21,6 +21,15 @@
     <link rel="stylesheet" href="Shared/Common.css" />
     <link rel="stylesheet" href="Shared/effect/load.css" />    
     <link href="Shared/Ai.css" rel="stylesheet" />    
+    <link rel="stylesheet" href="Shared/highlight/stackoverflow-light.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/go.min.js"></script>
+    <script>
+      hljs.highlightAll();        
+      hljs.configure({
+      ignoreUnescapedHTML: true
+      });
+    </script>
     <script src="Utils/js/ai.js" defer></script>
 
     <%--font-awesome--%>
@@ -131,10 +140,11 @@
                       <div class="block_openai_chat">
                         <div class="openai_chat_title">
                           <img src="/Images/ico/openai.svg"><span>How can I help you today?</span>
+                          <button class="btn-close-chat" type="button"><i class="fa fa-window-close-o"></i></button>
                         </div>
                         <div id="openai_chat_log">
                         </div>
-                        <input id="openai_input" placeholder="Type message..." type="text" name="message" />
+                        <textarea id="openai_input" placeholder="Type message..." type="text" name="message"></textarea>
                       </div>
                     </div>
                 </div>

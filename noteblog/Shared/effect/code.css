@@ -1,0 +1,46 @@
+pre {
+  border-radius: 6px;
+  width: fit-content;
+  margin-inline: auto;
+  position: relative;
+  /*    background-color: hsl(0,0%,96.5%);*/
+}
+
+/* pre::after {
+content: attr(data-language);
+position: absolute;
+background: #757575;
+color: #fff;
+font-size: 10px;
+line-height: 16px;
+padding: 1.8px 4.8px;
+right: 30px;
+top: -1px;
+white-space: nowrap;
+} */
+
+  pre > code.hljs {
+      padding-top: 15px !important;
+      padding: 1em;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      font-family: 'Fira Code', monospace, sans-serif !important;
+      font-size: 13px;
+      width: fit-content;
+      margin: auto;
+      display: block;
+  }
+
+  pre:hover > button {
+      opacity: 1;
+  }
+
+
+code {
+  border-radius: 4px;
+  white-space: pre-wrap;
+  background-color: hsl(210,8%,90%);
+  padding: 2px 4px;
+  font-family: 'Fira Code', monospace;
+  overflow-wrap: anywhere;
+}

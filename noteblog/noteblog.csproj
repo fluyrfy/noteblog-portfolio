@@ -489,6 +489,7 @@
     <Content Include="Shared\Common.css" />
     <Content Include="Shared\custom.css" />
     <Content Include="Shared\Default.css" />
+    <Content Include="Shared\effect\code.css" />
     <Content Include="Shared\highlight\a11y-dark.css" />
     <Content Include="Shared\highlight\a11y-light.css" />
     <Content Include="Shared\highlight\agate.css" />

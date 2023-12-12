@@ -3,24 +3,11 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="Shared/Note.css" rel="stylesheet" />
 
-    <%--scirpt hightlight--%>
-    <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">--%>
-    <link rel="stylesheet" href="Shared/highlight/stackoverflow-light.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/go.min.js"></script>
-    <%--<link href="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/themes/prism.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/prism.js"></script>--%>
-
     <%--clipboard js--%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
     
     <script>
       $(function() {
-        // Initialize Prism.js Highlight.js
-        hljs.highlightAll();
-        hljs.configure({
-            ignoreUnescapedHTML: true
-        });
         const codeElements = document.querySelectorAll('pre');
         codeElements.forEach(code => {
           const btn = document.createElement('button');
