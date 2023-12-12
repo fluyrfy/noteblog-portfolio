@@ -37,7 +37,7 @@
 .block_openai_chat #openai_chat_log {
   display: flex;
   flex-direction: column;
-  min-height: calc(100% - 84px);
+  height: calc(100% - 84px);
   overflow-y: scroll;
   overflow-x: hidden;
   /* margin-bottom: 0.5rem; */
