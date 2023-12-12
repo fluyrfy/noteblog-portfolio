@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="Shared/Common.css" />
     <link rel="stylesheet" href="Shared/effect/load.css" />    
     <link href="Shared/Ai.css" rel="stylesheet" />    
-    <script src="Utils/js/ai.js" async></script>
+    <script src="Utils/js/ai.js" defer></script>
 
     <%--font-awesome--%>
     <script src="https://kit.fontawesome.com/136fcdeb32.js" crossorigin="anonymous" async></script>
