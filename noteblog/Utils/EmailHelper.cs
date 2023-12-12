@@ -24,7 +24,7 @@ public static class EmailHelper
     log = new Logger(typeof(EmailHelper).Name);
   }
 
-  public static void SendVerificationEmail(string userEmail, string subject, string title, string content, string hint, string link)
+  public static void SendEmail(string userEmail, string subject, string title, string content, string hint, string link)
   {
     try
     {
@@ -41,32 +41,13 @@ public static class EmailHelper
       htmlBody = htmlBody.Replace("{title}", title);
       htmlBody = htmlBody.Replace("{content}", content);
       htmlBody = htmlBody.Replace("{hint}", hint);
-      htmlBody = htmlBody.Replace("{verifyLink}", $"{domain}/{link}");
+      htmlBody = htmlBody.Replace("{link}", $"{domain}/{link}");
       log.Debug($"Email title: {title}, content: {content}, hint: {hint}, link: {link}");
       mailMessage.Body = htmlBody;
       mailMessage.IsBodyHtml = true;
       SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
       string smtpAcct = ConfigurationManager.AppSettings["GoogleAppAcct"];
       string smtpPwd = ConfigurationManager.AppSettings["GoogleAppPwd"];
-      // using (MySqlConnection con = DatabaseHelper.GetConnection())
-      // {
-      //     MySqlCommand cmd = new MySqlCommand("SELECT name, value from configurations WHERE name = @acct OR name = @pwd", con);
-      //     cmd.Parameters.AddWithValue("@acct", "google-app-acct");
-      //     cmd.Parameters.AddWithValue("@pwd", "google-app-pwd");
-      //     con.Open();
-      //     MySqlDataReader reader = cmd.ExecuteReader();
-      //     while (reader.Read())
-      //     {
-      //         if (reader["name"].ToString() == "google-app-acct")
-      //         {
-      //             smtpAcct = reader["value"].ToString();
-      //         }
-      //         else if (reader["name"].ToString() == "google-app-pwd")
-      //         {
-      //             smtpPwd = reader["value"].ToString();
-      //         }
-      //     }
-      // }
       smtpClient.Credentials = new NetworkCredential()
       {
         UserName = smtpAcct,

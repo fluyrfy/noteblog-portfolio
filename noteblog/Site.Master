@@ -19,7 +19,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+TC&family=Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="Shared/Common.css" />
-    <link rel="stylesheet" href="Shared/effect/load.css" />
+    <link rel="stylesheet" href="Shared/effect/load.css" />    
+    <link href="Shared/Ai.css" rel="stylesheet" />    
+    <script src="Utils/js/ai.js" async></script>
 
     <%--font-awesome--%>
     <script src="https://kit.fontawesome.com/136fcdeb32.js" crossorigin="anonymous" async></script>
@@ -62,7 +64,7 @@
 
 
             $("a.bar-item, div.bar-item").on("click", function () {
-                $("a.bar-item").removeClass("w3-text-teal");
+                $("a.bar-item, div.bar-item").removeClass("w3-text-teal");
                 $(this).addClass("w3-text-teal");
             });
 
@@ -125,10 +127,10 @@
                     <a href="/#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding bar-item" data-fragment="about"><i class="fa fa-user fa-fw w3-margin-right"></i>ABOUT</a>
                     <a href="/#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding bar-item" data-fragment="contact"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
                     <a href="https://github.com/fluyrfy" target="_blank" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-github fa-fw w3-margin-right"></i>GITHUB</a>
-                    <div class="w3-bar-item w3-button w3-padding bar-item bar-item-chat"><div style="width: 19px;" class="w3-margin-right"><img src="/Images/ico/openai.svg" width="15" height="15" style="margin: auto" ></div>ChatGPT
+                    <div class="w3-bar-item w3-button w3-padding bar-item bar-item-chat"><div style="width: 19px; padding-left: 3px" class="w3-margin-right"><img src="/Images/ico/openai.svg" width="15" height="15" style="margin: auto" ></div>ChatGPT
                       <div class="block_openai_chat">
                         <div class="openai_chat_title">
-                          <span>How can I help you today?</span>
+                          <img src="/Images/ico/openai.svg"><span>How can I help you today?</span>
                         </div>
                         <div id="openai_chat_log">
                         </div>

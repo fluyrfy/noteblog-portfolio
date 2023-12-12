@@ -1,5 +1,9 @@
 $(window).on("load", function () {
 	$("#apiScript").remove();
+	// $(".block_openai_chat").hide();
+	$(".bar-item-chat").on("click", function () {
+		$(".block_openai_chat").toggle();
+	});
 });
 
 let messages = [];

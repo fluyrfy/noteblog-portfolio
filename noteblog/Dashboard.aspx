@@ -629,13 +629,13 @@
 
             </asp:MultiView>
 
-        <footer class="footer">
+        <!-- <footer class="footer">
           <div class="container-fluid">
             <div class="footer-in">
               <p class="mb-0">&copy 2021 Vishweb Design . All Rights Reserved.</p>
             </div>
           </div>
-			  </footer>
+			  </footer> -->
       </div>
     </div>
     <script src="Utils/js/dashboard.js"></script>

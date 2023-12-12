@@ -46,6 +46,9 @@ namespace noteblog
         }
         using (MySqlConnection con = new MySqlConnection(ConfigurationManager.ConnectionStrings["Noteblog"].ConnectionString))
         {
+          string newId = "";
+          string newTitle = "";
+          string newCategory = "";
           try
           {
             log.Info("Starting to create new note");
@@ -73,12 +76,14 @@ namespace noteblog
 
             cmd.Parameters.AddWithValue("@pic", imgData);
             log.Debug($"New note info: {txtTitle.Text}");
+            newTitle = txtTitle.Text;
             con.Open();
             cmd.ExecuteNonQuery();
             MySqlCommand cmd2 = new MySqlCommand();
             cmd2.Connection = con;
             cmd2.CommandText = "SELECT LAST_INSERT_ID()";
-            string newId = cmd2.ExecuteScalar().ToString();
+            newId = cmd2.ExecuteScalar().ToString();
+            newCategory = new CategoryRepository().get(Convert.ToInt32(rdlCategory.SelectedValue)).name;
             log.Info("Note created successfully, note ID: " + newId);
             DraftRepository draftRepository = new DraftRepository(userId);
             draftRepository.delete(userId, 0);
@@ -93,10 +98,14 @@ namespace noteblog
           finally
           {
             log.Info("End of note creation method");
+            List<string> emailList = new UserRepository().getAllEmail();
+            foreach (string email in emailList)
+            {
+              EmailHelper.SendEmail($"{email}", "New article on F.L. - check it out!", "New Note Alert", $"Don’t miss the new note on F.L.: {newTitle}. It’s about {newCategory}. Enjoy it.", "read it", $"Note?id={newId}");
+            }
             Response.Redirect("Dashboard.aspx");
           }
         }
-
       }
     }
   }
