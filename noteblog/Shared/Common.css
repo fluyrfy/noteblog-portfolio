@@ -30,6 +30,10 @@ header {
     background-color: transparent;
 }
 
+form {
+  margin: 0;
+}
+
 /* div.container-donate {
   display: flex;  
   flex-direction: column;
@@ -85,6 +89,11 @@ iframe#bmc-iframe {
   bottom: 0 !important;
   z-index: 99999999 !important;
   position: absolute !important;
+}
+
+.noscroll{
+  height: 100vh;
+  overflow:hidden;
 }
 
 @media screen and (max-width: 768px) {

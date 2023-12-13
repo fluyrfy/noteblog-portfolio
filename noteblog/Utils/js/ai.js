@@ -1,10 +1,11 @@
 $(window).on("load", function () {
 	$("#apiScript").remove();
-	// $(".block_openai_chat").hide();
 	$(".bar-item-chat, .btn-close-chat, .block_openai_chat::before").on(
 		"click",
 		function () {
-			$(".block_openai_chat").toggle();
+			$(".block_openai_chat").toggle(function () {
+				$("body").toggleClass("noscroll", $(this).is(":visible"));
+			});
 		}
 	);
 });

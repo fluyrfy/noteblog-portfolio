@@ -26,8 +26,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/go.min.js"></script>
     <script>
       hljs.highlightAll();        
-      hljs.configure({
-      ignoreUnescapedHTML: true
+      hljs.configure({                
+        ignoreUnescapedHTML: true
       });
     </script>
     <script src="Utils/js/ai.js" defer></script>
