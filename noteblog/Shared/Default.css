@@ -16,6 +16,7 @@
     transform: translateY(-50%);
     top: 50%;
     left: 16px;
+    font-size: 20px;
 }
 
     .category-icon.active {

@@ -410,6 +410,10 @@
                                                         <label>Description</label>
                                                         <input name="insertCategoryDescription" class="form-control" placeholder="new description" />
                                                     </div>
+                                                    <div class="form-group">
+                                                        <label>Icon Class</label>
+                                                        <input name="insertCategoryIconClass" class="form-control" placeholder="new icon class" />
+                                                    </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button><asp:Button runat="server" CssClass="btn btn-success" Text="Add" OnCommand="btnManageCategory_Command" CommandArgument="insert" />
@@ -435,6 +439,10 @@
                                                     <div class="form-group">
                                                         <label>Description</label>
                                                         <input type="text" class="form-control" name="editCategoryDescription" placeholder="new description" id="editCategoryDescription">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Icon Class</label>
+                                                        <input type="text" class="form-control" name="editCategoryIconClass" placeholder="new icon class" id="editCategoryIconClass">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">

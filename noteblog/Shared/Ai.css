@@ -104,7 +104,7 @@
   animation: block_openai_chat_popup 0.4s cubic-bezier(0.87, 0, 0.13, 1);
   position: relative;
   cursor: text;
-  user-select: auto !important;
+  user-select: text !important;
 }
 .block_openai_chat .openai_message:before {
   position: absolute;

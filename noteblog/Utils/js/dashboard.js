@@ -8,6 +8,7 @@
 			.done(function (category) {
 				$("#editCategoryName").val(category.name);
 				$("#editCategoryDescription").val(category.description);
+				$("#editCategoryIconClass").val(category.iconClass);
 			})
 			.fail(function (xhr, status, error) {
 				console.error(status, error);

@@ -6,6 +6,7 @@
 <asp:HiddenField ID="hidTotalPages" runat="server" ClientIDMode="Static" />
 
 <link rel="stylesheet" href="Shared/effect/hover.css" />
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.7.0/fonts/remixicon.css" rel="stylesheet">
 <script>
     function toggleChangePage(number) {
         $("#hidPageNumber").val(number);
@@ -64,7 +65,7 @@
     <asp:Repeater runat="server" ID="repCategory" OnItemCreated="repCategory_ItemCreated">
         <ItemTemplate>
             <div style="display: inline-block; position: relative;" class="loading-btn">
-                <i runat="server" class='<%# "fa category-icon " + Eval("iconClass") %>' aria-hidden="true"></i>
+                <i runat="server" class='<%# "category-icon " + Eval("iconClass") %>' aria-hidden="true"></i>
                 <asp:LinkButton runat="server" OnCommand="btnFilter_Command" CommandArgument='<%# Eval("name") %>' Text='<%# Eval("name") %>' CssClass="w3-button w3-white category-item" UseSubmitBehavior="false" />
             </div>
         </ItemTemplate>

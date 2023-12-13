@@ -499,8 +499,9 @@ namespace noteblog
             log.Info("Starting to update category");
             string name = Request.Form["editCategoryName"];
             string description = Request.Form["editCategoryDescription"];
-            log.Debug($"Update category name: {name}, description: {description}");
-            new CategoryRepository().update(id, name, description);
+            string iconClass = Request.Form["editCategoryIconClass"];
+            log.Debug($"Update category name: {name}, description: {description}, iconClass: {iconClass}");
+            new CategoryRepository().update(id, name, description, iconClass);
             log.Info("Category updated successfully");
           }
           catch (Exception ex)
@@ -518,8 +519,9 @@ namespace noteblog
             log.Info("Starting to insert category");
             string name = Request.Form["insertCategoryName"];
             string description = Request.Form["insertCategoryDescription"];
-            log.Debug($"Insert category name: {name}, description: {description}");
-            new CategoryRepository().insert(name, description);
+            string iconClass = Request.Form["insertCategoryIconClass"];
+            log.Debug($"Insert category name: {name}, description: {description}, icon_class: {iconClass}");
+            new CategoryRepository().insert(name, description, iconClass);
             log.Info("Category inserted successfully");
           }
           catch (Exception ex)
@@ -533,6 +535,7 @@ namespace noteblog
           break;
       }
       bindCategoryRepeater();
+      CacheHelper.ClearAllCache();
     }
 
     protected void btnManageProfile_Command(object sender, CommandEventArgs e)
