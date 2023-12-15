@@ -11,6 +11,23 @@
             $("#fuEditResume").click()
         })
         $("#imgProfileAvatar").toggle($("#imgProfileAvatar")[0].src.length > 0);
+
+        $("#fuEditResume").on("change", function (event) {
+            $("#resumeName").text(event.target.files[0].name);
+        })
+        $("#fuEditProfileAvatar").on("change", function (event) {
+            var input = event.target;
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $("#imgProfileAvatar").attr("src", e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        })
+
     })
 </script>
 
@@ -50,6 +67,7 @@
                                                     <i class="fa fa-fw fa-upload"></i>
                                                     <span>Upload Resume</span>
                                                 </button>
+                                                <span id="resumeName"></span>
                                             </div>
                                         </div>
                                         <div class="text-center text-sm-right">
