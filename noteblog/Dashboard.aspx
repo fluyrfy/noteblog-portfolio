@@ -2,6 +2,7 @@
 
 
 <%@ Register Src="~/Controls/PaginationControl.ascx" TagName="PaginationControl" TagPrefix="uc" %>
+<%@ Register Src="~/Controls/Dashboard/ProfileControl.ascx" TagName="ProfileControl" TagPrefix="uc" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link rel="stylesheet" href="Shared/bootstrap.min.css">
@@ -308,12 +309,12 @@
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label>Name</label>
-                                                        <input type="text" class="form-control" name="editUserName" id="editUserName" placeholder="new name" />
+                                                        <input type="text" class="form-control" name="editUserName" id="editUserName" placeholder="new name" readonly />
                                                     </div>
-                                                    <div class="form-group">
+                                                    <%--<div class="form-group">
                                                         <label>Avatar</label>
                                                         <input type="file" name="editUserAvatar" />
-                                                    </div>
+                                                    </div>--%>
                                                     <div class="form-group">
                                                         <label>Role</label>
                                                         <input type="text" class="form-control" name="editUserRole" id="editUserRole" placeholder="new role">
@@ -479,44 +480,7 @@
 
                 <%--manage profile--%>
                 <asp:View ID="vManageProfile" runat="server" OnActivate="vManageProfile_Activate">
-                    <div class="container bootstrap snippets bootdey">
-                        <h1 class="text-info">Edit Profile</h1>
-                        <hr>
-                        <div class="row">
-                            <!-- left column -->
-                            <div class="col-md-3">
-                                <div class="text-center">
-                                    <asp:Image ID="imgProfileAvatar" runat="server" CssClass="avatar img-circle img-thumbnail" alt="avatar" Style="width: 200px; height: 200px" />
-                                    <h6>Upload a different photo...</h6>
-                                    <asp:FileUpload ID="fuEditProfileAvatar" runat="server" CssClass="form-control" accept=".png,.jpg,.jpeg" />
-                                </div>
-                            </div>
-
-                            <!-- edit form column -->
-                            <div class="col-md-9 personal-info">
-                                <%--<div class="alert alert-info alert-dismissable">
-							  <a class="panel-close close" data-dismiss="alert">×</a> 
-							  <i class="fa fa-coffee"></i>
-							  This is an <strong>.alert</strong>. Use this to show important messages to the user.
-							</div>--%>
-                                <h3>Personal info</h3>
-                                <div class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-lg-3 control-label">Name:</label>
-                                        <div class="col-lg-8">
-                                            <asp:TextBox ID="txtEditProfileName" runat="server" CssClass="form-control" type="text" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="text-center">
-                                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Update" OnCommand="btnManageProfile_Command" CommandArgument="update" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
+                    <uc:ProfileControl ID="ProfileControl" runat="server" />
                 </asp:View>
 
                 <%--manage log--%>
@@ -606,23 +570,28 @@
                 <asp:View ID="vManageStats" runat="server">
                     <div class="main-content">
                         <section class="block-date">
-                          Date: <input type="text" name="date" id="startDate" required> - <input type="text" name="date" id="endDate" required><button class="btn-search" type="button"><span class="material-icons">
-                            search
-                            </span></button>
+                            Date:
+                            <input type="text" name="date" id="startDate" required>
+                            -
+                            <input type="text" name="date" id="endDate" required>
+                            <button class="btn-search" type="button">
+                                <span class="material-icons">search
+                                </span>
+                            </button>
                         </section>
                         <section class="block-chart">
-                          <div class="container-canvas">
-                            <canvas id="notesChart"></canvas>
-                          </div>
-                          <div class="container-canvas">
-                            <canvas id="visitsChart"></canvas>
-                          </div>
-                          <div class="container-canvas">
-                            <canvas id="regionsChart"></canvas>
-                          </div>
-                          <div class="container-canvas">
-                            <canvas id="ctrChart"></canvas>
-                          </div>
+                            <div class="container-canvas">
+                                <canvas id="notesChart"></canvas>
+                            </div>
+                            <div class="container-canvas">
+                                <canvas id="visitsChart"></canvas>
+                            </div>
+                            <div class="container-canvas">
+                                <canvas id="regionsChart"></canvas>
+                            </div>
+                            <div class="container-canvas">
+                                <canvas id="ctrChart"></canvas>
+                            </div>
                         </section>
                     </div>
                 </asp:View>
@@ -637,14 +606,14 @@
 
             </asp:MultiView>
 
-        <!-- <footer class="footer">
+            <!-- <footer class="footer">
           <div class="container-fluid">
             <div class="footer-in">
               <p class="mb-0">&copy 2021 Vishweb Design . All Rights Reserved.</p>
             </div>
           </div>
 			  </footer> -->
-      </div>
+        </div>
     </div>
     <script src="Utils/js/dashboard.js"></script>
 </asp:Content>

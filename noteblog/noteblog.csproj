@@ -466,6 +466,7 @@
     <Content Include="bin\WebGrease.dll" />
     <Content Include="bin\WebMatrix.Data.dll" />
     <Content Include="bin\WebMatrix.WebData.dll" />
+    <Content Include="Controls\Dashboard\ProfileControl.ascx" />
     <Content Include="Controls\NoteListControl.ascx" />
     <Content Include="Controls\PaginationControl.ascx" />
     <Content Include="google8859b173112989c9.html" />
@@ -743,6 +744,7 @@
     <Content Include="Shared\highlight\xt256.css" />
     <Content Include="Shared\effect\hover.css" />
     <Content Include="Shared\Note.css" />
+    <Content Include="Shared\Profile.css" />
     <Content Include="Shared\Sign.css" />
     <Content Include="Shared\Stats.css" />
     <Content Include="Shared\Take.css" />
@@ -881,6 +883,13 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\DraftsController.cs" />
+    <Compile Include="Controls\Dashboard\ProfileControl.ascx.cs">
+      <DependentUpon>ProfileControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\Dashboard\ProfileControl.ascx.designer.cs">
+      <DependentUpon>ProfileControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NoteListControl.ascx.cs">
       <DependentUpon>NoteListControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

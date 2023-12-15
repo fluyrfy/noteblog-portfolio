@@ -36,6 +36,7 @@ watchdog
 				{ language: "php", label: "PHP" },
 				{ language: "python", label: "Python" },
 				{ language: "r", label: "R" },
+				{ language: "sql", label: "SQL" },
 				{ language: "ruby", label: "Ruby" },
 				{ language: "typescript", label: "TypeScript" },
 				{ language: "xml", label: "XML" },

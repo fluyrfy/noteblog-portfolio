@@ -182,7 +182,9 @@
     transform: translate(-50%, 50%);
   }
 }
-
+pre {
+  width: 100% !important;
+}
 pre > code.hljs {
   font-size: 12px !important;
 }
