@@ -97,7 +97,7 @@ div.profile-card {
   position: absolute;
   left: 50%;
   top: 150%;
-  transform: translateX(-50%) scale(0.7);
+  transform: translateX(-50%);
   transform-origin: top center;
   box-shadow: 0 10px 25px 5px;
   opacity: 0;

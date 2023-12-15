@@ -30,7 +30,6 @@
         ignoreUnescapedHTML: true
       });
     </script>
-    <script src="Utils/js/download.js" async></script>
     <script src="Utils/js/ai.js" defer></script>
 
     <%--font-awesome--%>

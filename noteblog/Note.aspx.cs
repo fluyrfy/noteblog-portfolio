@@ -55,7 +55,7 @@ namespace noteblog
                   hlkAuthorProfile.NavigateUrl = homePage;
                   hlkAuthorGitHub.NavigateUrl = reader["github_link"].ToString();
                   hlkAuthorEmail.NavigateUrl = $"mailto:{reader["email"].ToString()}";
-                  // hlkAuthorResume.NavigateUrl
+                  hlkAuthorResume.NavigateUrl = $"{homePage}/Files/Resume.ashx?userId={reader["user_id"].ToString()}";
                   Page.Title = title;
                   Page.MetaDescription = contentText;
                   Page.MetaKeywords = keyword;

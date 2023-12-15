@@ -59,7 +59,7 @@
                                     <li>
                                         <asp:HyperLink ID="hlkAuthorEmail" CssClass="fa fa-envelope" aria-hidden="true" runat="server" Target="_blank" /></li>
                                     <li>
-                                        <a onclick="downloadResume()" class="fa fa-file-text" aria-hidden="true"></a>
+                                        <asp:HyperLink ID="hlkAuthorResume" class="fa fa-file-text" aria-hidden="true" runat="server" />
                                     </li>
                                 </ul>
                             </div>
