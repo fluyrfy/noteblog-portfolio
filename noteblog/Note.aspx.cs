@@ -30,7 +30,7 @@ namespace noteblog
               MySqlCommand cmd = new MySqlCommand();
               cmd.Connection = conn;
               StringBuilder sb = new StringBuilder();
-              sb.AppendLine("SELECT notes.*, users.name as user_name FROM notes INNER JOIN users ON notes.user_id = users.id WHERE 1 = 1");
+              sb.AppendLine("SELECT notes.*, users.id as user_id, users.* FROM notes INNER JOIN users ON notes.user_id = users.id WHERE 1 = 1");
               sb.AppendLine("AND notes.id = @id");
               cmd.Parameters.AddWithValue("@id", noteId);
               cmd.CommandText = sb.ToString();
@@ -46,7 +46,16 @@ namespace noteblog
                   string keyword = reader["keyword"].ToString();
                   litTitle.Text = title;
                   litContent.Text = content;
-                  litAuthor.Text = reader["user_name"].ToString();
+                  litAuthor.Text = reader["name"].ToString();
+                  imgAuthorAvatar.ImageUrl = $"data:image/png;base64,{Convert.ToBase64String((byte[])reader["avatar"])}";
+                  litAuthorName.Text = reader["name"].ToString();
+                  litAuthorJobTitle.Text = reader["job_title"].ToString();
+                  Uri baseUri = new Uri(Request.Url.GetLeftPart(UriPartial.Authority));
+                  string homePage = baseUri.AbsoluteUri;
+                  hlkAuthorProfile.NavigateUrl = homePage;
+                  hlkAuthorGitHub.NavigateUrl = reader["github_link"].ToString();
+                  hlkAuthorEmail.NavigateUrl = $"mailto:{reader["email"].ToString()}";
+                  // hlkAuthorResume.NavigateUrl
                   Page.Title = title;
                   Page.MetaDescription = contentText;
                   Page.MetaKeywords = keyword;

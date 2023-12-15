@@ -96,7 +96,6 @@ iframe#bmc-iframe {
 }
 
 .noscroll{
-  height: 100vh;
   overflow:hidden;
 }
 

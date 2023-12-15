@@ -241,7 +241,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col d-flex justify-content-end">
-                                                    <asp:Button runat="server" Text="Save Changes" CssClass="btn btn-primary" type="submit" OnClick="btnUpdateProfile_Click" />
+                                                    <button runat="server" onserverclick="btnUpdateProfile_Click" class="btn btn-primary loading-btn">Save Changes</button>
                                                 </div>
                                             </div>
                                         </form>

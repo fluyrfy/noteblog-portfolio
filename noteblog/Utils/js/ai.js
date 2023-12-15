@@ -4,7 +4,7 @@ $(window).on("load", function () {
 		"click",
 		function () {
 			$(".block_openai_chat").toggle(function () {
-				$("body").toggleClass("noscroll", $(this).is(":visible"));
+				$("html").toggleClass("noscroll", $(this).is(":visible"));
 			});
 		}
 	);
@@ -95,7 +95,7 @@ const createCompletion = (message) => {
 				var processedText = ansContent.replace(
 					codeBlockRegex,
 					function (match, language, code) {
-						return `<pre><code class="language-${language}">${code.trim()}</code></pre>`;
+						return `<pre data-language="${language}"><code class="language-${language}">${code.trim()}</code></pre>`;
 					}
 				);
 				addToChatLog("bot", processedText);
