@@ -80,7 +80,7 @@ public class UserRepository
   }
   public User get(int id)
   {
-    return _dbConnection.QueryFirst<User>("SELECT * FROM users WHERE id = @id", new { id });
+    return _dbConnection.QueryFirstOrDefault<User>("SELECT * FROM users WHERE id = @id", new { id });
   }
 
 

@@ -7,7 +7,7 @@
 		},
 		success: function (data, statusText, xhr) {
 			if (xhr.status === 200) {
-				window.location.href = "/Files/Resume.ashx";
+				window.location.href = "/Files/Resume.ashx?userId=" + userId;
 			} else {
 				console.error("Error: download fail");
 			}
