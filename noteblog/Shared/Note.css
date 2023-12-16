@@ -90,6 +90,7 @@ span.author:hover div.profile-card {
   height: auto;
 }
 div.profile-card {
+  z-index: 2;
   position: absolute;
   left: 50%;
   top: 100%;
