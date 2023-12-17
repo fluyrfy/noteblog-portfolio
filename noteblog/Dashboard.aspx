@@ -30,7 +30,7 @@
         <!-------sidebar--design------------>
         <div id="sidebar">
             <div class="sidebar-header">
-                <asp:HyperLink NavigateUrl="/" runat="server">
+                <asp:HyperLink NavigateUrl="/Default" runat="server">
                     <h3>
                         <asp:Image runat="server" CssClass="img-fluid rounded-circle" ID="imgAvatar" />
                         <asp:Label ID="lblUser" runat="server" />

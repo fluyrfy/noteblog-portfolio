@@ -2,7 +2,7 @@
 
 <%@ Register Src="~/Controls/NoteListControl.ascx" TagName="NoteListControl" TagPrefix="uc" %>
 
-<%@ OutputCache Duration="86400" Location="Server" VaryByParam="none" VaryByControl="ctl00$MainContent$NoteListControl1$hidLastUpdateTime;ctl00$MainContent$NoteListControl1$hidCategoryName;ctl00$MainContent$NoteListControl1$hidPageNumber;ctl00$MainContent$NoteListControl1$repPagination;ctl00$MainContent$NoteListControl1$repNote" %>
+<%@ OutputCache Duration="86400" Location="Server" VaryByParam="none" VaryByCustom=“none” VaryByControl="ctl00$MainContent$NoteListControl1$hidLastUpdateTime;ctl00$MainContent$NoteListControl1$hidCategoryName;ctl00$MainContent$NoteListControl1$hidPageNumber;ctl00$MainContent$NoteListControl1$repPagination;ctl00$MainContent$NoteListControl1$repNote" %>
 
 
 
@@ -32,6 +32,16 @@
         closeButton.parentElement.addEventListener("click", function() {
           init()
         });
+
+        $(".btn-clear-cache").click(function() {
+          $(this).addClass("rotate");
+          $.ajax({
+            url: `/api/status/clearCache`,
+            type: "GET",
+          }).done(function(){}).always(function() {
+            location.reload();
+          })
+        })
       })
     </script>
     <main>
@@ -43,7 +53,12 @@
                 <h1 style="display: flex; justify-content: space-between; align-items: center;">
                     <b>My Portfolio</b>
                 </h1>
-                last output cache time: <%= DateTime.Now.ToString() %>
+                <span>
+                  last output cache time: <%= DateTime.Now.ToString() %>
+                  <span class="btn-clear-cache">
+                    <i class="ri-refresh-line"></i>
+                  </span>
+                </span>
                 <uc:NoteListControl ID="NoteListControl1" runat="server" />
             </div>
             <div class="w3-container w3-padding-large" style="margin-bottom: 32px" id="about">

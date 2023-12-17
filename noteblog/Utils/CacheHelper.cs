@@ -2,27 +2,28 @@
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Caching;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace noteblog.Utils
 {
-    public class CacheHelper
+  public class CacheHelper
+  {
+    public static void ClearAllCache()
     {
-        public static void ClearAllCache()
-        {
-            Cache cache = HttpRuntime.Cache;
-            IDictionaryEnumerator enumerator = cache.GetEnumerator();
-            List<string> keysToRemove = new List<string>();
+      Cache cache = HttpRuntime.Cache;
+      IDictionaryEnumerator enumerator = cache.GetEnumerator();
+      List<string> keysToRemove = new List<string>();
 
-            while (enumerator.MoveNext())
-            {
-                keysToRemove.Add(enumerator.Key.ToString());
-            }
+      while (enumerator.MoveNext())
+      {
+        keysToRemove.Add(enumerator.Key.ToString());
+      }
 
-            foreach (string key in keysToRemove)
-            {
-                cache.Remove(key);
-            }
-            HttpResponse.RemoveOutputCacheItem("/Default.aspx");
-        }
+      foreach (string key in keysToRemove)
+      {
+        cache.Remove(key);
+      }
+      HttpResponse.RemoveOutputCacheItem("/Default");
     }
+  }
 }
