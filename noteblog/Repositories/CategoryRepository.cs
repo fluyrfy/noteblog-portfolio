@@ -23,6 +23,10 @@ public class CategoryRepository
       sb.AppendLine("SELECT * FROM categories");
       totalRecords = _dbConnection.ExecuteScalar<int>(DatabaseHelper.GetTotalRecords(sb.ToString()));
       sb.AppendLine("LIMIT @limit OFFSET @offset");
+      if (limit == 0)
+      {
+        limit = totalRecords;
+      }
       int offset = (nowPage - 1) * limit;
       var parameters = new { limit, offset };
       nowSetRecords = _dbConnection.ExecuteScalar<int>(DatabaseHelper.GetTotalRecords(sb.ToString()), parameters);
