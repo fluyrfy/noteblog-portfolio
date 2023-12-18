@@ -5,11 +5,14 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using MySql.Data.MySqlClient;
+using noteblog.Models;
+using noteblog.Utils;
 
 namespace noteblog
 {
     public partial class Note : Page
     {
+        private int authorId;
         protected void Page_Load(object sender, EventArgs e)
         {
             // if (!IsPostBack)
@@ -52,10 +55,10 @@ namespace noteblog
                                     litAuthorJobTitle.Text = reader["job_title"].ToString();
                                     Uri baseUri = new Uri(Request.Url.GetLeftPart(UriPartial.Authority));
                                     string homePage = baseUri.AbsoluteUri;
-                                    hlkAuthorProfile.NavigateUrl = homePage;
                                     hlkAuthorGitHub.NavigateUrl = reader["github_link"].ToString();
                                     hlkAuthorEmail.NavigateUrl = $"mailto:{reader["email"].ToString()}";
                                     hlkAuthorResume.NavigateUrl = $"{homePage}/Files/Resume.ashx?userId={reader["user_id"].ToString()}";
+                                    authorId = Convert.ToInt32(reader["user_id"].ToString());
                                     Page.Title = title;
                                     Page.MetaDescription = contentText;
                                     Page.MetaKeywords = keyword;
@@ -83,5 +86,24 @@ namespace noteblog
             }
             // }
         }
+
+        protected void lbtnAuthorProfile_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CacheHelper.ClearAllCache();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                Response.Write("<script>");
+                Response.Write($"window.open('/Default?uid={authorId}','_blank').focus()");
+                Response.Write("</script>");
+            }            
+        }
+
     }
 }

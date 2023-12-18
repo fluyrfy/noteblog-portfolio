@@ -53,7 +53,7 @@
                                 </div>
                                 <ul class="social">
                                     <li>
-                                        <asp:HyperLink ID="hlkAuthorProfile" runat="server" CssClass="fa fa-user" aria-hidden="true" Target="_blank" /></li>
+                                        <asp:LinkButton ID="lbtnAuthorProfile" OnClick="lbtnAuthorProfile_Click" runat="server" CssClass="fa fa-user" aria-hidden="true" /></li>                                        
                                     <li>
                                         <asp:HyperLink ID="hlkAuthorGitHub" CssClass="fa fa-github" aria-hidden="true" runat="server" Target="_blank" /></li>
                                     <li>
