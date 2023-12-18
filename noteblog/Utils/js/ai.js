@@ -5,6 +5,7 @@ $(window).on("load", function () {
 		function () {
 			$(".block_openai_chat").toggle(function () {
 				$("html").toggleClass("noscroll", $(this).is(":visible"));
+				$("#openai_input").focus();
 			});
 		}
 	);
@@ -14,9 +15,11 @@ let messages = [];
 var questionString = "Ask a question...";
 var errorString = "An error occurred! Please try again later.";
 var codeBlockRegex = /```(\w+)\n([\s\S]*?)```/g;
+var htmlRegex = /<!DOCTYPE html>([\s\S]*)<\/html>/;
+var combinedRegex = new RegExp(codeBlockRegex.source + "|" + htmlRegex.source);
 
 document.querySelector("#openai_input").addEventListener("keyup", (e) => {
-	if (e.which === 13 && !e.shiftKey && e.target.value.trim().length > 0) {
+	if (!e.shiftKey && e.which === 13 && e.target.value.trim().length > 0) {
 		addToChatLog("user", e.target.value);
 		createCompletion(e.target.value);
 		e.target.value = "";
@@ -39,6 +42,7 @@ const addToChatLog = (type, message) => {
 	messageContainer.append(messageElem);
 	messageElem.style.width = messageText.offsetWidth + 40 + "px";
 	messageContainer.scrollTop = messageContainer.scrollHeight;
+	hljs.highlightAll();
 };
 
 const createCompletion = (message) => {
@@ -92,15 +96,35 @@ const createCompletion = (message) => {
 					role: "assistant",
 					content: ansContent,
 				});
-				var processedText = ansContent.replace(
-					codeBlockRegex,
-					function (match, language, code) {
-						return `<pre data-language="${language}"><code class="language-${language}">${code.trim()}</code></pre>`;
-					}
-				);
+				var codeBlocks = ansContent.match(codeBlockRegex);
+				var htmlBlocks = ansContent.match(htmlRegex);
+				var processedText = ansContent;
+				if (codeBlocks) {
+					processedText = processedText.replace(
+						codeBlockRegex,
+						(match, language, code) => {
+							return `<pre data-language="${language}">
+                       <code class="language-${language}">${code.trim()}</code>
+                   </pre>`;
+						}
+					);
+				}
+
+				if (htmlBlocks) {
+					processedText = processedText.replace(htmlRegex, (html) => {
+						const codeBlock = document.createElement("pre");
+						codeBlock.setAttribute("data-language", "html");
+						const codeElement = document.createElement("code");
+						codeElement.classList.add("hljs", "language-html");
+						codeElement.innerText = html;
+						codeBlock.appendChild(codeElement);
+						return codeBlock.outerHTML;
+					});
+					console.log(processedText);
+				}
 				addToChatLog("bot", processedText);
-				hljs.highlightAll();
 			} catch (error) {
+				console.error(error);
 				addToChatLog("bot", data.error.message);
 			}
 			document.querySelector("#openai_input").focus();

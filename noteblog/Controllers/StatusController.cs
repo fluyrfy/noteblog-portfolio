@@ -6,28 +6,28 @@ using noteblog.Utils;
 
 namespace noteblog.Controllers
 {
-  [RoutePrefix("api/status")]
-  public class StatusController : ApiController
-  {
-    [HttpGet]
-    [Route("check")]
-    public HttpResponseMessage getStatus()
+    [RoutePrefix("api/status")]
+    public class StatusController : ApiController
     {
-      return Request.CreateResponse(HttpStatusCode.OK, "good :)");
+        [HttpGet]
+        [Route("check")]
+        public HttpResponseMessage getStatus()
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, "good :)");
+        }
+        [HttpGet]
+        [Route("clearCache")]
+        public HttpResponseMessage clearCache()
+        {
+            try
+            {
+                CacheHelper.ClearAllCache();
+                return Request.CreateResponse(HttpStatusCode.OK, "cache is cleared");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, $"cache is not cleared: {ex.Message}");
+            }
+        }
     }
-    [HttpGet]
-    [Route("clearCache")]
-    public HttpResponseMessage clearCache()
-    {
-      try
-      {
-        CacheHelper.ClearAllCache();
-        return Request.CreateResponse(HttpStatusCode.OK, "cache is cleared");
-      }
-      catch (Exception ex)
-      {
-        return Request.CreateResponse(HttpStatusCode.InternalServerError, $"cache is not cleared: {ex.Message}");
-      }
-    }
-  }
 }

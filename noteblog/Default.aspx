@@ -34,7 +34,7 @@
         });
 
         $(".btn-clear-cache").click(function() {
-          $(this).addClass("rotate");
+          $(this).addClass("refresh");
           $.ajax({
             url: `/api/status/clearCache`,
             type: "GET",

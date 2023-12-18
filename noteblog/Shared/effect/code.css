@@ -4,7 +4,7 @@ pre {
   max-width: 100%;
   margin-inline: auto;
   position: relative;
-  /*    background-color: hsl(0,0%,96.5%);*/
+     background-color: hsl(0,0%,96.5%) !important;
 }
 
 pre::after {
@@ -20,16 +20,19 @@ top: -1px;
 white-space: nowrap;
 }
 
-  pre > code.hljs {
+  pre > code.hljs, xmp.hljs {
       padding-top: 20px !important;
       padding: 1em;
       max-width: 100%;
       overflow-wrap: break-word;
       font-family: 'Fira Code', monospace, sans-serif !important;
-      font-size: 13px;
+      font-size: 12px;
       width: fit-content;
       margin: auto;
       display: block;
+  }
+  code.hljs .language-html > span {
+    display: block;
   }
 
   pre:hover > button {
@@ -37,7 +40,7 @@ white-space: nowrap;
   }
 
 
-code {
+code, xmp {
   border-radius: 4px;
   white-space: pre-wrap;
   background-color: hsl(210,8%,90%);

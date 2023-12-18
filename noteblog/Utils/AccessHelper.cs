@@ -16,11 +16,12 @@ namespace noteblog.Utils
                 string[] addresses = ipAddress.Split(',');
                 if (addresses.Length != 0)
                 {
-                    
+
                     cleanIp = Regex.Match(addresses[0], @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}").Value;
                 }
-            } else
-            {                
+            }
+            else
+            {
                 cleanIp = Regex.Match(context.Request.ServerVariables["REMOTE_ADDR"], @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}").Value;
             }
             return cleanIp;

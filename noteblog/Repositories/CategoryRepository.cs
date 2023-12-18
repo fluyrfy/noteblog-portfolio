@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -8,55 +7,55 @@ using noteblog.Models;
 
 public class CategoryRepository
 {
-  private readonly IDbConnection _dbConnection;
+    private readonly IDbConnection _dbConnection;
 
-  public CategoryRepository()
-  {
-    _dbConnection = DatabaseHelper.GetConnection();
-  }
-
-  public List<Category> getAll(out int totalRecords, out int nowSetRecords, int nowPage = 1, int limit = 5)
-  {
-    using (_dbConnection)
+    public CategoryRepository()
     {
-      StringBuilder sb = new StringBuilder();
-      sb.AppendLine("SELECT * FROM categories");
-      totalRecords = _dbConnection.ExecuteScalar<int>(DatabaseHelper.GetTotalRecords(sb.ToString()));
-      sb.AppendLine("LIMIT @limit OFFSET @offset");
-      if (limit == 0)
-      {
-        limit = totalRecords;
-      }
-      int offset = (nowPage - 1) * limit;
-      var parameters = new { limit, offset };
-      nowSetRecords = _dbConnection.ExecuteScalar<int>(DatabaseHelper.GetTotalRecords(sb.ToString()), parameters);
-      var categories = _dbConnection.Query<Category>(sb.ToString(), parameters).ToList();
-      return categories;
+        _dbConnection = DatabaseHelper.GetConnection();
     }
-  }
 
-  public int getId(string name)
-  {
-    return _dbConnection.QuerySingle<int>("SELECT id FROM categories WHERE name = @name", new { name });
-  }
+    public List<Category> getAll(out int totalRecords, out int nowSetRecords, int nowPage = 1, int limit = 5)
+    {
+        using (_dbConnection)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("SELECT * FROM categories");
+            totalRecords = _dbConnection.ExecuteScalar<int>(DatabaseHelper.GetTotalRecords(sb.ToString()));
+            sb.AppendLine("LIMIT @limit OFFSET @offset");
+            if (limit == 0)
+            {
+                limit = totalRecords;
+            }
+            int offset = (nowPage - 1) * limit;
+            var parameters = new { limit, offset };
+            nowSetRecords = _dbConnection.ExecuteScalar<int>(DatabaseHelper.GetTotalRecords(sb.ToString()), parameters);
+            var categories = _dbConnection.Query<Category>(sb.ToString(), parameters).ToList();
+            return categories;
+        }
+    }
 
-  public Category get(int id)
-  {
-    return _dbConnection.QuerySingle<Category>("SELECT * FROM categories WHERE id = @id", new { id });
-  }
+    public int getId(string name)
+    {
+        return _dbConnection.QuerySingle<int>("SELECT id FROM categories WHERE name = @name", new { name });
+    }
 
-  public bool insert(string name, string description = null, string iconClass = null)
-  {
-    return _dbConnection.Execute("INSERT INTO categories (name, description, icon_class) VALUES (@name, @description, @iconClass)", new { name, description, iconClass }) == 1;
-  }
+    public Category get(int id)
+    {
+        return _dbConnection.QuerySingle<Category>("SELECT * FROM categories WHERE id = @id", new { id });
+    }
 
-  public bool update(int id, string name = "", string description = null, string iconClass = null)
-  {
-    return _dbConnection.Execute("UPDATE categories SET name = @name, description = @description, icon_class = @iconClass WHERE id = @id", new { name, description, iconClass, id }) == 1;
-  }
+    public bool insert(string name, string description = null, string iconClass = null)
+    {
+        return _dbConnection.Execute("INSERT INTO categories (name, description, icon_class) VALUES (@name, @description, @iconClass)", new { name, description, iconClass }) == 1;
+    }
 
-  public bool delete(int id)
-  {
-    return _dbConnection.Execute("DELETE FROM categories WHERE id = @id", new { id }) >= 0;
-  }
+    public bool update(int id, string name = "", string description = null, string iconClass = null)
+    {
+        return _dbConnection.Execute("UPDATE categories SET name = @name, description = @description, icon_class = @iconClass WHERE id = @id", new { name, description, iconClass, id }) == 1;
+    }
+
+    public bool delete(int id)
+    {
+        return _dbConnection.Execute("DELETE FROM categories WHERE id = @id", new { id }) >= 0;
+    }
 }

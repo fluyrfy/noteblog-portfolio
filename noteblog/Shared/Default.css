@@ -70,10 +70,11 @@ a {
 }
 
 .btn-clear-cache {
+  display: inline-block;
   cursor: pointer;
 }
 
-.rotate {
+.refresh {
   animation:spin 1s linear infinite;
 }
 
@@ -91,9 +92,11 @@ a {
     }
 }
 
-@keyframes spin { 
-  100% { 
-      -webkit-transform: rotate(360deg); 
-      transform:rotate(360deg); 
-  } 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

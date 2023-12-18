@@ -68,7 +68,8 @@ public class LogRepository
             {
                 string query = "DELETE FROM logs WHERE created_at < @expiredTime";
                 return _dbConnection.Execute(query, new { expiredTime }) >= 0;
-            } catch (Exception ex) { return false; }
+            }
+            catch (Exception ex) { return false; }
         }
     }
 }
