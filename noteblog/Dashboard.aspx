@@ -30,13 +30,13 @@
         <!-------sidebar--design------------>
         <div id="sidebar">
             <div class="sidebar-header">
-                <asp:HyperLink NavigateUrl="/Default" runat="server">
+                <%--<asp:HyperLink NavigateUrl="/Default" runat="server"> --%>
                     <h3>
                         <asp:Image runat="server" CssClass="img-fluid rounded-circle" ID="imgAvatar" />
                         <asp:Label ID="lblUser" runat="server" />
                     </h3>
-                </asp:HyperLink>
-            </div>
+                <%--</asp:HyperLink>--%>
+           </div>
             <ul class="list-unstyled component m-0 sidebar-list">
                 <li class="active sidebar-item" data-sidebar-item="notes">
                     <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="0" CssClass="dashboard" ID="lbtnManageNotes"><i class="material-icons">article</i>notes</asp:LinkButton></li>
@@ -74,7 +74,12 @@
                             <div class="xp-profilebar text-right">
                                 <nav class="navbar p-0">
                                     <ul class="nav navbar-nav flex-row ml-auto">
-                                        <li class="dropdown nav-item active">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/Default">
+                                              <span class="material-icons">home</span>
+                                            </a>
+                                          </li>
+                                        <li class="dropdown nav-item">
                                             <a class="nav-link" href="#" data-toggle="dropdown">
                                                 <span class="material-icons">notifications</span> <span class="notification">4</span> </a>
                                             <ul class="dropdown-menu">

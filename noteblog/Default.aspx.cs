@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using noteblog.Models;
 
 namespace noteblog
@@ -31,7 +33,25 @@ namespace noteblog
       }
     }
 
-    protected void btnDownload_Click(object sender, EventArgs e)
+        protected void repUserSkills_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                UserSkill userSkill = (UserSkill)e.Item.DataItem;
+                string skillName = userSkill.name;
+
+                if (string.IsNullOrEmpty(skillName))
+                {
+                    e.Item.Visible = false;
+                }
+                else
+                {
+                    e.Item.Visible = true;
+                }
+            }
+        }
+
+        protected void btnDownload_Click(object sender, EventArgs e)
     {
       // 設定下載檔案的路徑和檔名
       string filePath = Server.MapPath("~/Files/Fan_Resume.pdf");

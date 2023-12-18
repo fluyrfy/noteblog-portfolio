@@ -134,7 +134,8 @@
                             <div class="xp-profilebar text-right">
                                 <nav class="navbar p-0">
                                     <ul class="nav navbar-nav flex-row ml-auto">
-                                        <li class="dropdown nav-item active">
+
+                                        <li class="dropdown nav-item">
                                             <a class="nav-link" href="#" data-toggle="dropdown">
                                                 <span class="material-icons">notifications</span> <span class="notification">4</span> </a>
                                             <ul class="dropdown-menu">
@@ -143,6 +144,11 @@
                                                 <li><a href="#">You Have 4 New Messages</a></li>
                                                 <li><a href="#">You Have 4 New Messages</a></li>
                                             </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                          <button class="nav-link">
+                                            <span class="material-icons">home</span>
+                                          </button>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">

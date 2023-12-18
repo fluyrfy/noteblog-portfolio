@@ -52,7 +52,8 @@ namespace noteblog.Controls
                     {
                         txtSkillName.Text = skill.name;
                     }
-                    else if (skill.percent != null)
+                    
+                    if (skill.percent != null)
                     {
                         txtSkillPercent.Text = skill.percent;
                     }
@@ -114,5 +115,20 @@ namespace noteblog.Controls
             }
         }
 
+        protected void btnDirectSelfHome_Click(object sender, EventArgs e)
+        {
+            string userId = AuthenticationHelper.GetUserId().ToString();
+            try
+            {
+                CacheHelper.ClearAllCache();
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                Response.Redirect($"/Default?uid={userId}");
+            }
+        }
     }
 }

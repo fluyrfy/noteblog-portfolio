@@ -64,9 +64,9 @@
     <span class="w3-margin-right">Filter:</span>
     <asp:Repeater runat="server" ID="repCategory" OnItemCreated="repCategory_ItemCreated">
         <ItemTemplate>
-            <div style="display: inline-block; position: relative;" class="btn-category-item loading-btn">
+            <div style="display: inline-block; position: relative;" class="btn-category-item">
                 <i runat="server" class='<%# "category-icon " + Eval("iconClass") %>' aria-hidden="true"></i>
-                <asp:LinkButton runat="server" OnCommand="btnFilter_Command" CommandArgument='<%# Eval("name") %>' Text='<%# Eval("name") %>' CssClass="w3-button w3-white category-item" UseSubmitBehavior="false" />
+                <asp:LinkButton runat="server" OnCommand="btnFilter_Command" CommandArgument='<%# Eval("name") %>' Text='<%# Eval("name") %>' CssClass="loading-btn w3-button w3-white category-item" UseSubmitBehavior="false" />
             </div>
         </ItemTemplate>
     </asp:Repeater>

@@ -62,14 +62,14 @@
             </div>
             <div class="w3-container w3-padding-large" style="margin-bottom: 32px" id="about">
                 <h4><b>About Me</b></h4>
-                <p>
+                <p style="text-align: justify;">
                     <asp:Label ID="lblBiography" runat="server" Style="display: block; white-space: pre-wrap;" />
                 </p>
                 <hr>
 
                 <h4>Technical Skills</h4>
                 <!-- Progress bars / Skills -->
-                <asp:Repeater runat="server" ID="repUserSkills">
+                <asp:Repeater runat="server" ID="repUserSkills" OnItemDataBound="repUserSkills_ItemDataBound">
                     <ItemTemplate>
                         <p><%# Eval("name") %></p>
                         <div class="w3-grey">
