@@ -4,6 +4,7 @@
 <asp:HiddenField ID="hidLastUpdateTime" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="hidPageNumber" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="hidTotalPages" runat="server" ClientIDMode="Static" />
+<asp:HiddenField ID="hidUserId" runat="server" ClientIDMode="Static" />
 
 <link rel="stylesheet" href="Shared/effect/hover.css" />
 <link href="https://cdn.jsdelivr.net/npm/remixicon@3.7.0/fonts/remixicon.css" rel="stylesheet">

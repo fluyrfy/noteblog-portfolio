@@ -1,4 +1,7 @@
-﻿function downloadResume(userId = 1) {
+﻿function downloadResume() {
+	let userId = new URLSearchParams(location.search).get("uid");
+	userId = userId ?? "1";
+	console.log(userId);
 	$.ajax({
 		url: "/Files/Resume.ashx?userId=" + userId,
 		type: "GET",

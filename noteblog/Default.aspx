@@ -2,47 +2,47 @@
 
 <%@ Register Src="~/Controls/NoteListControl.ascx" TagName="NoteListControl" TagPrefix="uc" %>
 
-<%@ OutputCache Duration="86400" Location="Server" VaryByParam="none" VaryByCustom=“none” VaryByControl="ctl00$MainContent$NoteListControl1$hidLastUpdateTime;ctl00$MainContent$NoteListControl1$hidCategoryName;ctl00$MainContent$NoteListControl1$hidPageNumber;ctl00$MainContent$NoteListControl1$repPagination;ctl00$MainContent$NoteListControl1$repNote" %>
+<%@ OutputCache Duration="86400" Location="Server" VaryByParam="none" VaryByCustom="“none”" VaryByControl="ctl00$MainContent$NoteListControl1$hidLastUpdateTime;ctl00$MainContent$NoteListControl1$hidCategoryName;ctl00$MainContent$NoteListControl1$hidPageNumber;ctl00$MainContent$NoteListControl1$repPagination;ctl00$MainContent$NoteListControl1$repNote" %>
 
 
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <link href="Shared/Default.css" rel="stylesheet" />    
+    <link href="Shared/Default.css" rel="stylesheet" />
     <script src="Utils/js/download.js" async></script>
     <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="FrankLiao" data-description="Support me on Buy me a coffee!" data-message="" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
     <script>
-      $(function() {      // 取得父元素和子元素
-        function init() {        
-          var parentElement = document.getElementById("donate-container");
-          var childElement = document.getElementById("bmc-wbtn");
-          var iframeElement = document.getElementById("bmc-iframe");
-          var iconElement = document.createElement("i");
-          iconElement.className = "fa fa-credit-card";
-          iconElement.setAttribute("aria-hidden", "true");
-          childElement.innerHTML = "Send me a tip"
-          childElement.appendChild(iconElement);
-          parentElement.appendChild(childElement);
-          parentElement.appendChild(iframeElement);
-        }
-        init();
-        $("#bmc-wbtn").click(function() {
-          init();
-        })
-        let closeButton = document.getElementById("bmc-close-btn");
-        closeButton.parentElement.addEventListener("click", function() {
-          init()
-        });
+        $(function () {      // 取得父元素和子元素
+            function init() {
+                var parentElement = document.getElementById("donate-container");
+                var childElement = document.getElementById("bmc-wbtn");
+                var iframeElement = document.getElementById("bmc-iframe");
+                var iconElement = document.createElement("i");
+                iconElement.className = "fa fa-credit-card";
+                iconElement.setAttribute("aria-hidden", "true");
+                childElement.innerHTML = "Send me a tip"
+                childElement.appendChild(iconElement);
+                parentElement.appendChild(childElement);
+                parentElement.appendChild(iframeElement);
+            }
+            init();
+            $("#bmc-wbtn").click(function () {
+                init();
+            })
+            let closeButton = document.getElementById("bmc-close-btn");
+            closeButton.parentElement.addEventListener("click", function () {
+                init()
+            });
 
-        $(".btn-clear-cache").click(function() {
-          $(this).addClass("refresh");
-          $.ajax({
-            url: `/api/status/clearCache`,
-            type: "GET",
-          }).done(function(){}).always(function() {
-            location.reload();
-          })
+            $(".btn-clear-cache").click(function () {
+                $(this).addClass("refresh");
+                $.ajax({
+                    url: `/api/status/clearCache`,
+                    type: "GET",
+                }).done(function () { }).always(function () {
+                    location.reload();
+                })
+            })
         })
-      })
     </script>
     <main>
         <!-- Overlay effect when opening sidebar on small screens -->
@@ -53,41 +53,30 @@
                 <h1 style="display: flex; justify-content: space-between; align-items: center;">
                     <b>My Portfolio</b>
                 </h1>
-                <span>
-                  last output cache time: <%= DateTime.Now.ToString() %>
-                  <span class="btn-clear-cache">
-                    <i class="ri-refresh-line"></i>
-                  </span>
+                <span>last output cache time: <%= DateTime.Now.ToString() %>
+                    <span class="btn-clear-cache">
+                        <i class="ri-refresh-line"></i>
+                    </span>
                 </span>
                 <uc:NoteListControl ID="NoteListControl1" runat="server" />
             </div>
             <div class="w3-container w3-padding-large" style="margin-bottom: 32px" id="about">
                 <h4><b>About Me</b></h4>
                 <p>
-                    Hi, I'm Frank Liao, and the website name F.L. is an abbreviation of my name.
-                </p>
-                <p style="text-align: justify">
-                    F.L. is an exciting name representing various meanings. For instance, it could stand for Fast Learning, signifying my enthusiasm for rapidly acquiring new skills and knowledge. It could also mean Fun Life, expressing my enjoyment of life's pleasures and adventures. Furthermore, it could indicate Future Leader, denoting my leadership abilities and ambitious aspirations.
-                </p>
-                <p style="text-align: justify">
-                    In defining our strengths, I chose three keywords for F.L.: "code," "recode," and "record." "Code" exemplifies our ability to create and solve problems using programming languages, while "Recode" underscores our continuous efforts to enhance and refine code, ensuring it's both efficient and lucid. Meanwhile, "Record" portrays our commitment to documenting and sharing our journey and accomplishments while learning, allowing anyone interested to gain insights from our experiences.
+                    <asp:Label ID="lblBiography" runat="server" Style="display: block; white-space: pre-wrap;" />
                 </p>
                 <hr>
 
                 <h4>Technical Skills</h4>
                 <!-- Progress bars / Skills -->
-                <p>Front-End</p>
-                <div class="w3-grey">
-                    <div class="w3-container w3-dark-grey w3-padding w3-center" style="width: 95%">95%</div>
-                </div>
-                <p>Back-End</p>
-                <div class="w3-grey">
-                    <div class="w3-container w3-dark-grey w3-padding w3-center" style="width: 90%">90%</div>
-                </div>
-                <p>Other</p>
-                <div class="w3-grey">
-                    <div class="w3-container w3-dark-grey w3-padding w3-center" style="width: 80%">80%</div>
-                </div>
+                <asp:Repeater runat="server" ID="repUserSkills">
+                    <ItemTemplate>
+                        <p><%# Eval("name") %></p>
+                        <div class="w3-grey">
+                            <div style='<%# "width: " + Eval("percent") %>' class="w3-container w3-dark-grey w3-padding w3-center"><%# Eval("percent") %></div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
                 <p>
                     <button class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom loading-btn" runat="server" onclick="downloadResume()" type="button">
                         <i class="fa fa-download w3-margin-right"></i>Download Resume
@@ -104,16 +93,25 @@
                     <div class="w3-third w3-dark-grey clickable">
                         <a href="mailto:yufanliaocestlavie@gmail.com">
                             <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
-                            <p>yufanliaocestlavie@gmail.com</p>
+                            <p>
+                                <asp:Literal ID="litContactEmail" runat="server" />
+                            </p>
                         </a>
                     </div>
                     <div class="w3-third w3-teal">
                         <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
-                        <p><a href="https://www.google.com/maps/place/%E6%96%B0%E7%AB%B9/@24.8015925,120.9690134,17z/data=!3m1!4b1!4m6!3m5!1s0x346835e9c2e07205:0x5e8cb484291aeeba!8m2!3d24.8015877!4d120.9715883!16s%2Fm%2F04lf1bd?hl=zh-TW&entry=ttu" target="_blank">HSC, TW</a></p>
+                        <p>
+                            <asp:HyperLink runat="server" ID="hlkContactRegionLink" Target="_blank">
+                                <asp:Literal ID="litContactRegionName" runat="server" />
+                            </asp:HyperLink>
+                        </p>
                     </div>
                     <div class="w3-third w3-dark-grey">
                         <p><i class="fa fa-phone w3-xxlarge w3-text-light-grey"></i></p>
-                        <p><a href="tel:+886-965605173">+886 965605173</a></p>
+                        <p>
+                            <a href="tel:+886-965605173">
+                                <asp:Literal ID="litContactPhone" runat="server" /></a>
+                        </p>
                     </div>
                 </div>
             </div>

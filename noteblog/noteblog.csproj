@@ -916,6 +916,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Draft.cs" />
+    <Compile Include="Models\UserSkill.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\AccessStatsRepository.cs" />
     <Compile Include="Repositories\LogRepository.cs" />

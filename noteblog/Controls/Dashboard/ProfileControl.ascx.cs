@@ -22,7 +22,7 @@ namespace noteblog.Controls
             int userId = AuthenticationHelper.GetUserId();
             UserRepository userRepository = new UserRepository();
             User user = userRepository.get(userId);
-            List<dynamic> userSkills = userRepository.getSkills(userId);
+            List<UserSkill> userSkills = userRepository.getSkills(userId);
             byte[] avatar = new byte[0];
             if (user.avatar != null && user.avatar.Length > 0)
             {
@@ -42,8 +42,8 @@ namespace noteblog.Controls
             litCreatedAt.Text = user.createdAt.ToLongDateString();
             foreach (var skill in userSkills)
             {
-                string skillNameID = $"txtSkill{skill.skill_id}Name";
-                string skillPercentID = $"txtSkill{skill.skill_id}Percent";
+                string skillNameID = $"txtSkill{skill.skillId}Name";
+                string skillPercentID = $"txtSkill{skill.skillId}Percent";
                 TextBox txtSkillName = FindControl(skillNameID) as TextBox;
                 TextBox txtSkillPercent = FindControl(skillPercentID) as TextBox;
                 if (txtSkillName != null && txtSkillPercent != null)
