@@ -4,6 +4,14 @@
     font-family: 'Fira Code', 'Noto Sans TC', monospace, sans-serif;
 }
 
+.btn-category-item {
+  cursor: pointer;
+}
+.btn-category-item:hover > .category-item {
+  color: #000!important;
+  background-color: #ccc!important
+}
+
 .category-item:not(#btnALL) {
     padding-left: 50px;
 }

@@ -55,7 +55,6 @@
         }
 
         toggleFilterClass();
-
     })
 </script>
 
@@ -64,7 +63,7 @@
     <span class="w3-margin-right">Filter:</span>
     <asp:Repeater runat="server" ID="repCategory" OnItemCreated="repCategory_ItemCreated">
         <ItemTemplate>
-            <div style="display: inline-block; position: relative;" class="loading-btn">
+            <div style="display: inline-block; position: relative;" class="btn-category-item loading-btn">
                 <i runat="server" class='<%# "category-icon " + Eval("iconClass") %>' aria-hidden="true"></i>
                 <asp:LinkButton runat="server" OnCommand="btnFilter_Command" CommandArgument='<%# Eval("name") %>' Text='<%# Eval("name") %>' CssClass="w3-button w3-white category-item" UseSubmitBehavior="false" />
             </div>
@@ -100,7 +99,7 @@
     <div class="w3-center">
         <div class="w3-bar">
             <asp:Button runat="server" CssClass="w3-bar-item w3-button w3-hover-black page-previous" Text="«" OnCommand="btnNavigation_Command" CommandArgument="Previous" ID="btnPrevious" ClientIDMode="Static" />
-<%--            <asp:Repeater runat="server" ID="repPagination">
+            <%--            <asp:Repeater runat="server" ID="repPagination">
                 <ItemTemplate>
                     <asp:Button runat="server" ID="btnPage" ClientIDMode="Static" CssClass="w3-bar-item w3-button w3-hover-black page-item loading-btn" Text='<%# Container.DataItem %>' OnClientClick='<%# "toggleChangePage(" + Container.DataItem + ");" %>' OnCommand="btnPage_Command" CommandArgument='<%# Container.DataItem %>' />
                 </ItemTemplate>
