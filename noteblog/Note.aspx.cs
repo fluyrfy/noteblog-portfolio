@@ -5,7 +5,6 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using MySql.Data.MySqlClient;
-using noteblog.Models;
 using noteblog.Utils;
 
 namespace noteblog
@@ -102,7 +101,7 @@ namespace noteblog
                 Response.Write("<script>");
                 Response.Write($"window.open('/Default?uid={authorId}','_blank').focus()");
                 Response.Write("</script>");
-            }            
+            }
         }
 
     }

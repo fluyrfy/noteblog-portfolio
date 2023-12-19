@@ -52,7 +52,7 @@ namespace noteblog.Controls
                     {
                         txtSkillName.Text = skill.name;
                     }
-                    
+
                     if (skill.percent != null)
                     {
                         txtSkillPercent.Text = skill.percent;

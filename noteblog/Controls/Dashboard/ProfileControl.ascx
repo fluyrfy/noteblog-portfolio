@@ -35,7 +35,7 @@
     <div class="row flex-lg-nowrap">
         <div class="col">
             <div class="row">
-                <div class="col m-3">
+                <div class="col m-mb-3">
                     <div class="card">
                         <div class="card-body">
                             <div class="e-profile">
@@ -48,9 +48,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                                    <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3 align-items-center align-items-md-start">
                                         <div class="text-center text-sm-left mb-2 mb-sm-0">
-                                          <div class="d-flex align-items-center">
+                                          <div class="d-flex align-items-center justify-content-md-start justify-content-center">
                                             <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap mr-3">
                                                 <asp:Literal ID="litUserName" runat="server" /></h4>
                                                 <button runat="server" onserverclick="btnDirectSelfHome_Click" type="button" class="btn btn-outline-dark btn-sm rounded-circle">
