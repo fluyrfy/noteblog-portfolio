@@ -85,15 +85,24 @@
             });
 
         });
-        function w3_open() {
-            document.getElementById("mySidebar").style.display = "block";
-            document.getElementById("myOverlay").style.display = "block";
-        }
+      function w3_open() {
+          document.getElementById("mySidebar").style.display = "block";
+          document.getElementById("myOverlay").style.display = "block";
+      }
 
-        function w3_close() {
-            document.getElementById("mySidebar").style.display = "none";
-            document.getElementById("myOverlay").style.display = "none";
-        }
+      function w3_close() {
+          document.getElementById("mySidebar").style.display = "none";
+          document.getElementById("myOverlay").style.display = "none";
+      }
+      function redirectWithCleanCache(route, e) {
+        e.preventDefault();
+        $.ajax({
+          url: "/api/status/clearCache",
+          method: "GET",
+        }).done(function() {
+          window.location.href = route;
+        })
+      }
     </script>
 </head>
 <body class="w3-light-grey w3-content">
@@ -124,7 +133,7 @@
                     <a onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
                         <i class="fa fa-remove"></i>
                     </a>
-                    <a href="/">
+                    <a onclick="redirectWithCleanCache('/Default', event)">
                         <asp:Image runat="server" ID="imgAvatar" Style="width: 45%; display: block; margin: 0 auto;" class="w3-round" ImageUrl="~/Images/logo/logo.svg" />
                     </a>
                     <br />

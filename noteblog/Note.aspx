@@ -39,18 +39,22 @@
                 <asp:Literal ID="litTitle" runat="server" />
                 <span class="note-info">Posted by
                     <span class="author">
-                        <asp:Literal ID="litAuthor" runat="server" />
+                        <a runat="server" onserverclick="lbtnAuthorProfile_Click">
+                            <asp:Literal ID="litAuthor" runat="server" />
+                        </a>
                         <div class="profile-card">
                             <div class="our-team">
-                                <div class="picture">
-                                    <asp:Image ID="imgAuthorAvatar" CssClass="img-fluid" runat="server" />
-                                </div>
-                                <div class="team-content">
-                                    <h3 class="name">
-                                        <asp:Literal ID="litAuthorName" ClientIDMode="Static" runat="server" /></h3>
-                                    <h4 class="title">
-                                        <asp:Literal ID="litAuthorJobTitle" ClientIDMode="Static" runat="server" /></h4>
-                                </div>
+                                <a runat="server" onserverclick="lbtnAuthorProfile_Click">
+                                    <div class="picture">
+                                        <asp:Image ID="imgAuthorAvatar" CssClass="img-fluid" runat="server" />
+                                    </div>
+                                    <div class="team-content">
+                                        <h3 class="name">
+                                            <asp:Literal ID="litAuthorName" ClientIDMode="Static" runat="server" /></h3>
+                                        <h4 class="title">
+                                            <asp:Literal ID="litAuthorJobTitle" ClientIDMode="Static" runat="server" /></h4>
+                                    </div>
+                                </a>
                                 <ul class="social">
                                     <li>
                                         <asp:LinkButton ID="lbtnAuthorProfile" OnClick="lbtnAuthorProfile_Click" runat="server" CssClass="fa fa-user" aria-hidden="true" /></li>                                        

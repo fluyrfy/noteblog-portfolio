@@ -112,7 +112,9 @@ div.profile-card {
   font-style: normal;
   font-weight: 500;
 }
-
+.our-team > a {
+  text-decoration: none;
+}
 .our-team .picture {
   display: inline-block;
   height: 130px;
