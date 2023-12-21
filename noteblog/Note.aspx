@@ -69,12 +69,13 @@
                     <span>
                         <asp:Repeater runat="server" ID="repCoAuthor">
                             <ItemTemplate>
+                                ,&nbsp;
                               <span class="author">
-                            ,&nbsp;<%# Eval("name") %>
+                                <%# Eval("name") %>
                                   <div class="profile-card">
                                       <div class="our-team">
                                         <div class="picture">
-                                          <img class="img-fluid" src='<%#string.IsNullOrEmpty(Convert.ToBase64String((byte[])Eval("avatar"))) ? "/Images/ico/user.png" : "data:image/png;base64," + Convert.ToBase64String((byte[])Eval("avatar")) %>' />
+                                          <img class="img-fluid" src='<%#(byte[])Eval("avatar") == null ? "/Images/ico/user.png" : string.IsNullOrEmpty(Convert.ToBase64String((byte[])Eval("avatar"))) ? "/Images/ico/user.png" : "data:image/png;base64," + Convert.ToBase64String((byte[])Eval("avatar")) %>' />
                                         </div>
                                         <div class="team-content">
                                             <h3 class="name">

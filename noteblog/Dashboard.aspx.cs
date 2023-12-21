@@ -116,7 +116,7 @@ namespace noteblog
                     sb.AppendLine("SELECT notes.*, categories.name as development FROM notes INNER JOIN categories ON notes.category_id = categories.id WHERE 1 = 1");
                     if (_role != "admin")
                     {
-                        sb.AppendLine("AND user_id = @userId");
+                        sb.AppendLine("AND user_id = @userId OR notes.id IN (SELECT note_id FROM `note_co-authors` WHERE user_id = @userId)");
                         cmd.Parameters.AddWithValue("@userId", _userId);
                     }
                     string keyQuery = "AND MATCH (title, content_text, keyword) AGAINST (@word IN BOOLEAN MODE) OR keyword LIKE @likeWord";

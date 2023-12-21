@@ -51,8 +51,10 @@ namespace noteblog
                   litTitle.Text = title;
                   litContent.Text = content;
                   litAuthor.Text = reader["name"].ToString();
-                  imgAuthorAvatar.ImageUrl = $"data:image/png;base64,{Convert.ToBase64String((byte[])reader["avatar"])}";
-                  litAuthorName.Text = reader["name"].ToString();
+                    imgAuthorAvatar.ImageUrl = (reader["avatar"] != DBNull.Value && reader["avatar"] != null)
+                      ? $"data:image/png;base64,{Convert.ToBase64String((byte[])reader["avatar"])}"
+                      : "/Images/ico/user.png";
+                litAuthorName.Text = reader["name"].ToString();
                   litAuthorJobTitle.Text = reader["job_title"].ToString();
                   Uri baseUri = new Uri(Request.Url.GetLeftPart(UriPartial.Authority));
                   string homePage = baseUri.AbsoluteUri;

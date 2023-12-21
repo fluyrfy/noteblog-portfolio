@@ -61,13 +61,13 @@
                     <label>Keyword</label>
                     <asp:TextBox ID="txtKeyword" runat="server" class="w3-input w3-border"></asp:TextBox>
                 </div>
-
-                <div class="w3-section">
-                    <label>Co-Author</label>
-                    <div id="input-co-author" contenteditable class="w3-input w3-border" ></div>                      
-                    <div id="coAuthorContainer"></div>
-                </div>
-
+                <asp:Panel runat="server" ID="pnlCoAuthor">
+                    <div class="w3-section">
+                        <label>Co-Author</label>
+                        <div id="input-co-author" contenteditable class="w3-input w3-border" ></div>                      
+                        <div id="coAuthorContainer"></div>
+                    </div>
+                </asp:Panel>
                 <div class="w3-section">
                     <label>Content</label>
                     <asp:TextBox ID="txtContent" class="w3-input w3-border ck-editor" TextMode="MultiLine" runat="server" AutoPostBack="true" ClientIDMode="Static"></asp:TextBox>
@@ -76,6 +76,7 @@
                     <button class="w3-button w3-black w3-round loading-btn submit-btn" runat="server" onclick="addDataLanguage();" onserverclick="btnSubmit_Click"><i class="fa fa-pencil w3-margin-right"></i>Submit</button>
                     <asp:HiddenField ID="hdnContent" runat="server" ClientIDMode="Static" />
                     <asp:HiddenField runat="server" ID="hdnSelectedCoAuthorUserIds" ClientIDMode="Static" />
+                    <asp:HiddenField runat="server" ID="hdnSelectedCoAuthorUser" ClientIDMode="Static" />
                 </div>
             </div>
         </div>

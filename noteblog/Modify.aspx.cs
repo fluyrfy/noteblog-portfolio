@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using noteblog.Models;
 using noteblog.Utils;
 
@@ -63,12 +65,18 @@ namespace noteblog
                                         hdnImgData.Value = picString;
                                     }
                                     txtContent.Text = HttpUtility.HtmlDecode(dr["content"].ToString());
+                                    if (Convert.ToInt32(dr["user_id"]) != AuthenticationHelper.GetUserId())
+                                    {
+                                        pnlCoAuthor.Visible = false;
+                                    }
                                 }
                                 ViewState["SQL_QUERY"] = ct;
                                 ViewState["NOTE"] = dt;
                                 ViewState["ID"] = noteId;
-                            }
+                            }                 
                         }
+                        List<User> coAuthorList = new NoteRepository().getCoAuthor(noteId);
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "coAuthors", $"let selectedCoAuthorUser =  {JsonConvert.SerializeObject(coAuthorList)};", true);
                     }
                 }
             }
@@ -142,12 +150,15 @@ namespace noteblog
                         {
                             log.Info($"Note modified successfully, note ID: {dr["id"].ToString()}");
                         }
-                        string[] hdnArray = hdnSelectedCoAuthorUserIds.Value.Split(',');
-                        int noteId = Convert.ToInt32(dr["id"]);
-                        new NoteRepository().deleteCoAuthor(noteId);
-                        foreach (string coAuthorId in hdnArray)
+                        if (!string.IsNullOrEmpty(hdnSelectedCoAuthorUserIds.Value))
                         {
-                            new NoteRepository().insertCoAuthor(noteId, Convert.ToInt32(coAuthorId));
+                            string[] hdnArray = hdnSelectedCoAuthorUserIds.Value.Split(',');
+                            int noteId = Convert.ToInt32(dr["id"]);
+                            new NoteRepository().deleteCoAuthor(noteId);
+                            foreach (string coAuthorId in hdnArray)
+                            {
+                                new NoteRepository().insertCoAuthor(noteId, Convert.ToInt32(coAuthorId));
+                            }                            
                         }
                     }
                     var userId = AuthenticationHelper.GetUserId();

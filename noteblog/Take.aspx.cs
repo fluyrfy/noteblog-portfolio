@@ -103,6 +103,11 @@ namespace noteblog
                     finally
                     {
                         log.Info("End of note creation method");
+                        List<string> emailList = new UserRepository().getAllEmail();
+                        foreach (string email in emailList)
+                        {
+                            EmailHelper.SendEmail($"{email}", "New note on F.L. - check it out!", "New Note Alert", $"Don’t miss the new note on F.L.: {newTitle}. It’s about {newCategory}. Enjoy it.", "read it", $"Note?id={newId}");
+                        }
                         Response.Redirect("Dashboard.aspx");
                     }
                 }
