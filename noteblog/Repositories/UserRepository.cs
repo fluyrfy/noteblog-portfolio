@@ -81,6 +81,11 @@ public class UserRepository
         return _dbConnection.QueryFirstOrDefault<User>("SELECT * FROM users WHERE id = @id", new { id });
     }
 
+    public List<User> getByKeyword(string text)
+    {
+        return _dbConnection.Query<User>("SELECT * FROM users WHERE name LIKE CONCAT('%', @text, '%') OR email LIKE CONCAT('%', @text, '%')", new { text }).ToList();
+    }
+
 
     public bool insert(Draft draft)
     {

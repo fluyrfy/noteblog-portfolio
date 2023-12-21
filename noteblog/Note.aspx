@@ -39,22 +39,19 @@
                 <asp:Literal ID="litTitle" runat="server" />
                 <span class="note-info">Posted by
                     <span class="author">
-                        <a runat="server" onserverclick="lbtnAuthorProfile_Click">
-                            <asp:Literal ID="litAuthor" runat="server" />
-                        </a>
+                        <asp:Literal ID="litAuthor" runat="server" />
+                      
                         <div class="profile-card">
                             <div class="our-team">
-                                <a runat="server" onserverclick="lbtnAuthorProfile_Click">
-                                    <div class="picture">
-                                        <asp:Image ID="imgAuthorAvatar" CssClass="img-fluid" runat="server" />
-                                    </div>
-                                    <div class="team-content">
-                                        <h3 class="name">
-                                            <asp:Literal ID="litAuthorName" ClientIDMode="Static" runat="server" /></h3>
-                                        <h4 class="title">
-                                            <asp:Literal ID="litAuthorJobTitle" ClientIDMode="Static" runat="server" /></h4>
-                                    </div>
-                                </a>
+                              <div class="picture">
+                                  <asp:Image ID="imgAuthorAvatar" CssClass="img-fluid" runat="server" />
+                              </div>
+                              <div class="team-content">
+                                  <h3 class="name">
+                                      <asp:Literal ID="litAuthorName" ClientIDMode="Static" runat="server" /></h3>
+                                  <h4 class="title">
+                                      <asp:Literal ID="litAuthorJobTitle" ClientIDMode="Static" runat="server" /></h4>
+                              </div>                        
                                 <ul class="social">
                                     <li>
                                         <asp:LinkButton ID="lbtnAuthorProfile" OnClick="lbtnAuthorProfile_Click" runat="server" CssClass="fa fa-user" aria-hidden="true" /></li>                                        
@@ -68,6 +65,41 @@
                                 </ul>
                             </div>
                         </div>
+                    </span>
+                    <span>
+                        <asp:Repeater runat="server" ID="repCoAuthor">
+                            <ItemTemplate>
+                              <span class="author">
+                            ,&nbsp;<%# Eval("name") %>
+                                  <div class="profile-card">
+                                      <div class="our-team">
+                                        <div class="picture">
+                                          <img class="img-fluid" src='<%#string.IsNullOrEmpty(Convert.ToBase64String((byte[])Eval("avatar"))) ? "/Images/ico/user.png" : "data:image/png;base64," + Convert.ToBase64String((byte[])Eval("avatar")) %>' />
+                                        </div>
+                                        <div class="team-content">
+                                            <h3 class="name">
+                                              <%# Eval("name") %></h3>
+                                            <h4 class="title">
+                                              <%# Eval("jobTitle") %>
+                                            </h4>
+                                         </div>                                          
+                                          <ul class="social">
+                                              <li>
+                                                <a onclick='<%#String.Format("redirectWithCleanCache(\"{0}\", event);", "/Default.aspx?uid=" + Eval("id")) %>'  class="fa fa-user" aria-hidden="true"></a>
+                                              </li>
+                                              <li>
+                                                <a href='<%# Eval("githubLink") %>' class="fa fa-github" aria-hidden="true" target="_blank"></a>
+                                              <li>
+                                                  <a href='mailto:<%# Eval("email") %>' class="fa fa-envelope" aria-hidden="true"></a></li>
+                                              <li>
+                                                  <a onclick='<%#"downloadResume(" + Eval("id") + ")" %>' class="fa fa-file-text" aria-hidden="true"></a>
+                                              </li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                              </span>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </span>
                     on
                     <asp:Literal ID="litCreatedAt" runat="server" /></span>

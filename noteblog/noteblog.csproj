@@ -479,6 +479,7 @@
     <Content Include="Images\ico\favicon.ico" />
     <Content Include="Images\ico\openai.svg" />
     <Content Include="Images\ico\user.ico" />
+    <Content Include="Images\ico\user.png" />
     <Content Include="Images\logo\logo-icononly.png" />
     <Content Include="Images\logo\logo.svg" />
     <Content Include="Images\email\email.png" />
@@ -755,6 +756,7 @@
     <Content Include="Utils\js\ai.js" />
     <Content Include="Utils\js\chart.js" />
     <Content Include="Utils\js\ckeditor.js" />
+    <Content Include="Utils\js\coAuthor.js" />
     <Content Include="Utils\js\dashboard.js" />
     <Content Include="Utils\js\download.js" />
     <Content Include="Utils\js\edit.js" />

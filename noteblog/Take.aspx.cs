@@ -83,6 +83,12 @@ namespace noteblog
                         cmd2.CommandText = "SELECT LAST_INSERT_ID()";
                         newId = cmd2.ExecuteScalar().ToString();
                         newCategory = new CategoryRepository().get(Convert.ToInt32(rdlCategory.SelectedValue)).name;
+                        string[] hdnArray = hdnSelectedCoAuthorUserIds.Value.Split(',');
+                        new NoteRepository().deleteCoAuthor(Convert.ToInt32(newId));
+                        foreach (string coAuthorId in hdnArray)
+                        {
+                            new NoteRepository().insertCoAuthor(Convert.ToInt32(newId), Convert.ToInt32(coAuthorId));
+                        }
                         log.Info("Note created successfully, note ID: " + newId);
                         DraftRepository draftRepository = new DraftRepository(userId);
                         draftRepository.delete(userId, 0);
@@ -97,11 +103,6 @@ namespace noteblog
                     finally
                     {
                         log.Info("End of note creation method");
-                        List<string> emailList = new UserRepository().getAllEmail();
-                        foreach (string email in emailList)
-                        {
-                            EmailHelper.SendEmail($"{email}", "New note on F.L. - check it out!", "New Note Alert", $"Don’t miss the new note on F.L.: {newTitle}. It’s about {newCategory}. Enjoy it.", "read it", $"Note?id={newId}");
-                        }
                         Response.Redirect("Dashboard.aspx");
                     }
                 }

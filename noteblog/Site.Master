@@ -30,7 +30,8 @@
         ignoreUnescapedHTML: true
       });
     </script>
-    <script src="Utils/js/ai.js" defer></script>
+    <script src="Utils/js/ai.js" defer></script>    
+    <script src="Utils/js/download.js" async></script>
 
     <%--font-awesome--%>
     <script src="https://kit.fontawesome.com/136fcdeb32.js" crossorigin="anonymous" async></script>

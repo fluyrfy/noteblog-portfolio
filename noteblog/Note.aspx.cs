@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Text;
 using System.Web;
 using System.Web.UI;
 using MySql.Data.MySqlClient;
+using noteblog.Models;
 using noteblog.Utils;
 
 namespace noteblog
@@ -63,6 +65,9 @@ namespace noteblog
                   Page.MetaKeywords = keyword;
                   DateTime createdAt = (DateTime)reader["created_at"];
                   litCreatedAt.Text = createdAt.ToString("MMMM dd, yyyy", new CultureInfo("en-US"));
+                  List<User> coAuthorsList = new NoteRepository().getCoAuthor(Convert.ToInt32(reader["id"]));
+                  repCoAuthor.DataSource = coAuthorsList;
+                  repCoAuthor.DataBind();
                 }
                 else
                 {

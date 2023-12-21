@@ -142,6 +142,13 @@ namespace noteblog
                         {
                             log.Info($"Note modified successfully, note ID: {dr["id"].ToString()}");
                         }
+                        string[] hdnArray = hdnSelectedCoAuthorUserIds.Value.Split(',');
+                        int noteId = Convert.ToInt32(dr["id"]);
+                        new NoteRepository().deleteCoAuthor(noteId);
+                        foreach (string coAuthorId in hdnArray)
+                        {
+                            new NoteRepository().insertCoAuthor(noteId, Convert.ToInt32(coAuthorId));
+                        }
                     }
                     var userId = AuthenticationHelper.GetUserId();
                     DraftRepository draftRepository = new DraftRepository(userId);

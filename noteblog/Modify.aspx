@@ -4,24 +4,32 @@
     <link href="Shared/Take.css" rel="stylesheet" />
     <script src="Scripts/ckeditor/ckeditor.js"></script>
     <script src="Utils/js/ckeditor.js" defer></script>
+    <script src="Utils/js/coAuthor.js"></script>
     <script type="module" src="Utils/js/edit.js"></script>
     <script type="module">
         import draft from './Utils/js/draft.js'
         $(document).ready(function () {
-            const element = {
-                noteId: new URLSearchParams(window.location.search).get('id'),
-                category: $("#<%= rdlCategory.ClientID %>"),
-                pic: $('#<%= fuCoverPhoto.ClientID %>'),
-                title: $('#<%= txtTitle.ClientID %>'),
-                keyword: $('#<%= txtKeyword.ClientID %>'),
-                content: contentEditor,
-                preImg: $('#<%= imgCover.ClientID %>'),
-                hdnImg: $('#<%= hdnImgData.ClientID %>'),
-            }
-
-            draft(element);
-        });
-    </script>
+          const element = {
+              noteId: new URLSearchParams(window.location.search).get('id'),
+              category: $("#<%= rdlCategory.ClientID %>"),
+              pic: $('#<%= fuCoverPhoto.ClientID %>'),
+              title: $('#<%= txtTitle.ClientID %>'),
+              keyword: $('#<%= txtKeyword.ClientID %>'),
+              coAuthor: $('#input-co-author'),
+              content: contentEditor,
+              preImg: $('#<%= imgCover.ClientID %>'),
+              hdnImg: $('#<%= hdnImgData.ClientID %>'),
+          }
+          draft(element, () => {$("#input-co-author").children().each(function(){
+            selectedCoAuthorUserIds.push(parseInt($(this).attr("id")));
+            $(this).find('.fa-times').on('click', function() {
+              let userId = parseInt($(this).parent().attr('id'));
+              selectedCoAuthorUserIds = selectedCoAuthorUserIds.filter(existingUserId => existingUserId !== userId);
+              $(this).parent().remove();
+            });
+          })});
+            });
+</script>
 
     <main>
         <div class="w3-main" style="margin-left: 300px">
@@ -53,6 +61,13 @@
                     <label>Keyword</label>
                     <asp:TextBox ID="txtKeyword" runat="server" class="w3-input w3-border"></asp:TextBox>
                 </div>
+
+                <div class="w3-section">
+                    <label>Co-Author</label>
+                    <div id="input-co-author" contenteditable class="w3-input w3-border" ></div>                      
+                    <div id="coAuthorContainer"></div>
+                </div>
+
                 <div class="w3-section">
                     <label>Content</label>
                     <asp:TextBox ID="txtContent" class="w3-input w3-border ck-editor" TextMode="MultiLine" runat="server" AutoPostBack="true" ClientIDMode="Static"></asp:TextBox>
@@ -60,6 +75,7 @@
                 <div style="width: 100%; text-align: center;">
                     <button class="w3-button w3-black w3-round loading-btn submit-btn" runat="server" onclick="addDataLanguage();" onserverclick="btnSubmit_Click"><i class="fa fa-pencil w3-margin-right"></i>Submit</button>
                     <asp:HiddenField ID="hdnContent" runat="server" ClientIDMode="Static" />
+                    <asp:HiddenField runat="server" ID="hdnSelectedCoAuthorUserIds" ClientIDMode="Static" />
                 </div>
             </div>
         </div>

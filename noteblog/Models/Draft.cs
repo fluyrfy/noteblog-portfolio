@@ -14,6 +14,8 @@ namespace noteblog.Models
         public string title { get; set; }
         public string keyword { get; set; }
         public string content { get; set; }
+        [Column("co-author")]
+        public string coAuthor { get; set; }
         public byte[] pic { get; set; }
 
         [Column("user_id")]

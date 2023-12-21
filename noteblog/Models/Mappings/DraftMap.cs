@@ -12,6 +12,7 @@ namespace noteblog.Models.Mappings
             Map(x => x.content).ToColumn("content");
             Map(x => x.keyword).ToColumn("keyword");
             Map(x => x.pic).ToColumn("pic");
+            Map(x => x.coAuthor).ToColumn("co-author");
             Map(x => x.noteId).ToColumn("note_id");
             Map(x => x.userId).ToColumn("user_id");
             Map(x => x.updatedAt).ToColumn("updated_at");

@@ -41,14 +41,14 @@ public class DraftRepository
 
     public bool insert(Draft draft)
     {
-        string query = "INSERT INTO drafts (category_id, title, content, keyword, pic, user_id, note_id) VALUES (@categoryId, @title, @content, @keyword, @pic, @userId, @noteId)";
+        string query = "INSERT INTO drafts (category_id, title, content, keyword, pic, `co-author`,  user_id, note_id) VALUES (@categoryId, @title, @content, @keyword, @pic, @coAuthor, @userId, @noteId)";
         int rowsAffected = _dbConnection.Execute(query, draft);
         return rowsAffected == 1;
     }
 
     public bool update(Draft draft)
     {
-        string query = "UPDATE drafts SET category_id = @categoryId, title = @title, content = @content, keyword = @keyword, pic = @pic WHERE user_id = @userId AND note_id = @noteId";
+        string query = "UPDATE drafts SET category_id = @categoryId, title = @title, content = @content, keyword = @keyword, pic = @pic, `co-author` = @coAuthor WHERE user_id = @userId AND note_id = @noteId";
         return _dbConnection.Execute(query, draft) == 1;
     }
 
