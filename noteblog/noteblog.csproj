@@ -1218,6 +1218,7 @@
   <ItemGroup>
     <Folder Include="Admin\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Vendor\bootstrap\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

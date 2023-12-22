@@ -2,6 +2,9 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="Shared/Take.css" rel="stylesheet" />
+    <%--<link rel="stylesheet" href="Shared/bootstrap.min.css">--%>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="Scripts/ckeditor/ckeditor.js"></script>
     <script src="Utils/js/ckeditor.js" defer></script>
     <script src="Utils/js/coAuthor.js"></script>
@@ -9,31 +12,41 @@
     <script type="module">
         import draft from './Utils/js/draft.js'
         $(document).ready(function () {
-          const element = {
-              noteId: new URLSearchParams(window.location.search).get('id'),
-              category: $("#<%= rdlCategory.ClientID %>"),
-              pic: $('#<%= fuCoverPhoto.ClientID %>'),
-              title: $('#<%= txtTitle.ClientID %>'),
-              keyword: $('#<%= txtKeyword.ClientID %>'),
-              coAuthor: $('#input-co-author'),
-              content: contentEditor,
-              preImg: $('#<%= imgCover.ClientID %>'),
-              hdnImg: $('#<%= hdnImgData.ClientID %>'),
-          }
-          draft(element, () => {$("#input-co-author").children().each(function(){
-            selectedCoAuthorUserIds.push(parseInt($(this).attr("id")));
-            $(this).find('.fa-times').on('click', function() {
-              let userId = parseInt($(this).parent().attr('id'));
-              selectedCoAuthorUserIds = selectedCoAuthorUserIds.filter(existingUserId => existingUserId !== userId);
-              $(this).parent().remove();
+            const element = {
+                noteId: new URLSearchParams(window.location.search).get('id'),
+                category: $("#<%= rdlCategory.ClientID %>"),
+                pic: $('#<%= fuCoverPhoto.ClientID %>'),
+                title: $('#<%= txtTitle.ClientID %>'),
+                keyword: $('#<%= txtKeyword.ClientID %>'),
+                coAuthor: $('#input-co-author'),
+                content: contentEditor,
+                preImg: $('#<%= imgCover.ClientID %>'),
+                hdnImg: $('#<%= hdnImgData.ClientID %>'),
+            }
+            draft(element, () => {
+                $("#input-co-author").children().each(function () {
+                    selectedCoAuthorUserIds.push(parseInt($(this).attr("id")));
+                    $(this).find('.fa-times').on('click', function () {
+                        let userId = parseInt($(this).parent().attr('id'));
+                        selectedCoAuthorUserIds = selectedCoAuthorUserIds.filter(existingUserId => existingUserId !== userId);
+                        $(this).parent().remove();
+                    });
+                })
             });
-          })});
-            });
-</script>
+        });
+    </script>
 
     <main>
         <div class="w3-main" style="margin-left: 300px">
             <div class="w3-container w3-padding-large w3-grey">
+                <asp:Panel runat="server" ID="pnlCoAuthorAlert" Visible="false">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Notice:</strong> You are a collaborator of this document. Please edit responsibly.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                </asp:Panel>
                 <h4 id="contact"><b>Modify Post</b></h4>
                 <hr class="w3-opacity">
                 <div class="w3-section" aria-orientation="horizontal">
@@ -64,7 +77,7 @@
                 <asp:Panel runat="server" ID="pnlCoAuthor">
                     <div class="w3-section">
                         <label>Co-Author</label>
-                        <div id="input-co-author" contenteditable class="w3-input w3-border" ></div>                      
+                        <div id="input-co-author" contenteditable class="w3-input w3-border"></div>
                         <div id="coAuthorContainer"></div>
                     </div>
                 </asp:Panel>

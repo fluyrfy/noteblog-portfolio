@@ -68,6 +68,7 @@ namespace noteblog
                                     if (Convert.ToInt32(dr["user_id"]) != AuthenticationHelper.GetUserId())
                                     {
                                         pnlCoAuthor.Visible = false;
+                                        pnlCoAuthorAlert.Visible = true;
                                     }
                                 }
                                 ViewState["SQL_QUERY"] = ct;
