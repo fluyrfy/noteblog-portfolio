@@ -41,7 +41,7 @@
             <div class="w3-container w3-padding-large w3-grey">
                 <asp:Panel runat="server" ID="pnlCoAuthorAlert" Visible="false">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Notice:</strong> You are a collaborator of this document. Please edit responsibly.
+                        <strong>Notice:</strong> You are a collaborator of this note. Please edit responsibly.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

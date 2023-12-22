@@ -32,7 +32,7 @@ namespace noteblog
                     if (int.TryParse(noteIdString, out int noteId))
                     {
                         CategoryRepository categoryRepository = new CategoryRepository();
-                        List<Category> categories = categoryRepository.getAll(out int tr, out int nsr);
+                        List<Category> categories = categoryRepository.getAll(out int tr, out int nsr, 1, 0);
 
                         foreach (Category category in categories)
                         {
@@ -74,7 +74,7 @@ namespace noteblog
                                 ViewState["SQL_QUERY"] = ct;
                                 ViewState["NOTE"] = dt;
                                 ViewState["ID"] = noteId;
-                            }                 
+                            }
                         }
                         List<User> coAuthorList = new NoteRepository().getCoAuthor(noteId);
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "coAuthors", $"let selectedCoAuthorUser =  {JsonConvert.SerializeObject(coAuthorList)};", true);
@@ -159,7 +159,7 @@ namespace noteblog
                             foreach (string coAuthorId in hdnArray)
                             {
                                 new NoteRepository().insertCoAuthor(noteId, Convert.ToInt32(coAuthorId));
-                            }                            
+                            }
                         }
                     }
                     var userId = AuthenticationHelper.GetUserId();

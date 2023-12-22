@@ -19,7 +19,7 @@ namespace noteblog
             if (!IsPostBack)
             {
                 CategoryRepository categoryRepository = new CategoryRepository();
-                List<Category> categories = categoryRepository.getAll(out int tr, out int nsr);
+                List<Category> categories = categoryRepository.getAll(out int tr, out int nsr, 1, 0);
 
                 foreach (Category category in categories)
                 {
