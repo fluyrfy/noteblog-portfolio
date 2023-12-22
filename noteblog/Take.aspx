@@ -15,18 +15,21 @@
             pic: $('#<%= fuCoverPhoto.ClientID %>'),
             title: $('#<%= txtTitle.ClientID %>'),
             keyword: $('#<%= txtKeyword.ClientID %>'),
+            coAuthor: $('#input-co-author'),
             content: contentEditor,
             preImg: $('#<%= imgCover.ClientID %>'),
             hdnImg: $('#<%= hdnImgData.ClientID %>'),
         }
-        draft(element, () => {$("#input-co-author").children().each(function(){
-          selectedCoAuthorUserIds.push(parseInt($(this).attr("id")));
-          $(this).find('.fa-times').on('click', function() {
-            let userId = parseInt($(this).parent().attr('id'));
-            selectedCoAuthorUserIds = selectedCoAuthorUserIds.filter(existingUserId => existingUserId !== userId);
-            $(this).parent().remove();
-          });
-        })});
+        draft(element, () => {
+            $("#input-co-author").children().each(function () {
+                selectedCoAuthorUserIds.push(parseInt($(this).attr("id")));
+                $(this).find('.fa-times').on('click', function () {
+                    let userId = parseInt($(this).parent().attr('id'));
+                    selectedCoAuthorUserIds = selectedCoAuthorUserIds.filter(existingUserId => existingUserId !== userId);
+                    $(this).parent().remove();
+                });
+            })
+        });
 
     </script>
     <main>
@@ -64,9 +67,9 @@
                     <asp:TextBox ID="txtKeyword" runat="server" class="w3-input w3-border"></asp:TextBox>
                 </div>
                 <div class="w3-section">
-                  <label>Co-Author</label>
-                  <div id="input-co-author" contenteditable class="w3-input w3-border" ></div>                      
-                  <div id="coAuthorContainer"></div>
+                    <label>Co-Author</label>
+                    <div id="input-co-author" contenteditable class="w3-input w3-border"></div>
+                    <div id="coAuthorContainer"></div>
                 </div>
                 <div class="w3-section">
                     <label>Content</label>
