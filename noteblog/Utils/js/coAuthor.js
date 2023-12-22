@@ -1,38 +1,38 @@
 let selectedCoAuthorUserIds = [];
 $(function () {
-	selectedCoAuthorUser.map((coAuthor) => {
-		let avatarSrc = coAuthor.avatar
-			? `data:image/png;base64,${coAuthor.avatar}`
-			: "Images/ico/user.png";
-		let figureElement = $(
-			'<figure contenteditable="false" class="fir-image-figure fig-co-author" id="' +
-			coAuthor.id +
-			'">' +
-			'<img class="fir-author-image fir-clickcircle" src="' +
-			avatarSrc +
-			'" alt="' +
-			coAuthor.name +
-			' - Author">' +
-			"<figcaption>" +
-			'<div class="fig-author-figure-title">' +
-			coAuthor.name +
-			"</div>" +
-			'</figcaption><i class="fa fa-times" aria-hidden="true"></i>' +
-			"</figure>"
-		);
-		figureElement
-			.find(".fa-times")
-			.on("click", function () {
+	if (location.pathname === "/Modify") {
+		selectedCoAuthorUser.map((coAuthor) => {
+			let avatarSrc = coAuthor.avatar
+				? `data:image/png;base64,${coAuthor.avatar}`
+				: "Images/ico/user.png";
+			let figureElement = $(
+				'<figure contenteditable="false" class="fir-image-figure fig-co-author" id="' +
+					coAuthor.id +
+					'">' +
+					'<img class="fir-author-image fir-clickcircle" src="' +
+					avatarSrc +
+					'" alt="' +
+					coAuthor.name +
+					' - Author">' +
+					"<figcaption>" +
+					'<div class="fig-author-figure-title">' +
+					coAuthor.name +
+					"</div>" +
+					'</figcaption><i class="fa fa-times" aria-hidden="true"></i>' +
+					"</figure>"
+			);
+			figureElement.find(".fa-times").on("click", function () {
 				figureElement.remove();
 				let userId = parseInt($(this).parent().attr("id"));
 				selectedCoAuthorUserIds = selectedCoAuthorUserIds.filter(
 					(existingUserId) => existingUserId !== userId
 				);
 			});
-		$("#input-co-author").append(figureElement);
-		$("#input-co-author").append("&nbsp;");
-		selectedCoAuthorUserIds.push(coAuthor.id);
-	})
+			$("#input-co-author").append(figureElement);
+			$("#input-co-author").append("&nbsp;");
+			selectedCoAuthorUserIds.push(coAuthor.id);
+		});
+	}
 	$("#input-co-author").on("input", function (e) {
 		let keyword = $(this)
 			.clone() //clone the element
