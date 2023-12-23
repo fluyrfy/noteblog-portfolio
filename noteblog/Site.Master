@@ -59,7 +59,7 @@
     <script>
       window.addEventListener('load', function () {
           if (location.pathname === "/" || location.pathname === "") {
-            window.location.replace(`${location.href}Default`)
+            window.location.replace(`${location.origin}/Default${location.search}`);
           }
             let fragment = window.location.hash.substring(1);
             if (fragment === "") {
