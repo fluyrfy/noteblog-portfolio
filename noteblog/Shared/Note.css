@@ -71,11 +71,12 @@ img {
 
 figure {
 	margin: 1em auto;
+	width: fit-content;
 	max-width: 100%;
 }
 
 figure table {
-	width: fit-content;
+	width: 100%;
 	border-collapse: collapse;
 }
 
