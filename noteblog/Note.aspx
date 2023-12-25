@@ -30,6 +30,19 @@
                     }, 2000)
                 });
             })
+
+            $(window).scroll(function() {
+              if ($(this).scrollTop() > 100) {
+                $('#scrollToTopBtn').fadeIn();
+              } else {
+                $('#scrollToTopBtn').fadeOut();
+              }
+            });
+            $('#scrollToTopBtn').click(function() {
+              $('html, body').animate({scrollTop : 0}, 800);
+              return false;
+            });
+
         });
     </script>
     <main>
@@ -106,6 +119,9 @@
                     <asp:Literal ID="litCreatedAt" runat="server" /></span>
             </h1>
             <asp:Literal ID="litContent" runat="server" Mode="PassThrough" />
+            <button id="scrollToTopBtn">
+              <i class="fa fa-chevron-up" aria-hidden="true"></i>
+            </button>
         </div>
     </main>
 </asp:Content>
