@@ -120,7 +120,6 @@ const createCompletion = (message) => {
 						codeBlock.appendChild(codeElement);
 						return codeBlock.outerHTML;
 					});
-					console.log(processedText);
 				}
 				addToChatLog("bot", processedText);
 			} catch (error) {
