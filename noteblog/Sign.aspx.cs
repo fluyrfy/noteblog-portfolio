@@ -365,13 +365,13 @@ namespace noteblog
                 }
                 else
                 {
-                  errMsg = "Incorrect password";
+                  errMsg = "Username and/or password are incorrect";
                   return false;
                 }
               }
             }
           }
-          errMsg = "User does not exist";
+          errMsg = "Username and/or password are incorrect";
           return false;
         }
       }
