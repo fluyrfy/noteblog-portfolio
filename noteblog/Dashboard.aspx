@@ -184,7 +184,7 @@
                                                             <asp:Literal Text='<%# Eval("id") %>' runat="server" ID="litNoteId" />
                                                         </th>
                                                         <th>
-                                                            <a href='<%# "Note.aspx?id=" + Eval("id") %>' class="link-opacity-25-hover link-offset-2 underline" onmouseover="this.style.textDecoration='underline';"
+                                                            <a target="_blank" href='<%# "Note.aspx?id=" + Eval("id") %>' class="link-opacity-25-hover link-offset-2 underline" onmouseover="this.style.textDecoration='underline';"
                                                                 onmouseout="this.style.textDecoration='none';">
                                                                 <%# Eval("title") %>
                                                             </a>
