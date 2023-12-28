@@ -64,7 +64,8 @@
             }
 
             $("a.fragment").each(function (){
-              $(this).attr("href", `${location.origin}/Default${location.search}#${$(this).attr("data-fragment")}`);
+              let search = location.pathname === "/Default" ? location.search : '';
+              $(this).attr("href", `${location.origin}/Default${search}#${$(this).attr("data-fragment")}`);
             })
 
             $("a.bar-item").each(function () {
