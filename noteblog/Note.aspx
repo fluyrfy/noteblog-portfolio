@@ -5,6 +5,7 @@
 
     <%--clipboard js--%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
         $(function () {
@@ -43,13 +44,38 @@
               return false;
             });
 
+            $("#htmlToPDF").click(function() {
+              const btnPDF = $(this);
+              let element = document.querySelector("#main-text");
+              let filename = $("h1.title").text().trim();
+              let opt = {
+                filename: `${filename}.pdf`,
+                image: {
+                  type: 'jpeg',
+                  quality: 1
+                },
+                jsPDF: { autoPaging: 'text'},
+                html2canvas: { useCORS: true },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+              };
+              
+              // New Promise-based usage:*/
+              html2pdf().then(function() {
+                  element.classList.add("print");
+                  btnPDF.hide();
+                }).set(opt).from(element).save().then(function() {element.classList.remove("print");
+                btnPDF.show();
+              });
+            })
         });
     </script>
     <main>
         <!-- !PAGE CONTENT! -->
-        <div class="w3-main main-text">
-            <h1 class="title">
-                <asp:Literal ID="litTitle" runat="server" />
+        <div class="w3-main main-text" id="main-text">
+            <div >
+              <h1 class="title">
+                <asp:Literal ID="litTitle" runat="server" ClientIDMode="Static"/>
+              </h1>
                 <span class="note-info">Posted by
                     <span class="author">
                         <asp:Literal ID="litAuthor" runat="server" />
@@ -117,11 +143,14 @@
                     </span>
                     on
                     <asp:Literal ID="litCreatedAt" runat="server" /></span>
-            </h1>
+            </>
             <asp:Literal ID="litContent" runat="server" Mode="PassThrough" />
-            <button id="scrollToTopBtn">
-              <i class="fa fa-chevron-up" aria-hidden="true"></i>
+            <button id="htmlToPDF" type="button">
+              <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
             </button>
-        </div>
+          </div>
+          <button id="scrollToTopBtn">
+            <i class="fa fa-chevron-up" aria-hidden="true"></i>
+          </button>
     </main>
 </asp:Content>

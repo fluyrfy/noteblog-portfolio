@@ -15,6 +15,11 @@
 	background: #ffffff;
 	box-shadow: -2px -1px 88px 0px rgba(0, 0, 0, 0.17);
 	line-height: 30px;
+	position: relative;
+}
+.main-text.print {
+	box-shadow: none;
+	margin: 0;
 }
 
 .copy-btn {
@@ -215,8 +220,20 @@ div.profile-card {
 	bottom: 1rem;
 	padding: 6px;
 	cursor: pointer;
-	border: #777;
+	border: #777 solid 0.5px;
 	border-radius: 5px;
+	display: none;
+}
+
+#htmlToPDF {
+	position: absolute;
+	right: 1rem;
+	top: 1rem;
+	padding: 6px;
+	cursor: pointer;
+	border: #777;
+	border-radius: 50%;
+	border: 1px dotted;
 }
 
 blockquote {
