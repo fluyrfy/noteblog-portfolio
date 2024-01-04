@@ -50,12 +50,25 @@ function fillElementWithDraft(
 }
 
 function autoSaveDraft(element) {
-	const interval = setInterval(function () {
-		saveDraft(element);
-	}, 30000);
+	let timeoutDraft;
+	function setSaveTimeout() {
+		if (timeoutDraft) {
+			clearTimeout(timeoutDraft);
+		}
+		timeoutDraft = setTimeout(() => {
+			saveDraft(element);
+		}, 10000);
+	}
+
+	window.addEventListener("keydown", setSaveTimeout);
+	$("main input, div#input-co-author, #fuCoverPhoto").on(
+		"change",
+		setSaveTimeout
+	);
 
 	window.addEventListener("beforeunload", () => {
-		clearInterval(interval);
+		saveDraft(element);
+		clearTimeout(timeoutDraft);
 	});
 }
 
