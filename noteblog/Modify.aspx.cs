@@ -65,7 +65,7 @@ namespace noteblog
                                         hdnImgData.Value = picString;
                                     }
                                     txtContent.Text = HttpUtility.HtmlDecode(dr["content"].ToString());
-                                    if (Convert.ToInt32(dr["user_id"]) != AuthenticationHelper.GetUserId())
+                                    if (dr["user_id"].ToString() != AuthenticationHelper.GetUserId())
                                     {
                                         pnlCoAuthor.Visible = false;
                                         pnlCoAuthorAlert.Visible = true;

@@ -9,10 +9,10 @@ using noteblog.Models.Mappings;
 public class DraftRepository
 {
     private readonly IDbConnection _dbConnection;
-    private readonly int _userId;
+    private readonly string _userId;
 
 
-    public DraftRepository(int userId)
+    public DraftRepository(string userId)
     {
         _dbConnection = DatabaseHelper.GetConnection();
         _userId = userId;
@@ -24,14 +24,14 @@ public class DraftRepository
 
     }
 
-    public bool isDraftExist(int userId, int noteId)
+    public bool isDraftExist(string userId, int noteId)
     {
         string query = "SELECT COUNT(*) FROM drafts WHERE user_id = @userId AND note_id = @noteId";
         int count = _dbConnection.ExecuteScalar<int>(query, new { userId, noteId });
         return count > 0;
     }
 
-    public Draft get(int userId, int noteId)
+    public Draft get(string userId, int noteId)
     {
         string query = "SELECT * FROM drafts WHERE user_id = @userId AND note_id = @noteId";
         var result = _dbConnection.Query<Draft>(query, new { userId, noteId }).FirstOrDefault();
@@ -52,7 +52,7 @@ public class DraftRepository
         return _dbConnection.Execute(query, draft) == 1;
     }
 
-    public bool delete(int userId, int noteId)
+    public bool delete(string userId, int noteId)
     {
         try
         {

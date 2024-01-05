@@ -19,7 +19,7 @@ namespace noteblog.Models
         public byte[] pic { get; set; }
 
         [Column("user_id")]
-        public int userId { get; set; }
+        public string userId { get; set; }
 
         [Column("note_id")]
         public int noteId { get; set; }

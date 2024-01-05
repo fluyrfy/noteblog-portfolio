@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web;
 using System.Web.Security;
 using Newtonsoft.Json;
@@ -21,13 +20,13 @@ namespace noteblog.Utils
             return null;
         }
 
-        public static int GetUserId()
+        public static string GetUserId()
         {
             if (GetUserData() != null)
             {
-                return Convert.ToInt32(GetUserData()["id"]);
+                return GetUserData()["id"].ToString();
             }
-            return 0;
+            return "";
         }
 
         public static bool IsUserAuthenticatedAndTicketValid()

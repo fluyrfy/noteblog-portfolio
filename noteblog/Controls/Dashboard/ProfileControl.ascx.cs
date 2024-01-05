@@ -19,7 +19,7 @@ namespace noteblog.Controls
 
         protected void bindProfileData()
         {
-            int userId = AuthenticationHelper.GetUserId();
+            var userId = AuthenticationHelper.GetUserId();
             UserRepository userRepository = new UserRepository();
             User user = userRepository.get(userId);
             List<UserSkill> userSkills = userRepository.getSkills(userId);
@@ -67,7 +67,7 @@ namespace noteblog.Controls
 
         protected void btnUpdateProfile_Click(object sender, EventArgs e)
         {
-            int id = AuthenticationHelper.GetUserId();
+            var id = AuthenticationHelper.GetUserId();
             try
             {
                 log.Info("Starting to update profile");

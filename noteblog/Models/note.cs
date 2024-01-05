@@ -7,7 +7,7 @@ namespace noteblog.Models
     {
         public int id { get; set; }
         [Column("user_id")]
-        public int userId { get; set; }
+        public string userId { get; set; }
         [Column("category_id")]
         public int categoryId { get; set; }
         public string title { get; set; }

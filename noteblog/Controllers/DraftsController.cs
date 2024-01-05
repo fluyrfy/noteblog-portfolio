@@ -10,7 +10,7 @@ namespace noteblog.Controllers
     [RoutePrefix("api/drafts")]
     public class DraftsController : ApiController
     {
-        private readonly int _userId;
+        private readonly string _userId;
         private readonly DraftRepository _repository;
 
         public DraftsController()

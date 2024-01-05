@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web;
+﻿using System.Web;
 using noteblog.Models;
 
 namespace noteblog
@@ -12,7 +11,7 @@ namespace noteblog
 
         public void ProcessRequest(HttpContext context)
         {
-            int userId = Convert.ToInt32(context.Request.QueryString["userId"]);
+            string userId = context.Request.QueryString["userId"];
             User user = new UserRepository().get(userId);
             if (user != null && user.resume != null)
             {

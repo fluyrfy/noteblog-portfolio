@@ -32,7 +32,7 @@ namespace noteblog
         {
             if (Page.IsValid && AuthenticationHelper.IsUserAuthenticatedAndTicketValid())
             {
-                int userId = AuthenticationHelper.GetUserId();
+                var userId = AuthenticationHelper.GetUserId();
                 int maxFileSizeInBytes = 1024 * 1024;
                 if (fuCoverPhoto.HasFile)
                 {

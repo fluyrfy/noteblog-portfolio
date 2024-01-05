@@ -9,7 +9,7 @@ namespace noteblog.Controllers
     [RoutePrefix("api/notes")]
     public class NotesController : ApiController
     {
-        private readonly int _userId;
+        private readonly string _userId;
         private readonly NoteRepository _repository;
 
         public NotesController()
