@@ -77,14 +77,13 @@ public class UserRepository
     string sql = "SELECT * FROM user_skills WHERE user_id = @userId";
     return _dbConnection.Query<UserSkill>(sql, new { userId }).ToList();
   }
-  public User get(string id = "")
+  public User get(string id = null, string role = "root")
   {
     if (string.IsNullOrEmpty(id))
     {
-      return _dbConnection.QueryFirstOrDefault<User>("SELECT * FROM users WHERE id = '5a1eb1c8-55f1-4701-95cc-2cadc8d841fe'");
+      return _dbConnection.QueryFirstOrDefault<User>("SELECT * FROM users WHERE role = @role", new { role });
     }
     return _dbConnection.QueryFirstOrDefault<User>("SELECT * FROM users WHERE id = @id", new { id });
-
   }
 
   public List<User> getByKeyword(string text)

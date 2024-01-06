@@ -13,7 +13,7 @@ namespace noteblog
 {
     public partial class Note : Page
     {
-        private int authorId;
+        private string authorId;
         protected void Page_Load(object sender, EventArgs e)
         {
             // if (!IsPostBack)
@@ -61,7 +61,7 @@ namespace noteblog
                                     hlkAuthorGitHub.NavigateUrl = reader["github_link"].ToString();
                                     hlkAuthorEmail.NavigateUrl = $"mailto:{reader["email"].ToString()}";
                                     hlkAuthorResume.NavigateUrl = $"{homePage}/Files/Resume.ashx?userId={reader["user_id"].ToString()}";
-                                    authorId = Convert.ToInt32(reader["user_id"].ToString());
+                                    authorId = reader["user_id"].ToString();
                                     Page.Title = title;
                                     Page.MetaDescription = contentText;
                                     Page.MetaKeywords = keyword;

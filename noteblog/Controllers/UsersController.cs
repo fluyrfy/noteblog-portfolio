@@ -42,31 +42,31 @@ namespace Userblog.Controllers
       }
     }
 
-    [HttpGet]
-    [Route("getByKeyword/{text}")]
-    public HttpResponseMessage getUserByKeyword(string text, [FromUri] string selectedUsers)
-    {
-      try
-      {
-        string[] selectedOtherUserIds = selectedUsers?.Split(',').ToArray();
-        string selfUserId = AuthenticationHelper.GetUserId();
-        string[] selectedUserIds = selectedOtherUserIds.Concat(new string[] { selfUserId }).ToArray();
-        List<User> userList = _repository.getByKeyword(text);
-        List<User> filteredUsers = userList.Where(user => !selectedUserIds.Contains(user.id)).ToList();
+    //[HttpGet]
+    //[Route("getByKeyword/{text}")]
+    //public HttpResponseMessage getUserByKeyword(string text, [FromUri] string selectedUsers)
+    //{
+    //  try
+    //  {
+    //    string[] selectedOtherUserIds = selectedUsers?.Split(',').ToArray();
+    //    string selfUserId = AuthenticationHelper.GetUserId();
+    //    string[] selectedUserIds = selectedOtherUserIds.Concat(new string[] { selfUserId }).ToArray();
+    //    List<User> userList = _repository.getByKeyword(text);
+    //    List<User> filteredUsers = userList.Where(user => !selectedUserIds.Contains(user.id)).ToList();
 
-        if (filteredUsers.Count > 0)
-        {
-          return Request.CreateResponse(HttpStatusCode.OK, filteredUsers);
-        }
-        else
-        {
-          return Request.CreateResponse(HttpStatusCode.NoContent);
-        }
-      }
-      catch (Exception ex)
-      {
-        return Request.CreateResponse(InternalServerError(ex));
-      }
-    }
+    //    if (filteredUsers.Count > 0)
+    //    {
+    //      return Request.CreateResponse(HttpStatusCode.OK, filteredUsers);
+    //    }
+    //    else
+    //    {
+    //      return Request.CreateResponse(HttpStatusCode.NoContent);
+    //    }
+    //  }
+    //  catch (Exception ex)
+    //  {
+    //    return Request.CreateResponse(InternalServerError(ex));
+    //  }
+    //}
   }
 }

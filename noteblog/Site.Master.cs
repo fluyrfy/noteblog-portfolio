@@ -15,11 +15,6 @@ namespace noteblog
       Response.Write("</script>");
       if (!IsPostBack)
       {
-        // var id = AuthenticationHelper.GetUserId();
-        // id = id == 0 ? 1 : id;
-        // User user = new UserRepository().get(id);
-        // litUserName.Text = user.name;
-        // hlkUserGitHub.NavigateUrl = user.githubLink;
         string userId = Request.QueryString["uid"];
         User user = new UserRepository().get(userId);
         litUserName.Text = user.name;
