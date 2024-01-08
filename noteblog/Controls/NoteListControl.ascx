@@ -19,31 +19,27 @@
             $("#hidPageNumber").val(1);
         })
 
-        //var pageItem = $(".page-item");
         var hidPageNumber = $("#hidPageNumber");
         let curNumber = parseInt(hidPageNumber.val());
         let totalPages = parseInt($("#hidTotalPages").val());
         $("#btnPrevious, #btnNext").toggle(totalPages > 1);
         $("#btnPrevious").prop("disabled", curNumber == 1);
         $("#btnNext").prop("disabled", curNumber == totalPages);
-        //pageItem.each(function (index) {
-        //    $(this).toggleClass("w3-black", index == (hidPageNumber.val() - 1));
-        //    $(this).on("click", function () {
-        //        hidPageNumber.val(index + 1);
-        //    });
-        //})
+
         $(".page-previous").on("click", function () {
-            if (curNumber > 1) {
-                curNumber = curNumber--;
-                hidPageNumber.val(curNumber);
-            }
+          if (curNumber > 1) {
+              let activeNumber = curNumber - 1;
+              hidPageNumber.val(activeNumber);
+          }
+          console.log(hidPageNumber.val())
         })
         $(".page-next").on("click", function () {
-            if (curNumber < totalPages) {
-                curNumber = curNumber++;
-                hidPageNumber.val(curNumber);
-            }
+          if (curNumber < totalPages) {
+              let activeNumber  = curNumber + 1;
+              hidPageNumber.val(activeNumber);
+          }
         })
+
 
         function toggleFilterClass() {
             const category = $('#hidCategoryName');
@@ -99,13 +95,8 @@
 <asp:Panel runat="server" ID="pnlPagination">
     <div class="w3-center">
         <div class="w3-bar">
-            <asp:Button runat="server" CssClass="w3-bar-item w3-button w3-hover-black page-previous" Text="«" OnCommand="btnNavigation_Command" CommandArgument="Previous" ID="btnPrevious" ClientIDMode="Static" />
-            <%--            <asp:Repeater runat="server" ID="repPagination">
-                <ItemTemplate>
-                    <asp:Button runat="server" ID="btnPage" ClientIDMode="Static" CssClass="w3-bar-item w3-button w3-hover-black page-item loading-btn" Text='<%# Container.DataItem %>' OnClientClick='<%# "toggleChangePage(" + Container.DataItem + ");" %>' OnCommand="btnPage_Command" CommandArgument='<%# Container.DataItem %>' />
-                </ItemTemplate>
-            </asp:Repeater>--%>
-            <asp:Button runat="server" class="w3-bar-item w3-button w3-hover-black page-next" Text="»" OnCommand="btnNavigation_Command" CommandArgument="Next" ID="btnNext" ClientIDMode="Static" />
+            <asp:Button runat="server" data-switch="previous" CssClass="w3-bar-item w3-button w3-hover-black page-previous" Text="«" OnCommand="btnNavigation_Command" CommandArgument="Previous" ID="btnPrevious" ClientIDMode="Static" />
+            <asp:Button runat="server" data-switch="next" class="w3-bar-item w3-button w3-hover-black page-next" Text="»" OnCommand="btnNavigation_Command" CommandArgument="Next" ID="btnNext" ClientIDMode="Static" />
         </div>
     </div>
 </asp:Panel>
