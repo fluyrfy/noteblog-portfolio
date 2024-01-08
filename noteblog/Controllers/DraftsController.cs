@@ -25,7 +25,10 @@ namespace noteblog.Controllers
         {
             try
             {
-                draft.userId = _userId;
+                if (Guid.TryParse(_userId, out Guid resultGuid))
+                {
+                    draft.userId = resultGuid;
+                }
                 if (_repository.isDraftExist(_userId, draft.noteId))
                 {
                     bool updatedSuccessfully = _repository.update(draft);
@@ -70,6 +73,7 @@ namespace noteblog.Controllers
             }
             catch (Exception ex)
             {
+                throw;
                 return Request.CreateResponse(InternalServerError(ex));
             }
         }

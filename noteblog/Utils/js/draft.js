@@ -11,9 +11,12 @@
 		} else {
 			deleteDraft(element.noteId);
 		}
+		callback();
+		autoSaveDraft(element);
+	} else {
+		callback();
+		autoSaveDraft(element);
 	}
-	callback();
-	autoSaveDraft(element);
 }
 
 function fillElementWithDraft(
