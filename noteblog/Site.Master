@@ -31,6 +31,7 @@
       });
     </script>
     <script src="Utils/js/ai.js" defer></script>    
+    <script src="Utils/js/urlLookup.js" defer></script>    
     <script src="Utils/js/download.js" async></script>
 
     <%--font-awesome--%>

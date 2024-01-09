@@ -763,6 +763,7 @@
     <Content Include="Utils\js\load.js" />
     <Content Include="Utils\js\stats.js" />
     <Content Include="Utils\js\turnstile.js" />
+    <Content Include="Utils\js\urlLookup.js" />
     <Content Include="Utils\js\user.js" />
     <Content Include="Utils\js\note.js" />
     <Content Include="Utils\js\draft.js" />
