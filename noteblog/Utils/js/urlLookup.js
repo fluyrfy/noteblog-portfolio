@@ -9,11 +9,12 @@
 			const confirmed = confirm(
 				"This link may be harmful. Do you want to continue?"
 			);
-			if (confirmed) {
-				location.href = $(this).attr("href");
+			if (!confirmed) {
+				return;
 			}
 		}
 	}
+	location.href = $(this).attr("href");
 });
 
 async function checkForSafeBrowsing(url) {
