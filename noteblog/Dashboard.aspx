@@ -31,18 +31,20 @@
         <div id="sidebar">
             <div class="sidebar-header">
                 <%--<asp:HyperLink NavigateUrl="/Default" runat="server"> --%>
-                    <h3>
-                        <asp:Image runat="server" CssClass="img-fluid rounded-circle" ID="imgAvatar" />
-                        <asp:Label ID="lblUser" runat="server" />
-                    </h3>
+                <h3>
+                    <asp:Image runat="server" CssClass="img-fluid rounded-circle" ID="imgAvatar" />
+                    <asp:Label ID="lblUser" runat="server" />
+                </h3>
                 <%--</asp:HyperLink>--%>
-           </div>
+            </div>
             <ul class="list-unstyled component m-0 sidebar-list">
                 <li class="active sidebar-item" data-sidebar-item="notes">
                     <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="0" CssClass="dashboard" ID="lbtnManageNotes"><i class="material-icons">article</i>notes</asp:LinkButton></li>
                 <asp:Panel runat="server" Visible="false" ID="pnlAdmin">
-                    <li class="sidebar-item" data-sidebar-item="users">
-                        <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="1" CssClass="dashboard" ID="lbtnManageUsers"><i class="material-icons">manage_accounts</i>users</asp:LinkButton></li>
+                    <asp:Panel runat="server" Visible="false" ID="pnlRoot">
+                        <li class="sidebar-item" data-sidebar-item="users">
+                            <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="1" CssClass="dashboard" ID="lbtnManageUsers"><i class="material-icons">manage_accounts</i>users</asp:LinkButton></li>
+                    </asp:Panel>
                     <li class="sidebar-item" data-sidebar-item="categories">
                         <asp:LinkButton runat="server" OnCommand="lbtnView_Command" CommandArgument="2" CssClass="dashboard"><i class="material-icons">category</i>categories</asp:LinkButton></li>
                 </asp:Panel>
@@ -76,9 +78,9 @@
                                     <ul class="nav navbar-nav flex-row ml-auto">
                                         <li class="nav-item">
                                             <a class="nav-link" href="/Default">
-                                              <span class="material-icons">home</span>
+                                                <span class="material-icons">home</span>
                                             </a>
-                                          </li>
+                                        </li>
                                         <li class="dropdown nav-item">
                                             <a class="nav-link" href="#" data-toggle="dropdown">
                                                 <span class="material-icons">notifications</span> <span class="notification">4</span> </a>
@@ -250,7 +252,7 @@
 
                 <%--manage users--%>
                 <asp:View ID="vManageUsers" runat="server" OnActivate="vManageUsers_Activate">
-                    <asp:HiddenField ID="hidUserId" runat="server" ClientIDMode="Static" Value="-1" />
+                    <asp:HiddenField ID="hidUserId" runat="server" ClientIDMode="Static" Value="" />
                     <div class="main-content">
                         <div class="col-md-5 col-lg-3 order-3 order-md-2 mx-auto">
                             <div class="xp-searchbar">
@@ -293,7 +295,7 @@
                                                         <td><%# Eval("isVerified") %></td>
                                                         <td><%# DataBinder.Eval(Container.DataItem, "updatedAt", "{0:yyyy-MM-dd HH:mm:ss}") %></td>
                                                         <td>
-                                                            <a href="#editUserModal" class="edit" data-toggle="modal" onclick="setId('User', <%# Eval("id") %>);">
+                                                            <a href="#editUserModal" class="edit" data-toggle="modal" onclick="setId('User', '<%# Eval("id") %>');">
                                                                 <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </a><a href="#deleteUserModal" class="delete" data-toggle="modal" onclick="setId('User', <%# Eval("id") %>)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i> </a></td>
                                                     </tr>
                                                 </ItemTemplate>
