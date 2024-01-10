@@ -83,6 +83,18 @@ figure table {
 	border-collapse: collapse;
 }
 
+figure figcaption {
+	background-color: #f7f7f7;
+	caption-side: bottom;
+	color: #333;
+	font-size: 0.75em;
+	outline-offset: -1px;
+	padding: 0.6em;
+	word-break: break-word;
+	text-align: center;
+	line-height: normal;
+}
+
 span.author {
 	position: relative;
 	display: inline-block;
