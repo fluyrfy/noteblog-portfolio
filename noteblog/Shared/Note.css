@@ -15,9 +15,12 @@
 	line-height: 30px;
 	position: relative;
 }
-.main-text.print {
-	box-shadow: none;
-	margin: 0;
+.print {
+	width: 530pt;
+	line-height: normal;
+}
+.print mark {
+	background: none;
 }
 
 .copy-btn {

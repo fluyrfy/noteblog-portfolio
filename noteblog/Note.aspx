@@ -5,7 +5,7 @@
 
     <%--clipboard js--%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
         $(function () {
@@ -46,15 +46,16 @@
 
             $("#htmlToPDF").click(function() {
               const btnPDF = $(this);
-              let element = document.querySelector("#main-text");
+              let element = document.querySelector("#main-text > div");
               let filename = $("h1.title").text().trim();
               let opt = {
                 filename: `${filename}.pdf`,
+                margin: 10,
                 image: {
                   type: 'jpeg',
                   quality: 1
                 },
-                jsPDF: { autoPaging: 'text'},
+                jsPDF: { unit: "mm", autoPaging: true, format: "a4", orientation: "portrait"},
                 html2canvas: { useCORS: true },
                 pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
               };
@@ -63,7 +64,8 @@
               html2pdf().then(function() {
                   element.classList.add("print");
                   btnPDF.hide();
-                }).set(opt).from(element).save().then(function() {element.classList.remove("print");
+                }).set(opt).from(element).save().then(function() {
+                  element.classList.remove("print");
                 btnPDF.show();
               });
             })
@@ -72,7 +74,7 @@
     <main>
         <!-- !PAGE CONTENT! -->
         <div class="w3-main main-text" id="main-text">
-            <div >
+            <div>
               <h1 class="title">
                 <asp:Literal ID="litTitle" runat="server" ClientIDMode="Static"/>
               </h1>
