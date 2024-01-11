@@ -13,8 +13,13 @@
 				return;
 			}
 		}
+		let originalLink = $(this).attr("href");
+		if ($(this).attr("target") === "_blank") {
+			open(originalLink);
+		} else {
+			location.href = originalLink;
+		}
 	}
-	location.href = $(this).attr("href");
 });
 
 async function checkForSafeBrowsing(url) {
