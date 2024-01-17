@@ -1,23 +1,30 @@
 ﻿export default async function draft(element, callback = () => {}) {
 	$("div.spanner, div.overlay").toggleClass("show");
-	const draftData = await getDraft(element.noteId);
-	$("div.spanner, div.overlay").toggleClass("show");
-	if (draftData) {
-		const confirmed = confirm(
-			"You have an unsaved draft. Would you like to restore your edits?"
-		);
-
-		if (confirmed) {
-			fillElementWithDraft(element, draftData);
-			// deleteDraft(element.noteId);
+	let draftData;
+	try {
+		draftData = await getDraft(element.noteId);
+	} catch (error) {
+		console.error(error);
+	} finally {
+		$("div.spanner, div.overlay").toggleClass("show");
+		if (draftData) {
+			const confirmed = confirm(
+				"You have an unsaved draft. Would you like to restore your edits?"
+			);
+			if (confirmed) {
+				try {
+					fillElementWithDraft(element, draftData);
+				} catch (error) {
+					console.error(error);
+				} finally {
+					callback();
+					autoSaveDraft(element);
+				}
+			}
 		} else {
-			// deleteDraft(element.noteId);
+			callback();
+			autoSaveDraft(element);
 		}
-		callback();
-		autoSaveDraft(element);
-	} else {
-		callback();
-		autoSaveDraft(element);
 	}
 }
 
@@ -89,21 +96,26 @@ function saveDraft(element) {
 	var reader = new FileReader();
 	var fileByteArray = [];
 	var fileEntity = element.pic.get(0).files[0];
-	if (fileEntity) {
-		reader.readAsArrayBuffer(fileEntity);
-		reader.onloadend = function (evt) {
-			if (evt.target.readyState == FileReader.DONE) {
-				var arrayBuffer = evt.target.result,
-					array = new Uint8Array(arrayBuffer);
-				for (var i = 0; i < array.length; i++) {
-					fileByteArray.push(array[i]);
+	try {
+		if (fileEntity) {
+			reader.readAsArrayBuffer(fileEntity);
+			reader.onloadend = function (evt) {
+				if (evt.target.readyState == FileReader.DONE) {
+					var arrayBuffer = evt.target.result,
+						array = new Uint8Array(arrayBuffer);
+					for (var i = 0; i < array.length; i++) {
+						fileByteArray.push(array[i]);
+					}
+					callSaveApi(element, fileByteArray);
 				}
-				callSaveApi(element, fileByteArray);
-			}
-		};
-	} else {
-		fileByteArray = base64ToByteArray(element.hdnImg.val());
-		callSaveApi(element, fileByteArray);
+			};
+		} else {
+			fileByteArray = base64ToByteArray(element.hdnImg.val());
+			callSaveApi(element, fileByteArray);
+		}
+	} catch (error) {
+		console.log(error);
+		alert("Error saving draft");
 	}
 }
 
