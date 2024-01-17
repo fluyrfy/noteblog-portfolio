@@ -5,26 +5,29 @@
 		draftData = await getDraft(element.noteId);
 	} catch (error) {
 		console.error(error);
+		alert("Fetch draft data failed, check your network connection");
+		return;
 	} finally {
 		$("div.spanner, div.overlay").toggleClass("show");
-		if (draftData) {
-			const confirmed = confirm(
-				"You have an unsaved draft. Would you like to restore your edits?"
-			);
-			if (confirmed) {
-				try {
-					fillElementWithDraft(element, draftData);
-				} catch (error) {
-					console.error(error);
-				} finally {
-					callback();
-					autoSaveDraft(element);
-				}
+	}
+	if (draftData) {
+		const confirmed = confirm(
+			"You have an unsaved draft. Would you like to restore your edits?"
+		);
+		if (confirmed) {
+			try {
+				fillElementWithDraft(element, draftData);
+			} catch (error) {
+				console.error(error);
+				alert("Failed to restore draft, please refresh the page");
+				return;
 			}
-		} else {
 			callback();
 			autoSaveDraft(element);
 		}
+	} else {
+		callback();
+		autoSaveDraft(element);
 	}
 }
 
@@ -32,7 +35,9 @@ function fillElementWithDraft(
 	{ category, title, content, keyword, pic, coAuthor, preImg, hdnImg },
 	draft
 ) {
-	category.find(`input[value="${draft.categoryId}"]`).prop("checked", true);
+	if (category) {
+		category.find(`input[value="${draft.categoryId}"]`).prop("checked", true);
+	}
 	title.val(draft.title);
 	keyword.val(draft.keyword);
 	content.setData(draft.content);
