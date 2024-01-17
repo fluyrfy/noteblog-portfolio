@@ -1,5 +1,7 @@
 ﻿export default async function draft(element, callback = () => {}) {
+	$("div.spanner, div.overlay").toggleClass("show");
 	const draftData = await getDraft(element.noteId);
+	$("div.spanner, div.overlay").toggleClass("show");
 	if (draftData) {
 		const confirmed = confirm(
 			"You have an unsaved draft. Would you like to restore your edits?"

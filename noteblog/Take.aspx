@@ -83,6 +83,11 @@
                 </div>
             </div>
         </div>
+        <div class="overlay"></div>
+        <div class="spanner">
+          <div class="loader"></div>
+          <p>Retrieve draft please be patient.</p>
+        </div>
     </main>
 
 </asp:Content>
