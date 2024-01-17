@@ -11,7 +11,7 @@
 			fillElementWithDraft(element, draftData);
 			// deleteDraft(element.noteId);
 		} else {
-			deleteDraft(element.noteId);
+			// deleteDraft(element.noteId);
 		}
 		callback();
 		autoSaveDraft(element);
