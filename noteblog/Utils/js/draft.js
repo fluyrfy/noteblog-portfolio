@@ -24,6 +24,13 @@
 			}
 			callback();
 			autoSaveDraft(element);
+		} else {
+			const confirmDeleteDraft = comfirm(
+				"Since you don't need the draft now, would you like to delete it or keep it for later?"
+			);
+			if (confirmDeleteDraft) {
+				deleteDraft(element.noteId);
+			}
 		}
 	} else {
 		callback();
