@@ -17,7 +17,7 @@
 }
 .print {
 	width: 530pt;
-	/* line-height: normal; */
+	line-height: normal;
 }
 .print * {
 	page-break-inside: avoid;
