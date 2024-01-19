@@ -116,13 +116,16 @@ namespace noteblog
           DataTable dt = (DataTable)ViewState["NOTE"];
           if (dt.Rows.Count > 0)
           {
+            var title = HttpUtility.HtmlEncode(txtTitle.Text);
+            var content = HttpUtility.HtmlEncode(hdnContent.Value);
+            var keyword = HttpUtility.HtmlEncode(txtKeyword.Text);
             DataRow dr = dt.Rows[0];
             dr["category_id"] = rdlCategory.SelectedValue;
-            dr["title"] = txtTitle.Text;
-            dr["content"] = HttpUtility.HtmlEncode(hdnContent.Value);
+            dr["title"] = title;
+            dr["content"] = content;
             dr["content_text"] = ConverterHelper.ExtractTextFromHtml(txtContent.Text);
-            dr["keyword"] = txtKeyword.Text;
-            log.Debug($"New note category: title: {dr["title"] as string}, keyword: {dr["keyword"] as string}");
+            dr["keyword"] = keyword;
+            log.Debug(Server.HtmlEncode($"New note category: title: {dr["title"] as string}, keyword: {dr["keyword"] as string}"));
             if (fuCoverPhoto.HasFile)
             {
               if (fuCoverPhoto.PostedFile.ContentLength > maxFileSizeInBytes)
@@ -164,7 +167,7 @@ namespace noteblog
               new NoteRepository().deleteCoAuthor(noteId);
               foreach (string coAuthorId in hdnArray)
               {
-                new NoteRepository().insertCoAuthor(noteId, Convert.ToInt32(coAuthorId));
+                new NoteRepository().insertCoAuthor(noteId, coAuthorId);
               }
             }
           }
@@ -185,7 +188,6 @@ namespace noteblog
           Response.Redirect("Dashboard.aspx");
         }
       }
-
     }
   }
 }

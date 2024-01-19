@@ -63,7 +63,7 @@ public class NoteRepository
     ).ToList();
     return coAuthors;
   }
-  public void insertCoAuthor(int noteId, int userId)
+  public void insertCoAuthor(int noteId, string userId)
   {
     string query = "INSERT INTO `note_co-authors` (note_id, user_id) VALUES (@noteId, @userId)";
     _dbConnection.Execute(query, new { noteId, userId });
