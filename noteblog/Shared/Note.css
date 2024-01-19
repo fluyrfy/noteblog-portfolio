@@ -17,12 +17,15 @@
 }
 .print {
 	width: 530pt;
-	line-height: normal;
+	/* line-height: normal; */
 }
-.print mark {
-	background: none;
+.print * {
+	page-break-inside: avoid;
 }
-
+.print mark,
+.print code {
+	display: inline-block;
+}
 .copy-btn {
 	opacity: 0;
 	transition: opacity 0.3s ease;
@@ -37,7 +40,6 @@
 	padding: 2px 6px;
 	margin: 0;
 }
-
 .marker-blue {
 	background-color: #72ccfd;
 }
