@@ -241,7 +241,7 @@ namespace noteblog
           HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
           authCookie.Expires = expiration;
           Response.Cookies.Add(authCookie);
-          Response.Redirect("~/Dashboard.aspx");
+          Response.Redirect("~/Dashboard");
         }
         else
         {
@@ -359,7 +359,8 @@ namespace noteblog
                                     {
                                         { "id", dr["id"] },
                                         { "name", dr["name"] },
-                                        { "email", dr["email"] }
+                                        { "email", dr["email"] },
+                                        { "role", dr["role"] }
                                     };
                   userData = JsonConvert.SerializeObject(userDataObject); ;
                   return true;

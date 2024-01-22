@@ -5,44 +5,52 @@ using Newtonsoft.Json;
 
 namespace noteblog.Utils
 {
-    public class AuthenticationHelper
+  public class AuthenticationHelper
+  {
+    public static Dictionary<string, object> GetUserData()
     {
-        public static Dictionary<string, object> GetUserData()
-        {
-            if (HttpContext.Current.User.Identity.IsAuthenticated)
-            {
-                FormsIdentity id = (FormsIdentity)HttpContext.Current.User.Identity;
-                FormsAuthenticationTicket ticket = id.Ticket;
-                Dictionary<string, object> userDataDictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(ticket.UserData);
-
-                return userDataDictionary;
-            }
-            return null;
-        }
-
-        public static string GetUserId()
-        {
-            if (GetUserData() != null)
-            {
-                return GetUserData()["id"].ToString();
-            }
-            return "";
-        }
-
-        public static bool IsUserAuthenticatedAndTicketValid()
-        {
-            if (HttpContext.Current.User.Identity.IsAuthenticated)
-            {
-                FormsIdentity id = (FormsIdentity)HttpContext.Current.User.Identity;
-                FormsAuthenticationTicket ticket = id.Ticket;
-
-                if (!ticket.Expired)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
+      if (HttpContext.Current.User.Identity.IsAuthenticated)
+      {
+        FormsIdentity id = (FormsIdentity)HttpContext.Current.User.Identity;
+        FormsAuthenticationTicket ticket = id.Ticket;
+        Dictionary<string, object> userDataDictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(ticket.UserData);
+        return userDataDictionary;
+      }
+      return null;
     }
+
+    public static string GetUserId()
+    {
+      if (GetUserData() != null)
+      {
+        return GetUserData()["id"].ToString();
+      }
+      return "";
+    }
+
+    public static string GetUserRole()
+    {
+      if (GetUserData() != null)
+      {
+        return GetUserData()["role"].ToString();
+      }
+      return "";
+    }
+
+    public static bool IsUserAuthenticatedAndTicketValid()
+    {
+      if (HttpContext.Current.User.Identity.IsAuthenticated)
+      {
+        FormsIdentity id = (FormsIdentity)HttpContext.Current.User.Identity;
+        FormsAuthenticationTicket ticket = id.Ticket;
+
+        if (!ticket.Expired)
+        {
+          return true;
+        }
+      }
+
+      return false;
+    }
+  }
 }
