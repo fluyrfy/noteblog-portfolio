@@ -70,18 +70,18 @@ function fillElementWithDraft(
 function autoSaveDraft(element) {
 	let timeoutDraft;
 	async function setSaveTimeout() {
-		const res = await fetch("/api/users/auth-state");
-		const authState = await res.json();
-		if (authState.status === "active") {
-			if (timeoutDraft) {
-				clearTimeout(timeoutDraft);
-			}
-			timeoutDraft = setTimeout(() => {
-				saveDraft(element);
-			}, 3000);
-		} else {
-			location.href = "/Sign";
+		if (timeoutDraft) {
+			clearTimeout(timeoutDraft);
 		}
+		timeoutDraft = setTimeout(async () => {
+			const res = await fetch("/api/users/auth-state");
+			const authState = await res.json();
+			if (authState.status === "active") {
+				saveDraft(element);
+			} else {
+				location.href = "/Sign";
+			}
+		}, 3000);
 	}
 	window.addEventListener("keydown", setSaveTimeout);
 	$("main input, div#input-co-author, #fuCoverPhoto").on(
