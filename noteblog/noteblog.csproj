@@ -761,6 +761,7 @@
     <Content Include="Utils\js\download.js" />
     <Content Include="Utils\js\edit.js" />
     <Content Include="Utils\js\load.js" />
+    <Content Include="Utils\js\noteNavigation.js" />
     <Content Include="Utils\js\stats.js" />
     <Content Include="Utils\js\turnstile.js" />
     <Content Include="Utils\js\urlLookup.js" />

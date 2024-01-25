@@ -6,7 +6,7 @@
     <%--clipboard js--%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <script src="Utils/js/noteNavigation.js" defer></script>
     <script>
         $(function () {
             const codeElements = document.querySelectorAll('pre');
@@ -74,6 +74,14 @@
     <main>
         <!-- !PAGE CONTENT! -->
         <div class="w3-main main-text" id="main-text">
+          <div class="container-navi">
+            <button class="toggle-navi" type="button">
+            </button>
+            <div class="noteNavigation">
+              <ul>
+              </ul>
+            </div>
+          </div>
             <div>
               <h1 class="title">
                 <asp:Literal ID="litTitle" runat="server" ClientIDMode="Static"/>
@@ -145,7 +153,7 @@
                     </span>
                     on
                     <asp:Literal ID="litCreatedAt" runat="server" /></span>
-            </>
+            </s>
             <asp:Literal ID="litContent" runat="server" Mode="PassThrough" />
             <button id="htmlToPDF" type="button">
               <i class="fa fa-file-pdf-o" aria-hidden="true"></i>

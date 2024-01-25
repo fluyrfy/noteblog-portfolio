@@ -260,3 +260,84 @@ blockquote {
 	padding-left: 1.5em;
 	padding-right: 1.5em;
 }
+
+/* note navigateion */
+.container-navi {
+	position: fixed;
+	right: 1px;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+}
+.container-navi button {
+	background: radial-gradient(#fff, gainsboro);
+	color: #000;
+	padding: 9px;
+	border: 3px dotted silver;
+	border-radius: 5px;
+}
+.container-navi button:hover {
+	background: WhiteSmoke;
+	cursor: pointer;
+	border-bottom: 3px solid silver;
+}
+.container-navi button::after {
+	content: "<<";
+}
+.container-navi button.active::after {
+	content: ">>";
+}
+.noteNavigation {
+	border-radius: 5px;
+	background-color: #fff;
+	padding-block: 36px;
+	max-width: 200px;
+	position: relative;
+	border: 1px solid #000;
+	display: none;
+}
+
+.noteNavigation .noteNavigationArrow {
+	position: absolute;
+	/* left: -30px; */
+	top: 36px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 5.5px 0 5.5px 9px;
+	border-color: transparent transparent transparent #000;
+	transition: all ease 0.5s;
+}
+.noteNavigation ul {
+	padding-left: 30px;
+	padding-right: 10px;
+	margin: 0;
+	width: 100%;
+}
+.noteNavigation ul li {
+	display: block;
+	font-size: 14px;
+	line-height: 16px;
+	width: 100%;
+	list-style: none;
+	transition: all ease 0.5s;
+}
+.noteNavigation ul li.active {
+	margin-left: 10px;
+	padding-right: 10px;
+}
+.noteNavigation ul li.active a {
+	color: #000;
+	font-weight: 600;
+}
+.noteNavigation ul li:before {
+	display: none;
+}
+.noteNavigation ul li + li {
+	margin-top: 24px;
+}
+.noteNavigation ul li a {
+	display: block;
+	color: #bbb;
+	text-decoration: none;
+}
